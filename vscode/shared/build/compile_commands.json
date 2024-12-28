@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/ns/UDT-workspace/vscode/shared/build",
+  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/vscode/shared/. -I/home/ns/UDT-workspace/vscode/shared/./libudt -g -o CMakeFiles/udt.dir/main.cpp.o -c /home/ns/UDT-workspace/vscode/shared/main.cpp",
+  "file": "/home/ns/UDT-workspace/vscode/shared/main.cpp",
+  "output": "CMakeFiles/udt.dir/main.cpp.o"
+}
+]

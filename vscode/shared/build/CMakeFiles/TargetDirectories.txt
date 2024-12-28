@@ -1,0 +1,3 @@
+/home/ns/UDT-workspace/vscode/shared/build/CMakeFiles/udt.dir
+/home/ns/UDT-workspace/vscode/shared/build/CMakeFiles/edit_cache.dir
+/home/ns/UDT-workspace/vscode/shared/build/CMakeFiles/rebuild_cache.dir
