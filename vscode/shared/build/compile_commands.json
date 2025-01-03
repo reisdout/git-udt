@@ -1,8 +1,14 @@
 [
 {
-  "directory": "/home/ns/UDT-workspace/vscode/shared/build",
-  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/vscode/shared/. -I/home/ns/UDT-workspace/vscode/shared/./libudt -g -o CMakeFiles/udt.dir/main.cpp.o -c /home/ns/UDT-workspace/vscode/shared/main.cpp",
-  "file": "/home/ns/UDT-workspace/vscode/shared/main.cpp",
+  "directory": "/home/ns/UDT-workspace/git-udt/vscode/shared/build",
+  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -g -o CMakeFiles/udt.dir/main.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp",
+  "file": "/home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp",
   "output": "CMakeFiles/udt.dir/main.cpp.o"
+},
+{
+  "directory": "/home/ns/UDT-workspace/git-udt/vscode/shared/build",
+  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include -g -o VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp",
+  "file": "/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp",
+  "output": "VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o"
 }
 ]

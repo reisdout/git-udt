@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/ns/UDT-workspace/vscode/shared/build/
+cmake_ninja_workdir = /home/ns/UDT-workspace/git-udt/vscode/shared/build/
 # =============================================================================
 # Object build statements for EXECUTABLE target udt
 
@@ -49,12 +49,14 @@ cmake_ninja_workdir = /home/ns/UDT-workspace/vscode/shared/build/
 
 build cmake_object_order_depends_target_udt: phony || CMakeFiles/udt.dir
 
-build CMakeFiles/udt.dir/main.cpp.o: CXX_COMPILER__udt_unscanned_Debug /home/ns/UDT-workspace/vscode/shared/main.cpp || cmake_object_order_depends_target_udt
+build CMakeFiles/udt.dir/main.cpp.o: CXX_COMPILER__udt_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp || cmake_object_order_depends_target_udt
   DEP_FILE = CMakeFiles/udt.dir/main.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/vscode/shared/. -I/home/ns/UDT-workspace/vscode/shared/./libudt
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13
   OBJECT_DIR = CMakeFiles/udt.dir
   OBJECT_FILE_DIR = CMakeFiles/udt.dir
+  TARGET_COMPILE_PDB = CMakeFiles/udt.dir/
+  TARGET_PDB = /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt.pdb
 
 
 # =============================================================================
@@ -62,24 +64,24 @@ build CMakeFiles/udt.dir/main.cpp.o: CXX_COMPILER__udt_unscanned_Debug /home/ns/
 
 
 #############################################
-# Link the executable /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
+# Link the executable /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
 
-build /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt: CXX_EXECUTABLE_LINKER__udt_Debug CMakeFiles/udt.dir/main.cpp.o | /home/ns/UDT-workspace/vscode/shared/libudt/libudt.so
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt: CXX_EXECUTABLE_LINKER__udt_Debug CMakeFiles/udt.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a
   FLAGS = -g
-  LINK_LIBRARIES = -Wl,-rpath,/home/ns/UDT-workspace/vscode/shared/libudt  -ludt
-  LINK_PATH = -L/home/ns/UDT-workspace/vscode/shared/libudt
+  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a
   OBJECT_DIR = CMakeFiles/udt.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
-  TARGET_PDB = udt.dbg
+  TARGET_COMPILE_PDB = CMakeFiles/udt.dir/
+  TARGET_FILE = /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
+  TARGET_PDB = /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt.pdb
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ns/UDT-workspace/vscode/shared/build && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -90,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ns/UDT-workspace/vscode/shared/build && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/vscode/shared -B/home/ns/UDT-workspace/vscode/shared/build
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -98,9 +100,76 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target VegasMLP13
+
+
+#############################################
+# Order-only phony target for VegasMLP13
+
+build cmake_object_order_depends_target_VegasMLP13: phony || VegasMLP13/CMakeFiles/VegasMLP13.dir
+
+build VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o: CXX_COMPILER__VegasMLP13_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp || cmake_object_order_depends_target_VegasMLP13
+  DEP_FILE = VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include
+  OBJECT_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir
+  OBJECT_FILE_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir/src
+  TARGET_COMPILE_PDB = VegasMLP13/CMakeFiles/VegasMLP13.dir/VegasMLP13.pdb
+  TARGET_PDB = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.pdb"
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target VegasMLP13
+
+
+#############################################
+# Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a
+
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a: CXX_STATIC_LIBRARY_LINKER__VegasMLP13_Debug VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = VegasMLP13/CMakeFiles/VegasMLP13.dir/VegasMLP13.pdb
+  TARGET_FILE = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"
+  TARGET_PDB = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.pdb"
+
+
+#############################################
+# Utility command for edit_cache
+
+build VegasMLP13/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13 && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build VegasMLP13/edit_cache: phony VegasMLP13/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build VegasMLP13/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13 && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build VegasMLP13/rebuild_cache: phony VegasMLP13/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
-build udt: phony /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
+build VegasMLP13: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
+
+build libVegasMLP13.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
+
+build udt: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
 
 # =============================================================================
 # Folder targets.
@@ -108,9 +177,16 @@ build udt: phony /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
 # =============================================================================
 
 #############################################
-# Folder: /home/ns/UDT-workspace/vscode/shared/build
+# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build
 
-build all: phony /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
+build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt VegasMLP13/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13
+
+build VegasMLP13/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
 
 # =============================================================================
 # Built-in targets
@@ -119,14 +195,14 @@ build all: phony /home/ns/UDT-workspace/vscode/shared/bin/Linux64/Debug/udt
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/vscode/shared/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.28/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/ns/UDT-workspace/vscode/shared/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
+build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.28/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
 
 
 #############################################
