@@ -15,9 +15,11 @@ using namespace std;
 
 #define MESSAGE 1
 
+#define HELLO 2
+
 #define MESSAGE_SIZE 3000
 
-#define HELLO 2
+
 
 int send_type = MESSAGE;
 
@@ -30,10 +32,14 @@ VegasMLP13* cchandle = NULL;
 void Set_client_socket()
 {
     if(send_type == FILE || send_type == HELLO)
-    
-        client = UDT::socket(AF_INET, SOCK_STREAM, 0);
-    else    
-        client = UDT::socket(AF_INET, SOCK_DGRAM, 0);
+        serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
+    else if (send_type == MESSAGE )
+        serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
+    else
+    {
+        cout << "Tipo de envio invalido" << endl;
+        exit(0);
+    }
     sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(9000);
@@ -54,8 +60,13 @@ void Set_server_socket()
 {
     if(send_type == FILE || send_type == HELLO)
         serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
-    else
+    else if (send_type == MESSAGE )
         serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
+    else
+    {
+        cout << "Tipo de envio invalido" << endl;
+        exit(0);
+    }
     sockaddr_in my_addr;
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(9000);
