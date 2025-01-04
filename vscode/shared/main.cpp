@@ -15,9 +15,11 @@ using namespace std;
 
 #define MESSAGE 1
 
+#define MESSAGE_SIZE 3000
+
 #define HELLO 2
 
-int send_type = FILE;
+int send_type = MESSAGE;
 
 UDTSOCKET client;
 UDTSOCKET serv;
@@ -123,18 +125,21 @@ int main(int argc, char**argv){
 
         ShowCCSignature();
 
-        char hello[100] = "hello world!\n";
+        char hello[3000];// = "hello world!\n";
 
         int packets_sent = 0;
         int packets_to_send =  std::stoi(std::string(argv[2]));
-
+        
         if(send_type == MESSAGE)
         {
+            for(int i=0; i < MESSAGE_SIZE-1; i++)
+                hello[i] = 'a';
+            hello[MESSAGE_SIZE -1] ='\0';
 
             while(packets_sent < packets_to_send)
             {
                 
-                if (UDT::ERROR == UDT::sendmsg(client, hello,100, -1,false))
+                if (UDT::ERROR == UDT::sendmsg(client, hello,MESSAGE_SIZE, -1,false))
                 //if (UDT::ERROR == UDT::send(client, hello, strlen(hello) + 1, 0))
                 {
                     std::cout << "send: " << UDT::getlasterror().getErrorMessage();
@@ -142,7 +147,8 @@ int main(int argc, char**argv){
                 }
                 std::cout << "sending: " << hello << std::endl;
                 packets_sent++;
-                sleep(3);
+                //sleep(3);
+                
             }
         }
 
@@ -199,13 +205,15 @@ int main(int argc, char**argv){
 
         char data[100];
 
+
         if(send_type == MESSAGE)
         {
 
+            char messa_data[MESSAGE_SIZE];
             while(true)
             {
                 
-                if (UDT::ERROR == UDT::recvmsg(recver, data, 100))
+                if (UDT::ERROR == UDT::recvmsg(recver, data, MESSAGE_SIZE))
                 //if (UDT::ERROR == UDT::recv(recver, data, 100, 0))
                 {
                     std::cout << "recv:" << UDT::getlasterror().getErrorMessage() << std::endl;

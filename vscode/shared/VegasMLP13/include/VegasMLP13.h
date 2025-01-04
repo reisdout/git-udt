@@ -6,10 +6,6 @@ class VegasMLP13: public CCC
 {
 public:
 
-   VegasMLP13(){
-      //m_dPktSndPeriod = 1000000; 
-      m_dCWndSize = 83333.0; 
-   }
 
    void Signature()
    {
@@ -52,6 +48,18 @@ public:
 
          ACKAction();
       }
+   }
+
+   virtual void onPktSent(const CPacket*pkt)
+   {
+      std::cout << "Pacote "<< (unsigned)pkt->getAckSeqNo() <<" Enviado" << std::endl;
+   }
+
+   virtual void onPktReceived(const CPacket*pkt)
+   {
+      std::cout << "Pacote "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
+     
+   
    }
 
    virtual void onTimeout()
