@@ -32,9 +32,9 @@ VegasMLP13* cchandle = NULL;
 void Set_client_socket()
 {
     if(send_type == FILE || send_type == HELLO)
-        serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
+        client= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == MESSAGE )
-        serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
+        client= UDT::socket(AF_INET, SOCK_DGRAM, 0);
     else
     {
         cout << "Tipo de envio invalido" << endl;
