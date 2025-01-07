@@ -53,6 +53,7 @@ public:
    virtual void onPktSent(const CPacket*pkt)
    {
       std::cout << "Pacote "<< (unsigned)pkt->getAckSeqNo() <<" Enviado" << std::endl;
+      std::cout << "m_dCWndSize "<< m_dCWndSize << std::endl;
    }
 
    virtual void onPktReceived(const CPacket*pkt)

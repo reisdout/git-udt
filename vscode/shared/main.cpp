@@ -17,11 +17,13 @@ using namespace std;
 
 #define HELLO 2
 
+#define PCC 3
+
 #define MESSAGE_SIZE 3000
 
 
 
-int send_type = MESSAGE;
+int send_type = PCC;
 
 UDTSOCKET client;
 UDTSOCKET serv;
@@ -32,6 +34,8 @@ VegasMLP13* cchandle = NULL;
 void Set_client_socket()
 {
     if(send_type == FILE || send_type == HELLO)
+        client= UDT::socket(AF_INET, SOCK_STREAM, 0);
+    else if (send_type == PCC)
         client= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == MESSAGE )
         client= UDT::socket(AF_INET, SOCK_DGRAM, 0);
@@ -60,6 +64,8 @@ void Set_server_socket()
 {
     if(send_type == FILE || send_type == HELLO)
         serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
+    else if (send_type == PCC)
+        serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == MESSAGE )
         serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
     else
@@ -75,11 +81,13 @@ void Set_server_socket()
     
     int optResult = UDT::setsockopt(serv, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
     std::cout << "optResult Server: " << optResult << std::endl;
+
     if (UDT::ERROR == UDT::bind(serv, (sockaddr*)&my_addr, sizeof(my_addr)))
     {
         std::cout << "bind: " << UDT::getlasterror().getErrorMessage();
         exit (0);
     }
+
     UDT::listen(serv, 10);
 
     int namelen;
@@ -137,19 +145,52 @@ int main(int argc, char**argv){
         ShowCCSignature();
 
         char hello[3000];// = "hello world!\n";
-
         int packets_sent = 0;
         int packets_to_send =  std::stoi(std::string(argv[2]));
         
-        if(send_type == MESSAGE)
+        if(send_type == PCC)
         {
-            for(int i=0; i < MESSAGE_SIZE-1; i++)
-                hello[i] = 'a';
-            hello[MESSAGE_SIZE -1] ='\0';
+            int size = 100000;
+            char* data = new char[size];
+            bzero(data, size);
+            int ssize = 0;
+            int ss;
+            while (true) 
+            {
+                ssize = 0;
+                //int ss;
+                while (ssize < size) 
+                {
+                    if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0))) 
+                    {
+                        cout << "send:" << UDT::getlasterror().getErrorMessage() << endl;
+                        break;
+                    }
+
+                    ssize += ss;
+                }
+
+                if (ssize < size) 
+                {
+                    break;
+                }
+            }
+
+          UDT::close(client);
+          delete [] data;
+
+        }
+
+        else if(send_type == MESSAGE)
+        {
 
             while(packets_sent < packets_to_send)
             {
-                
+                for(int i=0; i < MESSAGE_SIZE-1; i++)
+                    hello[i] = 'a';
+                hello[MESSAGE_SIZE -1] ='\0';
+
+
                 if (UDT::ERROR == UDT::sendmsg(client, hello,MESSAGE_SIZE, -1,false))
                 //if (UDT::ERROR == UDT::send(client, hello, strlen(hello) + 1, 0))
                 {
@@ -158,6 +199,8 @@ int main(int argc, char**argv){
                 }
                 std::cout << "sending: " << hello << std::endl;
                 packets_sent++;
+                int rsize = UDT::recvmsg(client, hello, MESSAGE_SIZE);
+
                 //sleep(3);
                 
             }
@@ -216,8 +259,45 @@ int main(int argc, char**argv){
 
         char data[100];
 
+        if(send_type == PCC)
+        {
+            char* data;
+            int size = 100000000;
+            data = new char[size];
+            int rsize = 0;
+            int rs;
+            int rcv_size;
+            int var_size = sizeof(int);
 
-        if(send_type == MESSAGE)
+
+            while (true) 
+            {
+                while (rsize < size) 
+                {
+                // UDT::getsockopt(recver, 0, UDT_RCVDATA, &rcv_size, &var_size);
+                    if (UDT::ERROR == (rs = UDT::recv(recver, data + rsize, size - rsize, 0))) 
+                    {
+                        cout << "recv:" << UDT::getlasterror().getErrorMessage() << endl;
+                        break;
+                    }
+
+                    rsize += rs;
+                }
+            
+
+                if (rsize < size) 
+                {
+                    break;
+                }
+            }
+        
+
+            delete [] data;
+            UDT::close(recver);
+        }
+
+    
+        else if(send_type == MESSAGE)
         {
 
             char messa_data[MESSAGE_SIZE];
