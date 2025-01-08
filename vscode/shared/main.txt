@@ -23,19 +23,11 @@ using namespace std;
 
 char filePath[] = "/home/ns/UDT-workspace/git-udt/vscode/shared/main.txt";
 
-int send_type = PCC;
+int send_type = FILE;
 
 UDTSOCKET client;
 UDTSOCKET serv;
 UDTSOCKET recver;
-UDTSOCKET recent;//receptor do cliente
-
-sockaddr_in serv_addr; //endereço do servidor, no cliente
-int namelen_server_addr_in_client; //endereco do servidor capturado no cliente
-sockaddr_in server_addr_in_client; //endereco ip do servidor capturado no cliente
-
-sockaddr_in my_addr;//endereco do servidor, no servidor
-
 VegasMLP13* cchandle = NULL;
 
 
@@ -52,25 +44,21 @@ void Set_client_socket()
         cout << "Tipo de envio invalido" << endl;
         exit(0);
     }
-    
+    sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(9000);
-    inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
-    //inet_pton(AF_INET, "192.168.15.200", &serv_addr.sin_addr);
+    //inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
+    inet_pton(AF_INET, "192.168.15.200", &serv_addr.sin_addr);
     memset(&(serv_addr.sin_zero), '\0', 8);
     int optResult = UDT::setsockopt(client, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
     std::cout << "optResult: " << optResult << std::endl; 
     // connect to the server, implict bind
-    
-    /*Aparentemente, quando do conect, há um bind(reserva) tácito na máquiana que 
-    está solicitando a conexao*/
     if (UDT::ERROR == UDT::connect(client, (sockaddr*)&serv_addr, sizeof(serv_addr)))
     {
         std::cout << "connect: " << UDT::getlasterror().getErrorMessage();
         exit(0);
     }
-    UDT::listen(client, 10);
-    recent = UDT::accept(client, (sockaddr*)&server_addr_in_client, &namelen_server_addr_in_client);
+
 }
 
 void Set_server_socket()
@@ -86,7 +74,7 @@ void Set_server_socket()
         cout << "Tipo de envio invalido" << endl;
         exit(0);
     }
-    
+    sockaddr_in my_addr;
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(9000);
     my_addr.sin_addr.s_addr = INADDR_ANY;
@@ -106,16 +94,11 @@ void Set_server_socket()
     int namelen;
     sockaddr_in their_addr;
 
-    recver = UDT::accept(serv, (sockaddr*)&their_addr, &namelen);    
-   
+    recver = UDT::accept(serv, (sockaddr*)&their_addr, &namelen);
+    
     char ip[16];
     std::cout << "new connection: " << inet_ntoa(their_addr.sin_addr) << ":" << ntohs(their_addr.sin_port) << std::endl;
 
-    //if (UDT::ERROR == UDT::connect(serv, (sockaddr*)&their_addr, sizeof(their_addr)))
-    //{
-        //std::cout << "connect send server to cleint: " << UDT::getlasterror().getErrorMessage();
-        //exit(0);
-    //}
 
 }
 
@@ -173,9 +156,6 @@ int main(int argc, char**argv){
             bzero(data, size);
             int ssize = 0;
             int ss;
-            char ack[100];
-            unsigned numPack = 0;
-
             while (true) 
             {
                 ssize = 0;
@@ -189,14 +169,8 @@ int main(int argc, char**argv){
                     }
 
                     ssize += ss;
-                    //if (UDT::ERROR == UDT::recv(client, ack, 100, 0))
-                    //{
-                        //cout << "recv ack:" << UDT::getlasterror().getErrorMessage() << endl;
-                        //return 0;
-                    //}
                 }
-                numPack++;
-                cout << numPack << endl;
+
                 if (ssize < size) 
                 {
                     break;
@@ -391,3 +365,4 @@ int main(int argc, char**argv){
 
 
 }
+

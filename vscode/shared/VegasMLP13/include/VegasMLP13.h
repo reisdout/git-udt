@@ -1,5 +1,5 @@
 #include <udt.h>
-#include "ccc.h" //para procurar local
+#include <ccc.h> //para procurar local
 #include <iostream>
 
 class VegasMLP13: public CCC
@@ -23,12 +23,14 @@ public:
       setACKInterval(2);
       setRTO(1000000);
    }
-
-   void onACK(const int& ack)
+   /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
+   estar com parametro de entrada diferente no CCC é "int32_t"*/
+   void onACK(int32_t ack)
    {
-      
-      std::cout << "Acionou onACK!!" << ack << std::endl;
-      
+      //char c;
+      int32_t clean_ack = ack&0xFFFFFFFF;
+      std::cout << "Acionou onACK!!" << (unsigned) clean_ack << std::endl;
+      //std::cin >> c;
       if (ack == m_iLastACK)
       {
          if (3 == ++ m_iDupACKCount)
@@ -52,8 +54,9 @@ public:
 
    virtual void onPktSent(const CPacket*pkt)
    {
-      std::cout << "Pacote "<< (unsigned)pkt->getAckSeqNo() <<" Enviado" << std::endl;
-      std::cout << "m_dCWndSize "<< m_dCWndSize << std::endl;
+      std::cout << "Pacote: "<< (unsigned)pkt->getAckSeqNo() <<" Enviado" << std::endl;
+      
+      std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
    }
 
    virtual void onPktReceived(const CPacket*pkt)
