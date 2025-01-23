@@ -20,16 +20,15 @@ public:
       m_dPktSndPeriod = 0.0;
       m_dCWndSize = 2.0;
 
-      setACKInterval(2);
+      setACKInterval(5);
       setRTO(1000000);
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/
    void onACK(int32_t ack)
    {
-      //char c;
-      int32_t clean_ack = ack&0xFFFFFFFF;
-      std::cout << "Acionou onACK!!" << (unsigned) clean_ack << std::endl;
+      char c;
+      std::cout << "Acionou onACK!! " << (unsigned) ack << std::endl;
       //std::cin >> c;
       if (ack == m_iLastACK)
       {
@@ -61,7 +60,8 @@ public:
 
    virtual void onPktReceived(const CPacket*pkt)
    {
-      std::cout << "Pacote "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
+      std::cout << "Pacote getAckSeqNo: "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
+      std::cout << "Pacote m_iSeqNo: "<< (unsigned)pkt->m_iSeqNo <<" Recebido" << std::endl;
      
    
    }

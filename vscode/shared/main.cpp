@@ -174,7 +174,7 @@ int main(int argc, char**argv){
             int ssize = 0;
             int ss;
             char ack[100];
-            unsigned numPack = 0;
+            //unsigned numPack = 0;
 
             while (true) 
             {
@@ -195,8 +195,8 @@ int main(int argc, char**argv){
                         //return 0;
                     //}
                 }
-                numPack++;
-                cout << "numPack: " << numPack << endl;
+                //numPack++;
+                //cout << "numPack: " << numPack << endl;
                 if (ssize < size) 
                 {
                     break;
