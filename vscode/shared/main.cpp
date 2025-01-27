@@ -21,6 +21,8 @@ using namespace std;
 
 #define MESSAGE_SIZE 3000
 
+int server_port = 0;
+
 char filePath[] = "/home/ns/UDT-workspace/git-udt/vscode/shared/main.txt";
 
 int send_type = PCC;
@@ -54,9 +56,10 @@ void Set_client_socket()
     }
     
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(9000);
-    inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
-    //inet_pton(AF_INET, "192.168.15.200", &serv_addr.sin_addr);
+    //serv_addr.sin_port = htons(9000);
+    serv_addr.sin_port = htons(server_port);
+    //inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
+    inet_pton(AF_INET, "10.0.1.3", &serv_addr.sin_addr);
     memset(&(serv_addr.sin_zero), '\0', 8);
     int optResult = UDT::setsockopt(client, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
     std::cout << "optResult: " << optResult << std::endl; 
@@ -88,7 +91,9 @@ void Set_server_socket()
     }
     
     my_addr.sin_family = AF_INET;
-    my_addr.sin_port = htons(9000);
+    //my_addr.sin_port = htons(9000);
+    my_addr.sin_port = htons(server_port);
+
     my_addr.sin_addr.s_addr = INADDR_ANY;
     memset(&(my_addr.sin_zero), '\0', 8);
     
@@ -143,19 +148,18 @@ std::streampos Get_file_size()
 
 int main(int argc, char**argv){
     printf("Hello, from udpSocket!\n");
+    char c;
     //Socket* ptSocket=0;
     //bool server = true;
     //bool debug = true;
-    std::cout << argv[1]<<"\n";
-
+    std::cout << "Terminal Type: " << argv[1]<<"\n";
+    std::cout << "Server Port: " << argv[2]<<"\n";
+    server_port = std::stoi(string(argv[2]));
+    cin >> c;
     if(std::string(argv[1]) == "client")
     {
 
-        if(argc < 3)
-        {
-            printf("Packets missing\n");
-            return 0;
-        }
+
 
         Set_client_socket();
 

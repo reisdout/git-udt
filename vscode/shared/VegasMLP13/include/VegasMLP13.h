@@ -28,7 +28,7 @@ public:
    void onACK(int32_t ack)
    {
       char c;
-      std::cout << "Acionou onACK!! " << (unsigned) ack << std::endl;
+      std::cout << "Acionou onACK!! " <<  ack << std::endl;
       //std::cin >> c;
       if (ack == m_iLastACK)
       {
@@ -53,15 +53,16 @@ public:
 
    virtual void onPktSent(const CPacket*pkt)
    {
-      std::cout << "Pacote: "<< (unsigned)pkt->getAckSeqNo() <<" Enviado" << std::endl;
+      //std::cout << "Pacote: "<< pkt->getAckSeqNo() <<" Enviado" << std::endl;
+      std::cout << "Pacote: "<< pkt->m_iSeqNo <<" Enviado" << std::endl;
       
       std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
    }
 
    virtual void onPktReceived(const CPacket*pkt)
    {
-      std::cout << "Pacote getAckSeqNo: "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
-      std::cout << "Pacote m_iSeqNo: "<< (unsigned)pkt->m_iSeqNo <<" Recebido" << std::endl;
+      //std::cout << "Pacote getAckSeqNo: "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
+      std::cout << "Pacote m_iSeqNo: "<< pkt->m_iSeqNo <<" Recebido" << std::endl;
      
    
    }
