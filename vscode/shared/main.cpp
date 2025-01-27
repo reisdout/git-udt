@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace UDT;
 using namespace std;
@@ -21,11 +23,18 @@ using namespace std;
 
 #define MESSAGE_SIZE 3000
 
+
 int server_port = 0;
 
 char filePath[] = "/home/ns/UDT-workspace/git-udt/vscode/shared/main.txt";
 
 int send_type = PCC;
+
+int delta_ack = 20;
+
+bool send_lock = false;
+
+
 
 UDTSOCKET client;
 UDTSOCKET serv;
@@ -172,20 +181,25 @@ int main(int argc, char**argv){
         
         if(send_type == PCC)
         {
-            int size = 100000;
+            int size = 30000;//100000;
             char* data = new char[size];
             bzero(data, size);
             int ssize = 0;
             int ss;
             char ack[100];
+            int random_number;
             //unsigned numPack = 0;
 
             while (true) 
             {
+                if(send_lock)
+                    continue;
+                cout << "+ envio (ssize,size)" <<"("<<ssize<<", "<<size<<")"<< "\n";
                 ssize = 0;
+                
                 //int ss;
-                while (ssize < size) 
-                {
+                while (ssize < size)                 {
+                    
                     if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0))) 
                     {
                         cout << "send:" << UDT::getlasterror().getErrorMessage() << endl;
@@ -199,6 +213,10 @@ int main(int argc, char**argv){
                         //return 0;
                     //}
                 }
+                send_lock = true;
+                srand(time(0));
+                random_number = rand()%4;
+                sleep(random_number);
                 //numPack++;
                 //cout << "numPack: " << numPack << endl;
                 if (ssize < size) 

@@ -2,10 +2,11 @@
 #include <ccc.h> //para procurar local
 #include <iostream>
 
+extern bool send_lock;
+
 class VegasMLP13: public CCC
 {
 public:
-
 
    void Signature()
    {
@@ -17,16 +18,21 @@ public:
       m_bSlowStart = true;
       m_issthresh = 83333;
 
-      m_dPktSndPeriod = 0.0;
+      m_dPktSndPeriod = 1.0;//sera que evita travamento?
       m_dCWndSize = 2.0;
 
       setACKInterval(5);
-      setRTO(1000000);
+      setRTO(5000000);
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/
    void onACK(int32_t ack)
    {
+      if((ack - ack_lock) > 15 )
+      {
+         send_lock = false;
+         ack_lock = ack;
+      }
       char c;
       std::cout << "Acionou onACK!! " <<  ack << std::endl;
       //std::cin >> c;
@@ -57,6 +63,10 @@ public:
       std::cout << "Pacote: "<< pkt->m_iSeqNo <<" Enviado" << std::endl;
       
       std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
+
+      if(!ack_lock)
+         ack_lock = pkt->m_iSeqNo;
+
    }
 
    virtual void onPktReceived(const CPacket*pkt)
@@ -74,6 +84,7 @@ public:
          m_issthresh = 2;
 
       m_bSlowStart = true;
+      std::cout << "timeout" << "\n";
       m_dCWndSize = 2.0;
    }
 
@@ -100,6 +111,7 @@ protected:
          m_issthresh = 2;
 
       m_dCWndSize = m_issthresh + 3;
+      
    }
 
 protected:
@@ -107,7 +119,9 @@ protected:
    bool m_bSlowStart;
 
    int m_iDupACKCount;
-   int m_iLastACK;
+   int32_t m_iLastACK;
+   int32_t ack_lock = 0;
+   
 };
 
 
