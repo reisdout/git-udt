@@ -34,6 +34,8 @@ int delta_ack = 20;
 
 bool send_lock = false;
 
+u_int32_t last_ack;
+
 
 
 UDTSOCKET client;
@@ -181,20 +183,36 @@ int main(int argc, char**argv){
         
         if(send_type == PCC)
         {
-            int size = 30000;//100000;
+            int size = 9000;//30000;//30000; //9000;100000;
             char* data = new char[size];
             bzero(data, size);
             int ssize = 0;
             int ss;
-            char ack[100];
+            //char ack[100];
             int random_number;
+            int unlock_send = 0;//usada para liberar a transmissão, quando as diferen
+                                //cas dos ACK não chega a 5; ver linhas iniciais de on ack. 
             //unsigned numPack = 0;
 
             while (true) 
             {
                 if(send_lock)
+                {
+                    cout << "send lock!"<<"\n";
+                    unlock_send++;
+                    if(unlock_send > 1000)
+                    {
+                        send_lock = false;
+                        unlock_send = 0;
+                    }
                     continue;
-                cout << "+ envio (ssize,size)" <<"("<<ssize<<", "<<size<<")"<< "\n";
+                }
+                unlock_send = 0;
+                cout << "+ envio (ssize,size,last_ack)" 
+                <<"("<<ssize
+                <<", "<<size
+                <<", "<<last_ack
+                <<")"<< "\n";
                 ssize = 0;
                 
                 //int ss;
@@ -215,7 +233,7 @@ int main(int argc, char**argv){
                 }
                 send_lock = true;
                 srand(time(0));
-                random_number = rand()%4;
+                random_number = rand()%3;
                 sleep(random_number);
                 //numPack++;
                 //cout << "numPack: " << numPack << endl;

@@ -1,8 +1,16 @@
+/*
+Esta classe é equivalente ao que esta no kernel,
+a TCP-Cubic, reno, vegas,etc
+*/
+
 #include <udt.h>
 #include <ccc.h> //para procurar local
 #include <iostream>
+#include <unistd.h>
 
 extern bool send_lock;
+extern uint32_t  last_ack;
+int dif_unlock = 3;
 
 class VegasMLP13: public CCC
 {
@@ -28,8 +36,25 @@ public:
    estar com parametro de entrada diferente no CCC é "int32_t"*/
    void onACK(int32_t ack)
    {
-      if((ack - ack_lock) > 15 )
+      last_ack = ack;
+      std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
+      if(!ack_lock)
+            ack_lock = ack;
+      /*
+         O Próximo if visa garantir que so havera novas transmissoes
+         se houver escoamento minimo de dados, percervido pela diferenca,
+         que indica novos ack. Caso contrario o looping infinito no main.cpp
+         vai estourar qualquer buffer.
+      */      
+      if((ack - ack_lock) > dif_unlock )
       {
+         
+         std::cout << "(ack, ack_lock, ack_dif, diff_unlock) " <<"("<<  
+         ack << ", "
+         << ack_lock<<", "
+         << ack - ack_lock<<", "
+         << dif_unlock
+         <<")" << std::endl;
          send_lock = false;
          ack_lock = ack;
       }
@@ -57,17 +82,17 @@ public:
       }
    }
 
-   virtual void onPktSent(const CPacket*pkt)
+   /*virtual void onPktSent(const CPacket*pkt)
    {
       //std::cout << "Pacote: "<< pkt->getAckSeqNo() <<" Enviado" << std::endl;
-      std::cout << "Pacote: "<< pkt->m_iSeqNo <<" Enviado" << std::endl;
+      //std::cout << "Pacote: "<< pkt->m_iSeqNo <<" Enviado" << std::endl;
       
-      std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
+      //std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
 
-      if(!ack_lock)
-         ack_lock = pkt->m_iSeqNo;
+      //if(!ack_lock)
+         //ack_lock = pkt->m_iSeqNo;
 
-   }
+   }*/
 
    virtual void onPktReceived(const CPacket*pkt)
    {
@@ -77,7 +102,7 @@ public:
    
    }
 
-   virtual void onTimeout()
+   /*virtual void onTimeout()
    {
       m_issthresh = getPerfInfo()->pktFlightSize / 2;
       if (m_issthresh < 2)
@@ -85,12 +110,18 @@ public:
 
       m_bSlowStart = true;
       std::cout << "timeout" << "\n";
-      m_dCWndSize = 2.0;
-   }
+      //m_dCWndSize = 2.0; mres
+      m_dCWndSize = 30; //mrs
+      setRTO(10000000);
+      send_lock = false;
+      dif_unlock = 0;
+      sleep(3);
+   }*/
 
 protected:
    virtual void ACKAction()
    {
+      
       if (m_bSlowStart)
       {
          m_dCWndSize += 1.0;
@@ -100,6 +131,14 @@ protected:
       }
       else
          m_dCWndSize += 1.0/m_dCWndSize;
+
+      if(dif_unlock <5)
+         dif_unlock++;
+      else
+         dif_unlock = 5;
+
+      if(m_dCWndSize > 3000)
+         m_dCWndSize = 200;
    }
 
    virtual void DupACKAction()
