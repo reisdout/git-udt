@@ -10,7 +10,7 @@ a TCP-Cubic, reno, vegas,etc
 
 extern bool send_lock;
 extern uint32_t  last_ack;
-int dif_unlock = 3;
+int dif_unlock = 10;
 
 class VegasMLP13: public CCC
 {
@@ -26,7 +26,7 @@ public:
       m_bSlowStart = true;
       m_issthresh = 83333;
 
-      m_dPktSndPeriod = 1.0;//sera que evita travamento?
+      m_dPktSndPeriod = 0.0; //1.0;//sera que evita travamento?
       m_dCWndSize = 2.0;
 
       setACKInterval(5);
@@ -46,6 +46,7 @@ public:
          que indica novos ack. Caso contrario o looping infinito no main.cpp
          vai estourar qualquer buffer.
       */      
+      
       if((ack - ack_lock) > dif_unlock )
       {
          
@@ -58,6 +59,8 @@ public:
          send_lock = false;
          ack_lock = ack;
       }
+      
+      //send_lock = false;
       char c;
       std::cout << "Acionou onACK!! " <<  ack << std::endl;
       //std::cin >> c;
@@ -102,7 +105,7 @@ public:
    
    }
 
-   /*virtual void onTimeout()
+   virtual void onTimeout()
    {
       m_issthresh = getPerfInfo()->pktFlightSize / 2;
       if (m_issthresh < 2)
@@ -110,13 +113,7 @@ public:
 
       m_bSlowStart = true;
       std::cout << "timeout" << "\n";
-      //m_dCWndSize = 2.0; mres
-      m_dCWndSize = 30; //mrs
-      setRTO(10000000);
-      send_lock = false;
-      dif_unlock = 0;
-      sleep(3);
-   }*/
+   }
 
 protected:
    virtual void ACKAction()
@@ -132,13 +129,13 @@ protected:
       else
          m_dCWndSize += 1.0/m_dCWndSize;
 
-      if(dif_unlock <5)
-         dif_unlock++;
-      else
-         dif_unlock = 5;
+      //if(dif_unlock <5)
+         //dif_unlock++;
+      //else
+         //dif_unlock = 5;
 
-      if(m_dCWndSize > 3000)
-         m_dCWndSize = 200;
+      //if(m_dCWndSize > 3000)
+         //m_dCWndSize = 200;
    }
 
    virtual void DupACKAction()

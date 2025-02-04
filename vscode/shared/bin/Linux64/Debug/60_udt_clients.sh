@@ -1,7 +1,7 @@
 #!/bin/bash
 
 i=0
-num_clients=2
+num_clients=1
 
 while [ $i -lt $num_clients ];
 do
@@ -15,7 +15,7 @@ do
     #echo $b
     #./udt server ${door}
     xterm -hold -e ./udt client ${door} && /bin/bash &
-    sleep 6
+    sleep 15
 
     i=`expr $i + 1` 
 

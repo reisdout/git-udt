@@ -23,6 +23,12 @@ using namespace std;
 
 #define MESSAGE_SIZE 3000
 
+#define MAX_PCC_SND_SIZE 1000000//3500000
+
+#define NET_BW 100000000
+
+#define NET_RTT 0.0003
+
 
 int server_port = 0;
 
@@ -43,6 +49,8 @@ UDTSOCKET serv;
 UDTSOCKET recver;
 UDTSOCKET recent;//receptor do cliente
 
+
+
 sockaddr_in serv_addr; //endereço do servidor, no cliente
 int namelen_server_addr_in_client; //endereco do servidor capturado no cliente
 sockaddr_in server_addr_in_client; //endereco ip do servidor capturado no cliente
@@ -51,6 +59,23 @@ sockaddr_in my_addr;//endereco do servidor, no servidor
 
 VegasMLP13* cchandle = NULL;
 
+
+void ConfigureClientOptions()
+{
+    int buffer = NET_BW*NET_RTT;
+    UDT::setsockopt(client, 0, UDT_SNDBUF, &buffer, sizeof(int));
+    UDT::setsockopt(client, 0, UDP_SNDBUF, &buffer, sizeof(int));
+
+}
+
+
+void ConfigureServerOptions()
+{
+    int buffer = NET_BW*NET_RTT;
+    UDT::setsockopt(recver, 0, UDT_SNDBUF, &buffer, sizeof(int));
+    UDT::setsockopt(recver, 0, UDP_RCVBUF, &buffer, sizeof(int));  
+
+}
 
 void Set_client_socket()
 {
@@ -83,8 +108,9 @@ void Set_client_socket()
         std::cout << "connect: " << UDT::getlasterror().getErrorMessage();
         exit(0);
     }
-    UDT::listen(client, 10);
-    recent = UDT::accept(client, (sockaddr*)&server_addr_in_client, &namelen_server_addr_in_client);
+    //UDT::listen(client, 10);
+    //recent = UDT::accept(client, (sockaddr*)&server_addr_in_client, &namelen_server_addr_in_client);
+    ConfigureClientOptions();
 }
 
 void Set_server_socket()
@@ -132,7 +158,7 @@ void Set_server_socket()
         //std::cout << "connect send server to cleint: " << UDT::getlasterror().getErrorMessage();
         //exit(0);
     //}
-
+    ConfigureServerOptions();
 }
 
 void ShowCCSignature()
@@ -166,45 +192,60 @@ int main(int argc, char**argv){
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     std::cout << "Server Port: " << argv[2]<<"\n";
     server_port = std::stoi(string(argv[2]));
-    cin >> c;
+    //cin >> c;
     if(std::string(argv[1]) == "client")
     {
 
 
 
         Set_client_socket();
-
-
-        ShowCCSignature();
-
+        
+        
         char hello[3000];// = "hello world!\n";
         int packets_sent = 0;
         int packets_to_send =  std::stoi(std::string(argv[2]));
         
         if(send_type == PCC)
         {
-            int size = 9000;//30000;//30000; //9000;100000;
-            char* data = new char[size];
-            bzero(data, size);
+            int size = MAX_PCC_SND_SIZE;///2;//1500;//3500000;//30000;//9000;//30000; //9000;100000;
+            char* data = new char[MAX_PCC_SND_SIZE];            
+            bzero(data, MAX_PCC_SND_SIZE);
+            bool first_send_aleready = false;
             int ssize = 0;
             int ss;
+            std::time_t time_of_last_send;  
+            std::time_t time_send; 
             //char ack[100];
+            int delay_quebra = 0;
             int random_number;
             int unlock_send = 0;//usada para liberar a transmissão, quando as diferen
                                 //cas dos ACK não chega a 5; ver linhas iniciais de on ack. 
             //unsigned numPack = 0;
 
             while (true) 
-            {
+            {                 
+                
+                if(first_send_aleready) //Já mandou? ja tem time_last_send
+                {
+                    //cout << "testing vel"<<"\n";
+                    time_send = std::time(0);
+                    //cout << "delta t: " <<  time_send - time_of_last_send <<"\n";
+                    if((time_send - time_of_last_send) < 2)
+                        continue;
+                }
+                
                 if(send_lock)
                 {
+                   
                     cout << "send lock!"<<"\n";
                     unlock_send++;
-                    if(unlock_send > 1000)
-                    {
-                        send_lock = false;
-                        unlock_send = 0;
-                    }
+                    sleep(3);
+                    
+                    //if(unlock_send > 1000)
+                    //{
+                        //send_lock = false;
+                        //unlock_send = 0;
+                    //}
                     continue;
                 }
                 unlock_send = 0;
@@ -216,25 +257,43 @@ int main(int argc, char**argv){
                 ssize = 0;
                 
                 //int ss;
-                while (ssize < size)                 {
-                    
+                while (ssize < size)
+                {
+                    cout << "enviando....."<<"\n";
+                    sleep(2*delay_quebra);
                     if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0))) 
                     {
                         cout << "send:" << UDT::getlasterror().getErrorMessage() << endl;
                         break;
                     }
-
+                    cout << "ss: " << ss << "\n";
+                    //cin >> c;
                     ssize += ss;
+                    first_send_aleready = true;
+                    //sleep(2);
+                    time_of_last_send = std::time(0);
                     //if (UDT::ERROR == UDT::recv(client, ack, 100, 0))
                     //{
                         //cout << "recv ack:" << UDT::getlasterror().getErrorMessage() << endl;
                         //return 0;
                     //}
+                    delay_quebra++;
                 }
+                
+                if(delay_quebra == 1)
+                {
+                    size = (size+9000); //% MAX_PCC_SND_SIZE; //3500000;
+                    if(size > MAX_PCC_SND_SIZE)
+                        size = MAX_PCC_SND_SIZE;
+                    ssize = size;
+                    cout << "size: " << size <<"\n"; 
+                }
+                
+                delay_quebra = 0;
                 send_lock = true;
                 srand(time(0));
                 random_number = rand()%3;
-                sleep(random_number);
+                usleep((random_number*1000000)/5);
                 //numPack++;
                 //cout << "numPack: " << numPack << endl;
                 if (ssize < size) 
@@ -329,7 +388,7 @@ int main(int argc, char**argv){
         if(send_type == PCC)
         {
             char* data;
-            int size = 100000000;
+            int size = MAX_PCC_SND_SIZE;
             data = new char[size];
             int rsize = 0;
             int rs;
