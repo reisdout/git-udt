@@ -7,9 +7,11 @@ a TCP-Cubic, reno, vegas,etc
 #include <ccc.h> //para procurar local
 #include <iostream>
 #include <unistd.h>
+#include "defines.h"
 
 extern bool send_lock;
 extern uint32_t  last_ack;
+extern int send_type;
 int dif_unlock = 10;
 
 class VegasMLP13: public CCC
@@ -38,29 +40,32 @@ public:
    {
       last_ack = ack;
       std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
-      if(!ack_lock)
-            ack_lock = ack;
-      /*
-         O Próximo if visa garantir que so havera novas transmissoes
-         se houver escoamento minimo de dados, percervido pela diferenca,
-         que indica novos ack. Caso contrario o looping infinito no main.cpp
-         vai estourar qualquer buffer.
-      */      
-      
-      if((ack - ack_lock) > dif_unlock )
+      if(send_type == PCC)
       {
+         if(!ack_lock)
+               ack_lock = ack;
+         /*
+            O Próximo if visa garantir que so havera novas transmissoes
+            se houver escoamento minimo de dados, percervido pela diferenca,
+            que indica novos ack. Caso contrario o looping infinito no main.cpp
+            vai estourar qualquer buffer.
+         */      
          
-         std::cout << "(ack, ack_lock, ack_dif, diff_unlock) " <<"("<<  
-         ack << ", "
-         << ack_lock<<", "
-         << ack - ack_lock<<", "
-         << dif_unlock
-         <<")" << std::endl;
-         send_lock = false;
-         ack_lock = ack;
+         if((ack - ack_lock) > dif_unlock )
+         {
+            
+            std::cout << "(ack, ack_lock, ack_dif, diff_unlock) " <<"("<<  
+            ack << ", "
+            << ack_lock<<", "
+            << ack - ack_lock<<", "
+            << dif_unlock
+            <<")" << std::endl;
+            send_lock = false;
+            ack_lock = ack;
+         }
+         
+         //send_lock = false;
       }
-      
-      //send_lock = false;
       char c;
       std::cout << "Acionou onACK!! " <<  ack << std::endl;
       //std::cin >> c;
