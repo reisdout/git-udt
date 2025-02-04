@@ -50,7 +50,7 @@ public:
             que indica novos ack. Caso contrario o looping infinito no main.cpp
             vai estourar qualquer buffer.
          */      
-         
+         /*
          if((ack - ack_lock) > dif_unlock )
          {
             
@@ -62,9 +62,9 @@ public:
             <<")" << std::endl;
             send_lock = false;
             ack_lock = ack;
-         }
+         }*/
          
-         //send_lock = false;
+         send_lock = false;
       }
       char c;
       std::cout << "Acionou onACK!! " <<  ack << std::endl;

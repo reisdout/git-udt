@@ -22,7 +22,7 @@ int server_port = 0;
 
 char filePath[] = "/home/ns/UDT-workspace/git-udt/vscode/shared/main.txt";
 
-int send_type = FILE;
+int send_type = PCC;
 
 int delta_ack = 20;
 
@@ -35,7 +35,7 @@ u_int32_t last_ack;
 UDTSOCKET client;
 UDTSOCKET serv;
 UDTSOCKET recver;
-UDTSOCKET recent;//receptor do cliente
+//UDTSOCKET recent;//receptor do cliente
 
 
 
@@ -51,8 +51,10 @@ VegasMLP13* cchandle = NULL;
 void ConfigureClientOptions()
 {
     int buffer = NET_BW*NET_RTT;
+    bool block = false;
     UDT::setsockopt(client, 0, UDT_SNDBUF, &buffer, sizeof(int));
     UDT::setsockopt(client, 0, UDP_SNDBUF, &buffer, sizeof(int));
+
 
 }
 
@@ -64,13 +66,22 @@ void ConfigureServerOptions()
     UDT::setsockopt(recver, 0, UDP_RCVBUF, &buffer, sizeof(int));  
 
 }
+void Pausar_por_tempo_aleatorio_micro_segundos(int par_tempo_minimo_micro_segundos)
+{
+    int random_number;    
+    srand(time(0));
+    random_number = rand()%3;
+    usleep(par_tempo_minimo_micro_segundos +((random_number*1000000)/5));
+
+}
+
 
 void Set_client_socket()
 {
     if(send_type == FILE || send_type == HELLO)
         client= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == PCC)
-        client= UDT::socket(AF_INET, SOCK_STREAM, 0);
+        client= UDT::socket(AF_INET, SOCK_DGRAM , 0);
     else if (send_type == MESSAGE )
         client= UDT::socket(AF_INET, SOCK_DGRAM, 0);
     else
@@ -195,7 +206,7 @@ int main(int argc, char**argv){
         
         if(send_type == PCC)
         {
-            int size = MAX_PCC_SND_SIZE;///2;//1500;//3500000;//30000;//9000;//30000; //9000;100000;
+            int size = MAX_PCC_SND_SIZE;
             char* data = new char[MAX_PCC_SND_SIZE];            
             bzero(data, MAX_PCC_SND_SIZE);
             bool first_send_aleready = false;
@@ -204,21 +215,26 @@ int main(int argc, char**argv){
             std::time_t time_of_last_send;  
             std::time_t time_send; 
             //char ack[100];
-            int delay_quebra = 0;
-            int random_number;
-            int unlock_send = 0;//usada para liberar a transmissão, quando as diferen
-                                //cas dos ACK não chega a 5; ver linhas iniciais de on ack. 
+            //int delay_quebra=0; //usada para pausar por um espaco de tempo em caso 
+                                  //de quebra no send. Perde sentido quando o socket e SOCK_DGRAM,
+                                  //pois nesse caso a condição nunca acontece.
+            int random_number;//usado para dar pausas aleatórias entre as tranmissões
+            int unlock_send = 0;//usada para liberar a transmissão, quando não
+                                //é liberado no on ack ver linhas iniciais de on ack.
+                                //ficou obsoleto 
             //unsigned numPack = 0;
 
             while (true) 
             {                 
-                
+
+                //esse if abaixo  visa regular o tempo entre envios para se 
+                //atingir uma determinada velocidade
                 if(first_send_aleready) //Já mandou? ja tem time_last_send
                 {
                     //cout << "testing vel"<<"\n";
                     time_send = std::time(0);
                     //cout << "delta t: " <<  time_send - time_of_last_send <<"\n";
-                    if((time_send - time_of_last_send) < 2)
+                    if((time_send - time_of_last_send) < 2)//regula o delta t
                         continue;
                 }
                 
@@ -227,13 +243,9 @@ int main(int argc, char**argv){
                    
                     cout << "send lock!"<<"\n";
                     unlock_send++;
-                    sleep(3);
+                    Pausar_por_tempo_aleatorio_micro_segundos(3000);
+                    //sleep(3);
                     
-                    //if(unlock_send > 1000)
-                    //{
-                        //send_lock = false;
-                        //unlock_send = 0;
-                    //}
                     continue;
                 }
                 unlock_send = 0;
@@ -243,13 +255,13 @@ int main(int argc, char**argv){
                 <<", "<<last_ack
                 <<")"<< "\n";
                 ssize = 0;
-                
-                //int ss;
-                while (ssize < size)
-                {
+                //while (ssize < size)//quando nao era datagrama. Ver projeto PCC
+                //{
                     cout << "enviando....."<<"\n";
-                    sleep(2*delay_quebra);
-                    if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0))) 
+                    //sleep(2*delay_quebra); //quando nao era datagrama, fazia delay quando
+                                             //quebrava no meio da transmissao, ou seja ssize < size 
+                    //if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0)))//quando nao era SOCK_DGRAM. PCC like 
+                    if( UDT::ERROR == (ss = UDT::sendmsg(client, data, size, -1, true)))
                     {
                         cout << "send:" << UDT::getlasterror().getErrorMessage() << endl;
                         break;
@@ -257,34 +269,18 @@ int main(int argc, char**argv){
                     cout << "ss: " << ss << "\n";
                     //cin >> c;
                     ssize += ss;
-                    first_send_aleready = true;
+                    first_send_aleready = true;//agora é possível calcular delta t entre as transissões
                     //sleep(2);
-                    time_of_last_send = std::time(0);
-                    //if (UDT::ERROR == UDT::recv(client, ack, 100, 0))
-                    //{
-                        //cout << "recv ack:" << UDT::getlasterror().getErrorMessage() << endl;
-                        //return 0;
-                    //}
-                    delay_quebra++;
-                }
-                
-                if(delay_quebra == 1)
-                {
-                    size = (size+9000); //% MAX_PCC_SND_SIZE; //3500000;
-                    if(size > MAX_PCC_SND_SIZE)
-                        size = MAX_PCC_SND_SIZE;
-                    ssize = size;
-                    cout << "size: " << size <<"\n"; 
-                }
-                
-                delay_quebra = 0;
+                    time_of_last_send = std::time(0); //tempo do ultimo envio, para calcular delta t
+                    //delay_quebra++;
+                //}
+
+                //delay_quebra = 0;
                 send_lock = true;
-                srand(time(0));
-                random_number = rand()%3;
-                usleep((random_number*1000000)/5);
+                Pausar_por_tempo_aleatorio_micro_segundos(200);
                 //numPack++;
                 //cout << "numPack: " << numPack << endl;
-                if (ssize < size) 
+                if (ssize < size) //é sianl que deu erro
                 {
                     break;
                 }
@@ -386,10 +382,12 @@ int main(int argc, char**argv){
 
             while (true) 
             {
+                rsize = 0; //Nada enviado nessa rodada de Tx
                 while (rsize < size) 
                 {
                 // UDT::getsockopt(recver, 0, UDT_RCVDATA, &rcv_size, &var_size);
-                    if (UDT::ERROR == (rs = UDT::recv(recver, data + rsize, size - rsize, 0))) 
+                    //if (UDT::ERROR == (rs = UDT::recv(recver, data + rsize, size - rsize, 0))) 
+                    if(UDT::ERROR == (rs= UDT::recvmsg(recver, data, size)))
                     {
                         cout << "recv:" << UDT::getlasterror().getErrorMessage() << endl;
                         break;
@@ -399,7 +397,7 @@ int main(int argc, char**argv){
                 }
             
 
-                if (rsize < size) 
+                if (rsize < size) //sinal de erro
                 {
                     break;
                 }
@@ -440,8 +438,6 @@ int main(int argc, char**argv){
             std::streampos size = Get_file_size();
             fstream ofs;
             ofs.open("largefile.mp4",ios::out | ios::trunc);
-            int optResult = UDT::setsockopt(recver, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> ));
-            std::cout << "optResult Server Listener: " << optResult << std::endl;
             if (UDT::ERROR == UDT::recvfile(recver, ofs, init, size))
             {
                 std::cout << "recvfile: " << UDT::getlasterror().getErrorMessage();
