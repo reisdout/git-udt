@@ -51,7 +51,6 @@ VegasMLP13* cchandle = NULL;
 void ConfigureClientOptions()
 {
     int buffer = NET_BW*NET_RTT;
-    bool block = false;
     UDT::setsockopt(client, 0, UDT_SNDBUF, &buffer, sizeof(int));
     UDT::setsockopt(client, 0, UDP_SNDBUF, &buffer, sizeof(int));
 
@@ -117,7 +116,7 @@ void Set_server_socket()
     if(send_type == FILE || send_type == HELLO)
         serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == PCC)
-        serv= UDT::socket(AF_INET, SOCK_STREAM, 0);
+        serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
     else if (send_type == MESSAGE )
         serv= UDT::socket(AF_INET, SOCK_DGRAM, 0);
     else
