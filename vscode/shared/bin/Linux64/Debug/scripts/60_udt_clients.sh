@@ -1,7 +1,7 @@
 #!/bin/bash
 
 i=0
-num_clients=1
+num_clients=60
 
 while [ $i -lt $num_clients ];
 do
