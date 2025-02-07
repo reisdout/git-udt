@@ -7,7 +7,7 @@ echo ${n_tty}
 # ExecStart=
 # ExecStart=-/sbin/mingetty --autologin ns --noclear ${n_tty}
 # _EOF_
-mkdir -p /etc/systemd/system/getty@tty$1.service.d
+sudo mkdir -p /etc/systemd/system/getty@tty$1.service.d
 echo "[Service]" > /etc/systemd/system/getty@tty$1.service.d/override.conf
 echo "ExecStart=" >> /etc/systemd/system/getty@tty$1.service.d/override.conf
 echo "ExecStart=-/sbin/mingetty --autologin ns --noclear tty$1" >> /etc/systemd/system/getty@tty$1.service.d/override.conf
