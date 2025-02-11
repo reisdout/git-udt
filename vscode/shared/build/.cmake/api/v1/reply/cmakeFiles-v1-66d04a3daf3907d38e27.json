@@ -128,6 +128,9 @@
 		},
 		{
 			"path" : "VegasMLP13/CMakeLists.txt"
+		},
+		{
+			"path" : "TCP_Socket/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

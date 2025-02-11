@@ -1,57 +1,11 @@
 # ninja log v5
-724	945	1738615314458297653	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-8	724	1738615314236298038	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-27	68	1736002370094048971	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a	167d8ec9bca8567
-1	26	1736002370054048823	VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o	e2bd8042e22d6478
-1	602	1738617114906976369	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-603	716	1738617115020976367	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-1	296	1738617635569965398	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-296	363	1738617635636965397	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-2	372	1738617805343961821	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-373	426	1738617805397961820	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	561	1738617892068959993	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-565	658	1738617892165959991	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	348	1738618048749956692	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-348	466	1738618048867956689	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-7	817	1738674336553969977	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-818	969	1738674336703969974	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	751	1738674594407964544	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-751	957	1738674594611964539	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	564	1738676230016930078	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-564	798	1738676230247930074	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	501	1738677429608469068	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-502	686	1738677429790469165	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-5	414	1738677496445504288	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-414	549	1738677496580504359	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-10	717	1738678926043257863	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-717	845	1738678926170257930	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-6	469	1738679280997444985	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-469	617	1738679281144445063	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-6	406	1738679475981547754	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-406	528	1738679476102547818	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-10	662	1738679736881685280	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-662	794	1738679737013685350	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-5	485	1738680109691882220	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-485	634	1738680109838882298	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-15	633	1738681073336390866	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-634	908	1738681073610391011	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-7	419	1738682749004276768	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-420	582	1738682749167276854	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-6	788	1738683582947716945	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-789	978	1738683583136717045	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-9	1065	1738683893833881246	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-1065	1283	1738683894051881360	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-20	1063	1738684260627075215	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-1064	1306	1738684260868075342	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-5	778	1738688689989417957	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-778	983	1738688690194418065	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-4	414	1738691854597086189	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-415	560	1738691854741086265	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-13	856	1738692094600212676	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-857	985	1738692094729212744	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-10	788	1738692450935400463	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-788	1184	1738692451323400668	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-6	922	1738692809929589673	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-923	1108	1738692810114589770	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
-5	401	1738695238720870364	CMakeFiles/udt.dir/main.cpp.o	65b425cc4c3d5b14
-402	522	1738695238839870426	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt	bef0e3cfe18bd1cb
+406	504	1739308777469758830	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	c7a02c58f6433297
+4	599	1739307617150465600	CMakeFiles/communicator.dir/main.cpp.o	3e8c1805daf29145
+356	406	1739308777372753371	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
+7	316	1739308777283748362	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	7b26d91df4b88ff2
+2	355	1739308777322750557	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	2d261036d245336
+27	54	1739291098036045355	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a	167d8ec9bca8567
+6	27	1739291098010043891	VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o	55127819b7e47bfb
+2	198	1739308834167949339	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	7b26d91df4b88ff2
+198	212	1739308834181950127	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
+212	270	1739308834237953278	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	c7a02c58f6433297

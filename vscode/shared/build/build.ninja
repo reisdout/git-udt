@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: udt
+# Project: communicator
 # Configurations: Debug
 # =============================================================================
 
@@ -41,37 +41,37 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /home/ns/UDT-workspace/git-udt/vscode/shared/build/
 # =============================================================================
-# Object build statements for EXECUTABLE target udt
+# Object build statements for EXECUTABLE target communicator
 
 
 #############################################
-# Order-only phony target for udt
+# Order-only phony target for communicator
 
-build cmake_object_order_depends_target_udt: phony || CMakeFiles/udt.dir
+build cmake_object_order_depends_target_communicator: phony || CMakeFiles/communicator.dir
 
-build CMakeFiles/udt.dir/main.cpp.o: CXX_COMPILER__udt_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp || cmake_object_order_depends_target_udt
-  DEP_FILE = CMakeFiles/udt.dir/main.cpp.o.d
+build CMakeFiles/communicator.dir/main.cpp.o: CXX_COMPILER__communicator_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp || cmake_object_order_depends_target_communicator
+  DEP_FILE = CMakeFiles/communicator.dir/main.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13
-  OBJECT_DIR = CMakeFiles/udt.dir
-  OBJECT_FILE_DIR = CMakeFiles/udt.dir
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket
+  OBJECT_DIR = CMakeFiles/communicator.dir
+  OBJECT_FILE_DIR = CMakeFiles/communicator.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target udt
+# Link build statements for EXECUTABLE target communicator
 
 
 #############################################
-# Link the executable /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
+# Link the executable /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt: CXX_EXECUTABLE_LINKER__udt_Debug CMakeFiles/udt.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator: CXX_EXECUTABLE_LINKER__communicator_Debug CMakeFiles/communicator.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
   FLAGS = -g
-  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a
-  OBJECT_DIR = CMakeFiles/udt.dir
+  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+  OBJECT_DIR = CMakeFiles/communicator.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
-  TARGET_PDB = udt.dbg
+  TARGET_FILE = /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
+  TARGET_PDB = communicator.dbg
 
 
 #############################################
@@ -113,7 +113,7 @@ build cmake_object_order_depends_target_VegasMLP13: phony || VegasMLP13/CMakeFil
 build VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o: CXX_COMPILER__VegasMLP13_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp || cmake_object_order_depends_target_VegasMLP13
   DEP_FILE = VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include
   OBJECT_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir
   OBJECT_FILE_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir/src
 
@@ -157,13 +157,84 @@ build VegasMLP13/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build VegasMLP13/rebuild_cache: phony VegasMLP13/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target tcpsocket
+
+
+#############################################
+# Order-only phony target for tcpsocket
+
+build cmake_object_order_depends_target_tcpsocket: phony || TCP_Socket/CMakeFiles/tcpsocket.dir
+
+build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_server.cpp || cmake_object_order_depends_target_tcpsocket
+  DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
+  OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
+  OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
+
+build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_client.cpp || cmake_object_order_depends_target_tcpsocket
+  DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./VEGAS_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
+  OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
+  OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target tcpsocket
+
+
+#############################################
+# Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a
+
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a: CXX_STATIC_LIBRARY_LINKER__tcpsocket_Debug TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+  TARGET_PDB = tcpsocket.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build TCP_Socket/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build TCP_Socket/edit_cache: phony TCP_Socket/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build TCP_Socket/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build TCP_Socket/rebuild_cache: phony TCP_Socket/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build VegasMLP13: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
 
+build communicator: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
+
 build libVegasMLP13.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
 
-build udt: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt
+build libtcpsocket.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
+
+build tcpsocket: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
 
 # =============================================================================
 # Folder targets.
@@ -173,7 +244,14 @@ build udt: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/
 #############################################
 # Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build
 
-build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/udt VegasMLP13/all
+build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator VegasMLP13/all TCP_Socket/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket
+
+build TCP_Socket/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
 
 # =============================================================================
 
@@ -189,14 +267,14 @@ build VegasMLP13/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Lin
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
+build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
 
 
 #############################################

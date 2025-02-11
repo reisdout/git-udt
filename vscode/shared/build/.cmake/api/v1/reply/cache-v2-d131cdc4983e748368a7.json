@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "3"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -831,7 +831,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "udt"
+			"value" : "communicator"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION",
@@ -1190,6 +1190,18 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "TCP_SOCKET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+		},
+		{
 			"name" : "UDT_LIB",
 			"properties" : 
 			[
@@ -1200,6 +1212,18 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a"
+		},
+		{
+			"name" : "VEGAS_MLP_13",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"
 		},
 		{
 			"name" : "VegasMLP13_BINARY_DIR",
@@ -1250,7 +1274,7 @@
 			"value" : "TRUE"
 		},
 		{
-			"name" : "udt_BINARY_DIR",
+			"name" : "communicator_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1262,7 +1286,7 @@
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/build"
 		},
 		{
-			"name" : "udt_IS_TOP_LEVEL",
+			"name" : "communicator_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1274,7 +1298,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "udt_SOURCE_DIR",
+			"name" : "communicator_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1284,6 +1308,42 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared"
+		},
+		{
+			"name" : "tcpsocket_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket"
+		},
+		{
+			"name" : "tcpsocket_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "tcpsocket_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket"
 		}
 	],
 	"kind" : "cache",

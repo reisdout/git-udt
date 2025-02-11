@@ -8,7 +8,8 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1
+						1,
+						2
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -36,6 +37,21 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "TCP_Socket",
+					"jsonFile" : "directory-TCP_Socket-Debug-366b6d57c5b8caab1df2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "TCP_Socket",
+					"targetIndexes" : 
+					[
+						2
+					]
 				}
 			],
 			"name" : "Debug",
@@ -44,13 +60,14 @@
 				{
 					"childIndexes" : 
 					[
-						1
+						1,
+						2
 					],
 					"directoryIndexes" : 
 					[
 						0
 					],
-					"name" : "udt",
+					"name" : "communicator",
 					"targetIndexes" : 
 					[
 						1
@@ -67,6 +84,18 @@
 					[
 						0
 					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "tcpsocket",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
 				}
 			],
 			"targets" : 
@@ -74,16 +103,23 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "VegasMLP13::@f5ca6493783f5e2d8e7b",
-					"jsonFile" : "target-VegasMLP13-Debug-6574e9ce6a36a045e287.json",
+					"jsonFile" : "target-VegasMLP13-Debug-50bfeb3c63d8fecadf16.json",
 					"name" : "VegasMLP13",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "udt::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-udt-Debug-233b7eb9b0494ec2a669.json",
-					"name" : "udt",
+					"id" : "communicator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-communicator-Debug-06e8cc2be332cd4e64ea.json",
+					"name" : "communicator",
 					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "tcpsocket::@0877140535a3148449e9",
+					"jsonFile" : "target-tcpsocket-Debug-5edf42dc13a97161b742.json",
+					"name" : "tcpsocket",
+					"projectIndex" : 2
 				}
 			]
 		}

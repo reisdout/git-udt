@@ -12,4 +12,4 @@
 
 #define NET_BW 100000000
 
-#define NET_RTT 0.0003
+#define NET_RTT 0.003

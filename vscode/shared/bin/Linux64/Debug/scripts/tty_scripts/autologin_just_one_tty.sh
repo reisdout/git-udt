@@ -1,5 +1,11 @@
 #bin/bash
 
+
+#Este script altera a configuração da tty, cujo numero é recebido como parametro
+#Poe exemplo, se quisermos alterar a tty11, basta chamarmos no console o .st:
+
+# autologin_just_one_tty.sh 11.
+
 n_tty="tty$1"
 echo ${n_tty}
 #cat > /etc/systemd/system/getty@tty$1.service.d/override.conf <<- "_EOF_"

@@ -3,7 +3,8 @@
 #include <arpa/inet.h>
 #include <cstring>
 #include <VegasMLP13/include/VegasMLP13.h>
-
+#include <TCP_Socket/include/tcp_client.h>
+#include <TCP_Socket/include/tcp_server.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -11,6 +12,8 @@
 #include <cstdlib>
 
 #include "VegasMLP13/include/defines.h"
+
+
 
 using namespace UDT;
 using namespace std;
@@ -50,9 +53,11 @@ VegasMLP13* cchandle = NULL;
 
 void ConfigureClientOptions()
 {
-    int buffer = NET_BW*NET_RTT;
+    int buffer = NET_BW*NET_RTT + 150000;
     UDT::setsockopt(client, 0, UDT_SNDBUF, &buffer, sizeof(int));
     UDT::setsockopt(client, 0, UDP_SNDBUF, &buffer, sizeof(int));
+    UDT::setsockopt(client, 0, UDT_RCVBUF, &buffer, sizeof(int));
+    UDT::setsockopt(client, 0, UDP_RCVBUF, &buffer, sizeof(int));  
 
 
 }
@@ -60,16 +65,19 @@ void ConfigureClientOptions()
 
 void ConfigureServerOptions()
 {
-    int buffer = NET_BW*NET_RTT;
+    int buffer = NET_BW*NET_RTT + 150000;
+    UDT::setsockopt(recver, 0, UDT_RCVBUF, &buffer, sizeof(int));
+    UDT::setsockopt(recver, 0, UDP_RCVBUF, &buffer, sizeof(int));
     UDT::setsockopt(recver, 0, UDT_SNDBUF, &buffer, sizeof(int));
-    UDT::setsockopt(recver, 0, UDP_RCVBUF, &buffer, sizeof(int));  
+    UDT::setsockopt(recver, 0, UDP_SNDBUF, &buffer, sizeof(int));
+  
 
 }
 void Pausar_por_tempo_aleatorio_micro_segundos(int par_tempo_minimo_micro_segundos)
 {
     int random_number;    
     srand(time(0));
-    random_number = rand()%3;
+    random_number = rand()%10;
     usleep(par_tempo_minimo_micro_segundos +((random_number*1000000)/5));
 
 }
@@ -182,16 +190,14 @@ std::streampos Get_file_size()
 }
 
 int main(int argc, char**argv){
-    printf("Hello, from udpSocket!\n");
+    printf("Hello, from communicator!\n");
     char c;
     //Socket* ptSocket=0;
     //bool server = true;
     //bool debug = true;
     std::cout << "Terminal Type: " << argv[1]<<"\n";
-    std::cout << "Server Port: " << argv[2]<<"\n";
-    server_port = std::stoi(string(argv[2]));
     //cin >> c;
-    if(std::string(argv[1]) == "client")
+    if(std::string(argv[1]) == "client_udt")
     {
 
 
@@ -224,7 +230,8 @@ int main(int argc, char**argv){
             //unsigned numPack = 0;
 
             while (true) 
-            {                 
+            {   
+                Pausar_por_tempo_aleatorio_micro_segundos(1000000);
 
                 //esse if abaixo  visa regular o tempo entre envios para se 
                 //atingir uma determinada velocidade
@@ -244,6 +251,11 @@ int main(int argc, char**argv){
                     unlock_send++;
                     Pausar_por_tempo_aleatorio_micro_segundos(3000);
                     //sleep(3);
+                    if(unlock_send > 10)
+                    {
+                        unlock_send = 0;
+                        send_lock = false;
+                    }
                     
                     continue;
                 }
@@ -361,8 +373,11 @@ int main(int argc, char**argv){
     }
 
 
-    if(std::string(argv[1]) == "server" )
+    if(std::string(argv[1]) == "server_udt" )
     {
+
+        std::cout << "Server Port: " << argv[2]<<"\n";
+        server_port = std::stoi(string(argv[2]));
 
         Set_server_socket();
 
@@ -470,6 +485,27 @@ int main(int argc, char**argv){
         return 1;
     }
 
+    if(std::string(argv[1]) == "tcp_server")
+    {
+        std::cout << "Starting TCP Socket" << std::endl;
+        TCP_Server communicator; 
+        communicator.SetOptions();
+        communicator.Bind();
+        communicator.Listen();
+        communicator.Accept();
+        communicator.Read();
+        communicator.Close();
+        return 1;
 
+    }
+    if(std::string(argv[1]) == "tcp_client")
+    {
+        TCP_Client communicator;
+        communicator.SetServerAddr();
+        communicator.ConnectToServer();
+        communicator.Send();
+        communicator.Close();
+        return 1;
+    }
 
 }
