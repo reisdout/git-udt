@@ -50,6 +50,17 @@ sockaddr_in my_addr;//endereco do servidor, no servidor
 
 VegasMLP13* cchandle = NULL;
 
+unsigned transmission_size = 170000;
+
+void bone(char* par_buffer, int par_size)
+{
+    bzero(par_buffer,par_size);
+    for(int i=0; i < par_size; i++)
+    {
+        par_buffer[i] = par_buffer[i]+1;
+    }
+}
+
 
 void ConfigureClientOptions()
 {
@@ -82,9 +93,35 @@ void Pausar_por_tempo_aleatorio_micro_segundos(int par_tempo_minimo_micro_segund
 
 }
 
+void ConfigureClientTransmissionRate()
+{
+    /*
+    O tamanho é ajustado de forma que 
+    a soma da velocidade total de todos os fluxos de 100Mbps
+    levando-se em consideração envios a cada 0.1seg.
+    */
+
+    if(NUM_FLOWS == 20)
+        transmission_size = MAX_PCC_SND_SIZE_20_FLUXOS;
+    else if(NUM_FLOWS == 40)
+        transmission_size = MAX_PCC_SND_SIZE_40_FLUXOS;
+    else if(NUM_FLOWS == 60)
+        transmission_size = MAX_PCC_SND_SIZE_60_FLUXOS;
+    else if(NUM_FLOWS == 80)
+        transmission_size = MAX_PCC_SND_SIZE_80_FLUXOS;
+    else{
+        cout << "Undefined transmission Size" << endl;
+        exit(0);
+    }        
+
+
+}
+
 
 void Set_client_socket()
 {
+
+
     if(send_type == FILE || send_type == HELLO)
         client= UDT::socket(AF_INET, SOCK_STREAM, 0);
     else if (send_type == PCC)
@@ -109,14 +146,16 @@ void Set_client_socket()
     
     /*Aparentemente, quando do conect, há um bind(reserva) tácito na máquiana que 
     está solicitando a conexao*/
-    if (UDT::ERROR == UDT::connect(client, (sockaddr*)&serv_addr, sizeof(serv_addr)))
+    while (UDT::ERROR == UDT::connect(client, (sockaddr*)&serv_addr, sizeof(serv_addr)))
     {
         std::cout << "connect: " << UDT::getlasterror().getErrorMessage();
-        exit(0);
+        Pausar_por_tempo_aleatorio_micro_segundos(5000000);
+        //exit(0);
     }
     //UDT::listen(client, 10);
     //recent = UDT::accept(client, (sockaddr*)&server_addr_in_client, &namelen_server_addr_in_client);
     ConfigureClientOptions();
+    ConfigureClientTransmissionRate();
 }
 
 void Set_server_socket()
@@ -197,7 +236,10 @@ int main(int argc, char**argv){
     //bool debug = true;
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     //cin >> c;
-    if(std::string(argv[1]) == "client_udt")
+    std::cout << "Server Port: " << argv[2]<<"\n";
+    server_port = std::stoi(string(argv[2]));
+
+    if(std::string(argv[1]) == "udt_client")
     {
 
 
@@ -211,9 +253,11 @@ int main(int argc, char**argv){
         
         if(send_type == PCC)
         {
-            int size = MAX_PCC_SND_SIZE;
-            char* data = new char[MAX_PCC_SND_SIZE];            
-            bzero(data, MAX_PCC_SND_SIZE);
+        
+            unsigned size =  transmission_size;
+            char* data = new char[transmission_size];            
+            //bzero(data, transmission_size);
+            bone(data, transmission_size);
             bool first_send_aleready = false;
             int ssize = 0;
             int ss;
@@ -231,27 +275,27 @@ int main(int argc, char**argv){
 
             while (true) 
             {   
-                Pausar_por_tempo_aleatorio_micro_segundos(1000000);
+                Pausar_por_tempo_aleatorio_micro_segundos(100000);//0.1s
 
                 //esse if abaixo  visa regular o tempo entre envios para se 
                 //atingir uma determinada velocidade
-                if(first_send_aleready) //Já mandou? ja tem time_last_send
+                /*if(first_send_aleready) //Já mandou? ja tem time_last_send
                 {
                     //cout << "testing vel"<<"\n";
                     time_send = std::time(0);
                     //cout << "delta t: " <<  time_send - time_of_last_send <<"\n";
                     if((time_send - time_of_last_send) < 2)//regula o delta t
                         continue;
-                }
+                }*/
                 
                 if(send_lock)
                 {
                    
                     cout << "send lock!"<<"\n";
                     unlock_send++;
-                    Pausar_por_tempo_aleatorio_micro_segundos(3000);
+                    Pausar_por_tempo_aleatorio_micro_segundos(2000);
                     //sleep(3);
-                    if(unlock_send > 10)
+                    if(unlock_send > 5)
                     {
                         unlock_send = 0;
                         send_lock = false;
@@ -268,7 +312,7 @@ int main(int argc, char**argv){
                 ssize = 0;
                 //while (ssize < size)//quando nao era datagrama. Ver projeto PCC
                 //{
-                    cout << "enviando....."<<"\n";
+                    cout << "enviando..... "<< size <<"\n";
                     //sleep(2*delay_quebra); //quando nao era datagrama, fazia delay quando
                                              //quebrava no meio da transmissao, ou seja ssize < size 
                     //if (UDT::ERROR ==(ss = UDT::send(client, data + ssize, size - ssize, 0)))//quando nao era SOCK_DGRAM. PCC like 
@@ -376,8 +420,6 @@ int main(int argc, char**argv){
     if(std::string(argv[1]) == "server_udt" )
     {
 
-        std::cout << "Server Port: " << argv[2]<<"\n";
-        server_port = std::stoi(string(argv[2]));
 
         Set_server_socket();
 
@@ -488,7 +530,8 @@ int main(int argc, char**argv){
     if(std::string(argv[1]) == "tcp_server")
     {
         std::cout << "Starting TCP Socket" << std::endl;
-        TCP_Server communicator; 
+        TCP_Server communicator;
+        communicator.SetPort((u_int32_t)server_port); 
         communicator.SetOptions();
         communicator.Bind();
         communicator.Listen();
@@ -501,6 +544,7 @@ int main(int argc, char**argv){
     if(std::string(argv[1]) == "tcp_client")
     {
         TCP_Client communicator;
+        communicator.SetPort((u_int32_t)server_port);
         communicator.SetServerAddr();
         communicator.ConnectToServer();
         communicator.Send();

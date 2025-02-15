@@ -22,7 +22,7 @@ void TCP_Server::Bind()
     std::cout << "Biding socket" << std::endl;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(SERVER_PORT);
+    address.sin_port = htons(port);
     // Bind the socket to the network address and port
     if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
         perror("bind failed");
@@ -37,7 +37,7 @@ void TCP_Server::Listen()
             exit(EXIT_FAILURE);
         }
 
-    std::cout << "Server listening on port " << SERVER_PORT << std::endl;
+    std::cout << "Server listening on port " << port << std::endl;
 
 }
 void TCP_Server::Accept()
@@ -64,7 +64,7 @@ void TCP_Server:: Read()
         if(valread > 0)
         {
             std::cout << "Received: " << buffer << std::endl;
-            send(new_socket, buffer, valread, 0);
+            //send(new_socket, buffer, valread, 0);
             //std::cout << "Echo message sent" << std::endl;
             if (strncmp("exit", buffer, 4) == 0) 
             { 

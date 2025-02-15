@@ -36,6 +36,7 @@ public:
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/
+
    void onACK(int32_t ack)
    {
       last_ack = ack;
@@ -90,22 +91,26 @@ public:
       }
    }
 
-   /*virtual void onPktSent(const CPacket*pkt)
+   virtual void onPktSent(const CPacket*pkt)
    {
-      //std::cout << "Pacote: "<< pkt->getAckSeqNo() <<" Enviado" << std::endl;
-      //std::cout << "Pacote: "<< pkt->m_iSeqNo <<" Enviado" << std::endl;
+      std::cout << "Packat m_iSeqNo: "<< (int32_t) pkt->m_iSeqNo <<" sent" << std::endl;
+      //time stamp é do início da conexão e é em microsec (proc-092.pdf)
+      std::cout << "Packat TimeStamp: "<< pkt->m_iTimeStamp << " sent" << std::endl;
+
+     
       
       //std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
 
       //if(!ack_lock)
          //ack_lock = pkt->m_iSeqNo;
 
-   }*/
+   }
 
    virtual void onPktReceived(const CPacket*pkt)
    {
       //std::cout << "Pacote getAckSeqNo: "<< (unsigned)pkt->getAckSeqNo() <<" Recebido" << std::endl;
       std::cout << "Pacote m_iSeqNo: "<< pkt->m_iSeqNo <<" Recebido" << std::endl;
+      
      
    
    }
