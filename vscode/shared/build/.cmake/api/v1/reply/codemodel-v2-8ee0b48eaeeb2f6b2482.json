@@ -9,7 +9,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -50,6 +51,21 @@
 					"source" : "TCP_Socket",
 					"targetIndexes" : 
 					[
+						3
+					]
+				},
+				{
+					"build" : "project_feature_saver",
+					"jsonFile" : "directory-project_feature_saver-Debug-e4749189c987ccff613d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "project_feature_saver",
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -61,7 +77,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3
 					],
 					"directoryIndexes" : 
 					[
@@ -94,6 +111,18 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "feature_saver",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
 						2
 					]
 				}
@@ -103,21 +132,28 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "VegasMLP13::@f5ca6493783f5e2d8e7b",
-					"jsonFile" : "target-VegasMLP13-Debug-50bfeb3c63d8fecadf16.json",
+					"jsonFile" : "target-VegasMLP13-Debug-6e8c82d6a8805dc35521.json",
 					"name" : "VegasMLP13",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "communicator::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-communicator-Debug-06e8cc2be332cd4e64ea.json",
+					"jsonFile" : "target-communicator-Debug-a5866d9dbdd6932c6a70.json",
 					"name" : "communicator",
 					"projectIndex" : 0
 				},
 				{
+					"directoryIndex" : 3,
+					"id" : "feature_saver::@2df2d92e02b088089148",
+					"jsonFile" : "target-feature_saver-Debug-03b1fb04bba2bd0a512c.json",
+					"name" : "feature_saver",
+					"projectIndex" : 3
+				},
+				{
 					"directoryIndex" : 2,
 					"id" : "tcpsocket::@0877140535a3148449e9",
-					"jsonFile" : "target-tcpsocket-Debug-5edf42dc13a97161b742.json",
+					"jsonFile" : "target-tcpsocket-Debug-e9242ce5b830bc0d30bc.json",
 					"name" : "tcpsocket",
 					"projectIndex" : 2
 				}

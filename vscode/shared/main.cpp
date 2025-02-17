@@ -5,6 +5,7 @@
 #include <VegasMLP13/include/VegasMLP13.h>
 #include <TCP_Socket/include/tcp_client.h>
 #include <TCP_Socket/include/tcp_server.h>
+#include <project_feature_saver/include/class_feature_saver.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -89,7 +90,7 @@ void Pausar_por_tempo_aleatorio_micro_segundos(int par_tempo_minimo_micro_segund
     int random_number;    
     srand(time(0));
     random_number = rand()%10;
-    usleep(par_tempo_minimo_micro_segundos +((random_number*1000000)/5));
+    usleep(par_tempo_minimo_micro_segundos +((random_number*100000)/10));
 
 }
 
@@ -236,9 +237,11 @@ int main(int argc, char**argv){
     //bool debug = true;
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     //cin >> c;
-    std::cout << "Server Port: " << argv[2]<<"\n";
-    server_port = std::stoi(string(argv[2]));
-
+    if(strlen(argv[2]))
+    {
+        std::cout << "Server Port: " << argv[2]<<"\n";
+        server_port = std::stoi(string(argv[2]));
+    }
     if(std::string(argv[1]) == "udt_client")
     {
 
@@ -298,7 +301,7 @@ int main(int argc, char**argv){
                     if(unlock_send > 5)
                     {
                         unlock_send = 0;
-                        send_lock = false;
+                        //send_lock = false;
                     }
                     
                     continue;
@@ -550,6 +553,11 @@ int main(int argc, char**argv){
         communicator.Send();
         communicator.Close();
         return 1;
+    }
+
+    if(std::string(argv[1]) == "feature_saver")
+    {
+        class_feature_saver obj_saver(server_port);
     }
 
 }

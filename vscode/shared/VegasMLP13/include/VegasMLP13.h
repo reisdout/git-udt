@@ -32,7 +32,7 @@ public:
       m_dCWndSize = 2.0;
 
       setACKInterval(5);
-      setRTO(5000000);
+      setRTO(500000);
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/
@@ -122,6 +122,7 @@ public:
          m_issthresh = 2;
 
       m_bSlowStart = true;
+      m_dCWndSize = 2.0;
       std::cout << "timeout" << "\n";
    }
 
@@ -139,13 +140,6 @@ protected:
       else
          m_dCWndSize += 1.0/m_dCWndSize;
 
-      //if(dif_unlock <5)
-         //dif_unlock++;
-      //else
-         //dif_unlock = 5;
-
-      //if(m_dCWndSize > 3000)
-         //m_dCWndSize = 200;
    }
 
    virtual void DupACKAction()

@@ -7,3 +7,6 @@
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/tcpsocket.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/edit_cache.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/rebuild_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_saver/CMakeFiles/feature_saver.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_saver/CMakeFiles/edit_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_saver/CMakeFiles/rebuild_cache.dir
