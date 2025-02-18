@@ -558,6 +558,58 @@ int main(int argc, char**argv){
     if(std::string(argv[1]) == "feature_saver")
     {
         class_feature_saver obj_saver(server_port);
+
+
+
+        high_resolution_clock::time_point t1_ack;
+        high_resolution_clock::time_point t2_ack;
+
+        high_resolution_clock::time_point t1_snd;
+        high_resolution_clock::time_point t2_snd;
+        
+        //"enviando os pacotes"
+        cout << "enviando....." << endl;
+        for(int i = 1; i < 10; i++)
+        {
+            obj_saver.meth_deal_packet_send((uint32_t)i, high_resolution_clock::now());
+            Pausar_por_tempo_aleatorio_micro_segundos(1500000);
+        }
+
+
+        cout << "The initial map elements are : \n"; 
+        std::unordered_map <uint32_t, high_resolution_clock::time_point>::iterator it1;
+        for (it1 = obj_saver.umap_seq_timestamp.begin(); it1 != obj_saver.umap_seq_timestamp.end(); ++it1) 
+        cout << it1->first << "->" << endl; 
+
+        //"chegando os acks"
+        for (int i=2; i<=10; i++)
+        {       
+
+            t1_ack = t2_ack;            
+            t2_ack = high_resolution_clock::now();
+
+
+            obj_saver.meth_deal_ack_arrival((uint32_t)i, t2_ack);
+            Pausar_por_tempo_aleatorio_micro_segundos(1500000);
+            if(i > 2)
+            {
+                cout <<"Round: "<< i << endl;
+                t1_snd = obj_saver.umap_seq_timestamp[uint32_t(i-2)];
+                t2_snd = obj_saver.umap_seq_timestamp[uint32_t(i-1)];
+                duration<double> interval_ack = duration_cast<microseconds>(t2_ack - t1_ack);
+                duration<double> interval_snd = duration_cast<microseconds>(t2_snd - t1_snd);
+                cout << "Dt_ack: " << interval_ack.count() << "; ack_ewma: " << obj_saver.get_ack_ewma() << std::endl;
+                cout << "Dt_snd: " << interval_snd.count() << "; snd_ewma: " << obj_saver.get_send_ewma() << std::endl;
+            }
+        }
+
+        // Declaration
+        //unordered_map<uint32_t, high_resolution_clock::time_point> mymap;
+        
+
+        //simulando a chegada de acks
+
+ 
     }
 
 }
