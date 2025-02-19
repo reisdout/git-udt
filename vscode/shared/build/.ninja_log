@@ -17,3 +17,5 @@
 3	777	1739992906318954220	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	44e80197b848566e
 777	792	1739992906333953328	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	db1aa8df0c85ef4e
 792	847	1739992906388950055	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	888bd3a3af825854
+1	500	1740000376929882279	CMakeFiles/communicator.dir/main.cpp.o	869cd0cfd86ac944
+501	555	1740000376984881903	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	888bd3a3af825854

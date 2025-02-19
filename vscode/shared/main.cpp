@@ -420,7 +420,7 @@ int main(int argc, char**argv){
     }
 
 
-    if(std::string(argv[1]) == "server_udt" )
+    if(std::string(argv[1]) == "udt_server" )
     {
 
 
