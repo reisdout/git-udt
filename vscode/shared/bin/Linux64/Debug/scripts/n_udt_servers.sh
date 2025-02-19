@@ -28,7 +28,7 @@ do
     #'cd udt_workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./udt server ${door}'
     
     # trocar '  por " paea ser avaliada antes de executar o comando
-    xterm -hold -e  "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./udt server ${door}" && /bin/bash &
+    xterm -hold -e  "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./communicator udt_server ${door}" && /bin/bash &
     sleep 3
 
     i=`expr $i + 1` 
