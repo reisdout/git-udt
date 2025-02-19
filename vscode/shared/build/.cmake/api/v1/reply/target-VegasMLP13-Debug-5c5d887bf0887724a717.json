@@ -12,7 +12,8 @@
 		"commands" : 
 		[
 			"add_library",
-			"include_directories"
+			"include_directories",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -27,7 +28,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 15,
+				"line" : 29,
 				"parent" : 0
 			},
 			{
@@ -42,7 +43,13 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 8,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 32,
 				"parent" : 0
 			}
 		]
@@ -85,6 +92,14 @@
 				{
 					"backtrace" : 4,
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/../project_feature_saver/include"
 				}
 			],
 			"language" : "CXX",

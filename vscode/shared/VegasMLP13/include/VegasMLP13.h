@@ -7,9 +7,12 @@ a TCP-Cubic, reno, vegas,etc
 #include <ccc.h> //para procurar local
 #include <iostream>
 #include <unistd.h>
+#include <chrono>
+#include "../../project_feature_saver/include/class_feature_saver.h"
 #include "defines.h"
 
 extern bool send_lock;
+extern int server_port;
 extern uint32_t  last_ack;
 extern int send_type;
 int dif_unlock = 10;
@@ -33,12 +36,15 @@ public:
 
       setACKInterval(5);
       setRTO(500000);
+      obj_saver.set_port(this->port);
+      obj_saver.meth_adjust_file_path();
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/
 
    void onACK(int32_t ack)
    {
+      auto ack_arrival = high_resolution_clock::now();
       last_ack = ack;
       std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
       if(send_type == PCC)
@@ -89,6 +95,8 @@ public:
 
          ACKAction();
       }
+
+      obj_saver.meth_deal_ack_arrival(ack,ack_arrival);
    }
 
    virtual void onPktSent(const CPacket*pkt)
@@ -96,7 +104,8 @@ public:
       std::cout << "Packat m_iSeqNo: "<< (int32_t) pkt->m_iSeqNo <<" sent" << std::endl;
       //time stamp é do início da conexão e é em microsec (proc-092.pdf)
       std::cout << "Packat TimeStamp: "<< pkt->m_iTimeStamp << " sent" << std::endl;
-
+      auto snd_time = high_resolution_clock::now();
+      obj_saver.meth_deal_packet_send(pkt->m_iSeqNo,snd_time);
      
       
       //std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
@@ -157,10 +166,11 @@ protected:
 protected:
    int m_issthresh;
    bool m_bSlowStart;
-
+   int port = server_port;
    int m_iDupACKCount;
    int32_t m_iLastACK;
    int32_t ack_lock = 0;
+   class_feature_saver obj_saver;
    
 };
 

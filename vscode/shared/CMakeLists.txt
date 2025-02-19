@@ -36,9 +36,9 @@ find_library(TCP_SOCKET
             NAMES tcpsocket 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
-find_library(FEATURE_SAVER 
-            NAMES feature_saver 
-            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+#find_library(FEATURE_SAVER 
+#            NAMES feature_saver 
+#            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
 
 add_subdirectory(VegasMLP13) #necessário se tiver que gerar a lib, como nesse caso

@@ -1,13 +1,22 @@
 #include "../include/class_feature_saver.h"
 
 
-class_feature_saver::class_feature_saver(uint32_t par_port)
+class_feature_saver::class_feature_saver()
 {
 
-    port = par_port;
+}  
+
+
+void class_feature_saver::meth_adjust_file_path()
+{
+   if(!port)
+    {
+      cout << "Porta nao configurada";
+      exit(0);
+    }
     meth_start_simulation_time();
-    int client_id = par_port - 9000;
-    path_seq_metrics_file = std::string("./10_0_") + 
+    int client_id = port - 9000;
+    path_seq_metrics_file = std::string("10_0_") + 
                             std::to_string(client_id) +
                             std::string("_2") +
                             std::string("to") +
@@ -20,7 +29,8 @@ class_feature_saver::class_feature_saver(uint32_t par_port)
                             std::replace(path_seq_metrics_file.begin(), path_seq_metrics_file.end(),':','_');
 
     std::cout << path_seq_metrics_file << std::endl;     
-} 
+}
+
 
 
 void class_feature_saver::meth_add_file_header()
@@ -44,7 +54,7 @@ void class_feature_saver::meth_add_file_header()
       */
     //cout << strDestAddres;
     //deletar rtt.substr(0,rtt.length()-3)
-  filepath = outDir+"/output/"+"training_"+str_starting_time + "."+"csv";
+  filepath = outDir+"/"+path_seq_metrics_file;
   file.open(filepath, std::ios::out | std::ios::app);
   if (file.fail())
   {
@@ -73,25 +83,56 @@ void class_feature_saver::meth_add_file_header()
 void class_feature_saver::meth_amortize_map(int32_t par_seq)
 {
     
-    std::unordered_map <uint32_t, high_resolution_clock::time_point>::iterator it;
-    
-    cout << "amortiz.... " << par_seq << endl;
-
-    if(umap_seq_timestamp.empty())
+    if(map_seq_timestamp.empty())
     {
         cout << "não amortizou.... " << par_seq << endl;
         return;
-    }
-    
-    it = umap_seq_timestamp.begin();
+    }    
 
-    while (it->first < par_seq && !umap_seq_timestamp.empty())
-    {
-        cout << "amortiz  " << it->first << endl;
-        umap_seq_timestamp.erase(it);
-        it = umap_seq_timestamp.begin();
-    }
     
+    
+    cout << "Entering amortization. The atual map elements are : \n"; 
+    for (auto it1 = map_seq_timestamp.begin(); it1 != map_seq_timestamp.end(); ++it1) 
+    cout << it1->first << "->" << endl; 
+    //map <uint32_t, high_resolution_clock::time_point>::iterator it;
+
+    
+
+    //cout << "amortiz.... " << par_seq << endl;
+
+    
+    bool done = false;
+    uint32_t erased;
+    while (!done)
+    {
+        cout << "Há " <<  map_seq_timestamp.count(par_seq) << " com seq == " <<par_seq<<endl;
+        done=true;
+        for(auto it = map_seq_timestamp.begin(),next_it = it; it != map_seq_timestamp.end(); it=next_it)
+        {
+        
+            ++next_it;
+            if(it->first < par_seq && !map_seq_timestamp.empty())
+            {
+                
+                cout << "amortiz  " << it->first << endl;
+                erased = map_seq_timestamp.erase(it->first);
+                cout << "erased:  " << erased << endl;
+                done=false;
+                break;
+                        
+            }
+            else
+            {
+                done=true;
+                break;
+            }
+                
+        }
+    }
+
+        cout << "The atual map elements are : \n"; 
+        for (auto it1 = map_seq_timestamp.begin(); it1 != map_seq_timestamp.end(); ++it1) 
+        cout << it1->first << "->" << endl; 
 }
 
 
@@ -104,12 +145,10 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
 
     if(first_ack_process)
     {
-        duration<double> intervalFromPreviousAck = duration_cast<microseconds>(marcaTempoChegadaAck - marcaTempoChegadaAckAnterior);
-
-        
-        cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck.count() <<  endl;
-
-        ack_ewma = (float)(((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck.count()));
+        auto delta_t = duration_cast<microseconds>(marcaTempoChegadaAck - marcaTempoChegadaAckAnterior);
+        float intervalFromPreviousAck = (float) delta_t.count();
+        ack_ewma = (float)(((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck));
+        cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck <<  endl;
 
     }
 
@@ -126,32 +165,32 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
                          high_resolution_clock::time_point par_ack_arrival_time)
 {
     
-    if(!first_ack_process)
-        return;
+    auto pre_rtt = duration_cast<microseconds>(par_ack_arrival_time - map_seq_timestamp.at(par_seq-1));
+    rtt = (double)pre_rtt.count();
+    cout << "rtt: " << rtt << "; Marca ACK: " << par_ack_arrival_time.time_since_epoch().count()<<"; Marca Send: "<< map_seq_timestamp.at(par_seq-1).time_since_epoch().count() << endl;
 
-    duration<double> pre_rtt = duration_cast<microseconds>(par_ack_arrival_time - umap_seq_timestamp[par_seq-1]);
-    rtt = pre_rtt.count();
 }
 
 void class_feature_saver::meth_calculate_send_ewma(uint32_t par_seq)
 {
 
     //seq-1, pois o ack é a espera do próximio byte ou segmento
-    if(umap_seq_timestamp.find(par_seq-1) != umap_seq_timestamp.end())
+    if(map_seq_timestamp.find(par_seq-1) != map_seq_timestamp.end())
     {
         cout << "found seq: " << par_seq-1 << endl;
-        marcaTempoAtual = umap_seq_timestamp[par_seq-1];
+        marcaTempoAtual = map_seq_timestamp.at(par_seq-1);
     }
     else
+    {
+        cout << "NOT found seq: " << par_seq-1 << endl;
         return;
-    
+    }
     if(first_ack_process)
     {
-        intervalbetweenTS = duration_cast<microseconds>(marcaTempoAtual - marcaTempoAnterior);
-        
-        cout << "send_ewma: " << send_ewma<< "; "<<"Dt: " << intervalbetweenTS.count() <<  endl;
-
-        send_ewma = (float)((1-expWeightExpon )*send_ewma + (expWeightExpon )*intervalbetweenTS.count());
+        auto delta_t = duration_cast<microseconds>(marcaTempoAtual - marcaTempoAnterior);
+        intervalbetweenTS = (float) delta_t.count();
+        send_ewma = (float)((1-expWeightExpon )*send_ewma + (expWeightExpon )*intervalbetweenTS);
+        cout << "send_ewma: " << send_ewma<< "; "<<"Dt: " << intervalbetweenTS <<  endl;
 
     }
 
@@ -165,12 +204,13 @@ void class_feature_saver::meth_deal_ack_arrival(uint32_t par_seq,
                                                 high_resolution_clock::time_point par_ack_arrival_time)
 {
 
+    cout << "======Receiving seq "<< par_seq <<"======"<<endl;
 
     meth_calculate_ack_ewma(par_seq, par_ack_arrival_time);
     meth_calculate_send_ewma(par_seq);
     meth_calculate_rtt(par_seq, par_ack_arrival_time);
     meth_amortize_map(par_seq);
-    /*
+    
     meth_save_training_data(par_seq-1, //numAckReceived[idAckReceiver][idAckSender], 
                          ack_ewma, 
                          send_ewma,
@@ -182,7 +222,7 @@ void class_feature_saver::meth_deal_ack_arrival(uint32_t par_seq,
                          0,
                          par_ack_arrival_time, 
                          marcaTempoAtual,//ts->GetEcho(),
-                         intervalbetweenTS.count(),
+                         intervalbetweenTS,
                          0,
                          0,
                          "L",
@@ -190,7 +230,7 @@ void class_feature_saver::meth_deal_ack_arrival(uint32_t par_seq,
                          port,
                         false);
     
-    */
+    
     first_ack_process = true;
 
 }
@@ -199,7 +239,7 @@ void class_feature_saver::meth_deal_packet_send(uint32_t par_seq,
                                                 high_resolution_clock::time_point par_send_time)
 {
 
-    umap_seq_timestamp.insert(make_pair(par_seq, par_send_time));
+    map_seq_timestamp.insert({par_seq, par_send_time});
 
 }
 
@@ -277,7 +317,7 @@ void class_feature_saver::meth_save_training_data(   unsigned int parNumAckFlow,
 
   
   if(parUnicFile)
-    filepath = outDir+"/output/"+"training_"+str_starting_time + "."+"csv";
+    filepath = outDir+"/"+path_seq_metrics_file;
 
   else
   {
@@ -295,7 +335,7 @@ void class_feature_saver::meth_save_training_data(   unsigned int parNumAckFlow,
     */
     //cout << strDestAddres;
     //deletar rtt.substr(0,rtt.length()-3)
-    filepath = outDir+"/output/"+path_seq_metrics_file;
+    filepath = outDir+"/"+path_seq_metrics_file;
   }
   //std::replace(filepath.begin(),filepath.end(),':','_');
   std::ofstream file;

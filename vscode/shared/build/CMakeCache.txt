@@ -244,6 +244,9 @@ VegasMLP13_BINARY_DIR:STATIC=/home/ns/UDT-workspace/git-udt/vscode/shared/build/
 //Value Computed by CMake
 VegasMLP13_IS_TOP_LEVEL:STATIC=OFF
 
+//Dependencies for the target
+VegasMLP13_LIB_DEPENDS:STATIC=general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;
+
 //Value Computed by CMake
 VegasMLP13_SOURCE_DIR:STATIC=/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13
 

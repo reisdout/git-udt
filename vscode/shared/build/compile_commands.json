@@ -7,7 +7,7 @@
 },
 {
   "directory": "/home/ns/UDT-workspace/git-udt/vscode/shared/build",
-  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include -g -o VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp",
+  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/../project_feature_saver/include -g -o VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp",
   "file": "/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp",
   "output": "VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o"
 },

@@ -1262,6 +1262,18 @@
 			"value" : "OFF"
 		},
 		{
+			"name" : "VegasMLP13_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;"
+		},
+		{
 			"name" : "VegasMLP13_SOURCE_DIR",
 			"properties" : 
 			[

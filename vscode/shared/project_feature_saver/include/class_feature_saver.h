@@ -7,11 +7,14 @@
 #include <fstream>
 #include <sstream> 
 #include <chrono>
-#include <unordered_map>
-#include <chrono>
+//#include <unordered_map>
+#include <map>
+
 
 using namespace std;
 using namespace std::chrono;
+
+extern map<uint32_t, high_resolution_clock::time_point> map_seq_timestamp;
 
 #define FIRST_ACK 1
 
@@ -20,10 +23,11 @@ using namespace std::chrono;
 
 class class_feature_saver{
     public:
-        class_feature_saver(uint32_t par_port);
+        class_feature_saver();
         ~class_feature_saver(){};
         
         void meth_add_file_header();
+        void meth_adjust_file_path();
         void meth_amortize_map(int32_t par_seq);
         void meth_update_seq_metrics_file(int32_t seq, unsigned );
         //Este método guarda o timestamp, pois não é retornado com o ack
@@ -63,8 +67,9 @@ class class_feature_saver{
         void meth_start_simulation_time();
         float get_ack_ewma(){return ack_ewma;};
         float get_send_ewma(){return send_ewma;};
+        void set_port(uint32_t par_port){port=par_port;};
 
-        unordered_map<uint32_t, high_resolution_clock::time_point> umap_seq_timestamp;
+        
 
     protected:
         //static const int BUFFER_SIZE = 1024;
@@ -74,8 +79,8 @@ class class_feature_saver{
     
     private:
 
-    string outDir = "/home/ns/Desktop";
-    uint32_t port;
+    string outDir = "/home/ns/Desktop/output";
+    uint32_t port=0;
     std::string path_seq_metrics_file; 
     std::string str_starting_time;
     float lastAck_ewma=0;
@@ -89,7 +94,7 @@ class class_feature_saver{
     bool first_ack_process = false;
     float ack_ewma = 0;
     float send_ewma = 0;
-    duration<double> intervalbetweenTS;
+    float intervalbetweenTS;
     double rtt;
 
     high_resolution_clock::time_point  marcaTempoChegadaAckAnterior;

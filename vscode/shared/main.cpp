@@ -41,7 +41,7 @@ UDTSOCKET serv;
 UDTSOCKET recver;
 //UDTSOCKET recent;//receptor do cliente
 
-
+map<uint32_t, high_resolution_clock::time_point> map_seq_timestamp;
 
 sockaddr_in serv_addr; //endereço do servidor, no cliente
 int namelen_server_addr_in_client; //endereco do servidor capturado no cliente
@@ -557,7 +557,9 @@ int main(int argc, char**argv){
 
     if(std::string(argv[1]) == "feature_saver")
     {
-        class_feature_saver obj_saver(server_port);
+        class_feature_saver obj_saver;
+        obj_saver.set_port(server_port);
+        obj_saver.meth_adjust_file_path();
 
 
 
@@ -566,6 +568,10 @@ int main(int argc, char**argv){
 
         high_resolution_clock::time_point t1_snd;
         high_resolution_clock::time_point t2_snd;
+        duration<double> interval_ack;
+        duration<double> interval_snd;
+        duration<double> rtt_duration;
+
         
         //"enviando os pacotes"
         cout << "enviando....." << endl;
@@ -576,28 +582,27 @@ int main(int argc, char**argv){
         }
 
 
-        cout << "The initial map elements are : \n"; 
-        std::unordered_map <uint32_t, high_resolution_clock::time_point>::iterator it1;
-        for (it1 = obj_saver.umap_seq_timestamp.begin(); it1 != obj_saver.umap_seq_timestamp.end(); ++it1) 
-        cout << it1->first << "->" << endl; 
-
+ 
         //"chegando os acks"
         for (int i=2; i<=10; i++)
         {       
-
+            cout <<"Round: "<< i << endl;
             t1_ack = t2_ack;            
             t2_ack = high_resolution_clock::now();
 
-
+            t1_snd = t2_snd;
+            t2_snd = map_seq_timestamp.at((uint32_t)i-1);
             obj_saver.meth_deal_ack_arrival((uint32_t)i, t2_ack);
             Pausar_por_tempo_aleatorio_micro_segundos(1500000);
+            rtt_duration = duration_cast<microseconds>(t2_ack - t2_snd);
+            cout << "rtt: " << rtt_duration.count() << endl; 
             if(i > 2)
             {
-                cout <<"Round: "<< i << endl;
-                t1_snd = obj_saver.umap_seq_timestamp[uint32_t(i-2)];
-                t2_snd = obj_saver.umap_seq_timestamp[uint32_t(i-1)];
-                duration<double> interval_ack = duration_cast<microseconds>(t2_ack - t1_ack);
-                duration<double> interval_snd = duration_cast<microseconds>(t2_snd - t1_snd);
+                
+ 
+                //t2_snd = map_seq_timestamp.at((uint32_t)i-1);
+                interval_ack = duration_cast<microseconds>(t2_ack - t1_ack);
+                interval_snd = duration_cast<microseconds>(t2_snd - t1_snd);
                 cout << "Dt_ack: " << interval_ack.count() << "; ack_ewma: " << obj_saver.get_ack_ewma() << std::endl;
                 cout << "Dt_snd: " << interval_snd.count() << "; snd_ewma: " << obj_saver.get_send_ewma() << std::endl;
             }
