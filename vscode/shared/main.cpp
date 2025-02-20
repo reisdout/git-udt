@@ -249,29 +249,26 @@ int main(int argc, char**argv){
         server_port = std::stoi(string(argv[2]));
     }
 
-    if(strlen(argv[3]))
+    if(argc >= 4)
     {
         std::cout << "Participando de uma simulação do tipo : " << argv[3]<<"\n";
         tipo_dado = string(argv[3]);
     }
 
-
-
-    if(strlen(argv[4]))
+    if(argc >= 5)
     {
         std::cout << "Data rate : " << argv[4]<<"\n";
         data_rate = string(argv[4]);
     }
 
-
-    if(strlen(argv[5]))
+    if(argc >= 6)
     {
         std::cout << "Participando de uma simulação de : " << argv[5]<<" Fluxos\n";
         num_flows = string(argv[5]);
     }
 
 
-    if(strlen(argv[6]))
+    if(argc >= 7)
     {
         std::cout << "Inicio da Simulacao " << argv[6]<<"\n";
         simu_start_time = string(argv[6]);
@@ -655,9 +652,20 @@ int main(int argc, char**argv){
 
     if(std::string(argv[1]) == "feature_extractor")
     {
-        //class_feature_extractor obj_extractor;
-        //obj_saver.set_port(server_port);
-        //obj_saver.meth_adjust_file_path();
+        
+        cout << "Caso feature_extractor" << endl;
+        
+        class_feature_extractor obj_extractor;
+        obj_extractor.set_port((uint32_t)server_port);
+        
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        //o out_dir é o diretório onde foram salvos os dados dos
+        //fluxos, que é o mesmo que deve ser usado para guardar
+        //os dados do roteador.
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        obj_extractor.set_out_dir("Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53");
+        
+        obj_extractor.meth_adjus_starting_time();
 
 
 

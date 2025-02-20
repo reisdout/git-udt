@@ -10,7 +10,6 @@ class_feature_saver::class_feature_saver()
 void class_feature_saver::meth_adjust_file_path()
 {
    
-    char c;
     meth_check_parameters();
     int client_id = port - 9000;
     seq_metrics_file_name = std::string("10_0_") + 
@@ -23,19 +22,24 @@ void class_feature_saver::meth_adjust_file_path()
                             std::string("_L_") +
                             str_starting_time +
                             std::string(".csv");
-                            std::replace(seq_metrics_file_name.begin(), seq_metrics_file_name.end(),':','_');
+    std::replace(seq_metrics_file_name.begin(), seq_metrics_file_name.end(),':','_');
 
     out_dir = out_dir+"/"+tipo_dado+"_"+default_congestion+"_"+num_flows+"Fluxos_"+ bottleneck_datarate+"Mbps_"+str_starting_time;
     
     cout << "out_dir: " << out_dir << endl;
-    cin >> c;
+    //cin >> c;
 
-    
-    int status = mkdir(out_dir.c_str(),0777);
-    if(status < 0)
+    struct stat sb;
+    if (stat(out_dir.c_str(), &sb) == 0)
+        cout << "out_dir already created";
+    else
     {
-      cout << "Impossível criar pai do diretório de saída";
-      exit(0);
+        int status = mkdir(out_dir.c_str(),0777);
+        if(status < 0)
+        {
+          cout << "Impossível criar pai do diretório de saída";
+          exit(0);
+        }
     }
 
     

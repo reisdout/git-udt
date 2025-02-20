@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream> 
 #include <chrono>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -26,18 +27,23 @@ public:
                         //a classe base ver https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors
     // pure virtual functions
     
+    void meth_adjust_file_path();
+    void meth_adjus_starting_time();
+    void meth_extract_router_features(string par_path_router_file);
+    void meth_check_parameters();
+
+    string get_out_dir(){return out_dir;};
     void get_sequence_number(string par_dump_line);
     void get_time_stamp(string par_dump_line);
-    void meth_adjust_file_path();
-    void meth_extract_router_features(string par_path_router_file);
+    void set_out_dir(string par_out_dir);
     void set_port(uint32_t par_port){port=par_port;};
 
  
     private:
 
-        string outDir = "/home/ns/Desktop/output";
+        string out_dir = "/home/ns/Desktop/output";
         uint32_t port=0;
-        std::string path_seq_metrics_file; 
+        std::string seq_metrics_file_name; 
         std::string str_starting_time;
 
 

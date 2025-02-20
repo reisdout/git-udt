@@ -29,6 +29,7 @@ find_library(UDT_LIB
 #Veja que temos que ter um find_library para as
 #libs que são construídas por nós. No caso aqui 
 # correspondem aos diretorios TCP_Socket e VegasMLP13
+#cuidado com tab e espaços.
 find_library(VEGAS_MLP_13 
             NAMES VegasMLP13 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
@@ -37,7 +38,7 @@ find_library(TCP_SOCKET
             NAMES tcpsocket 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
-find_library(FEATUE_EXTRACTOR 
+find_library(FEATURE_EXTRACTOR 
             NAMES feature_extractor 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 

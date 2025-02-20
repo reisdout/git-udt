@@ -227,7 +227,10 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Path to a library.
-FEATUE_EXTRACTOR:FILEPATH=/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a
+FEATUE_EXTRACTOR:FILEPATH=/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a
+
+//Path to a library.
+FEATURE_EXTRACTOR:FILEPATH=/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a
 
 //Path to a library.
 FEATURE_SAVER:FILEPATH=/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a
