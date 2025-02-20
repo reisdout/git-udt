@@ -79,6 +79,10 @@
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver"
 				},
 				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor"
+				},
+				{
 					"backtrace" : 4,
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/."
 				},

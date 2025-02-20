@@ -9,6 +9,9 @@
 #include <chrono>
 //#include <unordered_map>
 #include <map>
+//#include <unistd.h>
+#include <sys/stat.h>
+
 
 
 using namespace std;
@@ -38,6 +41,8 @@ class class_feature_saver{
                                 high_resolution_clock::time_point par_ack_arrival_time);
 
         void meth_calculate_send_ewma(uint32_t par_seq);
+
+        void meth_check_parameters();
         
         void meth_deal_packet_send(uint32_t par_seq, 
                                    high_resolution_clock::time_point par_send_time);
@@ -64,10 +69,22 @@ class class_feature_saver{
                                         int parIdSrc,
                                         int parIdDest,
                                         bool parUnicFile);
-        void meth_start_simulation_time();
+        
         float get_ack_ewma(){return ack_ewma;};
         float get_send_ewma(){return send_ewma;};
+        //O ideal é que tenha o formato do comando date no linux
+        // antes do AM/PM.
+        string get_starting_time(){return str_starting_time;};
+        string get_tipo_dado(){return tipo_dado;} ;
+        string get_default_congestion(){return default_congestion;};
+        string get_num_flows(){return num_flows;};
+        string get_bottleneck_datarate(){return bottleneck_datarate;};
+        void set_tipo_dado(string par_tipo_dado){tipo_dado = par_tipo_dado;};
+        void set_default_congestion(string par_default_congestion){default_congestion = par_default_congestion;};
+        void set_num_flows(string par_num_flows){num_flows = par_num_flows;};
+        void set_bottleneck_datarate(string par_data_rate){bottleneck_datarate = par_data_rate;};
         void set_port(uint32_t par_port){port=par_port;};
+        void set_starting_time(string par_starting_time){str_starting_time = par_starting_time;};
 
         
 
@@ -79,9 +96,10 @@ class class_feature_saver{
     
     private:
 
-    string outDir = "/home/ns/Desktop/output";
+    string out_dir = "/home/ns/Desktop/output";
     uint32_t port=0;
-    std::string path_seq_metrics_file; 
+    std::string seq_metrics_file_name;
+    
     std::string str_starting_time;
     float lastAck_ewma=0;
     float expWeightExpon = 0.8;
@@ -96,6 +114,10 @@ class class_feature_saver{
     float send_ewma = 0;
     float intervalbetweenTS;
     double rtt;
+    string tipo_dado;
+    string default_congestion;
+    string num_flows;
+    string bottleneck_datarate;    
 
     high_resolution_clock::time_point  marcaTempoChegadaAckAnterior;
     high_resolution_clock::time_point  marcaTempoChegadaAck;

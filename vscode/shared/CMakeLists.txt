@@ -16,7 +16,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${FullOutputDir}") #executable files
 include_directories(. ./libudt 
                     ./Vegas_MLP_13 
                     ./TCP_Socket 
-                    ./project_feature_saver)
+                    ./project_feature_saver
+                    ./project_feature_extractor)
 
 #link_directories(${CMAKE_SOURCE_DIR}/lib)
 
@@ -36,6 +37,10 @@ find_library(TCP_SOCKET
             NAMES tcpsocket 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
+find_library(FEATUE_EXTRACTOR 
+            NAMES feature_extractor 
+            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+
 #find_library(FEATURE_SAVER 
 #            NAMES feature_saver 
 #            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
@@ -44,6 +49,7 @@ find_library(TCP_SOCKET
 add_subdirectory(VegasMLP13) #necessário se tiver que gerar a lib, como nesse caso
 add_subdirectory(TCP_Socket)
 add_subdirectory(project_feature_saver)
+add_subdirectory(project_feature_extractor)
 
 
 #add_library(console SHARED console.cpp)
@@ -53,5 +59,6 @@ add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} 
                       ${UDT_LIB} 
                       ${VEGAS_MLP_13} 
-                      ${TCP_SOCKET} 
-                      ${FEATURE_SAVER})
+                      ${TCP_SOCKET}
+                      ${FEATURE_SAVER} 
+                      ${FEATURE_EXTRACTOR})

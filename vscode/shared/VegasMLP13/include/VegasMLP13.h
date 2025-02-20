@@ -14,6 +14,11 @@ a TCP-Cubic, reno, vegas,etc
 extern bool send_lock;
 extern int server_port;
 extern uint32_t  last_ack;
+extern string data_rate;
+extern string num_flows;
+extern string tipo_dado;
+extern string simu_start_time;
+extern string terminal_type;
 extern int send_type;
 int dif_unlock = 10;
 
@@ -36,8 +41,16 @@ public:
 
       setACKInterval(5);
       setRTO(500000);
-      obj_saver.set_port(this->port);
-      obj_saver.meth_adjust_file_path();
+      if(terminal_type == "udt_client")
+      {
+         obj_saver.set_port(this->port);
+         obj_saver.set_bottleneck_datarate(data_rate);
+         obj_saver.set_default_congestion("udt");
+         obj_saver.set_num_flows(num_flows);
+         obj_saver.set_tipo_dado(tipo_dado);
+         obj_saver.set_starting_time(simu_start_time);
+         obj_saver.meth_adjust_file_path();
+      }
    }
    /*Não estava sendo acionado esse callback pelo fato de a assinatura do método
    estar com parametro de entrada diferente no CCC é "int32_t"*/

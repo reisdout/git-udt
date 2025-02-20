@@ -9,14 +9,11 @@ class_feature_saver::class_feature_saver()
 
 void class_feature_saver::meth_adjust_file_path()
 {
-   if(!port)
-    {
-      cout << "Porta nao configurada";
-      exit(0);
-    }
-    meth_start_simulation_time();
+   
+    char c;
+    meth_check_parameters();
     int client_id = port - 9000;
-    path_seq_metrics_file = std::string("10_0_") + 
+    seq_metrics_file_name = std::string("10_0_") + 
                             std::to_string(client_id) +
                             std::string("_2") +
                             std::string("to") +
@@ -24,11 +21,25 @@ void class_feature_saver::meth_adjust_file_path()
                             std::to_string(client_id) +
                             std::string("_2") +
                             std::string("_L_") +
-                            str_starting_time.substr(0,str_starting_time.length()-6) +
+                            str_starting_time +
                             std::string(".csv");
-                            std::replace(path_seq_metrics_file.begin(), path_seq_metrics_file.end(),':','_');
+                            std::replace(seq_metrics_file_name.begin(), seq_metrics_file_name.end(),':','_');
 
-    std::cout << path_seq_metrics_file << std::endl;     
+    out_dir = out_dir+"/"+tipo_dado+"_"+default_congestion+"_"+num_flows+"Fluxos_"+ bottleneck_datarate+"Mbps_"+str_starting_time;
+    
+    cout << "out_dir: " << out_dir << endl;
+    cin >> c;
+
+    
+    int status = mkdir(out_dir.c_str(),0777);
+    if(status < 0)
+    {
+      cout << "Impossível criar pai do diretório de saída";
+      exit(0);
+    }
+
+    
+    std::cout << seq_metrics_file_name << std::endl;     
 }
 
 
@@ -54,7 +65,7 @@ void class_feature_saver::meth_add_file_header()
       */
     //cout << strDestAddres;
     //deletar rtt.substr(0,rtt.length()-3)
-  filepath = outDir+"/"+path_seq_metrics_file;
+  filepath = out_dir+"/"+seq_metrics_file_name;
   file.open(filepath, std::ios::out | std::ios::app);
   if (file.fail())
   {
@@ -200,6 +211,46 @@ void class_feature_saver::meth_calculate_send_ewma(uint32_t par_seq)
 }
 
 
+void class_feature_saver::meth_check_parameters()
+{
+    if(!port)
+    {
+      cout << "Please, set port" << endl;
+      exit(0);
+    }
+    if(!tipo_dado.length())
+    {
+      cout << "Please, set data type" << endl;
+      exit(0);
+    }
+    
+    if(!default_congestion.length())
+    {
+      cout << "Please, set default congestion" << endl;
+      exit(0);
+    }
+    if(!num_flows.length())
+    {
+      cout << "Please, set num flows" << endl;
+      exit(0);
+    }
+    if(!bottleneck_datarate.length())
+    {
+      cout << "Please, set data rate" << endl;
+      exit(0);
+    }
+
+    if(!str_starting_time.length())
+    {
+
+      cout << "Please, set starting time" << endl;
+      exit(0);
+
+
+    }
+}
+
+
 void class_feature_saver::meth_deal_ack_arrival(uint32_t par_seq, 
                                                 high_resolution_clock::time_point par_ack_arrival_time)
 {
@@ -317,7 +368,7 @@ void class_feature_saver::meth_save_training_data(   unsigned int parNumAckFlow,
 
   
   if(parUnicFile)
-    filepath = outDir+"/"+path_seq_metrics_file;
+    filepath = out_dir+"/"+seq_metrics_file_name;
 
   else
   {
@@ -335,7 +386,7 @@ void class_feature_saver::meth_save_training_data(   unsigned int parNumAckFlow,
     */
     //cout << strDestAddres;
     //deletar rtt.substr(0,rtt.length()-3)
-    filepath = outDir+"/"+path_seq_metrics_file;
+    filepath = out_dir+"/"+seq_metrics_file_name;
   }
   //std::replace(filepath.begin(),filepath.end(),':','_');
   std::ofstream file;
@@ -377,19 +428,8 @@ void class_feature_saver::meth_save_training_data(   unsigned int parNumAckFlow,
   //return true;
 
 
-
-
-
 }
 
 
 
 
-void class_feature_saver::meth_start_simulation_time()
-{
-  
-  //startingHour = simulationStart.GetHours();
-  //startingminute = simulationStart.GetMinutes();
-  time_t now = time(0);
-  this->str_starting_time.append(ctime(&now));
- }

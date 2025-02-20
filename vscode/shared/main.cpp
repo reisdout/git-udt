@@ -6,6 +6,7 @@
 #include <TCP_Socket/include/tcp_client.h>
 #include <TCP_Socket/include/tcp_server.h>
 #include <project_feature_saver/include/class_feature_saver.h>
+#include <project_feature_extractor/include/class_feature_extractor.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -34,7 +35,11 @@ bool send_lock = false;
 
 u_int32_t last_ack;
 
-
+string data_rate;
+string num_flows;
+string tipo_dado;
+string simu_start_time;
+string terminal_type; //cliente? servidor?
 
 UDTSOCKET client;
 UDTSOCKET serv;
@@ -236,12 +241,43 @@ int main(int argc, char**argv){
     //bool server = true;
     //bool debug = true;
     std::cout << "Terminal Type: " << argv[1]<<"\n";
+    terminal_type = string(argv[1]);
     //cin >> c;
     if(strlen(argv[2]))
     {
         std::cout << "Server Port: " << argv[2]<<"\n";
         server_port = std::stoi(string(argv[2]));
     }
+
+    if(strlen(argv[3]))
+    {
+        std::cout << "Participando de uma simulação do tipo : " << argv[3]<<"\n";
+        tipo_dado = string(argv[3]);
+    }
+
+
+
+    if(strlen(argv[4]))
+    {
+        std::cout << "Data rate : " << argv[4]<<"\n";
+        data_rate = string(argv[4]);
+    }
+
+
+    if(strlen(argv[5]))
+    {
+        std::cout << "Participando de uma simulação de : " << argv[5]<<" Fluxos\n";
+        num_flows = string(argv[5]);
+    }
+
+
+    if(strlen(argv[6]))
+    {
+        std::cout << "Inicio da Simulacao " << argv[6]<<"\n";
+        simu_start_time = string(argv[6]);
+    }
+
+
     if(std::string(argv[1]) == "udt_client")
     {
 
@@ -614,7 +650,21 @@ int main(int argc, char**argv){
 
         //simulando a chegada de acks
 
- 
+        return 1;
     }
+
+    if(std::string(argv[1]) == "feature_extractor")
+    {
+        //class_feature_extractor obj_extractor;
+        //obj_saver.set_port(server_port);
+        //obj_saver.meth_adjust_file_path();
+
+
+
+        //high_resolution_clock::time_point t1_ack;
+
+        return 1;
+    }
+
 
 }
