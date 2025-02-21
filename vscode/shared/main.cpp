@@ -670,6 +670,10 @@ int main(int argc, char**argv){
        
         cout << "seq: " << str_seq << endl;
 
+        uint64_t seq_in_decimal = std::stoull("0x"+str_seq,0,16);
+
+        cout << "seq_in_decimal: " << seq_in_decimal << endl;
+
         string time_stamp = obj_extractor.meth_search_time_stamp("1739556062.118691099 IP 10.0.0.3.41708 > 10.0.1.3.9000: UDP, length 1472");
 
         cout << "time_stamp: " << time_stamp << endl;

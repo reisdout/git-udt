@@ -38,7 +38,23 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
 
     //cin >> c;
 
-     std::cout << seq_metrics_file_name << std::endl;     
+    std::cout << seq_metrics_file_name << std::endl;
+    std::ofstream file;
+    file.open(seq_metrics_file_name, std::ios::out | std::ios::app);
+    if (file.fail())
+    {
+        std::cout << "Error opening seq buffer file" << endl;
+        exit(0);
+    }
+    file <<"#Ack" << "," 
+        << "Last Router Ocupation Router Arrival" << "(" <<"Packets"<< ")"<<"," 
+        << "Last Router Ocupation Router Arrival_ewma" << "(" <<"Packets"<< ")"<<","         
+        << "Network Situation Router Arrival" <<  ","
+        "Measure Time"<<","
+        <<"Queue_Router2" << "\n";
+
+        file.close();
+     
 
 }
 
@@ -75,6 +91,8 @@ void class_feature_extractor::meth_extract_router_features()
     }
     
     std::string dump_line;
+    uint64_t queue_now;
+    uint64_t seq_in_decimal;
 
     //cout << parPathTopology << "\n";
     //cout << parPathFlow << "\n";
@@ -127,7 +145,12 @@ void class_feature_extractor::meth_extract_router_features()
 
             else if(packet_line == FORTH_PACKET_LINE)
             {
-                meth_search_best_queue_size_by_time_stamp(time_stamp);
+                queue_now =  meth_search_best_queue_size_by_time_stamp(time_stamp);
+                seq_in_decimal = std::stoull("0x"+seq_number,0,16);
+                float bytes_in_queue = (float) queue_now;
+                router_queue_ewma = ((1- exp_weight_expon_queue)*router_queue_ewma + (exp_weight_expon_queue)*bytes_in_queue); 
+                meth_update_seq_queue_file(seq_in_decimal, router_queue_ewma);
+                
 
             }
 
@@ -199,34 +222,74 @@ string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_alo
 }
 
 
-void class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string par_time_stamp)
+uint64_t class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string par_time_stamp)
 {
 
+    /*
+    A ideia dos dados primário e secundário se baseia nos seguintes fatos
+
+    1. O pacote faz a diferença com a timestamp prioritária e depois com a secundária. Se
+    a diferenca com a primária for menor, o valor da fila associada com a primária é retornada.
+    
+    2. Se a diferença com a secundária for menor, a secundária passa a ser primária e a posição 
+    secundária é preenchida com uma nova linha da fila. Retorna-se ao passo 1, ou seja, permance na
+    busca pela menor diferença.
+
+    3. A estratégia acima só é possível pelo fato de tanto a chegada dos pacotes quanto a leitura dos
+    buffer estarem distribuídas sequencialmente.
+    
+    */
+    
     if(!stream_queue_size_along_time_file.is_open())
         stream_queue_size_along_time_file.open(queue_size_along_time_file);
     
     if(stream_queue_size_along_time_file.is_open())
     {
-        string queue_along_time_file_line;
-        string str_line_time_stamp;
-        string str_line_queue;
+        
         uint64_t packet_arrival_time;
         par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
         packet_arrival_time = (uint64_t)stoull(par_time_stamp);
 
-        if(! prior_packet_arrival_time)
+        if(!prior_packet_arrival_time)
         {
+            //Lendo as duas primeiras linhas
+            for(int i = 0; i < 2; i++)
+            {               
+
+                if(i==0) //preenchenco o prioritario com os dados a primeira linha
+                    meth_take_and_store_line_values(prior_packet_arrival_time, buffer_at_prior_packet_arrival_time);
             
-            getline(stream_queue_size_along_time_file, queue_along_time_file_line);
-            str_line_time_stamp = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',1);
-            
-            //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-            //Retorna algo do tipo 23456b234p
-            //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-            str_line_queue = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',2);//2345
-            str_line_queue = str_line_queue.substr(0,str_line_queue.find("b"));
-            str_line_queue = meth_deal_with_K_occurence(str_line_queue);
+                else//prrenchendo o secundário com os dados da segunda linha
+                    meth_take_and_store_line_values(secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time);
+                 
+            }
         }
+
+        uint64_t diff_prior=0;
+        uint64_t diff_secondary=0;
+        bool found= false;
+        while(!found)
+        {
+
+            diff_prior = labs(packet_arrival_time - prior_packet_arrival_time);
+            diff_secondary = labs(packet_arrival_time - secondary_packet_arrival_time);
+
+            if(diff_prior < diff_secondary)
+                found = true;
+
+            else
+            {
+                prior_packet_arrival_time = secondary_packet_arrival_time;
+                buffer_at_prior_packet_arrival_time = buffer_at_secondary_packet_arrival_time;
+                meth_take_and_store_line_values(secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time);
+            }
+
+            
+
+        }
+
+
+        return buffer_at_prior_packet_arrival_time;
         
 
 
@@ -289,6 +352,32 @@ string class_feature_extractor::meth_search_time_stamp(string par_dump_line)
 //fluxos, que é o mesmo que deve ser usado para guardar
 //os dados do roteador.
 //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+
+
+void class_feature_extractor:: meth_take_and_store_line_values(uint64_t & par_time_stamp, uint64_t & par_queue_buffer)
+{
+    
+    string queue_along_time_file_line;
+    string str_line_time_stamp;
+    string str_line_queue;
+
+
+    getline(stream_queue_size_along_time_file, queue_along_time_file_line);
+    str_line_time_stamp = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',1);
+    
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    //Retorna algo do tipo 23456b
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    str_line_queue = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',2);//2345
+    str_line_queue = str_line_queue.substr(0,str_line_queue.find("b"));
+    str_line_queue = meth_deal_with_K_occurence(str_line_queue);
+
+    par_time_stamp = (uint64_t)stoull(str_line_time_stamp);
+    par_queue_buffer = (uint64_t)stoull(str_line_queue);
+
+}
+
+
     
 
 void class_feature_extractor::set_out_dir(string par_out_dir)
@@ -308,3 +397,73 @@ void class_feature_extractor::set_out_dir(string par_out_dir)
     
 }
 
+
+void class_feature_extractor::set_queue_size_along_time_file(string par_queue_size_along_time_file)
+{
+    string line;
+    queue_size_along_time_file = par_queue_size_along_time_file;
+    queue_size_along_time_file_ewma = queue_size_along_time_file;
+    auto pos = queue_size_along_time_file_ewma.find(".");
+    queue_size_along_time_file_ewma.replace(pos,1,"_wema.");
+    
+    ifstream streaam_queue_size (out_dir+"router_data/"+queue_size_along_time_file);
+
+    if(!streaam_queue_size.is_open())
+    {
+        cout << "Error oppening  queue size  along time file" << endl;
+        exit(0);
+
+    }
+
+    std::ofstream file;
+
+    file.open(out_dir+"router_data/"+queue_size_along_time_file_ewma, std::ios::out | std::ios::app);
+    if (file.fail())
+    {
+        std::cout << "Router queue along time ewma error" << endl;
+        exit(0);
+    }
+    if (streaam_queue_size.is_open())
+    {
+        uint64_t time;
+        uint64_t queue=0;
+        float ewma=0.0;
+        
+        while ( getline (streaam_queue_size,line) )
+        {
+            meth_take_and_store_line_values(time, queue);
+            float bytes_in_queue = (float) queue;
+            ewma = ((1- exp_weight_expon_queue)*ewma + (exp_weight_expon_queue)*bytes_in_queue);
+
+            file <<time << "," << ewma <<"b"<<endl; 
+        }
+        file.close();
+        streaam_queue_size.close();
+
+    }
+}
+
+
+void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
+{
+
+  /*  
+  file.open(filepath, std::ios::out | std::ios::app);
+  if (file.fail())
+  {
+    std::cout << "Erro ao registrar Dados de Treinamento no Seq " << parSeq << "\n";
+    exit(0);
+  }
+  //make sure write fails with exception if something is wrong
+  file << parSeq << ","
+      << (float) queued_packages/(MAXROUTERBUFFERSIZE) << "," 
+      << lastRouterQueue_router_arrival_ewma[parIdSrc][parIdDest]/(MAXROUTERBUFFERSIZE) << ","
+      << networkSituation << ","
+      << routerTime << "\n";
+        //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
+  
+  file.close();
+
+*/
+
+}
