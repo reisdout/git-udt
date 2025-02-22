@@ -53,7 +53,7 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
         "Measure Time"<<","
         <<"Queue_Router2" << "\n";
 
-        file.close();
+    file.close();
      
 
 }
@@ -98,90 +98,94 @@ void class_feature_extractor::meth_extract_router_features()
     }
     
     std::string dump_line;
-    uint64_t queue_now;
+    float queue_now;
     uint64_t seq_in_decimal;
+    char c;
+    cout << "dump_file: " << dump_file << endl;
 
-    //cout << parPathTopology << "\n";
-    //cout << parPathFlow << "\n";
-    //myPause();
     ifstream stream_dump_file (dump_file);
-    bool packet=false;
-    int packet_line;
+    int packet = 0;
     string time_stamp;
     string seq_number;
+
+    uint64_t work_line=0;
 
     if (stream_dump_file.is_open())
     {
         while ( getline (stream_dump_file,dump_line) )
         {
             
+            cout << "work line: " << work_line++<< endl;
+            cout << dump_line << endl;
+            cout <<"packet: " << packet <<endl;
+            cin >> c;
             
-            
-            if(dump_line[0]!='#')//evitar comentários
+            if(dump_line[0]=='#')//evita comentários e linhas de dados dos pacotes
             {
                 packet = 0;
-                break;
-            } 
-
-            if(dump_line.find("10.0.0.3.41708 > 10.0.1.3")!=std::string::npos &&
-                     dump_line.find("UDP, length 1472")!=std::string::npos)
-            {
-                packet = FIRST_PACKET_LINE;
+                continue; //não precisa, mas é só para destacar que vai para o próximo.
             }
 
-
-            if(packet == FIRST_PACKET_LINE)
+            else if(dump_line.find("10.0.0.3")!=std::string::npos &&
+                    dump_line.find("UDP, length 1472")!=std::string::npos &&
+                    dump_line.find(to_string(port)+":") != string::npos)
+                     
             {
-              
                 time_stamp = meth_search_time_stamp(dump_line);
-                packet_line = SECOND_PACKET_LINE;
-
+                cout << "time_stamp: " << time_stamp<< "\n";
+                char c;
+                cin >> c;                
+                packet = FIRST_PACKET_LINE;
+                continue;
             }
+
 
             else if(packet == FIRST_PACKET_LINE)
             {
-                packet_line = THIRD_PACKET_LINE;
-                break;//não precisa, mas é só pra marcar que vai para outra linha
-            }
-            else if(packet_line == THIRD_PACKET_LINE)
-            {
-                seq_number =  meth_search_seq_number(dump_line);
-                packet_line = FORTH_PACKET_LINE;
-                break;
+      
+                packet = SECOND_PACKET_LINE;
+                continue;
+
             }
 
-            else if(packet_line == FORTH_PACKET_LINE)
+            else if(packet == SECOND_PACKET_LINE)
             {
+                seq_number =  meth_search_seq_number(dump_line);
+                packet = THIRD_PACKET_LINE;
+                continue;//não precisa, mas é só pra marcar que vai para outra linha
+            }
+            else if(packet == THIRD_PACKET_LINE)
+            {
+                
                 if(meth_search_best_queue_size_by_time_stamp(time_stamp,queue_now))
                 {
                     seq_in_decimal = std::stoull("0x"+seq_number,0,16);
-                    float bytes_in_queue = (float) queue_now;
-                    router_queue_ewma = ((1- exp_weight_expon_queue)*router_queue_ewma + (exp_weight_expon_queue)*bytes_in_queue); 
-                    meth_update_seq_queue_file(seq_in_decimal, router_queue_ewma);
+                    meth_update_seq_queue_file(seq_in_decimal, queue_now);
+                    packet = 0;
+                    continue;
                 }
                 else
+                {
+                    stream_dump_file.close();
                     return;
+                }                
                 
-
             }
 
-
-            
-
-
-            //if its starting a packet
+            else
+                packet = 0;          
                       
         }
+
+        stream_dump_file.close();
        
     
     }
-
     else
-    { 
-      std::cout << "Unable to open dump file\n"; 
-      exit(0);
+    {
+        cout << "Dump file oppening error" << endl;
+        exit(0);
     }
-
 
     return;
 
@@ -232,8 +236,8 @@ string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_alo
 
 }
 
-
-bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string par_time_stamp, uint64_t& par_best_queue_size)
+bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string par_time_stamp, 
+                                                                         float& par_best_queue_size)
 {
 
     /*
@@ -250,16 +254,31 @@ bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string 
     buffer estarem distribuídas sequencialmente.
     
     */
+
+    cout << "queue_size_along_time_file_ewma" <<"\n";
+    
+    cout << queue_size_along_time_file_ewma <<"\n"; 
+
     
     if(!stream_queue_size_along_time_file.is_open())
-        stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
+    {
+       cout << "Queue ewma along time file not oppened." << endl;
+       stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
+    }
     
     if(stream_queue_size_along_time_file.is_open())
     {
         
         uint64_t packet_arrival_time;
         par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
+        cout << "par_time stamp: " << par_time_stamp << ".\n";
+        char c;
+        cin >> c;
         packet_arrival_time = (uint64_t)stoull(par_time_stamp);
+
+        //float  buffer_at_prior_packet_arrival_time = 0.0;
+
+        //float  buffer_at_secondary_packet_arrival_time = 0.0;
 
         if(!prior_packet_arrival_time)//Lendio pela primeira vez. Pegar as duas primeiras linhas
         {
@@ -323,6 +342,12 @@ bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string 
 
 
     }
+
+    else
+    {
+        cout << "Error opening queue ewma along time file" << endl;
+        exit(0);
+    }
     
     return false;
     
@@ -372,9 +397,9 @@ meth_search_occurence_string_between_delimiter(string par_string_to_search,
 string class_feature_extractor::meth_search_time_stamp(string par_dump_line)
 {
 
-    string str_time_stamp;
-    str_starting_time.append(meth_search_occurence_string_between_delimiter(par_dump_line,' ',1));
-    return str_starting_time;
+    
+    return meth_search_occurence_string_between_delimiter(par_dump_line,' ',1);
+    
 }
 
 //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
@@ -383,11 +408,55 @@ string class_feature_extractor::meth_search_time_stamp(string par_dump_line)
 //os dados do roteador.
 //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 
-
-bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_stream_of_lines, uint64_t & par_time_stamp, uint64_t & par_queue_buffer)
+bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_stream_of_lines, 
+                                                               uint64_t & par_time_stamp, 
+                                                               float & par_queue_buffer)
 {
     
-    cout << "Enter meth_take_and_store_line_values()\n";
+    cout << "Enter meth_take_and_store_line_values() float\n";
+
+    
+
+    string queue_along_time_file_line;
+    string str_line_time_stamp;
+    string str_line_queue;
+
+
+    if(getline(par_stream_of_lines, queue_along_time_file_line))
+    {
+        cout <<  "queue_along_time_file_line: "<< queue_along_time_file_line<< "\n";
+        
+        if(queue_along_time_file_line.find("b") != string::npos)
+        {
+            str_line_time_stamp = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',1);
+            
+            //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+            //Retorna algo do tipo 23456b
+            //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+            str_line_queue = meth_search_occurence_string_between_delimiter(queue_along_time_file_line,',',2);//2345
+            str_line_queue = str_line_queue.substr(0,str_line_queue.find("b"));
+            str_line_queue = class_feature_extractor::meth_deal_with_K_occurence(str_line_queue);
+
+            par_time_stamp = (uint64_t)stoull(str_line_time_stamp);
+            par_queue_buffer = (float)stof(str_line_queue);
+            return true;
+        }
+        cout<< "sintax error in queueu along time file." <<endl;
+        return false;
+    }
+
+    return false;
+
+}
+
+
+
+bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_stream_of_lines, 
+                                                               uint64_t & par_time_stamp, 
+                                                               uint64_t & par_queue_buffer)
+{
+    
+    cout << "Enter meth_take_and_store_line_values() uint_64\n";
 
     string queue_along_time_file_line;
     string str_line_time_stamp;
@@ -493,7 +562,7 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
             //Nunca divida por define, pois, não sei por que dá errado
             //por isso, armazenamos na variavels MAX_BYTES_ROUTER_BUFFERSIZE
             uint32_t MAX_BYTES_ROUTER_BUFFERSIZE =MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
-            file <<time << "," << (float) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) << "\n"; 
+            file <<time << "," << (float) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
         }
         file.close();
         stream_queue_size.close();
@@ -518,33 +587,50 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
     queue_size_along_time_file = par_queue_size_along_time_file;
     queue_size_along_time_file_ewma = queue_size_along_time_file;
     auto pos = queue_size_along_time_file_ewma.find(".");
-    cout << "1......\n"; 
+    if(pos == string::npos)
+    {
+        cout << "Queue size along time file with no extension."<< endl;
+        exit(0);
+    }
     queue_size_along_time_file_ewma.replace(pos,1,"_ewma.");
+    queue_size_along_time_file_ewma = out_dir + "/" + "router_data" + "/" + queue_size_along_time_file_ewma;
     cout << "queue_size_along_time_file_ewma......" << queue_size_along_time_file_ewma <<"\n"; 
-    
+    char c;
+    cin >> c;
 }
 
 void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
 {
 
-  /*  
-  file.open(filepath, std::ios::out | std::ios::app);
-  if (file.fail())
-  {
-    std::cout << "Erro ao registrar Dados de Treinamento no Seq " << parSeq << "\n";
-    exit(0);
-  }
-  //make sure write fails with exception if something is wrong
-  file << parSeq << ","
-      << (float) queued_packages/(MAXROUTERBUFFERSIZE) << "," 
-      << lastRouterQueue_router_arrival_ewma[parIdSrc][parIdDest]/(MAXROUTERBUFFERSIZE) << ","
-      << networkSituation << ","
-      << routerTime << "\n";
-        //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
-  
-  file.close();
+    cout << "updatind router file..."<<"\n";
+    
+    if(par_queue_ewma >=0.40 && par_queue_ewma<=0.70)
+        return;
+    
+    int network_situation = 1;
 
-*/
+    if(par_queue_ewma >= 0.70)
+        network_situation = 2;
+
+    std::ofstream file;
+    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::app);
+    if (file.fail())
+    {
+        std::cout << "Erro ao registrar Dados de Treinamento no Seq " << par_seq << "\n";
+        exit(0);
+    }
+    //make sure write fails with exception if something is wrong
+    file << par_seq << ","
+        << "0" << "," 
+        << par_queue_ewma << ","
+        << network_situation << ","
+        << "0" << "," 
+        << "0" << "\n";
+        //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
+
+    file.close();
+
+
 
 }
 

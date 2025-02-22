@@ -682,44 +682,11 @@ int main(int argc, char**argv){
         //os dados do roteador.
         //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
         obj_extractor.set_out_dir("Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53");
-
-
-        string str_seq = obj_extractor.meth_search_seq_number("0x0010:  0a00 0103 a2ec 2328 05c8 1fa0 68e3 e998");
-       
-        cout << "seq: " << str_seq << endl;
-
-        uint64_t seq_in_decimal = std::stoull("0x"+str_seq,0,16);
-
-        cout << "seq_in_decimal: " << seq_in_decimal << endl;
-
-        string time_stamp = obj_extractor.meth_search_time_stamp("1739556062.118691099 IP 10.0.0.3.41708 > 10.0.1.3.9000: UDP, length 1472");
-
-        cout << "time_stamp: " << time_stamp << endl;
-
-
-        time_stamp.erase(std::remove(time_stamp.begin(), time_stamp.end(), '.'), time_stamp.end());
-        
-        cout << "time_stamp no point: " << time_stamp << endl;
-
-        string str_line_time_stamp = obj_extractor.meth_search_occurence_string_between_delimiter("1740004469515168362,39Kb",',',1);
-        
-        cout << "time stamp in time queue file: "<< str_line_time_stamp << endl;
-
-        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        //Retorna algo do tipo 23456b234p
-        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        string str_line_queue = obj_extractor.meth_search_occurence_string_between_delimiter("1740004469515168362,39Kb",',',2);//2345
-        str_line_queue = str_line_queue.substr(0,str_line_queue.find("b"));
-        str_line_queue = obj_extractor.meth_deal_with_K_occurence(str_line_queue);
-
-        cout << "queue em bytes: " << str_line_queue << endl;
-
-        //obj_extractor.meth_adjust_seq_metrics_file_path();
-
+        obj_extractor.set_dump_file("udt_dump.txt");
         obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");
-
-        //high_resolution_clock::time_point t1_ack;
-
+        obj_extractor.meth_adjust_seq_metrics_file_path();
+        obj_extractor.meth_extract_router_features();//Gera o cvs.
+   
         return 1;
     }
 
