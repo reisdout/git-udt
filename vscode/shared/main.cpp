@@ -243,10 +243,11 @@ int main(int argc, char**argv){
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     terminal_type = string(argv[1]);
     //cin >> c;
-    if(strlen(argv[2]))
+    if(argc >= 3)
     {
         std::cout << "Server Port: " << argv[2]<<"\n";
         server_port = std::stoi(string(argv[2]));
+        
     }
 
     if(argc >= 4)
@@ -650,6 +651,23 @@ int main(int argc, char**argv){
         return 1;
     }
 
+    if(std::string(argv[1]) == "router_ewma")
+    {
+        class_feature_extractor::meth_generate_queue_ewma_along_time_file(
+            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time.txt",
+            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time_ewma.txt");
+
+        
+        
+        class_feature_extractor::meth_generate_queue_ewma_along_time_file(
+            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time.txt",
+            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time_ewma.txt");
+
+        
+        return 1;
+    
+    }
+
     if(std::string(argv[1]) == "feature_extractor")
     {
         
@@ -698,7 +716,7 @@ int main(int argc, char**argv){
 
         //obj_extractor.meth_adjust_seq_metrics_file_path();
 
-
+        obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");
 
         //high_resolution_clock::time_point t1_ack;
 
