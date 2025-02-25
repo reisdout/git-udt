@@ -28,7 +28,7 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
                             std::string("to") +
                             std::string("10_1_") +
                             std::to_string(client_id) +
-                            std::string("_2") +
+                            std::string("_2_") +
                             str_starting_time +
                             "_training_buffer" +
                             std::string(".csv");
@@ -70,6 +70,11 @@ void class_feature_extractor::meth_adjus_starting_time()
     
     auto pos = out_dir.find("bps");
     str_starting_time = out_dir.substr(pos+4,string::npos);
+    string sub_string;
+    for (size_t i=str_starting_time.length()-16; i <str_starting_time.length()-8; ++i)
+        if(str_starting_time[i] == '_')
+            str_starting_time[i] = ' ';
+
     cout << "str_starting_time: "<< str_starting_time << endl;
 
 }
@@ -100,8 +105,8 @@ void class_feature_extractor::meth_extract_router_features()
     std::string dump_line;
     float queue_now;
     uint64_t seq_in_decimal;
-    char c;
-    cout << "dump_file: " << dump_file << endl;
+    //char c;
+    //cout << "dump_file: " << dump_file << endl;
 
     ifstream stream_dump_file (dump_file);
     int packet = 0;
@@ -116,9 +121,9 @@ void class_feature_extractor::meth_extract_router_features()
         {
             
             cout << "work line: " << work_line++<< endl;
-            cout << dump_line << endl;
-            cout <<"packet: " << packet <<endl;
-            cin >> c;
+            //cout << dump_line << endl;
+            //cout <<"packet: " << packet <<endl;
+            //cin >> c;
             
             if(dump_line[0]=='#')//evita comentários e linhas de dados dos pacotes
             {
@@ -133,8 +138,8 @@ void class_feature_extractor::meth_extract_router_features()
             {
                 time_stamp = meth_search_time_stamp(dump_line);
                 cout << "time_stamp: " << time_stamp<< "\n";
-                char c;
-                cin >> c;                
+                //char c;
+                //cin >> c;                
                 packet = FIRST_PACKET_LINE;
                 continue;
             }
@@ -236,7 +241,65 @@ string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_alo
 
 }
 
-bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string par_time_stamp, 
+bool class_feature_extractor::meth_drain_dump_file(string par_dump_file)
+{
+
+
+    std::string dump_file_drained = par_dump_file;
+
+    auto pos = dump_file_drained.find(".");
+    if(pos == string::npos)
+    {
+        cout << "Queue size along time file with no extension."<< endl;
+        exit(0);
+    }
+    dump_file_drained.replace(pos,1,"_drained.");
+
+    string dump_line;
+      
+   
+    ifstream stream_dump_file (par_dump_file);
+    if (!stream_dump_file.is_open())
+    {
+        cout << "Can't oppen file to drain" << endl;
+        exit(0);
+    } 
+    
+    
+    std::ofstream file;
+
+    file.open(dump_file_drained, std::ios::out | std::ios::app);
+    if (file.fail())
+    {
+        std::cout << "Error opening seq buffer file drained" << endl;
+        exit(0);
+    }
+  
+    uint64_t work_line=0;
+
+    while (getline (stream_dump_file,dump_line) )
+    {
+        cout << "work line: " << ++work_line << endl;
+
+        if(dump_line.find("0101 0101 0101 0101 0101 0101 0101 0101  ................") != string::npos)
+            continue;
+        
+        file << dump_line << endl;
+
+
+    }
+    stream_dump_file.close();
+    file.close();
+    
+    
+    return true;
+    
+
+
+}
+
+
+bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string par_time_stamp, 
                                                                          float& par_best_queue_size)
 {
 
@@ -272,8 +335,8 @@ bool class_feature_extractor:: meth_search_best_queue_size_by_time_stamp(string 
         uint64_t packet_arrival_time;
         par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
         cout << "par_time stamp: " << par_time_stamp << ".\n";
-        char c;
-        cin >> c;
+        //char c;
+        //cin >> c;
         packet_arrival_time = (uint64_t)stoull(par_time_stamp);
 
         //float  buffer_at_prior_packet_arrival_time = 0.0;
@@ -561,8 +624,8 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
             
             //Nunca divida por define, pois, não sei por que dá errado
             //por isso, armazenamos na variavels MAX_BYTES_ROUTER_BUFFERSIZE
-            uint32_t MAX_BYTES_ROUTER_BUFFERSIZE =MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
-            file <<time << "," << (float) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
+            uint32_t MAX_BYTES_ROUTER_BUFFERSIZE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
+            file <<time << "," <<  fixed << setprecision(5) << (float) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
         }
         file.close();
         stream_queue_size.close();
@@ -595,8 +658,8 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
     queue_size_along_time_file_ewma.replace(pos,1,"_ewma.");
     queue_size_along_time_file_ewma = out_dir + "/" + "router_data" + "/" + queue_size_along_time_file_ewma;
     cout << "queue_size_along_time_file_ewma......" << queue_size_along_time_file_ewma <<"\n"; 
-    char c;
-    cin >> c;
+    //char c;
+    //cin >> c;
 }
 
 void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)

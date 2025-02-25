@@ -15,7 +15,7 @@ using namespace std;
 
 
 #define MAX_PACKETS_ROUTER_BUFFERSIZE_100Mbps 300 //300//100
-#define MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps  MAX_PACKETS_ROUTER_BUFFERSIZE_100Mbps*1500 //2795084
+#define MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps  450000 
 
 
 class class_feature_extractor {
@@ -37,6 +37,7 @@ public:
     void meth_adjus_starting_time();
     void meth_construct_queue_along_time_file_ewma();
     static string meth_deal_with_K_occurence(string par_queue_along_time_file_line);
+    static bool meth_drain_dump_file(string par_dump_file);
     void meth_extract_router_features();//scan dump file
     void meth_check_parameters();
     static bool meth_generate_queue_ewma_along_time_file(string par_queue_along_time_file, string par_queue_along_time_file_ewma);

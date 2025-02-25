@@ -109,7 +109,7 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
     cout << "Entering amortization. The atual map elements are : \n"; 
     for (auto it1 = map_seq_timestamp.begin(); it1 != map_seq_timestamp.end(); ++it1) 
     cout << it1->first << "->" << endl; 
-    //map <uint32_t, high_resolution_clock::time_point>::iterator it;
+    map <uint32_t, high_resolution_clock::time_point>::iterator it;
 
     
 
@@ -120,7 +120,7 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
     uint32_t erased;
     while (!done)
     {
-        cout << "Há " <<  map_seq_timestamp.count(par_seq) << " com seq == " <<par_seq<<endl;
+        //cout << "Há " <<  map_seq_timestamp.count(par_seq) << " com seq == " <<par_seq<<endl;
         done=true;
         for(auto it = map_seq_timestamp.begin(),next_it = it; it != map_seq_timestamp.end(); it=next_it)
         {
@@ -129,9 +129,9 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
             if(it->first < par_seq && !map_seq_timestamp.empty())
             {
                 
-                cout << "amortiz  " << it->first << endl;
+                //cout << "amortiz  " << it->first << endl;
                 erased = map_seq_timestamp.erase(it->first);
-                cout << "erased:  " << erased << endl;
+                //cout << "erased:  " << erased << endl;
                 done=false;
                 break;
                         
@@ -145,9 +145,9 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
         }
     }
 
-        cout << "The atual map elements are : \n"; 
-        for (auto it1 = map_seq_timestamp.begin(); it1 != map_seq_timestamp.end(); ++it1) 
-        cout << it1->first << "->" << endl; 
+        //cout << "The atual map elements are : \n"; 
+        //for (auto it1 = map_seq_timestamp.begin(); it1 != map_seq_timestamp.end(); ++it1) 
+        //cout << it1->first << "->" << endl; 
 }
 
 
@@ -163,7 +163,7 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
         auto delta_t = duration_cast<microseconds>(marcaTempoChegadaAck - marcaTempoChegadaAckAnterior);
         float intervalFromPreviousAck = (float) delta_t.count();
         ack_ewma = (float)(((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck));
-        cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck <<  endl;
+        //cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck <<  endl;
 
     }
 
@@ -182,7 +182,7 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
     
     auto pre_rtt = duration_cast<microseconds>(par_ack_arrival_time - map_seq_timestamp.at(par_seq-1));
     rtt = (double)pre_rtt.count();
-    cout << "rtt: " << rtt << "; Marca ACK: " << par_ack_arrival_time.time_since_epoch().count()<<"; Marca Send: "<< map_seq_timestamp.at(par_seq-1).time_since_epoch().count() << endl;
+    //cout << "rtt: " << rtt << "; Marca ACK: " << par_ack_arrival_time.time_since_epoch().count()<<"; Marca Send: "<< map_seq_timestamp.at(par_seq-1).time_since_epoch().count() << endl;
 
 }
 
@@ -192,12 +192,12 @@ void class_feature_saver::meth_calculate_send_ewma(uint32_t par_seq)
     //seq-1, pois o ack é a espera do próximio byte ou segmento
     if(map_seq_timestamp.find(par_seq-1) != map_seq_timestamp.end())
     {
-        cout << "found seq: " << par_seq-1 << endl;
+        //cout << "found seq: " << par_seq-1 << endl;
         marcaTempoAtual = map_seq_timestamp.at(par_seq-1);
     }
     else
     {
-        cout << "NOT found seq: " << par_seq-1 << endl;
+        //cout << "NOT found seq: " << par_seq-1 << endl;
         return;
     }
     if(first_ack_process)
@@ -205,7 +205,7 @@ void class_feature_saver::meth_calculate_send_ewma(uint32_t par_seq)
         auto delta_t = duration_cast<microseconds>(marcaTempoAtual - marcaTempoAnterior);
         intervalbetweenTS = (float) delta_t.count();
         send_ewma = (float)((1-expWeightExpon )*send_ewma + (expWeightExpon )*intervalbetweenTS);
-        cout << "send_ewma: " << send_ewma<< "; "<<"Dt: " << intervalbetweenTS <<  endl;
+        //cout << "send_ewma: " << send_ewma<< "; "<<"Dt: " << intervalbetweenTS <<  endl;
 
     }
 
@@ -259,7 +259,7 @@ void class_feature_saver::meth_deal_ack_arrival(uint32_t par_seq,
                                                 high_resolution_clock::time_point par_ack_arrival_time)
 {
 
-    cout << "======Receiving seq "<< par_seq <<"======"<<endl;
+    //cout << "======Receiving seq "<< par_seq <<"======"<<endl;
 
     meth_calculate_ack_ewma(par_seq, par_ack_arrival_time);
     meth_calculate_send_ewma(par_seq);

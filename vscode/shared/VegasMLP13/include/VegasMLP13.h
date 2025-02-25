@@ -39,7 +39,7 @@ public:
       m_dPktSndPeriod = 0.0; //1.0;//sera que evita travamento?
       m_dCWndSize = 2.0;
 
-      setACKInterval(5);
+      setACKInterval(1);
       setRTO(500000);
       if(terminal_type == "udt_client")
       {

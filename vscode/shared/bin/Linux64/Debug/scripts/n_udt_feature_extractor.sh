@@ -24,8 +24,8 @@ do
     #b=`$command`
     #echo $b
     #./udt server ${door}
-    xterm -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./communicator udt_client ${door} Treino 100 ${num_clients} ${start_date}" && /bin/bash &
-    sleep 0.5
+    xterm -hold -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./communicator feature_extractor ${door}" && /bin/bash &
+    sleep 1
 
     i=`expr $i + 1` 
 

@@ -11,7 +11,7 @@
 #define MAX_PCC_SND_SIZE 170000
 
 
-#define NUM_FLOWS 80
+#define NUM_FLOWS 60
 #define MAX_PCC_SND_SIZE_20_FLUXOS 500000//0.5Mb
 #define MAX_PCC_SND_SIZE_40_FLUXOS 250000//0.25Mb
 #define MAX_PCC_SND_SIZE_60_FLUXOS 170000//0.17Mb
@@ -20,3 +20,5 @@
 #define NET_BW 100000000
 
 #define NET_RTT 0.044
+
+#define SIMUL_TIME 90000000 //1.5s em microsegundos

@@ -12,6 +12,8 @@
 #include <fstream>
 #include <ctime>
 #include <cstdlib>
+#include <algorithm>
+#include <chrono>
 
 #include "VegasMLP13/include/defines.h"
 
@@ -19,6 +21,7 @@
 
 using namespace UDT;
 using namespace std;
+using namespace std::chrono;
 
 
 
@@ -273,6 +276,10 @@ int main(int argc, char**argv){
     {
         std::cout << "Inicio da Simulacao " << argv[6]<<"\n";
         simu_start_time = string(argv[6]);
+        std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
+        
+        
+
     }
 
 
@@ -310,8 +317,12 @@ int main(int argc, char**argv){
                                 //ficou obsoleto 
             //unsigned numPack = 0;
 
-            while (true) 
-            {   
+            auto simulation_start = high_resolution_clock::now();
+            auto simulation_time = high_resolution_clock::now();
+            auto duration = duration_cast<microseconds>(simulation_time - simulation_start);
+            while (true && duration.count() <= SIMUL_TIME)             
+            {
+                
                 Pausar_por_tempo_aleatorio_micro_segundos(100000);//0.1s
 
                 //esse if abaixo  visa regular o tempo entre envios para se 
@@ -328,14 +339,14 @@ int main(int argc, char**argv){
                 if(send_lock)
                 {
                    
-                    cout << "send lock!"<<"\n";
+                    cout << "send lock! "<< unlock_send <<"\n";
                     unlock_send++;
                     Pausar_por_tempo_aleatorio_micro_segundos(2000);
                     //sleep(3);
-                    if(unlock_send > 5)
+                    if(unlock_send > 20)
                     {
                         unlock_send = 0;
-                        //send_lock = false;
+                        send_lock = false;
                     }
                     
                     continue;
@@ -376,10 +387,15 @@ int main(int argc, char**argv){
                 {
                     break;
                 }
-            }
 
+                simulation_time = high_resolution_clock::now();
+                duration = duration_cast<microseconds>(simulation_time - simulation_start);
+            }
+        
+          cout << "Client is done! Tanks!!" <<endl;
           UDT::close(client);
           delete [] data;
+          exit(0);
 
         }
 
@@ -651,19 +667,35 @@ int main(int argc, char**argv){
         return 1;
     }
 
+
+   if(std::string(argv[1]) == "drain_dump")
+    {
+        string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39";
+        
+        //class_feature_extractor obj_extractor;
+        /*obj_extractor.set_port((uint32_t)server_port);
+        obj_extractor.set_out_dir(experiment_path);
+        obj_extractor.set_dump_file("udt_dump.txt");
+        obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");
+        obj_extractor.meth_adjust_seq_metrics_file_path();
+        */
+       class_feature_extractor::meth_drain_dump_file(string("/home/ns/Desktop/output") + "/" + experiment_path + "/" + "router_data" + "/" + "udt_dump.txt");       
+       return 1;
+    
+    }
+
+
+
+
     if(std::string(argv[1]) == "router_ewma")
     {
-        class_feature_extractor::meth_generate_queue_ewma_along_time_file(
-            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time.txt",
-            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time_ewma.txt");
-
-        
+        string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39";
         
         class_feature_extractor::meth_generate_queue_ewma_along_time_file(
-            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time.txt",
-            "/home/ns/Desktop/output/Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53/router_data/queue_along_time_ewma.txt");
-
-        
+            string("/home/ns/Desktop/output") + "/" + experiment_path + "/" + "router_data" + "/" + "queue_along_time.txt",
+            string("/home/ns/Desktop/output") + "/" + experiment_path + "/" + "router_data" + "/" + "queue_along_time_ewma.txt");
+      
+      
         return 1;
     
     }
@@ -681,9 +713,9 @@ int main(int argc, char**argv){
         //fluxos, que é o mesmo que deve ser usado para guardar
         //os dados do roteador.
         //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        obj_extractor.set_out_dir("Treino_udt_80Fluxos_100Mbps_Thu_Feb_20_02_30_53");
-        obj_extractor.set_dump_file("udt_dump.txt");
-        obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");
+        obj_extractor.set_out_dir("Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39");
+        obj_extractor.set_dump_file("udt_dump_drained.txt");
+        obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
         obj_extractor.meth_adjust_seq_metrics_file_path();
         obj_extractor.meth_extract_router_features();//Gera o cvs.
    
