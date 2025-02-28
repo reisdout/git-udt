@@ -1190,18 +1190,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "FEATUE_EXTRACTOR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"
-		},
-		{
 			"name" : "FEATURE_EXTRACTOR",
 			"properties" : 
 			[
@@ -1226,6 +1214,18 @@
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"
 		},
 		{
+			"name" : "PURE_UDT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+		},
+		{
 			"name" : "TCP_SOCKET",
 			"properties" : 
 			[
@@ -1248,66 +1248,6 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a"
-		},
-		{
-			"name" : "VEGAS_MLP_13",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"
-		},
-		{
-			"name" : "VegasMLP13_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13"
-		},
-		{
-			"name" : "VegasMLP13_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "OFF"
-		},
-		{
-			"name" : "VegasMLP13_LIB_DEPENDS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Dependencies for the target"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;"
-		},
-		{
-			"name" : "VegasMLP13_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
@@ -1428,6 +1368,54 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver"
+		},
+		{
+			"name" : "pure_udt_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt"
+		},
+		{
+			"name" : "pure_udt_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "pure_udt_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;"
+		},
+		{
+			"name" : "pure_udt_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt"
 		},
 		{
 			"name" : "tcpsocket_BINARY_DIR",

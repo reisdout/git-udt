@@ -665,14 +665,22 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
 void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
 {
 
+    float queue_ewma_cuted = par_queue_ewma;
+
+    if(par_queue_ewma > 1.0)
+        queue_ewma_cuted = 1.0;
+
     cout << "updatind router file..."<<"\n";
+
+    if(par_queue_ewma <= 0.0001) //para enriquecer a amostra
+        return;
     
-    if(par_queue_ewma >=0.40 && par_queue_ewma<=0.70)
+    if(par_queue_ewma >= 0.40 && par_queue_ewma <= 0.70)
         return;
     
     int network_situation = 1;
 
-    if(par_queue_ewma >= 0.70)
+    if(par_queue_ewma > 0.70)
         network_situation = 2;
 
     std::ofstream file;
@@ -685,7 +693,7 @@ void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, floa
     //make sure write fails with exception if something is wrong
     file << par_seq << ","
         << "0" << "," 
-        << par_queue_ewma << ","
+        << queue_ewma_cuted << ","
         << network_situation << ","
         << "0" << "," 
         << "0" << "\n";

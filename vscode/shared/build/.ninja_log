@@ -1,64 +1,52 @@
 # ninja log v5
-1037	1114	1740425538333879611	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	1037	1740425538257879659	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-9	534	1740420400856172156	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	5b9b8878b19ce5d1
-762	801	1740082956847874285	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
-85	761	1740082956804874655	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	9c7ca3de55c42f56
-534	554	1740420400876172143	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	db1aa8df0c85ef4e
-5	364	1740082956407878066	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	9f63c8cea0db2bc6
-1024	1041	1740417964062734077	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-4	1024	1740417964045734088	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-36	85	1740082956128880464	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a	167d8ec9bca8567
-4	35	1740082956082880859	VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o	77ca5e27f7a3eb0f
-2	503	1740430361286788810	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	5b9b8878b19ce5d1
-503	526	1740430361308788796	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	db1aa8df0c85ef4e
-526	598	1740430361380788750	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	890	1740434732541987577	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-891	949	1740434732599987540	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-6	1098	1740435615592421746	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-1098	1153	1740435615647421711	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-12	1185	1740441804416455790	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-1187	1202	1740441804433455779	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-1202	1288	1740441804517455725	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	864	1740442186602210838	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-864	918	1740442186655210804	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-3	1283	1740484092164052676	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-1283	1313	1740484092195052656	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-2	1362	1740484092243052625	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-1362	1485	1740484092365052547	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	925	1740484174734999745	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-926	942	1740484174752999734	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-942	1009	1740484174817999692	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	954	1740485723210007465	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-955	971	1740485723227007454	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-971	1071	1740485723323007393	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-3	929	1740486142630738597	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-929	985	1740486142685738562	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-6	1600	1740486267970658328	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-1600	1683	1740486268052658276	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	1208	1740486755428346021	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-1208	1228	1740486755445346010	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-1228	1310	1740486755526345958	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	983	1740487170862079767	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-983	1052	1740487170931079723	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	1039	1740487844734648042	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-1039	1104	1740487844798648001	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	1561	1740487895564615483	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-1561	1628	1740487895630615441	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-1	953	1740488190500426522	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-953	1019	1740488190565426481	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	897	1740509124432235538	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-897	970	1740509124503235655	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-3	995	1740511196308625781	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-995	1066	1740511196378625895	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-2	977	1740511369959909933	CMakeFiles/communicator.dir/main.cpp.o	7ba3fa29b143e775
-977	1079	1740511370060910098	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-3	815	1740512461467695989	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-815	828	1740512461480696010	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-828	892	1740512461544696115	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-10	1025	1740512674000043764	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-1025	1042	1740512674018043793	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-1043	1107	1740512674081043896	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
-4	1201	1740512801979253176	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	9966ad88a4a213da
-1201	1216	1740512801993253199	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
-1216	1275	1740512802052253296	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	515cce9c509d57a8
+2	36	1740656615549586961	project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o	12d04b9740741c0f
+2	28	1740656692527509890	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
+2	639	1740656693138509279	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	278e32e093616c8d
+36	71	1740656615588586922	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a	c4eb2eef6efc46ee
+2	333	1740656615850586660	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	b039b907ea895804
+71	381	1740656615898586612	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	317cb73e6a5eac68
+29	1203	1740656693702508714	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	d46818e708ceb8b8
+8	52	1740656877048325139	project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o	dc48cf5907075ce6
+10	66	1740656877061325126	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	db1aa8df0c85ef4e
+52	99	1740656877086325101	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a	c4eb2eef6efc46ee
+66	131	1740656877122325065	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
+1	1143	1740657036654165381	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+3	1218	1740657076836125152	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1218	1274	1740657076892125096	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	935	1740657289710912046	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+935	998	1740657289775911981	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+4	957	1740657462771738782	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+957	1027	1740657462841738712	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+4	953	1740657525968675508	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+953	1015	1740657526030675446	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+1	884	1740657626264575087	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+884	940	1740657626320575031	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+9	1170	1740657732140469081	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1170	1228	1740657732198469023	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+4	943	1740657884836316203	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+943	1009	1740657884902316137	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	1597	1740659673962525010	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1597	1667	1740659674030524942	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+3	1092	1740660136972061406	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1092	1155	1740660137034061344	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	1169	1740662635714559777	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1170	1237	1740662635781559710	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+3	1713	1740663305307889407	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	d46818e708ceb8b8
+1714	1738	1740663305330889384	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
+1738	1878	1740663305468889246	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	1009	1740675636488543824	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	d46818e708ceb8b8
+1010	1044	1740675636524543788	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
+1	1280	1740675636760543551	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1281	1338	1740675636818543493	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+3	1778	1740676793365385601	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1779	1922	1740676793509385457	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+4	1434	1740687244348922112	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	d46818e708ceb8b8
+1434	1453	1740687244367922093	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
+1453	1542	1740687244455922005	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	1720	1740687287295879117	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	d46818e708ceb8b8
+1721	1738	1740687287313879099	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	e71b650292367726
+1738	1819	1740687287393879019	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+2	1091	1740750832422947850	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+1091	1163	1740750832492947780	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+4	911	1740750984633795462	CMakeFiles/communicator.dir/main.cpp.o	66c621bbf48afd3d
+912	966	1740750984687795408	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24

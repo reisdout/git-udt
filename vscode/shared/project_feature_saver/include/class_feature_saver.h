@@ -107,7 +107,6 @@ class class_feature_saver{
     //int a = timespec_get(time_ack_arrival,);
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-    
     long long unsigned numAckReceived = 0;
     bool first_ack_process = false;
     float ack_ewma = 0;

@@ -9,7 +9,7 @@ a TCP-Cubic, reno, vegas,etc
 #include <unistd.h>
 #include <chrono>
 #include "../../project_feature_saver/include/class_feature_saver.h"
-#include "defines.h"
+#include "../../defines/defines.h"
 
 extern bool send_lock;
 extern int server_port;
@@ -36,11 +36,12 @@ public:
       m_bSlowStart = true;
       m_issthresh = 83333;
 
-      m_dPktSndPeriod = 0.0; //1.0;//sera que evita travamento?
+      m_dPktSndPeriod = 10000.0; //1.0;//sera que evita travamento?
       m_dCWndSize = 2.0;
 
       setACKInterval(1);
-      setRTO(500000);
+      setRTO(100000);
+      save_start = high_resolution_clock::now();
       if(terminal_type == "udt_client")
       {
          obj_saver.set_port(this->port);
@@ -108,8 +109,12 @@ public:
 
          ACKAction();
       }
-
-      obj_saver.meth_deal_ack_arrival(ack,ack_arrival);
+      save_time = high_resolution_clock::now();
+      auto duration = duration_cast<microseconds>(save_time - save_start);
+      if(duration.count() <= SIMUL_TIME )
+         obj_saver.meth_deal_ack_arrival(ack,ack_arrival);
+      else
+         cout << "Save stoped. See duration: " <<duration.count()<< endl;
    }
 
    virtual void onPktSent(const CPacket*pkt)
@@ -118,10 +123,17 @@ public:
       //time stamp é do início da conexão e é em microsec (proc-092.pdf)
       std::cout << "Packat TimeStamp: "<< pkt->m_iTimeStamp << " sent" << std::endl;
       auto snd_time = high_resolution_clock::now();
-      obj_saver.meth_deal_packet_send(pkt->m_iSeqNo,snd_time);
-     
+      save_time = high_resolution_clock::now();
+      auto duration = duration_cast<microseconds>(save_time - save_start);
       
-      //std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
+      if(duration.count() < SIMUL_TIME)
+         obj_saver.meth_deal_packet_send(pkt->m_iSeqNo,snd_time);
+
+      else
+         cout << "Save stoped. See duration: " <<duration.count()<< endl;
+
+      
+      std::cout << "m_dCWndSize: "<< m_dCWndSize << std::endl;
 
       //if(!ack_lock)
          //ack_lock = pkt->m_iSeqNo;
@@ -184,6 +196,9 @@ protected:
    int32_t m_iLastACK;
    int32_t ack_lock = 0;
    class_feature_saver obj_saver;
+   high_resolution_clock::time_point save_start;
+   high_resolution_clock::time_point save_time = high_resolution_clock::now();
+
    
 };
 

@@ -1,9 +1,9 @@
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/CMakeFiles/communicator.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/CMakeFiles/edit_cache.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/CMakeFiles/rebuild_cache.dir
-/home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13/CMakeFiles/VegasMLP13.dir
-/home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13/CMakeFiles/edit_cache.dir
-/home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13/CMakeFiles/rebuild_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt/CMakeFiles/pure_udt.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt/CMakeFiles/edit_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt/CMakeFiles/rebuild_cache.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/tcpsocket.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/edit_cache.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-# Install script for directory: /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13
+# Install script for directory: /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

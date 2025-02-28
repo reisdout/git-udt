@@ -2,7 +2,8 @@
 #include <libudt/udt.h>
 #include <arpa/inet.h>
 #include <cstring>
-#include <VegasMLP13/include/VegasMLP13.h>
+//#include <VegasMLP13/include/VegasMLP13.h>
+#include <project_pure_udt/include/pure_udt.h>
 #include <TCP_Socket/include/tcp_client.h>
 #include <TCP_Socket/include/tcp_server.h>
 #include <project_feature_saver/include/class_feature_saver.h>
@@ -15,7 +16,7 @@
 #include <algorithm>
 #include <chrono>
 
-#include "VegasMLP13/include/defines.h"
+#include "defines/defines.h"
 
 
 
@@ -35,6 +36,8 @@ int send_type = PCC;
 int delta_ack = 20;
 
 bool send_lock = false;
+
+int opt_pure_udt = -1;
 
 u_int32_t last_ack;
 
@@ -57,7 +60,8 @@ sockaddr_in server_addr_in_client; //endereco ip do servidor capturado no client
 
 sockaddr_in my_addr;//endereco do servidor, no servidor
 
-VegasMLP13* cchandle = NULL;
+//VegasMLP13* cchandle = NULL;
+class_pure_udt* cchandle = NULL;
 
 unsigned transmission_size = 170000;
 
@@ -93,6 +97,13 @@ void ConfigureServerOptions()
   
 
 }
+
+void Pause()
+{
+    char c;
+    cin>>c;
+}
+
 void Pausar_por_tempo_aleatorio_micro_segundos(int par_tempo_minimo_micro_segundos)
 {
     int random_number;    
@@ -111,13 +122,13 @@ void ConfigureClientTransmissionRate()
     */
 
     if(NUM_FLOWS == 20)
-        transmission_size = MAX_PCC_SND_SIZE_20_FLUXOS;
+        transmission_size = 2 * MAX_PCC_SND_SIZE_20_FLUXOS;
     else if(NUM_FLOWS == 40)
-        transmission_size = MAX_PCC_SND_SIZE_40_FLUXOS;
+        transmission_size = 2 * MAX_PCC_SND_SIZE_40_FLUXOS;
     else if(NUM_FLOWS == 60)
-        transmission_size = MAX_PCC_SND_SIZE_60_FLUXOS;
+        transmission_size = 2 * MAX_PCC_SND_SIZE_60_FLUXOS;
     else if(NUM_FLOWS == 80)
-        transmission_size = MAX_PCC_SND_SIZE_80_FLUXOS;
+        transmission_size = 2 * MAX_PCC_SND_SIZE_80_FLUXOS;
     else{
         cout << "Undefined transmission Size" << endl;
         exit(0);
@@ -149,8 +160,14 @@ void Set_client_socket()
     //inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
     inet_pton(AF_INET, "10.0.1.3", &serv_addr.sin_addr);
     memset(&(serv_addr.sin_zero), '\0', 8);
-    int optResult = UDT::setsockopt(client, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
-    std::cout << "optResult: " << optResult << std::endl; 
+    //int optResult = UDT::setsockopt(client, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
+    //std::cout << "optResult: " << optResult << std::endl; 
+    opt_pure_udt = UDT::setsockopt(client, 0, UDT_CC, new CCCFactory<class_pure_udt> , sizeof(CCCFactory<class_pure_udt> )); 
+    std::cout << "opt_pure_udt: " << opt_pure_udt << std::endl;
+    //Pause();
+    
+
+    
     // connect to the server, implict bind
     
     /*Aparentemente, quando do conect, há um bind(reserva) tácito na máquiana que 
@@ -188,8 +205,8 @@ void Set_server_socket()
     my_addr.sin_addr.s_addr = INADDR_ANY;
     memset(&(my_addr.sin_zero), '\0', 8);
     
-    int optResult = UDT::setsockopt(serv, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
-    std::cout << "optResult Server: " << optResult << std::endl;
+    //int optResult = UDT::setsockopt(serv, 0, UDT_CC, new CCCFactory<VegasMLP13> , sizeof(CCCFactory<VegasMLP13> )); 
+    //std::cout << "optResult Server: " << optResult << std::endl;
 
     if (UDT::ERROR == UDT::bind(serv, (sockaddr*)&my_addr, sizeof(my_addr)))
     {
@@ -277,6 +294,7 @@ int main(int argc, char**argv){
         std::cout << "Inicio da Simulacao " << argv[6]<<"\n";
         simu_start_time = string(argv[6]);
         std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
+        std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');
         
         
 
@@ -297,7 +315,9 @@ int main(int argc, char**argv){
         
         if(send_type == PCC)
         {
-        
+            cout << "PCC" << endl;
+            //Pause();
+
             unsigned size =  transmission_size;
             char* data = new char[transmission_size];            
             //bzero(data, transmission_size);
@@ -338,8 +358,9 @@ int main(int argc, char**argv){
                 
                 if(send_lock)
                 {
-                   
-                    cout << "send lock! "<< unlock_send <<"\n";
+                    cout << "opt_pure_udt!!!!&&&&&&&& "<< opt_pure_udt <<"\n";
+                    cout << "send lock!!!!###### "<< (int) send_lock <<"\n";
+                    cout << "unlock_send!!!!@@@ "<< unlock_send << (int) send_lock <<"\n";
                     unlock_send++;
                     Pausar_por_tempo_aleatorio_micro_segundos(2000);
                     //sleep(3);
@@ -379,7 +400,8 @@ int main(int argc, char**argv){
                 //}
 
                 //delay_quebra = 0;
-                send_lock = true;
+                if(opt_pure_udt < 0)//Se for puro udt (opt_pure_udt=0), não bloqueia.
+                    send_lock = true;
                 Pausar_por_tempo_aleatorio_micro_segundos(200);
                 //numPack++;
                 //cout << "numPack: " << numPack << endl;
@@ -390,6 +412,8 @@ int main(int argc, char**argv){
 
                 simulation_time = high_resolution_clock::now();
                 duration = duration_cast<microseconds>(simulation_time - simulation_start);
+                cout << "duration: " << duration.count() << endl;
+                //cin >> c;
             }
         
           cout << "Client is done! Tanks!!" <<endl;
@@ -667,10 +691,12 @@ int main(int argc, char**argv){
         return 1;
     }
 
-
+   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Fri_Feb_28_10_45_58";
+   
+   
    if(std::string(argv[1]) == "drain_dump")
     {
-        string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39";
+        
         
         //class_feature_extractor obj_extractor;
         /*obj_extractor.set_port((uint32_t)server_port);
@@ -689,7 +715,7 @@ int main(int argc, char**argv){
 
     if(std::string(argv[1]) == "router_ewma")
     {
-        string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39";
+        
         
         class_feature_extractor::meth_generate_queue_ewma_along_time_file(
             string("/home/ns/Desktop/output") + "/" + experiment_path + "/" + "router_data" + "/" + "queue_along_time.txt",
@@ -713,8 +739,8 @@ int main(int argc, char**argv){
         //fluxos, que é o mesmo que deve ser usado para guardar
         //os dados do roteador.
         //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        obj_extractor.set_out_dir("Treino_udt_60Fluxos_100Mbps_Tue_Feb_25_03_32_39");
-        obj_extractor.set_dump_file("udt_dump_drained.txt");
+        obj_extractor.set_out_dir(experiment_path);
+        obj_extractor.set_dump_file("udt_dump.txt");
         obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
         obj_extractor.meth_adjust_seq_metrics_file_path();
         obj_extractor.meth_extract_router_features();//Gera o cvs.

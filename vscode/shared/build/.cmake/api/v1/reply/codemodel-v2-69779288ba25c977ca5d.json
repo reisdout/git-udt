@@ -22,22 +22,22 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						1
+						0
 					]
 				},
 				{
-					"build" : "VegasMLP13",
-					"jsonFile" : "directory-VegasMLP13-Debug-452464d8fd85a51327c9.json",
+					"build" : "project_pure_udt",
+					"jsonFile" : "directory-project_pure_udt-Debug-1b57bd1ff1b2538c637b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 1,
-					"source" : "VegasMLP13",
+					"source" : "project_pure_udt",
 					"targetIndexes" : 
 					[
-						0
+						3
 					]
 				},
 				{
@@ -67,7 +67,7 @@
 					"source" : "project_feature_saver",
 					"targetIndexes" : 
 					[
-						3
+						2
 					]
 				},
 				{
@@ -82,7 +82,7 @@
 					"source" : "project_feature_extractor",
 					"targetIndexes" : 
 					[
-						2
+						1
 					]
 				}
 			],
@@ -104,7 +104,7 @@
 					"name" : "communicator",
 					"targetIndexes" : 
 					[
-						1
+						0
 					]
 				},
 				{
@@ -112,11 +112,11 @@
 					[
 						1
 					],
-					"name" : "VegasMLP13",
+					"name" : "pure_udt",
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						0
+						3
 					]
 				},
 				{
@@ -140,7 +140,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						3
+						2
 					]
 				},
 				{
@@ -152,44 +152,44 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2
+						1
 					]
 				}
 			],
 			"targets" : 
 			[
 				{
-					"directoryIndex" : 1,
-					"id" : "VegasMLP13::@f5ca6493783f5e2d8e7b",
-					"jsonFile" : "target-VegasMLP13-Debug-ae7fadaf0b136f530996.json",
-					"name" : "VegasMLP13",
-					"projectIndex" : 1
-				},
-				{
 					"directoryIndex" : 0,
 					"id" : "communicator::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-communicator-Debug-5bf97336ae9693063114.json",
+					"jsonFile" : "target-communicator-Debug-9acf1b6227716499dae6.json",
 					"name" : "communicator",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "feature_extractor::@a015f72589a78a71da2c",
-					"jsonFile" : "target-feature_extractor-Debug-6e4fea326fa52a33087e.json",
+					"jsonFile" : "target-feature_extractor-Debug-f92a145f8feb92556bd3.json",
 					"name" : "feature_extractor",
 					"projectIndex" : 4
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "feature_saver::@2df2d92e02b088089148",
-					"jsonFile" : "target-feature_saver-Debug-d844e3e10881916fff88.json",
+					"jsonFile" : "target-feature_saver-Debug-c1eed5e36e2449a9418e.json",
 					"name" : "feature_saver",
 					"projectIndex" : 3
 				},
 				{
+					"directoryIndex" : 1,
+					"id" : "pure_udt::@82dc3fe8f10c89423411",
+					"jsonFile" : "target-pure_udt-Debug-eb2aacbc503af1ebfb7d.json",
+					"name" : "pure_udt",
+					"projectIndex" : 1
+				},
+				{
 					"directoryIndex" : 2,
 					"id" : "tcpsocket::@0877140535a3148449e9",
-					"jsonFile" : "target-tcpsocket-Debug-80b92cebc9a55c6dd50e.json",
+					"jsonFile" : "target-tcpsocket-Debug-e0db032f53229b6e7a1f.json",
 					"name" : "tcpsocket",
 					"projectIndex" : 2
 				}

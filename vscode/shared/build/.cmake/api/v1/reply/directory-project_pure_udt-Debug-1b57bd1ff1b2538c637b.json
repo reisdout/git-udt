@@ -8,7 +8,7 @@
 	"installers" : [],
 	"paths" : 
 	{
-		"build" : "VegasMLP13",
-		"source" : "VegasMLP13"
+		"build" : "project_pure_udt",
+		"source" : "project_pure_udt"
 	}
 }

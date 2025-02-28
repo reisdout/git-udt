@@ -15,24 +15,27 @@ function get_cur_nano_sec() {
 #b=`$command`;
 #echo $b; #Output is: public_html REV test... (command worked successfully)
 
-variableA=$(tc -s -d qdisc ls dev ens33 | awk '/backlog[[:space:]]/ { print $2 }')
+#variableA=$(tc -s -d qdisc ls dev enp0s20f3 | awk 'NR==6 &&  /backlog/ { print  $2 }')
+#variableA=$(netstat -nua)
 #read_time=$(date +%s%N)
 #echo $variableA
 
 # How long the script should run for. 
-duration=3
+duration=600
 CURSEC=`get_cur_sec`
-echo $duration
-echo $CURSEC
+#echo $duration
+#echo $CURSEC
 quitpoint=`expr $CURSEC + $duration`
 
 while [ $CURSEC -lt $quitpoint ];
 do
   printf `get_cur_nano_sec`
   printf ","  
+  #variableA=$(tc -s -d qdisc ls dev enp0s20f3 | awk 'NR==6 || NR==3 &&  /backlog/ { print  $2 }')
+  variableA=$(tc -s -d qdisc ls dev enp0s20f3 | awk 'NR==6 &&  /backlog/ { print  $2 }')
   printf $variableA
   printf "\n"
-  sleep 0.005
+  sleep 0.000000005
   CURSEC=`get_cur_sec`  
 done
 

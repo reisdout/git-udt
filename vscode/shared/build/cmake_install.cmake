@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13/cmake_install.cmake")
+  include("/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt/cmake_install.cmake")
   include("/home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket/cmake_install.cmake")
   include("/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_saver/cmake_install.cmake")
   include("/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_extractor/cmake_install.cmake")

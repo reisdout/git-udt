@@ -27,6 +27,7 @@ void class_feature_saver::meth_adjust_file_path()
     out_dir = out_dir+"/"+tipo_dado+"_"+default_congestion+"_"+num_flows+"Fluxos_"+ bottleneck_datarate+"Mbps_"+str_starting_time;
     
     cout << "out_dir: " << out_dir << endl;
+    //char c;
     //cin >> c;
 
     struct stat sb;
@@ -118,28 +119,33 @@ void class_feature_saver::meth_amortize_map(int32_t par_seq)
     
     bool done = false;
     uint32_t erased;
-    while (!done)
+    while (!done && !map_seq_timestamp.empty())
     {
         //cout << "Há " <<  map_seq_timestamp.count(par_seq) << " com seq == " <<par_seq<<endl;
         done=true;
+        
+        //este for é devido a desestabilização do iterador
+        //quando algum elemento do map é apagado
+        //por isso, quando apaga um há um continie, para se renovar o
+        //iterador
         for(auto it = map_seq_timestamp.begin(),next_it = it; it != map_seq_timestamp.end(); it=next_it)
         {
         
             ++next_it;
-            if(it->first < par_seq && !map_seq_timestamp.empty())
+            if(it->first < par_seq )
             {
                 
                 //cout << "amortiz  " << it->first << endl;
                 erased = map_seq_timestamp.erase(it->first);
                 //cout << "erased:  " << erased << endl;
                 done=false;
-                break;
+                continue;
                         
             }
             else
             {
                 done=true;
-                break;
+
             }
                 
         }

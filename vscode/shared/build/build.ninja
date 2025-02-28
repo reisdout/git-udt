@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_communicator: phony || CMakeFiles/commun
 build CMakeFiles/communicator.dir/main.cpp.o: CXX_COMPILER__communicator_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp || cmake_object_order_depends_target_communicator
   DEP_FILE = CMakeFiles/communicator.dir/main.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor
   OBJECT_DIR = CMakeFiles/communicator.dir
   OBJECT_FILE_DIR = CMakeFiles/communicator.dir
 
@@ -64,9 +64,9 @@ build CMakeFiles/communicator.dir/main.cpp.o: CXX_COMPILER__communicator_unscann
 #############################################
 # Link the executable /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator: CXX_EXECUTABLE_LINKER__communicator_Debug CMakeFiles/communicator.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator: CXX_EXECUTABLE_LINKER__communicator_Debug CMakeFiles/communicator.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a
   FLAGS = -g
-  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"
+  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"
   OBJECT_DIR = CMakeFiles/communicator.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -102,59 +102,59 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target VegasMLP13
+# Object build statements for STATIC_LIBRARY target pure_udt
 
 
 #############################################
-# Order-only phony target for VegasMLP13
+# Order-only phony target for pure_udt
 
-build cmake_object_order_depends_target_VegasMLP13: phony || VegasMLP13/CMakeFiles/VegasMLP13.dir
+build cmake_object_order_depends_target_pure_udt: phony || project_pure_udt/CMakeFiles/pure_udt.dir
 
-build VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o: CXX_COMPILER__VegasMLP13_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/src/VegasMLP13.cpp || cmake_object_order_depends_target_VegasMLP13
-  DEP_FILE = VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o.d
+build project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o: CXX_COMPILER__pure_udt_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/src/pure_udt.cpp || cmake_object_order_depends_target_pure_udt
+  DEP_FILE = project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/../project_feature_saver/include
-  OBJECT_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir
-  OBJECT_FILE_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir/src
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/../project_feature_saver/include
+  OBJECT_DIR = project_pure_udt/CMakeFiles/pure_udt.dir
+  OBJECT_FILE_DIR = project_pure_udt/CMakeFiles/pure_udt.dir/src
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target VegasMLP13
+# Link build statements for STATIC_LIBRARY target pure_udt
 
 
 #############################################
-# Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a
+# Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a: CXX_STATIC_LIBRARY_LINKER__VegasMLP13_Debug VegasMLP13/CMakeFiles/VegasMLP13.dir/src/VegasMLP13.cpp.o
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a: CXX_STATIC_LIBRARY_LINKER__pure_udt_Debug project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
-  OBJECT_DIR = VegasMLP13/CMakeFiles/VegasMLP13.dir
+  OBJECT_DIR = project_pure_udt/CMakeFiles/pure_udt.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libVegasMLP13.a"
-  TARGET_PDB = VegasMLP13.a.dbg
+  TARGET_FILE = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a"
+  TARGET_PDB = pure_udt.a.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
-build VegasMLP13/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13 && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+build project_pure_udt/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
-build VegasMLP13/edit_cache: phony VegasMLP13/CMakeFiles/edit_cache.util
+build project_pure_udt/edit_cache: phony project_pure_udt/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build VegasMLP13/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13 && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
+build project_pure_udt/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build VegasMLP13/rebuild_cache: phony VegasMLP13/CMakeFiles/rebuild_cache.util
+build project_pure_udt/rebuild_cache: phony project_pure_udt/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -173,14 +173,14 @@ build cmake_object_order_depends_target_tcpsocket: phony || TCP_Socket/CMakeFile
 build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_server.cpp || cmake_object_order_depends_target_tcpsocket
   DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
   OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
   OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
 
 build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_client.cpp || cmake_object_order_depends_target_tcpsocket
   DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include
   OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
   OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
 
@@ -240,7 +240,7 @@ build cmake_object_order_depends_target_feature_saver: phony || project_feature_
 build project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o: CXX_COMPILER__feature_saver_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/src/class_feature_saver.cpp || cmake_object_order_depends_target_feature_saver
   DEP_FILE = project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include
   OBJECT_DIR = project_feature_saver/CMakeFiles/feature_saver.dir
   OBJECT_FILE_DIR = project_feature_saver/CMakeFiles/feature_saver.dir/src
 
@@ -300,7 +300,7 @@ build cmake_object_order_depends_target_feature_extractor: phony || project_feat
 build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor.cpp || cmake_object_order_depends_target_feature_extractor
   DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./Vegas_MLP_13 -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
@@ -346,21 +346,21 @@ build project_feature_extractor/rebuild_cache: phony project_feature_extractor/C
 # =============================================================================
 # Target aliases.
 
-build VegasMLP13: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
-
 build communicator: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
 
 build feature_extractor: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a
 
 build feature_saver: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a
 
-build libVegasMLP13.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
-
 build libfeature_extractor.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a
 
 build libfeature_saver.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a
 
+build libpure_udt.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
+
 build libtcpsocket.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
+
+build pure_udt: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
 
 build tcpsocket: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
 
@@ -372,7 +372,7 @@ build tcpsocket: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/
 #############################################
 # Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build
 
-build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator VegasMLP13/all TCP_Socket/all project_feature_saver/all project_feature_extractor/all
+build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator project_pure_udt/all TCP_Socket/all project_feature_saver/all project_feature_extractor/all
 
 # =============================================================================
 
@@ -380,13 +380,6 @@ build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/
 # Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/TCP_Socket
 
 build TCP_Socket/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
-
-# =============================================================================
-
-#############################################
-# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/VegasMLP13
-
-build VegasMLP13/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libVegasMLP13.a
 
 # =============================================================================
 
@@ -403,20 +396,27 @@ build project_feature_extractor/all: phony /home/ns/UDT-workspace/git-udt/vscode
 build project_feature_saver/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a
 
 # =============================================================================
+
+#############################################
+# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_pure_udt
+
+build project_pure_udt/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/VegasMLP13/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
+build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
 
 
 #############################################
