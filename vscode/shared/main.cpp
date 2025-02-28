@@ -691,7 +691,7 @@ int main(int argc, char**argv){
         return 1;
     }
 
-   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Fri_Feb_28_10_45_58";
+   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Fri_Feb_28_03_16_35";
    
    
    if(std::string(argv[1]) == "drain_dump")

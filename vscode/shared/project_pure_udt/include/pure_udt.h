@@ -34,7 +34,7 @@ public:
    {
 
         //m_dCWndSize = 10.0; 
-        m_dPktSndPeriod = (m_iMSS * 8.0) / 10;
+        m_dPktSndPeriod = (30*m_iMSS * 8.0) / 100;//Vai atingir 100MB quando a metade dos fluxos subirem
         m_dCWndSize = 83333.0;
       
       save_start = high_resolution_clock::now();

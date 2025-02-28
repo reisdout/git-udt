@@ -672,7 +672,7 @@ void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, floa
 
     cout << "updatind router file..."<<"\n";
 
-    if(par_queue_ewma <= 0.0001) //para enriquecer a amostra
+    if(par_queue_ewma <= 0.00001) //para enriquecer a amostra
         return;
     
     if(par_queue_ewma >= 0.40 && par_queue_ewma <= 0.70)
