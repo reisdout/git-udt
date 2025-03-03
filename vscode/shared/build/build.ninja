@@ -304,6 +304,13 @@ build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_featu
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
+build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_udt.cpp || cmake_object_order_depends_target_feature_extractor
+  DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include
+  OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
+  OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target feature_extractor
@@ -312,7 +319,7 @@ build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_featu
 #############################################
 # Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a: CXX_STATIC_LIBRARY_LINKER__feature_extractor_Debug project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a: CXX_STATIC_LIBRARY_LINKER__feature_extractor_Debug project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   POST_BUILD = :

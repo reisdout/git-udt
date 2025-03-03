@@ -1,0 +1,7 @@
+1741028856.869670 IP 10.0.0.3.52406 > 10.0.0.1.53: Flags [S], seq 3734070309, win 64240, options [mss 1460,sackOK,TS val 950196206 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+1741028856.871090 IP 10.0.0.3.52412 > 10.0.0.1.53: Flags [S], seq 491724220, win 64240, options [mss 1460,sackOK,TS val 950196207 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+1741028856.871874 IP 10.0.0.3.52426 > 10.0.0.1.53: Flags [S], seq 724040148, win 64240, options [mss 1460,sackOK,TS val 950196208 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+1741028856.876556 IP 10.0.0.3.52436 > 10.0.0.1.53: Flags [S], seq 3511094529, win 64240, options [mss 1460,sackOK,TS val 950196213 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+1741028856.877045 IP 10.0.0.3.52450 > 10.0.0.1.53: Flags [S], seq 3286766469, win 64240, options [mss 1460,sackOK,TS val 950196213 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+1741028856.877632 IP 10.0.0.3.52466 > 10.0.0.1.53: Flags [S], seq 454506191, win 64240, options [mss 1460,sackOK,TS val 950196214 ecr 0,nop,wscale 7,tfo  cookiereq,nop,nop], length 0
+

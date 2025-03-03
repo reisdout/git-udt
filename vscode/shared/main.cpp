@@ -7,7 +7,7 @@
 #include <TCP_Socket/include/tcp_client.h>
 #include <TCP_Socket/include/tcp_server.h>
 #include <project_feature_saver/include/class_feature_saver.h>
-#include <project_feature_extractor/include/class_feature_extractor.h>
+#include <project_feature_extractor/include/class_feature_extractor_udt.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -46,6 +46,7 @@ string num_flows;
 string tipo_dado;
 string simu_start_time;
 string terminal_type; //cliente? servidor?
+
 
 UDTSOCKET client;
 UDTSOCKET serv;
@@ -691,7 +692,7 @@ int main(int argc, char**argv){
         return 1;
     }
 
-   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Fri_Feb_28_03_16_35";
+   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Mon_Mar__3_05_32_35";
    
    
    if(std::string(argv[1]) == "drain_dump")
@@ -726,27 +727,29 @@ int main(int argc, char**argv){
     
     }
 
-    if(std::string(argv[1]) == "feature_extractor")
+    if(std::string(argv[1]) == "udt_feature_extractor")
     {
         
         cout << "Caso feature_extractor" << endl;
         
-        class_feature_extractor obj_extractor;
-        obj_extractor.set_port((uint32_t)server_port);
+        class_feature_extractor_udt obj_extractor_udt;
+        obj_extractor_udt.set_port((uint32_t)server_port);
         
         //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
         //o out_dir é o diretório onde foram salvos os dados dos
         //fluxos, que é o mesmo que deve ser usado para guardar
         //os dados do roteador.
         //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        obj_extractor.set_out_dir(experiment_path);
-        obj_extractor.set_dump_file("udt_dump.txt");
-        obj_extractor.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
-        obj_extractor.meth_adjust_seq_metrics_file_path();
-        obj_extractor.meth_extract_router_features();//Gera o cvs.
+        obj_extractor_udt.set_out_dir(experiment_path);
+        obj_extractor_udt.set_dump_file("udt_dump.txt");
+        obj_extractor_udt.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
+        obj_extractor_udt.meth_adjust_seq_metrics_file_path();
+        obj_extractor_udt.meth_extract_router_features();//Gera o cvs.
    
         return 1;
     }
 
+
+    cout << "Invalid option!!!\n" <<endl;
 
 }

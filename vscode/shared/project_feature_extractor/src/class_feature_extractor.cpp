@@ -79,6 +79,34 @@ void class_feature_extractor::meth_adjus_starting_time()
 
 }
 
+bool class_feature_extractor::meth_check_if_parse_dump_file_is_possible()
+{
+
+    if (!dump_file.length())
+    {
+        cout << "Please, set dump file" <<endl;
+        exit(0);
+    }
+    if(!queue_size_along_time_file.length())
+    {
+        cout << "Please, set router queue file" <<endl;
+        exit(0);
+
+    }
+
+    if(!seq_metrics_file_name.length())
+    {
+        cout << "Please, set seq metrics output file" <<endl;
+        exit(0);
+
+    }
+
+
+    return true;
+
+}
+
+
 
 void class_feature_extractor::meth_extract_router_features()
 {
@@ -351,7 +379,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
 
                 if(i==0) //preenchenco o prioritario com os dados a primeira linha
                 {    
-                    if(!class_feature_extractor::meth_take_and_store_line_values(stream_queue_size_along_time_file, prior_packet_arrival_time, buffer_at_prior_packet_arrival_time))
+                    if(!class_feature_extractor::meth_take_and_store_line_values_from_queue_along_time(stream_queue_size_along_time_file, prior_packet_arrival_time, buffer_at_prior_packet_arrival_time))
                     {    cout << "End of queue along time file";
                          stream_queue_size_along_time_file.close();
                          return false;
@@ -359,7 +387,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
                 }
                 else//prrenchendo o secundário com os dados da segunda linha
                 {
-                    if(!class_feature_extractor::meth_take_and_store_line_values(stream_queue_size_along_time_file,secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time))
+                    if(!class_feature_extractor::meth_take_and_store_line_values_from_queue_along_time(stream_queue_size_along_time_file,secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time))
                     {
                         stream_queue_size_along_time_file.close();
                         return false;
@@ -386,7 +414,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
             {
                 prior_packet_arrival_time = secondary_packet_arrival_time;
                 buffer_at_prior_packet_arrival_time = buffer_at_secondary_packet_arrival_time;
-                if(!class_feature_extractor::meth_take_and_store_line_values(stream_queue_size_along_time_file, secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time))
+                if(!class_feature_extractor::meth_take_and_store_line_values_from_queue_along_time(stream_queue_size_along_time_file, secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time))
                 {
                     cout<< "End of queue along time file" << endl;
                     stream_queue_size_along_time_file.close();
@@ -420,15 +448,6 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
 }
 
 
-string class_feature_extractor::meth_search_seq_number(string par_dump_line)
-{
-    //uint32_t seq_number;
-    string str_seq_number;
-    str_seq_number.append(meth_search_occurence_string_between_delimiter(par_dump_line,' ',9));
-    str_seq_number.append(meth_search_occurence_string_between_delimiter(par_dump_line,' ',10));
-    //cout << "str_seq_number: " << str_seq_number;
-    return str_seq_number;
-}
 
 
 string class_feature_extractor::
@@ -457,13 +476,6 @@ meth_search_occurence_string_between_delimiter(string par_string_to_search,
 }
 
 
-string class_feature_extractor::meth_search_time_stamp(string par_dump_line)
-{
-
-    
-    return meth_search_occurence_string_between_delimiter(par_dump_line,' ',1);
-    
-}
 
 //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 //o out_dir é o diretório onde foram salvos os dados dos
@@ -471,7 +483,7 @@ string class_feature_extractor::meth_search_time_stamp(string par_dump_line)
 //os dados do roteador.
 //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 
-bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_stream_of_lines, 
+bool class_feature_extractor:: meth_take_and_store_line_values_from_queue_along_time(ifstream &par_stream_of_lines, 
                                                                uint64_t & par_time_stamp, 
                                                                float & par_queue_buffer)
 {
@@ -514,7 +526,7 @@ bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_str
 
 
 
-bool class_feature_extractor:: meth_take_and_store_line_values(ifstream &par_stream_of_lines, 
+bool class_feature_extractor:: meth_take_and_store_line_values_from_queue_along_time(ifstream &par_stream_of_lines, 
                                                                uint64_t & par_time_stamp, 
                                                                uint64_t & par_queue_buffer)
 {
@@ -615,7 +627,7 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
         uint64_t queue = 0;
         float ewma = 0.0;
         
-        while (meth_take_and_store_line_values(stream_queue_size, time, queue))
+        while (meth_take_and_store_line_values_from_queue_along_time(stream_queue_size, time, queue))
         {
            
             float bytes_in_queue = (float) queue;
@@ -662,7 +674,7 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
     //cin >> c;
 }
 
-void class_feature_extractor:: meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
+void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
 {
 
     float queue_ewma_cuted = par_queue_ewma;
@@ -711,3 +723,5 @@ class_feature_extractor:: ~class_feature_extractor()
         stream_queue_size_along_time_file.close();
     
 }
+
+

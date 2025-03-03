@@ -7,6 +7,7 @@ set(ProjectType STATIC) #pode ser SHARED ou STATIC. Essa variavel sera passada
 
 include_directories(. include) #evita ter que dar o caminho dos .h nos includes
 
-add_library(${PROJECT_NAME} ${ProjectType} src/class_feature_extractor.cpp) #cria a lib
+add_library(${PROJECT_NAME} ${ProjectType} src/class_feature_extractor.cpp
+                                           src/class_feature_extractor_udt.cpp) #cria a lib
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)

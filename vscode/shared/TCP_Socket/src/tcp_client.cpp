@@ -15,7 +15,7 @@ void TCP_Client::SetServerAddr()
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+    if (inet_pton(AF_INET, "10.0.1.3", &serv_addr.sin_addr) <= 0) {
         std::cerr << "Invalid address/ Address not supported" << std::endl;
         exit(0);
     }
@@ -56,8 +56,8 @@ void TCP_Client::Send()
             std::cout << "Enviando...: "<< endl;
             send(sock, data, CLIENT_BUFFER_SIZE, 0);
             std::cout << "cwnd: " << get_cwnd() << std::endl;
-            if(get_cwnd() == 65)
-                set_cwnd(100);
+            //if(get_cwnd() == 65)
+                //set_cwnd(100);
             std::cout << "message sent: " << data[0] << std::endl;
             //ssize_t valread = read(sock, buffer, CLIENT_BUFFER_SIZE);
             //std::cout << "Server Received: " << buffer[0] << std::endl;
