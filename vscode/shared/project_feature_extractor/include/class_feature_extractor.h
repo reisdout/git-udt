@@ -44,12 +44,13 @@ public:
     void meth_adjus_starting_time();
     bool meth_check_if_parse_dump_file_is_possible();
     void meth_construct_queue_along_time_file_ewma();
+    void meth_erase_dot_from_time_stamp(string& par_time_stamp);
     static string meth_deal_with_K_occurence(string par_queue_along_time_file_line);
     static bool meth_drain_dump_file(string par_dump_file);
     virtual void meth_extract_router_features()=0;//scan dump file
     void meth_check_parameters();
     static bool meth_generate_queue_ewma_along_time_file(string par_queue_along_time_file, string par_queue_along_time_file_ewma);
-
+    virtual void meth_prepare_time_stamp(string & par_time_stamp){return;};
     virtual string meth_search_seq_number(string par_dump_line)=0;
     virtual string  meth_search_time_stamp(string par_dump_line)=0;
     bool meth_search_best_queue_size_by_time_stamp(string dump_seq_time_stamp, float& par_best_queue_size);

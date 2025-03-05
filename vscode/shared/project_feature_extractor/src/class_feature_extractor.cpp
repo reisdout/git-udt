@@ -40,7 +40,7 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
 
     std::cout << seq_metrics_file_name << std::endl;
     std::ofstream file;
-    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::app);
+    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::trunc);
     if (file.fail())
     {
         std::cout << "Error opening seq buffer file" << endl;
@@ -108,124 +108,6 @@ bool class_feature_extractor::meth_check_if_parse_dump_file_is_possible()
 
 
 
-void class_feature_extractor::meth_extract_router_features()
-{
-    
-    if (!dump_file.length())
-    {
-        cout << "Please, set dump file" <<endl;
-        exit(0);
-    }
-    if(!queue_size_along_time_file.length())
-    {
-        cout << "Please, set router queue file" <<endl;
-        exit(0);
-
-    }
-
-    if(!seq_metrics_file_name.length())
-    {
-        cout << "Please, set seq metrics output file" <<endl;
-        exit(0);
-
-    }
-    
-    std::string dump_line;
-    float queue_now;
-    uint64_t seq_in_decimal;
-    //char c;
-    //cout << "dump_file: " << dump_file << endl;
-
-    ifstream stream_dump_file (dump_file);
-    int packet = 0;
-    string time_stamp;
-    string seq_number;
-
-    uint64_t work_line=0;
-
-    if (stream_dump_file.is_open())
-    {
-        while ( getline (stream_dump_file,dump_line) )
-        {
-            
-            cout << "work line: " << work_line++<< endl;
-            //cout << dump_line << endl;
-            //cout <<"packet: " << packet <<endl;
-            //cin >> c;
-            
-            if(dump_line[0]=='#')//evita comentários e linhas de dados dos pacotes
-            {
-                packet = 0;
-                continue; //não precisa, mas é só para destacar que vai para o próximo.
-            }
-
-            else if(dump_line.find("10.0.0.3")!=std::string::npos &&
-                    dump_line.find("UDP, length 1472")!=std::string::npos &&
-                    dump_line.find(to_string(port)+":") != string::npos)
-                     
-            {
-                time_stamp = meth_search_time_stamp(dump_line);
-                cout << "time_stamp: " << time_stamp<< "\n";
-                //char c;
-                //cin >> c;                
-                packet = FIRST_PACKET_LINE;
-                continue;
-            }
-
-
-            else if(packet == FIRST_PACKET_LINE)
-            {
-      
-                packet = SECOND_PACKET_LINE;
-                continue;
-
-            }
-
-            else if(packet == SECOND_PACKET_LINE)
-            {
-                seq_number =  meth_search_seq_number(dump_line);
-                packet = THIRD_PACKET_LINE;
-                continue;//não precisa, mas é só pra marcar que vai para outra linha
-            }
-            else if(packet == THIRD_PACKET_LINE)
-            {
-                
-                if(meth_search_best_queue_size_by_time_stamp(time_stamp,queue_now))
-                {
-                    seq_in_decimal = std::stoull("0x"+seq_number,0,16);
-                    meth_update_seq_queue_file(seq_in_decimal, queue_now);
-                    packet = 0;
-                    continue;
-                }
-                else
-                {
-                    stream_dump_file.close();
-                    return;
-                }                
-                
-            }
-
-            else
-                packet = 0;          
-                      
-        }
-
-        stream_dump_file.close();
-       
-    
-    }
-    else
-    {
-        cout << "Dump file oppening error" << endl;
-        exit(0);
-    }
-
-    return;
-
-}
-
-
-
 void class_feature_extractor::meth_check_parameters()
 {
 
@@ -255,6 +137,11 @@ void class_feature_extractor::meth_check_parameters()
 
 
 
+}
+
+void class_feature_extractor::meth_erase_dot_from_time_stamp(string &par_time_stamp)
+{
+    par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
 }
 
 string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_along_time_file_line)
@@ -361,7 +248,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
     {
         
         uint64_t packet_arrival_time;
-        par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
+        meth_erase_dot_from_time_stamp(par_time_stamp);
         cout << "par_time stamp: " << par_time_stamp << ".\n";
         //char c;
         //cin >> c;

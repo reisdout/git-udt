@@ -8,6 +8,7 @@
 #include <TCP_Socket/include/tcp_server.h>
 #include <project_feature_saver/include/class_feature_saver.h>
 #include <project_feature_extractor/include/class_feature_extractor_udt.h>
+#include <project_feature_extractor/include/class_feature_extractor_tcp.h>
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -692,7 +693,7 @@ int main(int argc, char**argv){
         return 1;
     }
 
-   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Mon_Mar__3_05_32_35";
+   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_28_03_16_35";
    
    
    if(std::string(argv[1]) == "drain_dump")
@@ -746,6 +747,55 @@ int main(int argc, char**argv){
         obj_extractor_udt.meth_adjust_seq_metrics_file_path();
         obj_extractor_udt.meth_extract_router_features();//Gera o cvs.
    
+        return 1;
+    }
+
+
+    if(std::string(argv[1]) == "tcp_feature_extractor")
+    {
+        
+        cout << "Caso tcp_feature_extractor" << endl;
+        
+        class_feature_extractor_tcp obj_extractor_tcp;
+        obj_extractor_tcp.set_port((uint32_t)server_port);
+        
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        //o out_dir é o diretório onde foram salvos os dados dos
+        //fluxos, que é o mesmo que deve ser usado para guardar
+        //os dados do roteador.
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        obj_extractor_tcp.set_out_dir(experiment_path);
+        obj_extractor_tcp.set_dump_file("tcp_dump.txt");
+        obj_extractor_tcp.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
+        obj_extractor_tcp.meth_adjust_seq_metrics_file_path();
+        obj_extractor_tcp.meth_extract_router_features();//Gera o cvs.
+   
+        return 1;
+    }
+
+
+
+    if(std::string(argv[1]) == "udt_feature_extractor_tcp_test")
+    {
+        
+        cout << "Caso feature_extractor_tcp test" << endl;
+        
+        class_feature_extractor_tcp obj_extractor_tcp;
+        
+        string dump_line = "1741115941.544244 IP 10.0.0.3.59492 > 10.0.1.3.9090: Flags [P.], seq 1:2897, ack 1, win 502, options [nop,nop,TS val 1796301299 ecr 2335579299], length 2896";
+        
+        
+        
+        cout << obj_extractor_tcp.meth_search_time_stamp(dump_line) << endl;
+
+        string seq_number = obj_extractor_tcp.meth_search_seq_number(dump_line);
+
+        cout << seq_number << endl;
+
+        seq_number =  obj_extractor_tcp.meth_search_occurence_string_between_delimiter(seq_number,':',2);
+        
+        cout << seq_number << endl;
+
         return 1;
     }
 

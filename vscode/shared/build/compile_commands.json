@@ -40,5 +40,11 @@
   "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -g -o project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_udt.cpp",
   "file": "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_udt.cpp",
   "output": "project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o"
+},
+{
+  "directory": "/home/ns/UDT-workspace/git-udt/vscode/shared/build",
+  "command": "/usr/bin/g++ -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -g -o project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o -c /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_tcp.cpp",
+  "file": "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_tcp.cpp",
+  "output": "project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o"
 }
 ]
