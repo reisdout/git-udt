@@ -12,7 +12,8 @@
 		"commands" : 
 		[
 			"add_library",
-			"include_directories"
+			"include_directories",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -27,7 +28,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 11,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
@@ -43,6 +44,12 @@
 				"command" : 1,
 				"file" : 0,
 				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -68,19 +75,27 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./debug"
 				},
 				{
 					"backtrace" : 4,
@@ -89,6 +104,18 @@
 				{
 					"backtrace" : 4,
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/defines"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/../project_feature_saver/include"
 				}
 			],
 			"language" : "CXX",

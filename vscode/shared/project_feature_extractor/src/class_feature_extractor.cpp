@@ -1,5 +1,6 @@
 #include "../include/class_feature_extractor.h"
 //#include <bits/stdc++.h>
+#include "mrs_utils.h"
 
 # define FIRST_PACKET_LINE 1
 # define SECOND_PACKET_LINE 2
@@ -113,7 +114,7 @@ void class_feature_extractor::meth_check_parameters()
 
     if(!port)
     {
-      cout << "Please, set port" << endl;
+      cout << "From class_feature_extractor: Please, set port" << endl;
       exit(0);
     }
 
@@ -142,6 +143,29 @@ void class_feature_extractor::meth_check_parameters()
 void class_feature_extractor::meth_erase_dot_from_time_stamp(string &par_time_stamp)
 {
     par_time_stamp.erase(std::remove(par_time_stamp.begin(), par_time_stamp.end(), '.'), par_time_stamp.end());
+    
+    /*int places = par_time_stamp.length();
+
+    if(par_precision == "MILI")
+        if(places < PLACES_IN_MILLI)
+        {
+            for(int i = places; i < PLACES_IN_MILLI; i++)
+                par_time_stamp.append("0");
+
+        }
+    else if (par_precision == "NANO")
+    {
+        if(places < PLACES_IN_NANO)
+        {
+            for(int i = places; i < PLACES_IN_NANO; i++)
+                par_time_stamp.append("0");
+
+        }
+
+    }
+*/
+
+
 }
 
 string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_along_time_file_line)
@@ -460,9 +484,10 @@ void class_feature_extractor::set_out_dir(string par_out_dir)
     //par_out_dir deve ser o diretório em que foi
     //armazenado os dados dos fluxos.
     out_dir = out_dir+"/"+par_out_dir;
+    class_mrs_debug::print<string>("out_dir: ", out_dir);
     struct stat sb;
     if (stat(out_dir.c_str(), &sb) == 0)
-        cout << "There is previou flow data"<<endl;
+        cout << "There is previous flow data"<<endl;
     else
     {
         cout << "No previous flow data" << endl;
@@ -569,7 +594,7 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, floa
     if(par_queue_ewma > 1.0)
         queue_ewma_cuted = 1.0;
 
-    cout << "updatind router file..."<<"\n";
+    cout << "updating router file..."<<"\n";
 
     if(par_queue_ewma <= 0.00001) //para enriquecer a amostra
         return;

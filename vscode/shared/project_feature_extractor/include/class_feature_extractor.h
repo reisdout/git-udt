@@ -23,7 +23,42 @@ using namespace std;
 # define THIRD_PACKET_LINE 3
 # define FORTH_PACKET_LINE 4
 # define DATA_PACKET_LINE 5
+# define PLACES_IN_MILLI 17
+# define PLACES_IN_NANO 20
 
+
+template <class T>
+void class_feature_extractor_print(string par_string, T par_var) {
+
+    
+    float type_float;
+    double type_double;
+    long double type_long_double;
+    
+
+    const type_info& t_float = typeid(type_float);
+    const type_info& t_double = typeid(type_double);  
+    const type_info& t_long_double = typeid(type_long_double);
+    const type_info& t_my_type = typeid(par_var);
+    
+    
+    bool print = true;
+    if(print)
+    {
+
+        //cout << "entering print " << endl;
+        char c;
+        if(t_my_type == t_float || t_my_type == t_double)
+            cout << par_string << fixed << setprecision(5) << par_var << endl;
+        else if (t_my_type == t_long_double)
+            cout << par_string << fixed << setprecision(10) << par_var << endl;
+        else
+            cout << par_string << par_var << endl;
+        cin >> c;
+    }
+}
+
+//Pressupõe um diretorio prévio, onde há dados dos fluxos
 
 
 class class_feature_extractor {
@@ -42,12 +77,12 @@ public:
     
     void meth_adjust_seq_metrics_file_path();
     void meth_adjus_starting_time();
-    bool meth_check_if_parse_dump_file_is_possible();
+    virtual bool meth_check_if_parse_dump_file_is_possible();
     void meth_construct_queue_along_time_file_ewma();
-    void meth_erase_dot_from_time_stamp(string& par_time_stamp);
+    static void meth_erase_dot_from_time_stamp(string& par_time_stamp);
     static string meth_deal_with_K_occurence(string par_queue_along_time_file_line);
     static bool meth_drain_dump_file(string par_dump_file);
-    virtual void meth_extract_router_features()=0;//scan dump file
+    virtual void meth_extract_router_features(){};//scan dump file
     void meth_check_parameters();
     static bool meth_generate_queue_ewma_along_time_file(string par_queue_along_time_file, string par_queue_along_time_file_ewma);
     virtual void meth_prepare_time_stamp(string & par_time_stamp){return;};
@@ -70,7 +105,7 @@ public:
     string get_dump_file(){return dump_file;};
     string get_queue_size_along_time_file(){return queue_size_along_time_file;};
   
-    void set_dump_file(string par_dump_file){dump_file = out_dir+ "/" +"router_data"+ "/" + par_dump_file;};
+    virtual void set_dump_file(string par_dump_file){dump_file = out_dir+ "/" +"router_data"+ "/" + par_dump_file;};
     void set_out_dir(string par_out_dir); //Será acrescentado ao /home/ns/Desktop/output
     void set_port(uint32_t par_port){port=par_port;};
     void set_queue_size_along_time_file(string par_queue_size_along_time_file);
@@ -78,6 +113,8 @@ public:
 
  
 protected:
+        
+        bool first_packet = false;
         unsigned segmentsReceived=0;
         static inline bool queue_ewma_generated = false;
         string out_dir = "/home/ns/Desktop/output";
@@ -94,6 +131,7 @@ protected:
         std::string queue_size_along_time_file_ewma;
         std::string seq_metrics_file_name; 
         std::string str_starting_time;
+        uint64_t feature_extrator_work_line=0;
 
 
 

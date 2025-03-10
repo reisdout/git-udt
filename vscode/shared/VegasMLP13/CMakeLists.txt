@@ -10,7 +10,7 @@ set (FullOutputDir "${CMAKE_SOURCE_DIR}/bin/${CMAKE_SYSTEM_NAME}${OSBitness}/${C
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${FullOutputDir}/static libs") #static libs
                         
-include_directories(. include ${CMAKE_SOURCE_DIR}/defines ${CMAKE_SOURCE_DIR}/project_feature_saver/include) #evita ter que dar o caminho dos .h nos includes
+include_directories(. include ${CMAKE_SOURCE_DIR}/defines ${CMAKE_SOURCE_DIR}/project_feature_saver/include ) #evita ter que dar o caminho dos .h nos includes
 
 find_library(UDT_LIB 
              NAMES udt 

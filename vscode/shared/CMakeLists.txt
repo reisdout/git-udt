@@ -15,10 +15,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${FullOutputDir}") #executable files
 
 include_directories(. ./libudt 
                     #./Vegas_MLP_13
-                    ./project_pure_udt 
-                    ./TCP_Socket 
-                    ./project_feature_saver
-                    ./project_feature_extractor)
+                    ./project_pure_udt/include 
+                    ./TCP_Socket/include 
+                    ./project_feature_saver/include
+                    ./project_feature_extractor/include
+                    ./project_mrs_utils/include
+                    ./debug)
 
 #link_directories(${CMAKE_SOURCE_DIR}/lib)
 

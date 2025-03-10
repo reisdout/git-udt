@@ -75,19 +75,27 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./debug"
 				},
 				{
 					"backtrace" : 4,

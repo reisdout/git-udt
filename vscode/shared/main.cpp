@@ -1,4 +1,24 @@
-#include <iostream>
+/*****************************VISAO GERAL****************************************************
+ ********************************************************************************************
+ Os clientes enviam dados
+ Os servidores recebem
+ As classes extractors se voltam para a extração de features dos dumps.
+ As classes savers se referem ao salvamento de features ao longo da troca de dados entre
+ servidores e clientes.
+ Caso interessante está na opção tcp_feature_saver, que traz a conbinação entre as classe
+ class_feature_extractor_tcp_client e class_feature_saver_tcp. 
+ A class_feature_extractor_tcp_client EXTRAI (por isso extractor) as features do dump 
+ do arquivo levantado dos fluxos dos clientes e as passa para 
+ class_feature_saver_tcp, que gera o arquivo da médias móveis associadas aos seq. 
+ Essa tarefa de associação dos seq às médias móveis(ewma) seq é próprio das  classes savers. 
+ Já associação dos seq a ocupação da fila é própria dos extractors, uma vez
+ que depende de mineração do dump gerado no roteador.
+ ********************************************************************************************
+ ********************************************************************************************/
+
+
+
+
 #include <libudt/udt.h>
 #include <arpa/inet.h>
 #include <cstring>
@@ -6,9 +26,12 @@
 #include <project_pure_udt/include/pure_udt.h>
 #include <TCP_Socket/include/tcp_client.h>
 #include <TCP_Socket/include/tcp_server.h>
-#include <project_feature_saver/include/class_feature_saver.h>
+#include <project_feature_saver/include/class_feature_saver_udt.h>
+#include <project_feature_saver/include/class_feature_saver_tcp.h>
 #include <project_feature_extractor/include/class_feature_extractor_udt.h>
 #include <project_feature_extractor/include/class_feature_extractor_tcp.h>
+#include <project_feature_extractor/include/class_feature_extractor_tcp_client.h>
+#include "mrs_utils.h"
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
@@ -16,6 +39,8 @@
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
+#include<iomanip>
+#include<typeinfo>
 
 #include "defines/defines.h"
 
@@ -23,8 +48,40 @@
 
 using namespace UDT;
 using namespace std;
-using namespace std::chrono;
+//using namespace std::chrono;
 
+
+
+template <class T>
+void main_print(string par_string, T par_var,bool par_pause=true) {
+
+    
+    float type_float;
+    double type_double;
+    long double type_long_double;
+    
+
+    const type_info& t_float = typeid(type_float);
+    const type_info& t_double = typeid(type_double);  
+    const type_info& t_long_double = typeid(type_long_double);
+    const type_info& t_my_type = typeid(par_var);
+    
+    
+    bool print = true;
+    if(print)
+    {
+
+        //cout << "entering print " << endl;
+        char c;
+        if(t_my_type == t_float || t_my_type == t_double)
+            cout << par_string << fixed << setprecision(5) << par_var << endl;
+        else if (t_my_type == t_long_double)
+            cout << par_string << fixed << setprecision(10) << par_var << endl;
+        else
+            cout << par_string << par_var << endl;
+        cin >> c;
+    }
+}
 
 
 
@@ -46,7 +103,8 @@ string data_rate;
 string num_flows;
 string tipo_dado;
 string simu_start_time;
-string terminal_type; //cliente? servidor?
+string terminal_type; //cliente? servidor?, etc..
+string congestion_control;
 
 
 UDTSOCKET client;
@@ -257,6 +315,9 @@ std::streampos Get_file_size()
 }
 
 int main(int argc, char**argv){
+
+ // ./communicator $app_type $port $cong_control $simul_type $data_rate $num_flows $simul_start_time
+
     printf("Hello, from communicator!\n");
     char c;
     //Socket* ptSocket=0;
@@ -264,41 +325,48 @@ int main(int argc, char**argv){
     //bool debug = true;
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     terminal_type = string(argv[1]);
-    //cin >> c;
-    if(argc >= 3)
+
+    class_mrs_debug::print<uint64_t>("period_to_transmit: ", TCP_Client::period_to_transmit_micro_seconds);
+
+    if(argc > 2)
     {
         std::cout << "Server Port: " << argv[2]<<"\n";
         server_port = std::stoi(string(argv[2]));
+
+    }
+    if(argc > 3)
+    {
+        std::cout << "Congestion Control: " << argv[3]<<"\n";
+        congestion_control = string(argv[3]);
+ 
         
     }
 
-    if(argc >= 4)
+    if(argc > 4)
     {
-        std::cout << "Participando de uma simulação do tipo : " << argv[3]<<"\n";
-        tipo_dado = string(argv[3]);
+        std::cout << "Participando de uma simulação do tipo : " << argv[4]<<"\n";
+        tipo_dado = string(argv[4]);
     }
 
-    if(argc >= 5)
+    if(argc > 5)
     {
-        std::cout << "Data rate : " << argv[4]<<"\n";
-        data_rate = string(argv[4]);
+        std::cout << "Data rate : " << argv[5]<<"\n";
+        data_rate = string(argv[5]);
     }
 
-    if(argc >= 6)
+    if(argc > 6)
     {
-        std::cout << "Participando de uma simulação de : " << argv[5]<<" Fluxos\n";
-        num_flows = string(argv[5]);
+        std::cout << "Participando de uma simulação de : " << argv[6]<<" Fluxos\n";
+        num_flows = string(argv[6]);
     }
 
 
-    if(argc >= 7)
+    if(argc > 7)
     {
-        std::cout << "Inicio da Simulacao " << argv[6]<<"\n";
-        simu_start_time = string(argv[6]);
+        std::cout << "Inicio da Simulacao " << argv[7]<<"\n";
+        simu_start_time = string(argv[7]);
         std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
-        std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');
-        
-        
+        std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');        
 
     }
 
@@ -622,20 +690,35 @@ int main(int argc, char**argv){
     }
     if(std::string(argv[1]) == "tcp_client")
     {
-        TCP_Client communicator;
+
+
+        /****************** COMAND FORMAT*************************
+
+        ./communicator tcp_client $cong_control $port $simul_type $data_rate $num_flows $simul_start_time
+        
+        **********************************************************/
+
+
+        TCP_Client communicator((u_int32_t)server_port,
+                                data_rate,
+                                congestion_control,
+                                num_flows,
+                                tipo_dado,
+                                simu_start_time);
         communicator.SetPort((u_int32_t)server_port);
         communicator.SetServerAddr();
         communicator.ConnectToServer();
         communicator.Send();
         communicator.Close();
+
         return 1;
     }
 
     if(std::string(argv[1]) == "feature_saver")
     {
-        class_feature_saver obj_saver;
-        obj_saver.set_port(server_port);
-        obj_saver.meth_adjust_file_path();
+        class_feature_saver_udt obj_saver_udt;
+        obj_saver_udt.set_port(server_port);
+        obj_saver_udt.meth_adjust_file_path();
 
 
 
@@ -653,7 +736,7 @@ int main(int argc, char**argv){
         cout << "enviando....." << endl;
         for(int i = 1; i < 10; i++)
         {
-            obj_saver.meth_deal_packet_send((uint32_t)i, high_resolution_clock::now());
+            obj_saver_udt.meth_deal_packet_send((uint32_t)i, high_resolution_clock::now());
             Pausar_por_tempo_aleatorio_micro_segundos(1500000);
         }
 
@@ -668,7 +751,7 @@ int main(int argc, char**argv){
 
             t1_snd = t2_snd;
             t2_snd = map_seq_timestamp.at((uint32_t)i-1);
-            obj_saver.meth_deal_ack_arrival((uint32_t)i, t2_ack);
+            obj_saver_udt.meth_deal_ack_arrival((uint32_t)i, t2_ack);
             Pausar_por_tempo_aleatorio_micro_segundos(1500000);
             rtt_duration = duration_cast<microseconds>(t2_ack - t2_snd);
             cout << "rtt: " << rtt_duration.count() << endl; 
@@ -679,8 +762,8 @@ int main(int argc, char**argv){
                 //t2_snd = map_seq_timestamp.at((uint32_t)i-1);
                 interval_ack = duration_cast<microseconds>(t2_ack - t1_ack);
                 interval_snd = duration_cast<microseconds>(t2_snd - t1_snd);
-                cout << "Dt_ack: " << interval_ack.count() << "; ack_ewma: " << obj_saver.get_ack_ewma() << std::endl;
-                cout << "Dt_snd: " << interval_snd.count() << "; snd_ewma: " << obj_saver.get_send_ewma() << std::endl;
+                cout << "Dt_ack: " << interval_ack.count() << "; ack_ewma: " << obj_saver_udt.get_ack_ewma() << std::endl;
+                cout << "Dt_snd: " << interval_snd.count() << "; snd_ewma: " << obj_saver_udt.get_send_ewma() << std::endl;
             }
         }
 
@@ -693,7 +776,7 @@ int main(int argc, char**argv){
         return 1;
     }
 
-   string experiment_path = "Treino_udt_60Fluxos_100Mbps_Tue_Feb_28_03_16_35";
+   string experiment_path = "Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21";
    
    
    if(std::string(argv[1]) == "drain_dump")
@@ -718,6 +801,7 @@ int main(int argc, char**argv){
     if(std::string(argv[1]) == "router_ewma")
     {
         
+        class_mrs_debug::print<char>("entrou router_ewma",'\n');
         
         class_feature_extractor::meth_generate_queue_ewma_along_time_file(
             string("/home/ns/Desktop/output") + "/" + experiment_path + "/" + "router_data" + "/" + "queue_along_time.txt",
@@ -798,6 +882,245 @@ int main(int argc, char**argv){
 
         return 1;
     }
+
+    if(std::string(argv[1]) == "tcp_client_feature_extractor_test")
+    {
+        cout << "Caso tcp_feature_saver_test" << endl;
+
+        char c;
+
+        string vet_dump_lines[]{"1741180556.605556 IP 10.0.1.3.9090 > ns-virtual-machine.37170: Flags [.], ack 5793, win 592, options [nop,nop,TS val 2358321713 ecr 4149794421], length 0",
+                                "1741180556.605558 IP 10.0.1.3.9090 > ns-virtual-machine.37170: Flags [.], ack 8689, win 637, options [nop,nop,TS val 2358321713 ecr 4149794421], length 0",
+                                "1741180556.605683 IP 10.0.1.3.9090 > ns-virtual-machine.37170: Flags [.], ack 11585, win 682, options [nop,nop,TS val 2358321714 ecr 4149794421], length 0",
+                                "1741180556.606030 IP 10.0.1.3.9090 > ns-virtual-machine.37170: Flags [.], ack 14481, win 681, options [nop,nop,TS val 2358321714 ecr 4149794421], length 0"
+                               };
+
+        int num_test = 4;
+
+         class_feature_extractor_tcp_client obj_extractor;
+         obj_extractor.set_port(server_port);
+         uint64_t ack_arrival;
+         uint64_t echo_reply;
+         uint64_t seq_number;
+
+         for (int i = 0; i < num_test; i++)
+         { 
+         obj_extractor.meth_extract_client_feature(vet_dump_lines[i],seq_number,ack_arrival,echo_reply);
+         cout << "seq: " << seq_number << endl;
+         cout << "ack_arrival: " << ack_arrival << endl;
+         cout << "echo_reply: " << echo_reply << endl;
+         cin >> c;
+         }
+         
+
+        return 1;
+    }
+
+
+    if(std::string(argv[1]) == "tcp_feature_saver")
+    {
+        cout << "Caso tcp_feature_saver" << endl;
+
+        class_feature_extractor_tcp_client obj_extractor;
+        string dump_line;
+        obj_extractor.set_port(server_port);
+        uint64_t ack_arrival;
+        uint64_t echo_reply;
+        uint64_t seq_number;
+        uint64_t work_line;
+
+
+        class_feature_saver_tcp obj_saver;
+        obj_saver.set_port(server_port);
+        obj_saver.set_bottleneck_datarate(data_rate);
+        obj_saver.set_default_congestion("Vegas");
+        obj_saver.set_num_flows(num_flows);
+        obj_saver.set_tipo_dado(tipo_dado);
+        obj_saver.set_starting_time(simu_start_time);
+        obj_saver.meth_adjust_file_path();
+
+         /*
+         Anteriormente, a cada chegada de ack o meth_deal_ack_arrival era acionado,
+         agora, mantendo-se a mesma lógica, o meth_deal_ack_arrival é acionado quando
+         se encontra um ack no dump.
+         */
+        ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt");
+        if (stream_dump_file.is_open())
+        {
+            while (getline (stream_dump_file,dump_line) )
+            {
+    
+                
+                class_mrs_debug::print<uint64_t>("workline: ", ++work_line);
+                class_mrs_debug::print<string>("dump_line: ", dump_line);
+                obj_extractor.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply);
+                obj_saver.meth_deal_ack_arrival(seq_number,ack_arrival,echo_reply);
+    
+            }
+
+            stream_dump_file.close();
+
+        }
+
+        else
+        {
+            cout << "Can't open client dump file" << endl;
+            exit(0);
+        } 
+
+        return 1;
+    }
+
+
+    if(std::string(argv[1]) == "tcp_feature_saver_and_extractor")
+    {
+       
+        /****************** COMAND FORMAT************************
+
+            ./communicator tcp_feature_saver_and_extractor $port 
+        
+        **********************************************************/
+        
+
+        /*
+            agora, enquanto estiver salvando o sistema também
+            estará extraindo, para extrair apenas os seqs correspondentes
+            aos ack. O saver provoca o extractor
+        */
+        
+        cout << "Caso tcp_feature_saver_and_extractor" << endl;
+        //A classe class_feature_extractor_tcp_client é praticamente
+        //  um extrator de acks
+        
+        class_feature_extractor_tcp_client obj_extractor_tcp_client;
+        string dump_line;
+        obj_extractor_tcp_client.set_port(server_port);
+
+
+        uint64_t ack_arrival;
+        uint64_t echo_reply;
+        uint64_t seq_number;
+        uint64_t work_line;
+
+        class_feature_saver_tcp obj_saver;
+
+        string tcp_saver_extractor_experiment_path = "Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21";
+
+        string tcp_saver_extractor_tipo_dado = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',1);
+        class_mrs_debug::print<string>("tcp_saver_extractor_tipo_dado: ", tcp_saver_extractor_tipo_dado);
+        
+        string tcp_saver_extractor_congestion_control = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',2);
+        class_mrs_debug::print<string>("tcp_saver_extractor_congestion_control:" ,tcp_saver_extractor_congestion_control);
+
+        string tcp_saver_extractor_num_flows = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',3);
+        tcp_saver_extractor_num_flows = tcp_saver_extractor_num_flows.substr(0,tcp_saver_extractor_num_flows.find("Fluxos"));
+        class_mrs_debug::print<string>("tcp_saver_extractor_num_flows: ",tcp_saver_extractor_num_flows);
+        
+
+
+        string tcp_saver_extractor_data_rate = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',4);
+        tcp_saver_extractor_data_rate = tcp_saver_extractor_data_rate.substr(0,tcp_saver_extractor_num_flows.find("Mbps")); 
+        
+        class_mrs_debug::print<string>("tcp_saver_extractor_data_rate: ",tcp_saver_extractor_data_rate);
+
+        string tcp_saver_extractor_simul_start_time =   class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',5) 
+                                                      +"_" + class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',6)
+                                                      +"_" + class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',7)
+                                                      +"_" + class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',8)
+                                                      +"_" + class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',9)
+                                                      +"_" + class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',10);
+
+        
+        class_mrs_debug::print<string>("tcp_saver_extractor_simul_start_time: ",tcp_saver_extractor_simul_start_time);
+        
+        obj_saver.set_port((uint32_t)server_port);
+        obj_saver.set_bottleneck_datarate(tcp_saver_extractor_data_rate);
+        obj_saver.set_default_congestion(tcp_saver_extractor_congestion_control);
+        obj_saver.set_num_flows(tcp_saver_extractor_num_flows);
+        obj_saver.set_tipo_dado(tcp_saver_extractor_tipo_dado);
+        obj_saver.set_starting_time(tcp_saver_extractor_simul_start_time); //Aqui pega do ditetorio que foi criado na criação dos fluxos
+        obj_saver.meth_adjust_file_path(tcp_saver_extractor_experiment_path);
+        
+        //é o saver que define o out_dir da forma "Treino_udt_60Fluxos_100Mbps_Fri_Mar_06_03_16_35"
+        
+        
+        ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt");
+
+        class_feature_extractor_tcp obj_extractor_tcp_router;
+        obj_extractor_tcp_router.set_port((uint32_t)server_port);
+        
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        //o out_dir é o diretório onde foram salvos os dados dos
+        //fluxos, que é o mesmo que deve ser usado para guardar
+        //os dados do roteador.
+        //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+                                             
+        obj_extractor_tcp_router.set_out_dir(tcp_saver_extractor_experiment_path);
+        obj_extractor_tcp_router.set_dump_file("tcp_dump.txt");
+        obj_extractor_tcp_router.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
+        obj_extractor_tcp_router.meth_adjust_seq_metrics_file_path();
+
+
+        if (stream_dump_file.is_open())
+        {
+ 
+            
+            while (getline (stream_dump_file,dump_line) )
+            {
+    
+                
+                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line);
+                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line);
+                
+                //extrai os tempos dos pacotes ack
+                if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply))
+                {
+                    
+                    if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
+                    {   
+                        //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
+                        //associado a um ack ewma.
+                        class_mrs_debug::print<uint64_t>("seq to save: ",seq_number);
+                        class_mrs_debug::print<uint64_t>("ack_arival to save: ", ack_arrival);
+                        class_mrs_debug::print<uint64_t>("ech reply to save: ",echo_reply);
+                        obj_saver.meth_deal_ack_arrival(seq_number,ack_arrival,echo_reply);                    
+                        class_mrs_debug::print<char>("extraiu features efetivamente ", '\n');
+                    }
+                }
+                else
+                {
+                    if(dump_line.find("[S],")!=std::string::npos &&
+                       dump_line.find(string(" > ") + "10.0.1.3." + to_string(server_port))!= std::string::npos)
+                       {
+                            class_mrs_debug::print<char>("Setting virtual clock origin ", '\n');
+                            string syn_time_stamp = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',1);
+                            class_feature_extractor::meth_erase_dot_from_time_stamp(syn_time_stamp);
+                            string syn_TS_val = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',16);
+                            class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp);
+                            class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val);
+                            obj_saver.meth_set_virtual_clock_origin(stoull(syn_time_stamp),stoull(syn_TS_val));
+                       }
+                 }
+    
+                class_mrs_debug::print<char>("just a pause: ", '\n');
+            
+            }
+
+            stream_dump_file.close();
+
+        }
+
+        else
+        {
+            cout << "Can't open client dump file" << endl;
+            exit(0);
+        } 
+
+
+   
+        return 1;
+    }
+
 
 
     cout << "Invalid option!!!\n" <<endl;

@@ -1,12 +1,35 @@
 #include "../include/tcp_client.h"
+#include "../defines/defines.h"
+
+#include <cstdlib>
+#include <algorithm>
+#include <chrono>
+
+using namespace std::chrono;
 
 
-TCP_Client::TCP_Client()
+TCP_Client::TCP_Client(uint32_t par_server_port,
+                       string par_data_rate,
+                       string par_congestion_control,
+                       string par_num_flows,
+                       string par_tipo_dado,
+                       string par_simu_start_time)
+                       
+
 {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         std::cerr << "Socket creation error" << std::endl;
         exit(0);
     }
+
+
+    obj_saver.set_port(par_server_port);
+    obj_saver.set_bottleneck_datarate(par_data_rate);
+    obj_saver.set_default_congestion(par_congestion_control);
+    obj_saver.set_num_flows(par_num_flows);
+    obj_saver.set_tipo_dado(par_tipo_dado);
+    obj_saver.set_starting_time(par_simu_start_time);
+    obj_saver.meth_adjust_file_path();
 }
 
 void TCP_Client::SetServerAddr()
@@ -35,39 +58,53 @@ void TCP_Client::Send()
     //getline(cin, message_to_server);
     //std::cout << message_to_server<< endl;
     
-    char* data = new char[CLIENT_BUFFER_SIZE];
+    char* data = new char[MSS];
     char temp;
 
+
+    auto simulation_start = high_resolution_clock::now();
+    auto simulation_time = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(simulation_time - simulation_start);
     for(;;) //Se quiser mandar apenas uma mensagem
             //pode tirar o for.
     {
-        //temp = cin.get();
-        usleep (10000);
-        delete [] data;
-        //std::cout << "Pronto! Pode digitar...: "<< endl;
-        //message_to_server.clear();
-        //getline(cin, message_to_server);
-        //std::cout << message_to_server << endl;
-        data = new char [CLIENT_BUFFER_SIZE];            
-        fill_of(data,'a',CLIENT_BUFFER_SIZE);
-        std::cout << "data: " << data[0] << std::endl;
-        if(data)
-        {      
-            std::cout << "Enviando...: "<< endl;
-            send(sock, data, CLIENT_BUFFER_SIZE, 0);
-            std::cout << "cwnd: " << get_cwnd() << std::endl;
-            //if(get_cwnd() == 65)
-                //set_cwnd(100);
-            std::cout << "message sent: " << data[0] << std::endl;
-            //ssize_t valread = read(sock, buffer, CLIENT_BUFFER_SIZE);
-            //std::cout << "Server Received: " << buffer[0] << std::endl;
-            std::cout << "last ack: " << get_last_ack() << std::endl;
-            if ((strncmp(buffer, "exit", 4)) == 0) 
-            {
-                printf("Client Exit...\n");
-                break;
+        if(duration.count() <= SIMUL_TIME)
+        {
+            //temp = cin.get();
+            usleep (period_to_transmit_micro_seconds);
+            delete [] data;
+            //std::cout << "Pronto! Pode digitar...: "<< endl;
+            //message_to_server.clear();
+            //getline(cin, message_to_server);
+            //std::cout << message_to_server << endl;
+            data = new char [MSS];            
+            fill_of(data,'a',MSS);
+            std::cout << "data: " << data[0] << std::endl;
+            if(data)
+            {      
+                std::cout << "Enviando...: "<< endl;
+                send(sock, data, MSS, 0);
+                //std::cout << "cwnd: " << get_cwnd() << std::endl;
+                //if(get_cwnd() == 65)
+                    //set_cwnd(100);
+                std::cout << "message sent: " << data[0] << std::endl;
+                //ssize_t valread = read(sock, buffer, CLIENT_BUFFER_SIZE);
+                //std::cout << "Server Received: " << buffer[0] << std::endl;
+                std::cout << "last ack: " << get_last_ack() << std::endl;
+                if ((strncmp(buffer, "exit", 4)) == 0) 
+                {
+                    printf("Client Exit...\n");
+                    break;
+                }
+
             }
+        
+            simulation_time = high_resolution_clock::now();
+            duration = duration_cast<microseconds>(simulation_time - simulation_start);
         }
+
+        else
+            break;
        
     }
     Close();

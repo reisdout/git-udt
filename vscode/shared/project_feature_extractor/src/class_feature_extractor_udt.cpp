@@ -25,7 +25,7 @@ void class_feature_extractor_udt::meth_extract_router_features()
         while ( getline (stream_dump_file,dump_line) )
         {
             
-            cout << "work line: " << work_line++<< endl;
+            cout << "work line: " << ++work_line<< endl;
             //cout << dump_line << endl;
             //cout <<"packet: " << packet <<endl;
             //cin >> c;
@@ -117,8 +117,10 @@ string class_feature_extractor_udt::meth_search_seq_number(string par_dump_line)
 string class_feature_extractor_udt::meth_search_time_stamp(string par_dump_line)
 {
 
-    
-    return meth_search_occurence_string_between_delimiter(par_dump_line,' ',1);
+    string time_stamp_temp;
+    time_stamp_temp = meth_search_occurence_string_between_delimiter(par_dump_line,' ',1);
+    meth_erase_dot_from_time_stamp(time_stamp_temp);
+    return time_stamp_temp;
     
 }
 

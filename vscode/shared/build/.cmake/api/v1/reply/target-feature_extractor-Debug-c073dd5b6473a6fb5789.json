@@ -68,19 +68,27 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor"
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./debug"
 				},
 				{
 					"backtrace" : 4,
@@ -89,6 +97,14 @@
 				{
 					"backtrace" : 4,
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/defines"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include"
 				}
 			],
 			"language" : "CXX",
@@ -96,7 +112,8 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -116,7 +133,8 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -138,6 +156,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "project_feature_extractor/src/class_feature_extractor_tcp.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "project_feature_extractor/src/class_feature_extractor_tcp_client.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

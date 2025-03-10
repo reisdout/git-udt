@@ -1,0 +1,1190 @@
+../communicator  tcp_feature_saver_and_extractor 9090
+Hello, from communicator!
+Terminal Type: tcp_feature_saver_and_extractor
+Server Port: 9090
+Caso tcp_feature_saver_and_extractor
+1: tcp_saver_extractor_tipo_dado: Treino
+c
+2: tcp_saver_extractor_congestion_control:Vegas
+c
+3: tcp_saver_extractor_num_flows: 1
+c
+4: tcp_saver_extractor_data_rate: 100Mbps
+c
+5: tcp_saver_extractor_simul_start_time: Fri_Mar_7_04_26_21
+c
+out_dir: /home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21
+out_dir already created10_0_90_2to10_1_90_2_L_Fri_Mar_7_04_26_21.csv
+6: out_dir: /home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21
+c
+There is previous flow data
+queue_size_along_time_file_ewma....../home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+str_starting_time: Fri Mar 7 04_26_21
+10_0_90_2to10_1_90_2_Fri Mar 7 04_26_21_training_buffer.csv
+7: workline in client dump file: 1
+c
+8: dump_line in client dump file: 1741375617.866051 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [S], seq 3807052484, win 64240, options [mss 1460,sackOK,TS val 4233006441 ecr 0,nop,wscale 7], length 0
+c
+9: entering meth_extract_client_feature
+
+c
+10: tcp_extractor_clinet_work_line, atuando sobre os ack : 1
+c
+11: par_dump_line: 1741375617.866051 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [S], seq 3807052484, win 64240, options [mss 1460,sackOK,TS val 4233006441 ecr 0,nop,wscale 7], length 0
+c
+12: Setting virtual clock origin 
+
+c
+13: syn_time_stamp: 1741375617866051
+c
+14: sys_TS_val: 4233006441
+c
+15: virtual_clock_origin: 1737142611425
+c
+16: just a pause: 
+
+c
+17: workline in client dump file: 2
+c
+18: dump_line in client dump file: 1741375617.910563 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [S.], seq 4019792362, ack 3807052485, win 65160, options [mss 1460,sackOK,TS val 2446985084 ecr 4233006441,nop,wscale 7], length 0
+c
+19: entering meth_extract_client_feature
+
+c
+20: tcp_extractor_clinet_work_line, atuando sobre os ack : 2
+c
+21: par_dump_line: 1741375617.910563 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [S.], seq 4019792362, ack 3807052485, win 65160, options [mss 1460,sackOK,TS val 2446985084 ecr 4233006441,nop,wscale 7], length 0
+c
+22: just a pause: 
+
+c
+23: workline in client dump file: 3
+c
+24: dump_line in client dump file: 1741375617.910599 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], ack 1, win 502, options [nop,nop,TS val 4233006485 ecr 2446985084], length 0
+c
+25: entering meth_extract_client_feature
+
+c
+26: tcp_extractor_clinet_work_line, atuando sobre os ack : 3
+c
+27: par_dump_line: 1741375617.910599 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], ack 1, win 502, options [nop,nop,TS val 4233006485 ecr 2446985084], length 0
+c
+28: just a pause: 
+
+c
+29: workline in client dump file: 4
+c
+30: dump_line in client dump file: 1741375617.986132 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 1:1449, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+31: entering meth_extract_client_feature
+
+c
+32: tcp_extractor_clinet_work_line, atuando sobre os ack : 4
+c
+33: par_dump_line: 1741375617.986132 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 1:1449, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+34: just a pause: 
+
+c
+35: workline in client dump file: 5
+c
+36: dump_line in client dump file: 1741375617.986636 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 2897:4345, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+37: entering meth_extract_client_feature
+
+c
+38: tcp_extractor_clinet_work_line, atuando sobre os ack : 5
+c
+39: par_dump_line: 1741375617.986636 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 2897:4345, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+40: just a pause: 
+
+c
+41: workline in client dump file: 6
+c
+42: dump_line in client dump file: 1741375617.987012 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 5793:7241, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+43: entering meth_extract_client_feature
+
+c
+44: tcp_extractor_clinet_work_line, atuando sobre os ack : 6
+c
+45: par_dump_line: 1741375617.987012 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 5793:7241, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+46: just a pause: 
+
+c
+47: workline in client dump file: 7
+c
+48: dump_line in client dump file: 1741375617.987495 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 8689:10137, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+49: entering meth_extract_client_feature
+
+c
+50: tcp_extractor_clinet_work_line, atuando sobre os ack : 7
+c
+51: par_dump_line: 1741375617.987495 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 8689:10137, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+52: just a pause: 
+
+c
+53: workline in client dump file: 8
+c
+54: dump_line in client dump file: 1741375617.987825 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 11585:13033, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+55: entering meth_extract_client_feature
+
+c
+56: tcp_extractor_clinet_work_line, atuando sobre os ack : 8
+c
+57: par_dump_line: 1741375617.987825 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 11585:13033, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+58: just a pause: 
+
+c
+59: workline in client dump file: 9
+c
+60: dump_line in client dump file: 1741375618.028976 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 2897, win 546, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+c
+61: entering meth_extract_client_feature
+
+c
+62: tcp_extractor_clinet_work_line, atuando sobre os ack : 9
+c
+63: par_dump_line: 1741375618.028976 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 2897, win 546, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+c
+64: str_seq_number em meth_search_seq_number: 2897
+c
+65: Ack siginifcativo, lendo nova linha 
+
+c
+66: feature_extrator_work_line, nos colhidos pelo roteador: 1
+c
+67: dump_line, nos colhidos pelo roteador: 1741375642.594310090 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 3807052485:3807055381, ack 4019792363, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 2896
+c
+68: Ack siginifcativo, lendo nova linha 
+
+c
+69: feature_extrator_work_line, nos colhidos pelo roteador: 2
+c
+70: dump_line, nos colhidos pelo roteador: 1741375642.594702620 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 4344:5792, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+c
+71: Precisa de ack maior
+
+c
+72: just a pause: 
+
+c
+73: workline in client dump file: 10
+c
+74: dump_line in client dump file: 1741375618.029015 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 14481:15929, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 1448
+c
+75: entering meth_extract_client_feature
+
+c
+76: tcp_extractor_clinet_work_line, atuando sobre os ack : 10
+c
+77: par_dump_line: 1741375618.029015 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 14481:15929, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 1448
+c
+78: just a pause: 
+
+c
+79: workline in client dump file: 11
+c
+80: dump_line in client dump file: 1741375618.029091 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 5793, win 592, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+c
+81: entering meth_extract_client_feature
+
+c
+82: tcp_extractor_clinet_work_line, atuando sobre os ack : 11
+c
+83: par_dump_line: 1741375618.029091 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 5793, win 592, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+c
+84: str_seq_number em meth_search_seq_number: 5793
+c
+85: Ack referente a pacote anterior ou corrente
+
+c
+updating router file...
+86: seq to save: 5793
+c
+87: ack_arival to save: 1741375618029091
+c
+88: ech reply to save: 4233006561
+c
+89: ack_arrival_mili_sec: 1741375618029.0910644531
+c
+90: ecr_from_1970: 1741375617986.0000000000
+c
+91: rtt in meth_calculate_rtt: 43091.06250
+d
+92: extraiu features efetivamente 
+
+d
+93: just a pause: 
+
+d
+94: workline in client dump file: 12
+d
+95: dump_line in client dump file: 1741375618.029094 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 7241, win 614, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+s
+96: entering meth_extract_client_feature
+
+s
+97: tcp_extractor_clinet_work_line, atuando sobre os ack : 12
+s
+98: par_dump_line: 1741375618.029094 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 7241, win 614, options [nop,nop,TS val 2446985202 ecr 4233006561], length 0
+d
+99: str_seq_number em meth_search_seq_number: 7241
+d
+100: Ack siginifcativo, lendo nova linha 
+
+s
+101: feature_extrator_work_line, nos colhidos pelo roteador: 3
+s
+102: dump_line, nos colhidos pelo roteador: 1741375642.595171560 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 7240:8688, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+Queue ewma along time file not oppened.
+par_time stamp: 1741375642595171560.
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640692856653,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640733095072,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640764972127,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640789955919,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640814872811,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640839739553,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640865110115,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640896602000,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640921569972,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640946546504,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640971478206,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375640996392608,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641022063570,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641047025612,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641072617584,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641097691076,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641122780228,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641147832390,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641172724832,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641197623464,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641222366355,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641247228597,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641272317949,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641297483391,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641322450473,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641347315705,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641372337457,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641397028179,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641422010591,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641447046042,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641471802504,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641496799176,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641521432938,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641546302980,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641571575642,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641596587274,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641621624836,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641646553258,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641671617730,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641697231952,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641722322424,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641747326136,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641772239858,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641797223389,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641822211501,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641847270363,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641872235185,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641897464377,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641922382849,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641947280211,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641972076623,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375641996901845,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642021986687,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642046988369,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642071801120,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642096743062,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642121654714,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642146478066,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642171226908,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642196327640,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642221190502,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642246239854,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642270985735,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642295733467,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642320684859,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642345681401,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642370798873,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642395786175,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642420635457,0.00000b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642445589229,0.00013b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642470351170,0.00014b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642495824533,0.00015b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642520693364,0.00003b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642545992556,0.01616b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642570761908,0.03015b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642595868570,0.03491b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642620888692,0.05740b
+updating router file...
+103: seq to save: 7241
+s
+104: ack_arival to save: 1741375618029094
+s
+105: ech reply to save: 4233006561
+s
+106: ack_ewma: 2.40000
+s
+107: send_ewma: 0.00000
+s
+108: ack_arrival_mili_sec: 1741375618029.0939941406
+s
+109: ecr_from_1970: 1741375617986.0000000000
+s
+110: rtt in meth_calculate_rtt: 43093.99219
+s
+111: extraiu features efetivamente 
+
+s
+112: just a pause: 
+
+s
+113: workline in client dump file: 13
+s
+114: dump_line in client dump file: 1741375618.029156 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 17377:18825, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 1448
+s
+115: entering meth_extract_client_feature
+
+s
+116: tcp_extractor_clinet_work_line, atuando sobre os ack : 13
+s
+117: par_dump_line: 1741375618.029156 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 17377:18825, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 1448
+s
+118: just a pause: 
+
+s
+119: workline in client dump file: 14
+s
+120: dump_line in client dump file: 1741375618.029264 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 8689, win 637, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+121: entering meth_extract_client_feature
+
+s
+122: tcp_extractor_clinet_work_line, atuando sobre os ack : 14
+s
+123: par_dump_line: 1741375618.029264 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 8689, win 637, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+124: str_seq_number em meth_search_seq_number: 8689
+s
+125: Ack referente a pacote anterior ou corrente
+
+s
+updating router file...
+126: seq to save: 8689
+s
+127: ack_arival to save: 1741375618029264
+s
+128: ech reply to save: 4233006561
+s
+129: ack_ewma: 136.48000
+s
+130: send_ewma: 0.00000
+s
+131: ack_arrival_mili_sec: 1741375618029.2639160156
+s
+132: ecr_from_1970: 1741375617986.0000000000
+s
+133: rtt in meth_calculate_rtt: 43263.91406
+s
+134: extraiu features efetivamente 
+
+s
+135: just a pause: 
+
+s
+136: workline in client dump file: 15
+s
+137: dump_line in client dump file: 1741375618.029270 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 11585, win 682, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+138: entering meth_extract_client_feature
+
+s
+139: tcp_extractor_clinet_work_line, atuando sobre os ack : 15
+s
+140: par_dump_line: 1741375618.029270 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 11585, win 682, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+141: str_seq_number em meth_search_seq_number: 11585
+s
+142: Ack siginifcativo, lendo nova linha 
+
+s
+143: feature_extrator_work_line, nos colhidos pelo roteador: 4
+s
+144: dump_line, nos colhidos pelo roteador: 1741375642.595558820 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 10136:11584, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642595558820.
+updating router file...
+145: seq to save: 11585
+s
+146: ack_arival to save: 1741375618029270
+x
+147: ech reply to save: 4233006561
+x
+148: ack_ewma: 32.09600
+x
+149: send_ewma: 0.00000
+x
+150: ack_arrival_mili_sec: 1741375618029.2700195312
+x
+151: ecr_from_1970: 1741375617986.0000000000
+x
+152: rtt in meth_calculate_rtt: 43270.01953
+s
+153: extraiu features efetivamente 
+
+s
+154: just a pause: 
+
+s
+155: workline in client dump file: 16
+s
+156: dump_line in client dump file: 1741375618.029271 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 14481, win 670, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+157: entering meth_extract_client_feature
+
+s
+158: tcp_extractor_clinet_work_line, atuando sobre os ack : 16
+s
+159: par_dump_line: 1741375618.029271 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 14481, win 670, options [nop,nop,TS val 2446985203 ecr 4233006561], length 0
+s
+160: str_seq_number em meth_search_seq_number: 14481
+s
+161: Ack siginifcativo, lendo nova linha 
+
+s
+162: feature_extrator_work_line, nos colhidos pelo roteador: 5
+s
+163: dump_line, nos colhidos pelo roteador: 1741375642.595945780 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 13032:14480, ack 1, win 502, options [nop,nop,TS val 4233006561 ecr 2446985084], length 1448
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642595945780.
+updating router file...
+164: seq to save: 14481
+s
+165: ack_arival to save: 1741375618029271
+s
+166: ech reply to save: 4233006561
+s
+167: ack_ewma: 7.21920
+s
+168: send_ewma: 0.00000
+s
+169: ack_arrival_mili_sec: 1741375618029.2709960938
+s
+170: ecr_from_1970: 1741375617986.0000000000
+s
+171: rtt in meth_calculate_rtt: 43270.99609
+x
+172: extraiu features efetivamente 
+
+x
+173: just a pause: 
+
+x
+174: workline in client dump file: 17
+x
+175: dump_line in client dump file: 1741375618.029335 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 20273:21721, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+176: entering meth_extract_client_feature
+
+x
+177: tcp_extractor_clinet_work_line, atuando sobre os ack : 17
+x
+178: par_dump_line: 1741375618.029335 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 20273:21721, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+179: just a pause: 
+
+x
+180: workline in client dump file: 18
+x
+181: dump_line in client dump file: 1741375618.029451 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 23169:24617, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+182: entering meth_extract_client_feature
+
+x
+183: tcp_extractor_clinet_work_line, atuando sobre os ack : 18
+x
+184: par_dump_line: 1741375618.029451 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 23169:24617, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+185: just a pause: 
+
+x
+186: workline in client dump file: 19
+x
+187: dump_line in client dump file: 1741375618.029605 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 26065:27513, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+188: entering meth_extract_client_feature
+
+x
+189: tcp_extractor_clinet_work_line, atuando sobre os ack : 19
+x
+190: par_dump_line: 1741375618.029605 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 26065:27513, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1448
+x
+191: just a pause: 
+
+x
+192: workline in client dump file: 20
+x
+193: dump_line in client dump file: 1741375618.060758 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 30001:31449, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+194: entering meth_extract_client_feature
+
+x
+195: tcp_extractor_clinet_work_line, atuando sobre os ack : 20
+x
+196: par_dump_line: 1741375618.060758 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 30001:31449, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+197: just a pause: 
+
+x
+198: workline in client dump file: 21
+x
+199: dump_line in client dump file: 1741375618.060987 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 32897:34345, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+200: entering meth_extract_client_feature
+
+x
+201: tcp_extractor_clinet_work_line, atuando sobre os ack : 21
+x
+202: par_dump_line: 1741375618.060987 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 32897:34345, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+203: just a pause: 
+
+x
+204: workline in client dump file: 22
+x
+205: dump_line in client dump file: 1741375618.061099 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 35793:37241, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+206: entering meth_extract_client_feature
+
+x
+207: tcp_extractor_clinet_work_line, atuando sobre os ack : 22
+x
+208: par_dump_line: 1741375618.061099 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 35793:37241, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+209: just a pause: 
+
+x
+210: workline in client dump file: 23
+x
+211: dump_line in client dump file: 1741375618.061201 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 38689:40137, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+212: entering meth_extract_client_feature
+
+x
+213: tcp_extractor_clinet_work_line, atuando sobre os ack : 23
+x
+214: par_dump_line: 1741375618.061201 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 38689:40137, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 1448
+x
+215: just a pause: 
+
+x
+216: workline in client dump file: 24
+x
+217: dump_line in client dump file: 1741375618.071653 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 17377, win 702, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+218: entering meth_extract_client_feature
+
+s
+219: tcp_extractor_clinet_work_line, atuando sobre os ack : 24
+s
+220: par_dump_line: 1741375618.071653 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 17377, win 702, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+221: str_seq_number em meth_search_seq_number: 17377
+s
+222: Ack siginifcativo, lendo nova linha 
+
+s
+223: feature_extrator_work_line, nos colhidos pelo roteador: 6
+s
+224: dump_line, nos colhidos pelo roteador: 1741375642.636888670 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 14480:17376, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642636888670.
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642645937904,0.06728b
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642670960986,0.01811b
+updating router file...
+225: seq to save: 17377
+s
+226: ack_arival to save: 1741375618071653
+s
+227: ech reply to save: 4233006604
+s
+228: ack_ewma: 33907.04688
+s
+229: send_ewma: 34.40000
+s
+230: ack_arrival_mili_sec: 1741375618071.6530761719
+s
+231: ecr_from_1970: 1741375618029.0000000000
+s
+232: rtt in meth_calculate_rtt: 42653.07812
+s
+233: extraiu features efetivamente 
+
+s
+234: just a pause: 
+
+s
+235: workline in client dump file: 25
+s
+236: dump_line in client dump file: 1741375618.071674 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 41585:43033, ack 1, win 502, options [nop,nop,TS val 4233006646 ecr 2446985245], length 1448
+s
+237: entering meth_extract_client_feature
+
+s
+238: tcp_extractor_clinet_work_line, atuando sobre os ack : 25
+s
+239: par_dump_line: 1741375618.071674 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 41585:43033, ack 1, win 502, options [nop,nop,TS val 4233006646 ecr 2446985245], length 1448
+s
+240: just a pause: 
+
+s
+241: workline in client dump file: 26
+s
+242: dump_line in client dump file: 1741375618.071763 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 20273, win 681, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+243: entering meth_extract_client_feature
+
+s
+244: tcp_extractor_clinet_work_line, atuando sobre os ack : 26
+s
+245: par_dump_line: 1741375618.071763 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 20273, win 681, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+246: str_seq_number em meth_search_seq_number: 20273
+s
+247: Ack siginifcativo, lendo nova linha 
+
+s
+248: feature_extrator_work_line, nos colhidos pelo roteador: 7
+s
+249: dump_line, nos colhidos pelo roteador: 1741375642.637056980 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 17376:20272, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985202], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642637056980.
+updating router file...
+250: seq to save: 20273
+s
+251: ack_arival to save: 1741375618071763
+s
+252: ech reply to save: 4233006604
+x
+253: ack_ewma: 6869.40918
+x
+254: send_ewma: 6.88000
+x
+255: ack_arrival_mili_sec: 1741375618071.7629394531
+x
+256: ecr_from_1970: 1741375618029.0000000000
+x
+257: rtt in meth_calculate_rtt: 42762.93750
+x
+258: extraiu features efetivamente 
+
+x
+259: just a pause: 
+
+x
+260: workline in client dump file: 27
+x
+261: dump_line in client dump file: 1741375618.071766 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 26065, win 792, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+x
+262: entering meth_extract_client_feature
+
+x
+263: tcp_extractor_clinet_work_line, atuando sobre os ack : 27
+x
+264: par_dump_line: 1741375618.071766 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 26065, win 792, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+x
+265: str_seq_number em meth_search_seq_number: 26065
+x
+266: Ack siginifcativo, lendo nova linha 
+
+x
+267: feature_extrator_work_line, nos colhidos pelo roteador: 8
+x
+268: dump_line, nos colhidos pelo roteador: 1741375642.637334610 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 20272:23168, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 2896
+x
+269: Ack referente a linha à frente
+
+x
+270: Ack siginifcativo, lendo nova linha 
+
+x
+271: feature_extrator_work_line, nos colhidos pelo roteador: 9
+x
+272: dump_line, nos colhidos pelo roteador: 1741375642.637341090 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 23168:26064, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642637341090.
+updating router file...
+273: seq to save: 26065
+s
+274: ack_arival to save: 1741375618071766
+s
+275: ech reply to save: 4233006604
+s
+276: ack_ewma: 1376.28174
+x
+277: send_ewma: 1.37600
+x
+278: ack_arrival_mili_sec: 1741375618071.7661132812
+x
+279: ecr_from_1970: 1741375618029.0000000000
+x
+280: rtt in meth_calculate_rtt: 42766.11328
+s
+281: extraiu features efetivamente 
+
+s
+282: just a pause: 
+
+s
+283: workline in client dump file: 28
+s
+284: dump_line in client dump file: 1741375618.071767 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 30001, win 819, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+285: entering meth_extract_client_feature
+
+s
+286: tcp_extractor_clinet_work_line, atuando sobre os ack : 28
+s
+287: par_dump_line: 1741375618.071767 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 30001, win 819, options [nop,nop,TS val 2446985245 ecr 4233006604], length 0
+s
+288: str_seq_number em meth_search_seq_number: 30001
+s
+289: Ack siginifcativo, lendo nova linha 
+
+s
+290: feature_extrator_work_line, nos colhidos pelo roteador: 10
+s
+291: dump_line, nos colhidos pelo roteador: 1741375642.637412180 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 26064:28960, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 2896
+s
+292: Ack referente a linha à frente
+
+s
+293: Ack siginifcativo, lendo nova linha 
+
+s
+294: feature_extrator_work_line, nos colhidos pelo roteador: 11
+s
+295: dump_line, nos colhidos pelo roteador: 1741375642.637600640 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 28960:30000, ack 1, win 502, options [nop,nop,TS val 4233006604 ecr 2446985203], length 1040
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642637600640.
+updating router file...
+296: seq to save: 30001
+s
+297: ack_arival to save: 1741375618071767
+s
+298: ech reply to save: 4233006604
+s
+299: ack_ewma: 276.05634
+s
+300: send_ewma: 0.27520
+s
+301: ack_arrival_mili_sec: 1741375618071.7670898438
+s
+302: ecr_from_1970: 1741375618029.0000000000
+s
+303: rtt in meth_calculate_rtt: 42767.08984
+s
+304: extraiu features efetivamente 
+
+s
+305: just a pause: 
+
+s
+306: workline in client dump file: 29
+s
+307: dump_line in client dump file: 1741375618.071839 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 44481:45929, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+308: entering meth_extract_client_feature
+
+s
+309: tcp_extractor_clinet_work_line, atuando sobre os ack : 29
+s
+310: par_dump_line: 1741375618.071839 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 44481:45929, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+311: just a pause: 
+
+s
+312: workline in client dump file: 30
+s
+313: dump_line in client dump file: 1741375618.071947 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 47377:48825, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+314: entering meth_extract_client_feature
+
+s
+315: tcp_extractor_clinet_work_line, atuando sobre os ack : 30
+s
+316: par_dump_line: 1741375618.071947 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 47377:48825, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+317: just a pause: 
+
+s
+318: workline in client dump file: 31
+s
+319: dump_line in client dump file: 1741375618.072068 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 50273:51721, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+320: entering meth_extract_client_feature
+
+s
+321: tcp_extractor_clinet_work_line, atuando sobre os ack : 31
+s
+322: par_dump_line: 1741375618.072068 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 50273:51721, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+323: just a pause: 
+
+s
+324: workline in client dump file: 32
+s
+325: dump_line in client dump file: 1741375618.072182 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 53169:54617, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+326: entering meth_extract_client_feature
+
+s
+327: tcp_extractor_clinet_work_line, atuando sobre os ack : 32
+s
+328: par_dump_line: 1741375618.072182 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 53169:54617, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+329: just a pause: 
+
+s
+330: workline in client dump file: 33
+s
+331: dump_line in client dump file: 1741375618.072287 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 56065:57513, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+332: entering meth_extract_client_feature
+
+s
+333: tcp_extractor_clinet_work_line, atuando sobre os ack : 33
+s
+334: par_dump_line: 1741375618.072287 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [.], seq 56065:57513, ack 1, win 502, options [nop,nop,TS val 4233006647 ecr 2446985245], length 1448
+s
+335: just a pause: 
+
+s
+336: workline in client dump file: 34
+s
+337: dump_line in client dump file: 1741375618.103397 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 32897, win 862, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+338: entering meth_extract_client_feature
+
+s
+339: tcp_extractor_clinet_work_line, atuando sobre os ack : 34
+s
+340: par_dump_line: 1741375618.103397 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 32897, win 862, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+341: str_seq_number em meth_search_seq_number: 32897
+s
+342: Ack siginifcativo, lendo nova linha 
+
+s
+343: feature_extrator_work_line, nos colhidos pelo roteador: 12
+s
+344: dump_line, nos colhidos pelo roteador: 1741375642.668681605 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 30000:32896, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642668681605.
+Enter meth_take_and_store_line_values() float
+queue_along_time_file_line: 1741375642695965798,0.05942b
+updating router file...
+345: seq to save: 32897
+s
+346: ack_arival to save: 1741375618103397
+s
+347: ech reply to save: 4233006635
+s
+348: ack_ewma: 25359.21094
+s
+349: send_ewma: 24.85504
+s
+350: ack_arrival_mili_sec: 1741375618103.3969726562
+s
+351: ecr_from_1970: 1741375618060.0000000000
+s
+352: rtt in meth_calculate_rtt: 43396.97266
+s
+353: extraiu features efetivamente 
+
+s
+354: just a pause: 
+
+s
+355: workline in client dump file: 35
+s
+356: dump_line in client dump file: 1741375618.103424 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 35793, win 841, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+357: entering meth_extract_client_feature
+
+s
+358: tcp_extractor_clinet_work_line, atuando sobre os ack : 35
+s
+359: par_dump_line: 1741375618.103424 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 35793, win 841, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+360: str_seq_number em meth_search_seq_number: 35793
+s
+361: Ack siginifcativo, lendo nova linha 
+
+s
+362: feature_extrator_work_line, nos colhidos pelo roteador: 13
+s
+363: dump_line, nos colhidos pelo roteador: 1741375642.668842345 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 32896:35792, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642668842345.
+updating router file...
+364: seq to save: 35793
+s
+365: ack_arival to save: 1741375618103424
+s
+366: ech reply to save: 4233006635
+s
+367: ack_ewma: 5093.44189
+s
+368: send_ewma: 4.97101
+s
+369: ack_arrival_mili_sec: 1741375618103.4240722656
+s
+370: ecr_from_1970: 1741375618060.0000000000
+s
+371: rtt in meth_calculate_rtt: 43424.07031
+s
+372: extraiu features efetivamente 
+
+s
+373: just a pause: 
+
+s
+374: workline in client dump file: 36
+s
+375: dump_line in client dump file: 1741375618.103426 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 38689, win 820, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+376: entering meth_extract_client_feature
+
+s
+377: tcp_extractor_clinet_work_line, atuando sobre os ack : 36
+s
+378: par_dump_line: 1741375618.103426 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 38689, win 820, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+379: str_seq_number em meth_search_seq_number: 38689
+s
+380: Ack siginifcativo, lendo nova linha 
+
+s
+381: feature_extrator_work_line, nos colhidos pelo roteador: 14
+s
+382: dump_line, nos colhidos pelo roteador: 1741375642.668909005 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 35792:38688, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642668909005.
+updating router file...
+383: seq to save: 38689
+s
+384: ack_arival to save: 1741375618103426
+s
+385: ech reply to save: 4233006635
+s
+386: ack_ewma: 1020.28833
+s
+387: send_ewma: 0.99420
+s
+388: ack_arrival_mili_sec: 1741375618103.4260253906
+s
+389: ecr_from_1970: 1741375618060.0000000000
+s
+390: rtt in meth_calculate_rtt: 43426.02344
+s
+391: extraiu features efetivamente 
+
+s
+392: just a pause: 
+
+s
+393: workline in client dump file: 37
+s
+394: dump_line in client dump file: 1741375618.103428 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 41585, win 799, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+395: entering meth_extract_client_feature
+
+s
+396: tcp_extractor_clinet_work_line, atuando sobre os ack : 37
+s
+397: par_dump_line: 1741375618.103428 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 41585, win 799, options [nop,nop,TS val 2446985277 ecr 4233006635], length 0
+s
+398: str_seq_number em meth_search_seq_number: 41585
+s
+399: Ack siginifcativo, lendo nova linha 
+
+s
+400: feature_extrator_work_line, nos colhidos pelo roteador: 15
+s
+401: dump_line, nos colhidos pelo roteador: 1741375642.669122115 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 38688:41584, ack 1, win 502, options [nop,nop,TS val 4233006635 ecr 2446985203], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642669122115.
+updating router file...
+402: seq to save: 41585
+s
+403: ack_arival to save: 1741375618103428
+s
+404: ech reply to save: 4233006635
+s
+405: ack_ewma: 205.65765
+s
+406: send_ewma: 0.19884
+s
+407: ack_arrival_mili_sec: 1741375618103.4279785156
+s
+408: ecr_from_1970: 1741375618060.0000000000
+s
+409: rtt in meth_calculate_rtt: 43427.97656
+s
+410: extraiu features efetivamente 
+
+s
+411: just a pause: 
+
+s
+412: workline in client dump file: 38
+s
+413: dump_line in client dump file: 1741375618.114037 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 44481, win 862, options [nop,nop,TS val 2446985287 ecr 4233006646], length 0
+s
+414: entering meth_extract_client_feature
+
+s
+415: tcp_extractor_clinet_work_line, atuando sobre os ack : 38
+s
+416: par_dump_line: 1741375618.114037 IP 10.0.1.3.9090 > 10.0.0.3.42624: Flags [.], ack 44481, win 862, options [nop,nop,TS val 2446985287 ecr 4233006646], length 0
+s
+417: str_seq_number em meth_search_seq_number: 44481
+s
+418: Ack siginifcativo, lendo nova linha 
+
+s
+419: feature_extrator_work_line, nos colhidos pelo roteador: 16
+s
+420: dump_line, nos colhidos pelo roteador: 1741375642.679533230 IP 10.0.0.3.42624 > 10.0.1.3.9090: Flags [P.], seq 41584:44480, ack 1, win 502, options [nop,nop,TS val 4233006646 ecr 2446985245], length 2896
+s
+queue_size_along_time_file_ewma
+/home/ns/Desktop/output/Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21/router_data/queue_along_time_ewma.txt
+par_time stamp: 1741375642679533230.
+updating router file...
+421: seq to save: 44481
+s
+422: ack_arival to save: 1741375618114037
+s
+423: ech reply to save: 4233006646
+s
+424: ack_ewma: 8528.33203
+s
+425: send_ewma: 8.83977
+s
+426: ack_arrival_mili_sec: 1741375618114.0371093750
+s
+427: ecr_from_1970: 1741375618071.0000000000
+s
+428: rtt in meth_calculate_rtt: 43037.10938
+s
+429: extraiu features efetivamente 
+

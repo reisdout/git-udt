@@ -12,16 +12,52 @@
 //#include <unistd.h>
 #include <sys/stat.h>
 
+#include <typeinfo> 
+#include <iomanip>
 
 
 using namespace std;
 using namespace std::chrono;
 
-extern map<uint32_t, high_resolution_clock::time_point> map_seq_timestamp;
+
 
 #define FIRST_ACK 1
 
 #define MAX_PACKETS_ROUTER_BUFFERSIZE 300
+
+
+template <class T>
+void class_feature_saver_print(string par_string, T par_var) {
+ 
+    
+    float type_float;
+    double type_double;
+    long double type_long_double;
+    
+
+    const type_info& t_float = typeid(type_float);
+    const type_info& t_double = typeid(type_double);  
+    const type_info& t_long_double = typeid(type_long_double);
+    const type_info& t_my_type = typeid(par_var);
+    
+    
+    bool print = true;
+    if(print)
+    {
+
+        //cout << "entering print " << endl;
+        char c;
+        if(t_my_type == t_float || t_my_type == t_double)
+            cout << par_string << fixed << setprecision(5) << par_var << endl;
+        else if (t_my_type == t_long_double)
+            cout << par_string << fixed << setprecision(10) << par_var << endl;
+        else
+            cout << par_string << par_var << endl;
+        cin >> c;
+    }
+}
+
+
 
 
 class class_feature_saver{
@@ -30,28 +66,37 @@ class class_feature_saver{
         ~class_feature_saver(){};
         
         void meth_add_file_header();
-        void meth_adjust_file_path();
-        void meth_amortize_map(int32_t par_seq);
-        void meth_update_seq_metrics_file(int32_t seq, unsigned );
-        //Este método guarda o timestamp, pois não é retornado com o ack
-        void meth_calculate_ack_ewma(uint32_t par_seq, 
-                                    high_resolution_clock::time_point par_ack_arrival_time);
-        
-        void meth_calculate_rtt(uint32_t par_seq, 
-                                high_resolution_clock::time_point par_ack_arrival_time);
+        void meth_adjust_file_path(string par_out_dir="");
 
-        void meth_calculate_send_ewma(uint32_t par_seq);
+        //Este método guarda o timestamp, pois não é retornado com o ack
+        virtual void meth_calculate_ack_ewma(uint32_t par_seq, 
+                                    high_resolution_clock::time_point par_ack_arrival_time){};
+        
+        virtual void meth_calculate_rtt(uint32_t par_seq, 
+                                high_resolution_clock::time_point par_ack_arrival_time){};
+
+        virtual void meth_calculate_send_ewma(uint32_t par_seq){};
+
+        virtual void meth_calculate_ack_ewma(uint64_t par_ack_arrival_time){};
+
+        virtual void meth_calculate_rtt(uint64_t  par_ack_arrival_time, uint64_t  par_eco_reply){};
+
+        virtual void meth_calculate_send_ewma(uint64_t  par_eco_reply){};
+
 
         void meth_check_parameters();
         
-        void meth_deal_packet_send(uint32_t par_seq, 
-                                   high_resolution_clock::time_point par_send_time);
+        virtual void meth_deal_packet_send(uint32_t par_seq, 
+                                   high_resolution_clock::time_point par_send_time){};
         
-        void meth_deal_ack_arrival(uint32_t par_seq, 
-                                   high_resolution_clock::time_point par_ack_arrival_time);
+        virtual void meth_deal_ack_arrival(uint32_t par_seq, 
+                                   high_resolution_clock::time_point par_ack_arrival_time){};
+        virtual void meth_deal_ack_arrival(uint32_t par_seq, 
+                                           uint64_t par_ack_arrival,
+                                           uint64_t par_packet_eco_reply){};
        
         
-        void meth_save_training_data(   unsigned int parNumAckFlow, 
+        void meth_save_training_data(   uint64_t parNumAckFlow, 
                                         float parAck_ewma, 
                                         float parSend_ewma, 
                                         float parRtt_ratio,
@@ -60,8 +105,8 @@ class class_feature_saver{
                                         float parRouterQueue_ewma,
                                         uint32_t parRouterBufferSizeValueAckArrival,
                                         uint32_t parRouterBufferSizeValuePacketSent,
-                                        high_resolution_clock::time_point parTSAckArrival,
-                                        high_resolution_clock::time_point parTSInsideAck,
+                                        uint64_t parTSAckArrival,
+                                        uint64_t parTSInsideAck,
                                         double parMimRTTAck,
                                         uint8_t* parBufEndSrc, 
                                         uint8_t* parBufEndDest,
@@ -71,14 +116,17 @@ class class_feature_saver{
                                         bool parUnicFile);
         
         float get_ack_ewma(){return ack_ewma;};
+        string get_bottleneck_datarate(){return bottleneck_datarate;};
+        string get_default_congestion(){return default_congestion;};
+        string get_num_flows(){return num_flows;};
+        string get_out_dir(){return out_dir;};
         float get_send_ewma(){return send_ewma;};
         //O ideal é que tenha o formato do comando date no linux
         // antes do AM/PM.
         string get_starting_time(){return str_starting_time;};
-        string get_tipo_dado(){return tipo_dado;} ;
-        string get_default_congestion(){return default_congestion;};
-        string get_num_flows(){return num_flows;};
-        string get_bottleneck_datarate(){return bottleneck_datarate;};
+        string get_tipo_dado(){return tipo_dado;};        
+        
+        
         void set_tipo_dado(string par_tipo_dado){tipo_dado = par_tipo_dado;};
         void set_default_congestion(string par_default_congestion){default_congestion = par_default_congestion;};
         void set_num_flows(string par_num_flows){num_flows = par_num_flows;};
@@ -89,15 +137,9 @@ class class_feature_saver{
         
 
     protected:
-        //static const int BUFFER_SIZE = 1024;
-        //static const int PORT = 8080;
-
-    
-    
-    private:
 
     string out_dir = "/home/ns/Desktop/output";
-    uint32_t port=0;
+    uint32_t port = 0;
     std::string seq_metrics_file_name;
     
     std::string str_starting_time;
@@ -105,24 +147,19 @@ class class_feature_saver{
     float expWeightExpon = 0.8;
     std::timespec *time_ack_arrival;
     //int a = timespec_get(time_ack_arrival,);
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+    //high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-    long long unsigned numAckReceived = 0;
+    uint64_t numAckReceived = 0;
     bool first_ack_process = false;
     float ack_ewma = 0;
     float send_ewma = 0;
-    float intervalbetweenTS;
-    double rtt;
+    float rtt;
     string tipo_dado;
     string default_congestion;
     string num_flows;
     string bottleneck_datarate;    
 
-    high_resolution_clock::time_point  marcaTempoChegadaAckAnterior;
-    high_resolution_clock::time_point  marcaTempoChegadaAck;
 
-    high_resolution_clock::time_point  marcaTempoAnterior;
-    high_resolution_clock::time_point  marcaTempoAtual;
 };
 
 #endif

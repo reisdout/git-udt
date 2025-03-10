@@ -286,6 +286,9 @@ tcpsocket_BINARY_DIR:STATIC=/home/ns/UDT-workspace/git-udt/vscode/shared/build/T
 //Value Computed by CMake
 tcpsocket_IS_TOP_LEVEL:STATIC=OFF
 
+//Dependencies for the target
+tcpsocket_LIB_DEPENDS:STATIC=general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;
+
 //Value Computed by CMake
 tcpsocket_SOURCE_DIR:STATIC=/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket
 
