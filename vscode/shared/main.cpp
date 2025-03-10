@@ -105,6 +105,7 @@ string tipo_dado;
 string simu_start_time;
 string terminal_type; //cliente? servidor?, etc..
 string congestion_control;
+string experiment_path;
 
 
 UDTSOCKET client;
@@ -314,6 +315,95 @@ std::streampos Get_file_size()
     return size;
 }
 
+void deal_with_options(string par_string, int par_argc, char* par_argv[])
+{
+
+    class_mrs_debug::print("par_string: ",par_string);
+
+    if(par_string.find("server") != string::npos)    
+    {
+        if(par_argc != 2)
+        {
+            std::cout << "We need ${app_var} ${cong_cont_var} ${data_type_var} ${rate_var} ${flows_var} ${date_var}" << endl;
+            exit(0);
+        }        
+
+        std::cout << "Server Port: " << par_argv[2]<<"\n";
+        server_port = std::stoi(string(par_argv[2]));     
+        return;
+    }
+    
+    if(par_string == "udt_client" || par_string == "tcp_client")
+    {
+
+        //${door} Treino 100 ${num_clients} ${start_date}
+
+        if(par_argc != 7)
+        {
+            std::cout << "We need ${app_var} ${cong_cont_var} ${data_type_var} ${rate_var} ${flows_var} ${date_var}" << endl;
+            exit(0);
+        }        
+
+        std::cout << "Server Port: " << par_argv[2]<<"\n";
+        server_port = std::stoi(string(par_argv[2]));     
+
+        
+        std::cout << "Congestion Control: " << par_argv[3]<<"\n";
+        congestion_control = string(par_argv[3]);
+
+        std::cout << "Participando de uma simulação do tipo : " << par_argv[4]<<"\n";
+        tipo_dado = string(par_argv[4]);
+        
+        std::cout << "Data rate : " << par_argv[5]<<"\n";
+        data_rate = string(par_argv[5]);
+        std::cout << "Participando de uma simulação de : " << par_argv[6]<<" Fluxos\n";
+        num_flows = string(par_argv[6]);
+
+        std::cout << "Inicio da Simulacao " << par_argv[6]<<"\n";
+        simu_start_time = string(par_argv[6]);
+        std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
+        std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');
+
+    }
+
+    else if(par_string.find("extractor")!=string::npos)    
+    {
+        //${door} ${experiment_path}
+        if(par_argc != 4)
+        {
+            std::cout << "We need ${app_var} ${port} ${path_var}" << endl;
+            exit(0);
+        }        
+        std::cout << "Server Port: " << par_argv[2]<<"\n";
+        server_port = std::stoi(string(par_argv[2])); 
+        
+        std::cout << "Experiment path: " << par_argv[3]<<"\n";
+        experiment_path = string(par_argv[3]);
+
+        
+
+
+    }
+
+    else if(par_string == "router_ewma")
+    {
+        if(par_argc != 3)
+        {
+            std::cout << "We need ${app_var} ${path_val}" << endl;
+            exit(0);
+        }        
+
+
+        std::cout << "Experiment path: " << par_argv[2]<<"\n";
+        experiment_path = string(par_argv[2]);
+
+    }
+
+
+
+}
+
+
 int main(int argc, char**argv){
 
  // ./communicator $app_type $port $cong_control $simul_type $data_rate $num_flows $simul_start_time
@@ -328,48 +418,7 @@ int main(int argc, char**argv){
 
     class_mrs_debug::print<uint64_t>("period_to_transmit: ", TCP_Client::period_to_transmit_micro_seconds);
 
-    if(argc > 2)
-    {
-        std::cout << "Server Port: " << argv[2]<<"\n";
-        server_port = std::stoi(string(argv[2]));
-
-    }
-    if(argc > 3)
-    {
-        std::cout << "Congestion Control: " << argv[3]<<"\n";
-        congestion_control = string(argv[3]);
- 
-        
-    }
-
-    if(argc > 4)
-    {
-        std::cout << "Participando de uma simulação do tipo : " << argv[4]<<"\n";
-        tipo_dado = string(argv[4]);
-    }
-
-    if(argc > 5)
-    {
-        std::cout << "Data rate : " << argv[5]<<"\n";
-        data_rate = string(argv[5]);
-    }
-
-    if(argc > 6)
-    {
-        std::cout << "Participando de uma simulação de : " << argv[6]<<" Fluxos\n";
-        num_flows = string(argv[6]);
-    }
-
-
-    if(argc > 7)
-    {
-        std::cout << "Inicio da Simulacao " << argv[7]<<"\n";
-        simu_start_time = string(argv[7]);
-        std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
-        std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');        
-
-    }
-
+    deal_with_options(terminal_type,argc,argv);
 
     if(std::string(argv[1]) == "udt_client")
     {
@@ -776,7 +825,7 @@ int main(int argc, char**argv){
         return 1;
     }
 
-   string experiment_path = "Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21";
+   
    
    
    if(std::string(argv[1]) == "drain_dump")
@@ -917,8 +966,11 @@ int main(int argc, char**argv){
     }
 
 
-    if(std::string(argv[1]) == "tcp_feature_saver")
+    if(std::string(argv[1]) == "tcp_feature_saver") //Analisar, parece obsoleto, 
+                                                    //pois no tcp, o saver é junto com o
+                                                    //extractro
     {
+       /*
         cout << "Caso tcp_feature_saver" << endl;
 
         class_feature_extractor_tcp_client obj_extractor;
@@ -939,11 +991,11 @@ int main(int argc, char**argv){
         obj_saver.set_starting_time(simu_start_time);
         obj_saver.meth_adjust_file_path();
 
-         /*
-         Anteriormente, a cada chegada de ack o meth_deal_ack_arrival era acionado,
-         agora, mantendo-se a mesma lógica, o meth_deal_ack_arrival é acionado quando
-         se encontra um ack no dump.
-         */
+         
+         //Anteriormente, a cada chegada de ack o meth_deal_ack_arrival era acionado,
+         //agora, mantendo-se a mesma lógica, o meth_deal_ack_arrival é acionado quando
+         //se encontra um ack no dump.
+         
         ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt");
         if (stream_dump_file.is_open())
         {
@@ -967,7 +1019,7 @@ int main(int argc, char**argv){
             cout << "Can't open client dump file" << endl;
             exit(0);
         } 
-
+        */
         return 1;
     }
 
@@ -977,7 +1029,7 @@ int main(int argc, char**argv){
        
         /****************** COMAND FORMAT************************
 
-            ./communicator tcp_feature_saver_and_extractor $port 
+            ./communicator tcp_feature_saver_and_extractor $port $path
         
         **********************************************************/
         
@@ -1004,7 +1056,7 @@ int main(int argc, char**argv){
 
         class_feature_saver_tcp obj_saver;
 
-        string tcp_saver_extractor_experiment_path = "Treino_Vegas_1Fluxos_100Mbps_Fri_Mar_7_04_26_21";
+        string tcp_saver_extractor_experiment_path = experiment_path;
 
         string tcp_saver_extractor_tipo_dado = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',1);
         class_mrs_debug::print<string>("tcp_saver_extractor_tipo_dado: ", tcp_saver_extractor_tipo_dado);

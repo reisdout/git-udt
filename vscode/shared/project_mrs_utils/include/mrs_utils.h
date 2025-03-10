@@ -9,6 +9,10 @@
 using namespace std;
 
 
+#define APP_RELEASE_PROFILE 0
+
+#define APP_DEBUG_PROFILE 1
+
 class class_mrs_debug{
 
 public:
@@ -21,6 +25,10 @@ public:
     template <typename T>
     static void print(string par_string, T par_var, bool par_print=true) {
 
+        int profile = APP_DEBUG_PROFILE;
+
+        if(profile ==  APP_RELEASE_PROFILE)
+            return;
         print_counter++;
         if(par_print)
         {
