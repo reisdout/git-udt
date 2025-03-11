@@ -36,19 +36,19 @@ void class_feature_saver::meth_adjust_file_path(string par_out_dir)
 
     struct stat sb;
     if (stat(out_dir.c_str(), &sb) == 0)
-        cout << "out_dir already created";
+        cout << "out_dir already created" << endl;
     else
     {
         int status = mkdir(out_dir.c_str(),0777);
         if(status < 0)
         {
-          cout << "Impossível criar pai do diretório de saída";
+          cout << "Impossível criar pai do diretório de saída"<< endl;
           exit(0);
         }
     }
 
     
-    std::cout << seq_metrics_file_name << std::endl;     
+    std::cout <<"Metrics File: " << seq_metrics_file_name << std::endl;     
 }
 
 

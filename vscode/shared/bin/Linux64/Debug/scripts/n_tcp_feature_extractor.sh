@@ -1,5 +1,21 @@
 #!/bin/bash
 
+
+if [ "$1" == "-h" ]; then
+
+    echo "Usage: $0 [-p|--path 'experiment path'] [-f|--flows 'number of flows']"
+    exit 0
+fi
+
+
+if [ "$1" == "--help" ]; then
+
+    echo echo "Usage: $0 [-p|--path 'experiment path'] [-f|--flows 'number of flows']"
+    exit 0
+fi
+
+
+
 i=2
 #num_clients=$1
 last_terminal_tty=`expr $num_clients + 2`
@@ -8,13 +24,14 @@ start_date=$(date | cut -b 1-19 | tr ' ' _ | tr : _)
 
 
 VALID_ARGS=$(getopt -o p:,f: --long path:,flows: -- "$@")
+
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
 
 if [[ $# -ne 4 ]]; then
-   echo "You provided $# arguments, but we need 4"    
+   echo "You provided $# arguments, but we need 4. Use -h option."    
     exit 0;
 fi
 

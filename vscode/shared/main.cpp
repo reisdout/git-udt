@@ -322,9 +322,9 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
 
     if(par_string.find("server") != string::npos)    
     {
-        if(par_argc != 2)
+        if(par_argc != 3)
         {
-            std::cout << "We need ${app_var} ${cong_cont_var} ${data_type_var} ${rate_var} ${flows_var} ${date_var}" << endl;
+            std::cout << "We need ${app_var} ${door}"  << endl;
             exit(0);
         }        
 
@@ -338,9 +338,9 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
 
         //${door} Treino 100 ${num_clients} ${start_date}
 
-        if(par_argc != 7)
+        if(par_argc != 8)
         {
-            std::cout << "We need ${app_var} ${cong_cont_var} ${data_type_var} ${rate_var} ${flows_var} ${date_var}" << endl;
+            std::cout << "We need ${app_var} ${door} ${cong_cont_var} ${data_type_var} ${rate_var} ${flows} ${date_var}" << endl;
             exit(0);
         }        
 
@@ -356,11 +356,12 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
         
         std::cout << "Data rate : " << par_argv[5]<<"\n";
         data_rate = string(par_argv[5]);
+
         std::cout << "Participando de uma simulação de : " << par_argv[6]<<" Fluxos\n";
         num_flows = string(par_argv[6]);
 
-        std::cout << "Inicio da Simulacao " << par_argv[6]<<"\n";
-        simu_start_time = string(par_argv[6]);
+        std::cout << "Inicio da Simulacao " << par_argv[7]<<"\n";
+        simu_start_time = string(par_argv[7]);
         std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
         std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');
 
@@ -371,7 +372,7 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
         //${door} ${experiment_path}
         if(par_argc != 4)
         {
-            std::cout << "We need ${app_var} ${port} ${path_var}" << endl;
+            std::cout << "We need ${app_var} ${door} ${path_var}" << endl;
             exit(0);
         }        
         std::cout << "Server Port: " << par_argv[2]<<"\n";

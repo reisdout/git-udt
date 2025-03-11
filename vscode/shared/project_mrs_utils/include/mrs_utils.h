@@ -25,7 +25,7 @@ public:
     template <typename T>
     static void print(string par_string, T par_var, bool par_print=true) {
 
-        int profile = APP_DEBUG_PROFILE;
+        int profile = APP_RELEASE_PROFILE;
 
         if(profile ==  APP_RELEASE_PROFILE)
             return;
