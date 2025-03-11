@@ -1,0 +1,42 @@
+tshark -i enp0s20f3 -f "tcp" -s 100 -w /home/ns/Desktop/tshark/tcp_pcap.pcapng
+
+tcpdump -tt --nano -qns 0 -X -r tcp_pcap.pcapng > tcp_dump.txt
+
+sudo tcpdump  -tt --micro -i enp0s20f3 -f "tcp[tcpflags] == tcp-ack or tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack" > tcp_dump_direct_only_ack.txt
+
+
+
+tshark -i enp0s20f3 -f "tcp[13] & 8 !=0 " -s 100 -w ./tshark_tcp_pcap.pcapng
+
+sudo tcpdump  -tt --nano -r tshark_tcp_pcap.pcapng > tshark_tcp_dump_readable.txt
+
+
+#NOS CLIENTES
+
+
+sudo systemctl restart NetworkManager.service
+
+
+
+
+
+tshark -i ens33 -f "tcp[tcpflags] == tcp-ack or tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack"  -w ./tshark_tcp_pcap_16_30.pcapng
+
+sudo tcpdump -n  -tt --micro -r tshark_tcp_pcap_16_30.pcapng > tcp_dump_16_30.txt
+
+
+
+
+
+#NO ROTEADOR
+
+tshark -i enp0s20f3 -f "tcp[13] & 8 !=0 " -s 100 -w ./tshark_tcp_pcap_16_30.pcapng
+sudo tcpdump  -tt --nano -r tshark_tcp_pcap_16_30.pcapng > tshark_tcp_dump_router_16_30.txt
+
+
+
+
+matar os processos
+
+sudo pkill -f ./communicator
+
