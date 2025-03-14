@@ -20,19 +20,19 @@ public:
 
     inline static int print_counter = 0;
 
-    inline static int par_print_from = 0;
+    inline static int par_print_from = 0; //1836 para Treino_TcpVegas_60Fluxos_100Mbps_Tue_Mar_11_12_15_58
 
     template <typename T>
-    static void print(string par_string, T par_var, bool par_print=true) {
+    static void print(string par_string, T par_var, bool par_force_print=false) {
 
         int profile = APP_RELEASE_PROFILE;
 
-        if(profile ==  APP_RELEASE_PROFILE)
-            return;
-        print_counter++;
-        if(par_print)
-        {
+        //if(profile ==  APP_RELEASE_PROFILE)
+            //return;
 
+        if(profile == APP_DEBUG_PROFILE || par_force_print)
+        {
+            print_counter++;
             float type_float;
             double type_double;
             long double type_long_double;
@@ -46,7 +46,7 @@ public:
     
 
             //cout << "entering print " << endl;
-            char c;
+            //char c;
             cout << print_counter<<": ";
             if(t_my_type == t_float || t_my_type == t_double)
                 cout << par_string << fixed << setprecision(5) << par_var << endl;
@@ -56,7 +56,8 @@ public:
                 cout << par_string << par_var << endl;
             
             if(print_counter >= par_print_from)
-                cin >> c;
+                cin.ignore();
+                //cin >> c;
         }
     }
 

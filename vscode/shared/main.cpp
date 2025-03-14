@@ -364,10 +364,11 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
         simu_start_time = string(par_argv[7]);
         std::replace(simu_start_time.begin(), simu_start_time.end(),':','_');
         std::replace(simu_start_time.begin(), simu_start_time.end(),' ','_');
+        return;
 
     }
 
-    else if(par_string.find("extractor")!=string::npos)    
+    if(par_string.find("extractor")!=string::npos)    
     {
         //${door} ${experiment_path}
         if(par_argc != 4)
@@ -381,12 +382,12 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
         std::cout << "Experiment path: " << par_argv[3]<<"\n";
         experiment_path = string(par_argv[3]);
 
-        
+        return;
 
 
     }
 
-    else if(par_string == "router_ewma")
+    if(par_string == "router_ewma")
     {
         if(par_argc != 3)
         {
@@ -397,8 +398,12 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
 
         std::cout << "Experiment path: " << par_argv[2]<<"\n";
         experiment_path = string(par_argv[2]);
+        return;
 
     }
+
+    cout << "!nvalid args!!" << endl;
+    exit(0);
 
 
 
@@ -1059,6 +1064,8 @@ int main(int argc, char**argv){
 
         string tcp_saver_extractor_experiment_path = experiment_path;
 
+        class_mrs_debug::print<string>("tcp_saver_extractor_experiment_path: ", tcp_saver_extractor_experiment_path);
+
         string tcp_saver_extractor_tipo_dado = class_feature_extractor::meth_search_occurence_string_between_delimiter(tcp_saver_extractor_experiment_path,'_',1);
         class_mrs_debug::print<string>("tcp_saver_extractor_tipo_dado: ", tcp_saver_extractor_tipo_dado);
         
@@ -1097,8 +1104,12 @@ int main(int argc, char**argv){
         //é o saver que define o out_dir da forma "Treino_udt_60Fluxos_100Mbps_Fri_Mar_06_03_16_35"
         
         
+        
+        
         ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt");
-
+        
+        cout << "client ifstream: " << obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt" << endl;
+        
         class_feature_extractor_tcp obj_extractor_tcp_router;
         obj_extractor_tcp_router.set_port((uint32_t)server_port);
         
@@ -1113,22 +1124,29 @@ int main(int argc, char**argv){
         obj_extractor_tcp_router.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
         obj_extractor_tcp_router.meth_adjust_seq_metrics_file_path();
 
-
+        bool intersting_line = false;
         if (stream_dump_file.is_open())
         {
- 
+            
+            cout << "stream opend" << endl;
             
             while (getline (stream_dump_file,dump_line) )
             {
-    
                 
                 class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line);
                 class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line);
                 
+                //Verifica se é linha do fluxo da porta
+                if(dump_line.find("10.0.1.3." + to_string(server_port)) == std::string::npos)
+                {
+                    //cout << "not intersting line." << endl;
+                    continue;
+                }
+                intersting_line = true;
+                //cin.ignore();
                 //extrai os tempos dos pacotes ack
                 if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply))
                 {
-                    
                     if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
                     {   
                         //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
@@ -1170,7 +1188,8 @@ int main(int argc, char**argv){
         } 
 
 
-   
+        if(!intersting_line)
+            cout << "No line to considere for this port." <<endl;
         return 1;
     }
 

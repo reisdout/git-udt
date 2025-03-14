@@ -36,7 +36,8 @@ bool class_feature_extractor_tcp_client::meth_extract_client_feature(string par_
     if (par_dump_line.length() > 0)
     {
         
-        class_mrs_debug::print<uint64_t>("tcp_extractor_clinet_work_line, atuando sobre os ack : ", ++extractor_tcp_clinet_work_line);
+        //nesse caso, a work_line é do main
+        //class_mrs_debug::print<uint64_t>("tcp_extractor_clinet_work_line, atuando sobre os ack : ", ++extractor_tcp_clinet_work_line);
         //cout << dump_line << endl;
         //cout <<"packet: " << packet <<endl;
         //cin >> c;

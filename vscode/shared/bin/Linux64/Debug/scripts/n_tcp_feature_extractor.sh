@@ -81,9 +81,9 @@ do
     #b=`$command`
     #echo $b
     #./udt server ${door}
-    echo "App call: ./communicator tcp_client ${door} ${path_var}"
+    echo "App call: ./communicator tcp_feature_saver_and_extractor ${door} ${path_var}"
     xterm -hold -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./communicator tcp_feature_saver_and_extractor ${door} ${path_var}" && /bin/bash &
-    sleep 1
+    sleep 3
 
     i=`expr $i + 1` 
 

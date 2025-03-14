@@ -3,8 +3,6 @@
 #include <iomanip> 
 #include <typeinfo>
 
-
-
 template <class T>
 void class_feature_extractor_tcp_print(string par_string, T par_var,bool par_pause=true) {
     
@@ -55,23 +53,33 @@ public:
     virtual void meth_extract_router_features();//scan dump file
     //retorna true se o seq foi efetivamente a um ewma no cvs.
     bool meth_extract_router_features(uint64_t par_ack_seq);//scan dump file
+    bool meth_get_one_of_my_lines(string& par_dump_line);
     virtual string meth_search_seq_number(string par_dump_line);
     virtual string  meth_search_time_stamp(string par_dump_line);
+    void meth_update_seq_numbers(string par_dump_line);
 
    
     
 
     protected:
        
-        
+       
         uint64_t last_ack_processed = 0;
         ifstream stream_dump_file;
-        string seq_number;
-        string seq_number_inf;
-        string seq_number_sup;
-        uint64_t seq_number_inf_in_decimal=0;
-        uint64_t seq_number_sup_in_decimal=0;
+        string current_dump_line = "XXXXXXXXXXXX";
+        string current_seq_number_interval;
+        string current_seq_number_inf;
+        string current_seq_number_sup;
+        uint64_t current_seq_number_inf_in_decimal=0;
+        uint64_t current_seq_number_sup_in_decimal=0;
+        string current_time_stamp;
         float queue_now;
+
+
+        //printers
+        bool force_print_tcp_extractor = false;
+        bool force_print_in_meth_extract_router_features_ack=false;
+        bool force_print_meth_get_one_of_my_lines = false;
     
     
 };
