@@ -1,9 +1,9 @@
 #/bin/bash
 sudo tc qdisc del dev enp0s20f3 root
 sleep 5
-sudo tc qdisc add dev enp0s20f3 root handle 1: tbf rate 100mbit burst 120000 limit 450000
+sudo tc qdisc add dev enp0s20f3 root handle 1: netem delay 40ms
 sleep 5
-sudo tc qdisc add dev enp0s20f3 parent 1: handle 2: netem delay 40ms
+sudo tc qdisc add dev enp0s20f3 parent 1: handle 2: tbf rate 100mbit burst 120000 limit 450000
 sleep 5
 sudo tc -s qdisc show dev enp0s20f3
 sleep 5
@@ -22,5 +22,18 @@ sudo ip route add 10.0.0.0/24 via 10.0.0.1
 sleep 5
 sudo ip route add 10.0.1.0/24 via 10.0.1.1
 sleep 5
+
+sleep 5
+sudo mkdir /tmp/ramdisk
+
+sleep 2
+sudo chmod 777 /tmp/ramdisk/
+
+sleep 2
+sudo mount -t tmpfs -o size=2G myramdisk /tmp/ramdisk
+
+sleep 2
+
+mount | tail -n 1
 
 

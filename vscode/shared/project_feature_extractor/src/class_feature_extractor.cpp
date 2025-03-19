@@ -536,19 +536,19 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
         cout <<"stream opened" << endl;
         uint64_t time;
         uint64_t queue = 0;
-        float ewma = 0.0;
+        long double ewma = 0.0;
         
         while (meth_take_and_store_line_values_from_queue_along_time(stream_queue_size, time, queue))
         {
            
-            float bytes_in_queue = (float) queue;
+            long double bytes_in_queue = static_cast<long double> (queue);
     
-            ewma = (float)((1- exp_weight_expon_queue)*ewma + (exp_weight_expon_queue)*bytes_in_queue);
+            ewma = (long double)((1- exp_weight_expon_queue)*ewma + (exp_weight_expon_queue)*bytes_in_queue);
             
             //Nunca divida por define, pois, não sei por que dá errado
             //por isso, armazenamos na variavels MAX_BYTES_ROUTER_BUFFERSIZE
             uint32_t MAX_BYTES_ROUTER_BUFFERSIZE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
-            file <<time << "," <<  fixed << setprecision(5) << (float) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
+            file <<time << "," <<  fixed << setprecision(5) << (long double) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
         }
         file.close();
         stream_queue_size.close();
