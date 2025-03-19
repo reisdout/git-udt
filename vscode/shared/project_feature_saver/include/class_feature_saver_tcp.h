@@ -22,4 +22,6 @@ class class_feature_saver_tcp: public class_feature_saver{
         uint64_t marcaTempoChegadaAckAnterior;
         uint64_t marcaTempoAnterior;
         u_int64_t virtual_clock_origin=0;
+
+        bool feature_saver_tcp_force_print = false;
     };

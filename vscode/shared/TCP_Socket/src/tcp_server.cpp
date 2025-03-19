@@ -63,7 +63,7 @@ void TCP_Server:: Read()
         valread = read(new_socket, buffer, SERVER_BUFFER_SIZE);
         if(valread > 0)
         {
-            std::cout << "Received: " << buffer << std::endl;
+            std::cout << "Port "<< port <<" Received " << valread<< " bytes." << std::endl;
             //send(new_socket, buffer, valread, 0);
             //std::cout << "Echo message sent" << std::endl;
             if (strncmp("exit", buffer, 4) == 0) 

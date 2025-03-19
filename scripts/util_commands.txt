@@ -40,3 +40,8 @@ matar os processos
 
 sudo pkill -f ./communicator
 
+
+Quantas linha em um arquivo
+
+wc -l < countries.txt
+

@@ -15,8 +15,10 @@
 #include "../../project_feature_saver/include/class_feature_saver_tcp.h"
 
 
-#define MSS 15000
-#define CLIENT_PORT  9090
+#define MSS 30000
+            //3000 - Péssimo
+            //15000 - Bom com clients_to_fill_band=30, mas com degradação das CNN
+//#define CLIENT_PORT  9090
 
 
 
@@ -26,7 +28,8 @@ class TCP_Client{
 
     public:
 
-        inline static uint64_t clients_to_fill_band = 30;
+        inline static uint64_t clients_to_fill_band = 40;
+                                                        //30 bom com MSS 15000;
         inline static uint64_t mss = MSS;
         inline static uint64_t transmission_rate_mbps = 100;    
 

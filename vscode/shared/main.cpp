@@ -414,6 +414,8 @@ int main(int argc, char**argv){
 
  // ./communicator $app_type $port $cong_control $simul_type $data_rate $num_flows $simul_start_time
 
+    bool main_force_print =false;
+
     printf("Hello, from communicator!\n");
     char c;
     //Socket* ptSocket=0;
@@ -1133,12 +1135,13 @@ int main(int argc, char**argv){
             while (getline (stream_dump_file,dump_line) )
             {
                 
-                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line);
-                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line);
+                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line, main_force_print);
+                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line, main_force_print);
                 
                 //Verifica se é linha do fluxo da porta
                 if(dump_line.find("10.0.1.3." + to_string(server_port)) == std::string::npos)
                 {
+                    class_mrs_debug::print<string>("line is not of my flow: ", dump_line, main_force_print);
                     //cout << "not intersting line." << endl;
                     continue;
                 }
@@ -1151,11 +1154,11 @@ int main(int argc, char**argv){
                     {   
                         //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
                         //associado a um ack ewma.
-                        class_mrs_debug::print<uint64_t>("seq to save: ",seq_number);
-                        class_mrs_debug::print<uint64_t>("ack_arival to save: ", ack_arrival);
-                        class_mrs_debug::print<uint64_t>("ech reply to save: ",echo_reply);
+                        class_mrs_debug::print<uint64_t>("seq to save: ",seq_number, main_force_print);
+                        class_mrs_debug::print<uint64_t>("ack_arival to save: ", ack_arrival,main_force_print);
+                        class_mrs_debug::print<uint64_t>("ech reply to save: ",echo_reply,main_force_print);
                         obj_saver.meth_deal_ack_arrival(seq_number,ack_arrival,echo_reply);                    
-                        class_mrs_debug::print<char>("extraiu features efetivamente ", '\n');
+                        class_mrs_debug::print<char>("extraiu features efetivamente ", '\n',main_force_print);
                     }
                 }
                 else
@@ -1177,6 +1180,7 @@ int main(int argc, char**argv){
             
             }
 
+            cout << "No more Acks to me. Good bye!" <<endl;
             stream_dump_file.close();
 
         }

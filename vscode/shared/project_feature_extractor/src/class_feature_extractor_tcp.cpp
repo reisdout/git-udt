@@ -176,6 +176,7 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                         meth_update_seq_queue_file(par_ack_seq-1, queue_now);
                         done = true;
                         considered_ack = true;
+                        cout << "ack " << par_ack_seq << " processed." << endl;
                 }
                 else
                 {

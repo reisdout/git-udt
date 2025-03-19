@@ -1,53 +1,20 @@
 # ninja log v5
-24	2052	1741960345136976912	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1742	1849	1741736605174811709	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	3d55eb86fe24fa26
-5	1191	1741612023479267788	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	9bb9b9c6efee8d0a
-8	3116	1741960118871097362	CMakeFiles/communicator.dir/main.cpp.o	aa0075fb2d6d4b24
-12	4039	1741736607364791185	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	8a42b21aa6b41a22
-2052	2081	1741960345164976650	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1245	2031	1741607375497398799	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_udt.cpp.o	ec860cba977283bd
-4	88	1741612022376265209	project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o	7dea33b161c385f6
-668	708	1741619447552628450	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
 10	1502	1741704052303405638	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	dd0ec014432da3a3
+4533	4686	1742307622573806647	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
+4	88	1741612022376265209	project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o	7dea33b161c385f6
+8803	9117	1742307627002816812	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+60	4532	1742307622420806296	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	514c677d890d219c
 2364	4560	1741607378016404690	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o	7a9c5f617261a191
-5	667	1741619447508628347	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	514c677d890d219c
-2081	2216	1741960345292975450	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-8	1742	1741736605069812693	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o	f58990600b258134
-4039	6787	1741736610115765403	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o	286c4c143965dba9
 88	140	1741612022431265337	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a	c4eb2eef6efc46ee
-8	1226	1741960770423991318	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1226	1260	1741960770457990999	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1261	1655	1741960770851987307	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-5	2456	1741961031183547609	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-2456	2491	1741961031218547281	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-2491	2640	1741961031364545913	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-14	1985	1741961162242319388	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1986	2024	1741961162278319051	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-2030	2191	1741961162448317458	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-5	1779	1741961490838239947	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1779	1815	1741961490874239610	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1815	2121	1741961491174236798	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-8	1914	1741962102857504385	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1916	1952	1741962102894504039	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1953	2084	1741962103024502820	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-7	2424	1741962228189329841	CMakeFiles/communicator.dir/main.cpp.o	aa0075fb2d6d4b24
-2424	2555	1741962228321328603	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-3	1946	1741962771121241741	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1947	1981	1741962771155241423	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1981	2127	1741962771299240073	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-6	1939	1741962905603981412	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1939	1975	1741962905639981075	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1975	2135	1741962905797979594	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-12	1241	1741963114004028381	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1241	1258	1741963114021028222	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1259	1506	1741963114263025954	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-3	1366	1741963537421060300	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-1367	1394	1741963537449060037	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-1395	1491	1741963537545059138	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-23	2673	1741965107086350162	CMakeFiles/communicator.dir/main.cpp.o	aa0075fb2d6d4b24
-31	2933	1741965107347347716	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-2933	2992	1741965107405347173	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-2992	3196	1741965107601345336	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
-4	3194	1741965695701833946	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
-3194	3269	1741965695778833224	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
-3269	3402	1741965695910831987	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24
+41490	73499	1742305055972916216	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o	286c4c143965dba9
+67	4119	1742307622007805348	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o	f58990600b258134
+4231	8684	1742307626571815823	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	ce99f0daf91a3761
+4120	4231	1742307622120805608	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a	3d55eb86fe24fa26
+5	1191	1741612023479267788	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	9bb9b9c6efee8d0a
+51	7578	1742307625467813289	CMakeFiles/communicator.dir/main.cpp.o	aa0075fb2d6d4b24
+202	41489	1742305023958842747	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	8a42b21aa6b41a22
+8686	8803	1742307626690816096	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a	5f01d0a7101bacdc
+1245	2031	1741607375497398799	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_udt.cpp.o	ec860cba977283bd
+11	545	1742389465336900823	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	9bb9b9c6efee8d0a
+546	584	1742389465377900917	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a	63a26e127ab53bfc
+584	798	1742389465589901403	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator	7d95b01861c29a24

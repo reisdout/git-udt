@@ -20,7 +20,7 @@ public:
 
     inline static int print_counter = 0;
 
-    inline static int par_print_from = 0; //1836 para Treino_TcpVegas_60Fluxos_100Mbps_Tue_Mar_11_12_15_58
+    inline static int par_print_from = 200000000; //1836 para Treino_TcpVegas_60Fluxos_100Mbps_Tue_Mar_11_12_15_58
 
     template <typename T>
     static void print(string par_string, T par_var, bool par_force_print=false) {

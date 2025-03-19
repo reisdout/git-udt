@@ -596,11 +596,17 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, floa
     cout << "updating router file..."<<"\n";
 
     if(par_queue_ewma <= 0.00001) //para enriquecer a amostra
+    {
+        cout << "tiny queue buffer." << endl;
         return;
+    }    
     
     if(par_queue_ewma >= 0.40 && par_queue_ewma <= 0.70)
+    {
+        cout << "Queue out of range."<<endl;
         return;
     
+    }
     int network_situation = 1;
 
     if(par_queue_ewma > 0.70)
