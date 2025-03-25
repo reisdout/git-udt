@@ -44,12 +44,12 @@ while [ : ]; do
         cong_cont_var=$2
         shift 2
         ;;
-    -d | --data_type)
+    -d | --data_type) 
         #echo "Processing 'data_type' option. Input argument is '$2'"
         data_type_var=$2
         shift 2
         ;;
-   -r | --rate)
+   -r | --rate) #é em Mbps...Não precisa da unida, ou seja, 100 para indicar 100Mbps
         #echo "Processing 'rate' option. Input argument is '$2'"
         rate_var=$2
         shift 2
@@ -124,7 +124,7 @@ else
 
 fi
 
-sysctl net.ipv4.tcp_congestion_control
+
 
 
 

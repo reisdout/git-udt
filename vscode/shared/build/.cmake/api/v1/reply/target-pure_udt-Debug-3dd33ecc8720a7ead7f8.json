@@ -1,0 +1,160 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include_directories",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"project_pure_udt/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 29,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 16,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/."
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./debug"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/."
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/defines"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/../project_feature_saver/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "pure_udt::@82dc3fe8f10c89423411",
+	"name" : "pure_udt",
+	"nameOnDisk" : "libpure_udt.a",
+	"paths" : 
+	{
+		"build" : "project_pure_udt",
+		"source" : "project_pure_udt"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "project_pure_udt/src/pure_udt.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

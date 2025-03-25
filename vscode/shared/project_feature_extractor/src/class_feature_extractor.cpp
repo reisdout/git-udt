@@ -40,21 +40,6 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
     //cin >> c;
 
     std::cout << seq_metrics_file_name << std::endl;
-    std::ofstream file;
-    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::trunc);
-    if (file.fail())
-    {
-        std::cout << "Error opening seq buffer file" << endl;
-        exit(0);
-    }
-    file <<"#Ack" << "," 
-        << "Last Router Ocupation Router Arrival" << "(" <<"Packets"<< ")"<<"," 
-        << "Last Router Ocupation Router Arrival_ewma" << "(" <<"Packets"<< ")"<<","         
-        << "Network Situation Router Arrival" <<  ","
-        "Measure Time"<<","
-        <<"Queue_Router2" << "\n";
-
-    file.close();
     cout << "saindo meth_adjust_seq_metrics_file_path" << endl;
 }
 
@@ -587,7 +572,8 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
 
 void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
 {
-
+    
+    
     float queue_ewma_cuted = par_queue_ewma;
 
     if(par_queue_ewma > 1.0)
@@ -595,10 +581,10 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, floa
 
     cout << "updating router file..."<<"\n";
 
-    if(par_queue_ewma <= 0.00001) //para enriquecer a amostra
+    if(par_queue_ewma <= 0.000001) //para enriquecer a amostra
     {
         cout << "tiny queue buffer." << endl;
-        return;
+        //return;
     }    
     
     if(par_queue_ewma >= 0.40 && par_queue_ewma <= 0.70)
@@ -607,10 +593,13 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, floa
         return;
     
     }
+
     int network_situation = 1;
 
     if(par_queue_ewma > 0.70)
         network_situation = 2;
+    else
+        n1++;
 
     std::ofstream file;
     file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::app);
@@ -620,6 +609,21 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, floa
         exit(0);
     }
     //make sure write fails with exception if something is wrong
+
+    if(first_ack_seq_queue_association)//precisa intitular as colunas
+    {
+
+        file <<"#Ack" << "," 
+            << "Last Router Ocupation Router Arrival" << "(" <<"Packets"<< ")"<<"," 
+            << "Last Router Ocupation Router Arrival_ewma" << "(" <<"Packets"<< ")"<<","         
+            << "Network Situation Router Arrival" <<  ","
+            "Measure Time"<<","
+            <<"Queue_Router2" << "\n";
+
+        first_ack_seq_queue_association = false;
+    
+    }
+
     file << par_seq << ","
         << "0" << "," 
         << queue_ewma_cuted << ","
@@ -638,6 +642,23 @@ class_feature_extractor:: ~class_feature_extractor()
 {
     if(stream_queue_size_along_time_file.is_open())
         stream_queue_size_along_time_file.close();
+
+
+
+        std::ofstream file;
+        file.open(out_dir + "/" + "n1.txt", std::ios::out | std::ios::app);
+        if (file.fail())
+        {
+            std::cout << "n1 register error " << "\n";
+            exit(0);
+        }
+        //make sure write fails with exception if something is wrong
+    
+        file << n1 << endl;
+            //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
+    
+        file.close();
+    
     
 }
 

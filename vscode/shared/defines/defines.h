@@ -21,4 +21,4 @@
 
 #define NET_RTT 0.044
 
-#define SIMUL_TIME 90000000 //1.5s em microsegundos
+#define SIMUL_TIME_UDT 90000000 //1.5m em microsegundos

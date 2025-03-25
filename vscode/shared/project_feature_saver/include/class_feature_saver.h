@@ -97,9 +97,9 @@ class class_feature_saver{
        
         
         void meth_save_training_data(   uint64_t parNumAckFlow, 
-                                        float parAck_ewma, 
+                                        long double parAck_ewma, 
                                         float parSend_ewma, 
-                                        float parRtt_ratio,
+                                        long double parRtt_ratio,
                                         uint32_t parCwnd,
                                         int parBuffeSizeVariation,
                                         float parRouterQueue_ewma,
@@ -151,9 +151,9 @@ class class_feature_saver{
 
     uint64_t numAckReceived = 0;
     bool first_ack_process = false;
-    float ack_ewma = 0;
+    long double ack_ewma = 0;
     float send_ewma = 0;
-    float rtt;
+    long double rtt;
     string tipo_dado;
     string default_congestion;
     string num_flows;

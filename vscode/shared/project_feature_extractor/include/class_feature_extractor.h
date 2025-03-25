@@ -115,6 +115,7 @@ public:
 protected:
         
         bool first_packet = false;
+        bool first_ack_seq_queue_association = true;
         unsigned segmentsReceived=0;
         static inline bool queue_ewma_generated = false;
         string out_dir = "/home/ns/Desktop/output";
@@ -132,6 +133,7 @@ protected:
         std::string seq_metrics_file_name; 
         std::string str_starting_time;
         uint64_t feature_extrator_work_line=0;
+        u_int64_t n1 = 0;
 
 
 

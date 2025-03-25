@@ -137,6 +137,9 @@
 		},
 		{
 			"path" : "project_feature_extractor/CMakeLists.txt"
+		},
+		{
+			"path" : "project_report/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

@@ -58,7 +58,7 @@ public:
 
       save_time = high_resolution_clock::now();
       auto duration = duration_cast<microseconds>(save_time - save_start);
-      if(duration.count() <= SIMUL_TIME )
+      if(duration.count() <= SIMUL_TIME_UDT )
          obj_saver.meth_deal_ack_arrival(ack,ack_arrival);
       else
          cout << "Save stoped. See duration: " <<duration.count()<< endl;
@@ -73,7 +73,7 @@ public:
       save_time = high_resolution_clock::now();
       auto duration = duration_cast<microseconds>(save_time - save_start);
       
-      if(duration.count() < SIMUL_TIME)
+      if(duration.count() < SIMUL_TIME_UDT)
          obj_saver.meth_deal_packet_send(pkt->m_iSeqNo,snd_time);
 
       else

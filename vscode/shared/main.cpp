@@ -31,6 +31,7 @@
 #include <project_feature_extractor/include/class_feature_extractor_udt.h>
 #include <project_feature_extractor/include/class_feature_extractor_tcp.h>
 #include <project_feature_extractor/include/class_feature_extractor_tcp_client.h>
+#include <project_report/include/class_report.h>
 #include "mrs_utils.h"
 #include <unistd.h>
 #include <iostream>
@@ -320,6 +321,16 @@ void deal_with_options(string par_string, int par_argc, char* par_argv[])
 
     class_mrs_debug::print("par_string: ",par_string);
 
+    
+
+    if(par_string.find("say_hello") != string::npos)    
+    {
+        cout << "atomic args. It's Ok." << endl;
+        return;
+    }
+    
+
+
     if(par_string.find("server") != string::npos)    
     {
         if(par_argc != 3)
@@ -424,9 +435,27 @@ int main(int argc, char**argv){
     std::cout << "Terminal Type: " << argv[1]<<"\n";
     terminal_type = string(argv[1]);
 
-    class_mrs_debug::print<uint64_t>("period_to_transmit: ", TCP_Client::period_to_transmit_micro_seconds);
-
+    
     deal_with_options(terminal_type,argc,argv);
+
+
+    if(std::string(argv[1]) == "say_hello")
+    {
+
+        cout << "Hello!" << endl;
+
+        uint64_t unidade = 10;
+        uint64_t cauda = 1000000;
+        uint64_t time = unidade*cauda; 
+
+        cout << "before" << endl;
+        usleep(time);
+        cout << "afther" <<endl;
+
+        return 1;
+    }
+
+
 
     if(std::string(argv[1]) == "udt_client")
     {
@@ -467,7 +496,7 @@ int main(int argc, char**argv){
             auto simulation_start = high_resolution_clock::now();
             auto simulation_time = high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(simulation_time - simulation_start);
-            while (true && duration.count() <= SIMUL_TIME)             
+            while (true && duration.count() <= SIMUL_TIME_UDT)             
             {
                 
                 Pausar_por_tempo_aleatorio_micro_segundos(100000);//0.1s
@@ -741,33 +770,57 @@ int main(int argc, char**argv){
         communicator.Listen();
         communicator.Accept();
         communicator.Read();
-        communicator.Close();
+        //communicator.Close();
         return 1;
 
     }
     if(std::string(argv[1]) == "tcp_client")
     {
 
+        bool tcp_client_force_print = false;
+        class_mrs_debug::print<char>("Instanciando cliente tcp", '\n', tcp_client_force_print);
 
         /****************** COMAND FORMAT*************************
 
         ./communicator tcp_client $cong_control $port $simul_type $data_rate $num_flows $simul_start_time
         
         **********************************************************/
+        uint64_t mss = 60000;
+        uint64_t clients_to_fill_band = 50; //stoull(num_flows);
+        uint64_t simul_time = 90000000; //1.5 min em microsec
 
-
-        TCP_Client communicator((u_int32_t)server_port,
+       TCP_Client communicator((u_int32_t)server_port,
+                                clients_to_fill_band,
                                 data_rate,
                                 congestion_control,
+                                mss,
                                 num_flows,
+                                simul_time,
                                 tipo_dado,
                                 simu_start_time);
+        
+        class_mrs_debug::print<char>("cliente tcp instanciado", '\n', tcp_client_force_print);
+
+        class_report obj_report(communicator.get_experiment_dir(), "tcp_clients_report.txt");
+        obj_report.meth_add_report_field_values("tipo_dado", tipo_dado);
+        obj_report.meth_add_report_field_values("congestion_control", congestion_control);
+        obj_report.meth_add_report_field_values("data_rate",to_string(communicator.transmission_rate_mbps));
+        obj_report.meth_add_report_field_values("num_flows", num_flows);
+        obj_report.meth_add_report_field_values("mss",to_string(communicator.mss));
+        obj_report.meth_add_report_field_values("clients_to_fill_band",to_string(communicator.clients_to_fill_band));
+        obj_report.meth_add_report_field_values("period_to_transmit",to_string(communicator.period_to_transmit_micro_seconds));
+        obj_report.meth_report();
+
+        class_mrs_debug::print<uint64_t>("period_to_transmit: ", communicator.get_period_to_transmit());
+        
         communicator.SetPort((u_int32_t)server_port);
         communicator.SetServerAddr();
         communicator.ConnectToServer();
         communicator.Send();
-        communicator.Close();
+        //communicator.Close();
 
+
+        
         return 1;
     }
 
@@ -1062,6 +1115,8 @@ int main(int argc, char**argv){
         uint64_t seq_number;
         uint64_t work_line;
 
+        bool virtual_clock_defined = false;
+
         class_feature_saver_tcp obj_saver;
 
         string tcp_saver_extractor_experiment_path = experiment_path;
@@ -1135,20 +1190,20 @@ int main(int argc, char**argv){
             while (getline (stream_dump_file,dump_line) )
             {
                 
-                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line, main_force_print);
-                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line, main_force_print);
+                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line);
+                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line);
                 
                 //Verifica se é linha do fluxo da porta
                 if(dump_line.find("10.0.1.3." + to_string(server_port)) == std::string::npos)
                 {
-                    class_mrs_debug::print<string>("line is not of my flow: ", dump_line, main_force_print);
+                    class_mrs_debug::print<string>("line is not of my flow: ", dump_line);
                     //cout << "not intersting line." << endl;
                     continue;
                 }
                 intersting_line = true;
                 //cin.ignore();
                 //extrai os tempos dos pacotes ack
-                if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply))
+                if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply) && virtual_clock_defined)
                 {
                     if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
                     {   
@@ -1173,6 +1228,7 @@ int main(int argc, char**argv){
                             class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp);
                             class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val);
                             obj_saver.meth_set_virtual_clock_origin(stoull(syn_time_stamp),stoull(syn_TS_val));
+                            virtual_clock_defined =true;
                        }
                  }
     

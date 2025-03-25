@@ -141,9 +141,9 @@ void class_feature_saver::meth_check_parameters()
 
 
 void class_feature_saver::meth_save_training_data(uint64_t parNumAckFlow, 
-                                                    float parAck_ewma, 
+                                                    long double parAck_ewma, 
                                                     float parSend_ewma, 
-                                                    float parRtt_ratio,
+                                                    long double parRtt_ratio,
                                                     uint32_t parCwnd,
                                                     int parBuffeSizeVariation,
                                                     float parRouterQueue_ewma,

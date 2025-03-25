@@ -35,11 +35,18 @@ TS SYN 1       Origem Virtual Clock(Ov)	    ack_arr	   ecr	       RTT
 
 
 */
+
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    class_mrs_debug::print<uint64_t>("par_1970_ts: ", par_1970_ts, feature_saver_tcp_force_print); 
+    class_mrs_debug::print<uint64_t>("par_virtual_clock_ts: ", par_virtual_clock_ts, feature_saver_tcp_force_print ); 
+
+
     //tem que dividir por 1000 o desde de 1970, pois o dump traz em microssegundos e o virtual
     //é milissegundos.
+    
     virtual_clock_origin = (par_1970_ts/1000) - par_virtual_clock_ts;
 
-    class_mrs_debug::print<uint64_t>("virtual_clock_origin: ", virtual_clock_origin); 
+    class_mrs_debug::print<uint64_t>("virtual_clock_origin: ", virtual_clock_origin, feature_saver_tcp_force_print ); 
 
 }
 
@@ -89,13 +96,16 @@ void class_feature_saver_tcp::meth_calculate_ack_ewma(uint64_t par_ack_arrival_t
     numAckReceived=(numAckReceived+1);
     
     
-    if(first_ack_process)
+    if(first_ack_process)    
     {
-        auto delta_t = par_ack_arrival_time - marcaTempoChegadaAckAnterior;
-        float intervalFromPreviousAck = (float) delta_t;
-        ack_ewma = (float)(((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck));
+
+        long double ack_arrival_micro = par_ack_arrival_time/1000;
+        long double marcaTempoChegadaAckAnterior_micro = marcaTempoChegadaAckAnterior/1000;
+        long double delta_t = ack_arrival_micro - marcaTempoChegadaAckAnterior_micro;
+        long double intervalFromPreviousAck = delta_t;
+        ack_ewma = ((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck);
         //cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck <<  endl;
-        class_mrs_debug::print<float>("ack_ewma: ", ack_ewma);
+        class_mrs_debug::print<long double>("ack_ewma: ", ack_ewma);
     }
     
     
@@ -111,17 +121,20 @@ void class_feature_saver_tcp::meth_calculate_rtt(uint64_t  par_ack_arrival_time,
 {
     long double ack_arrival_mili_sec = static_cast<long double>(par_ack_arrival_time/1000.0);
 
-    class_mrs_debug::print<long double>("ack_arrival_mili_sec: ", ack_arrival_mili_sec);
+    class_mrs_debug::print<long double>("ack_arrival_mili_sec: ", ack_arrival_mili_sec,feature_saver_tcp_force_print);
 
+    class_mrs_debug::print<long double>("virtual_clock_origin: ", virtual_clock_origin ,feature_saver_tcp_force_print );
+
+    class_mrs_debug::print<long double>("par_packet_eco_reply: ", par_packet_eco_reply ,feature_saver_tcp_force_print );
     
     long double ecr_from_1970 =  static_cast<long double>(virtual_clock_origin + par_packet_eco_reply);
 
-    class_mrs_debug::print<long double>("ecr_from_1970: ", ecr_from_1970);
+    class_mrs_debug::print<long double>("ecr_from_1970: ", ecr_from_1970, feature_saver_tcp_force_print);
     
-    rtt = float(ack_arrival_mili_sec - ecr_from_1970);  //(double)pre_rtt.count();
+    rtt = (ack_arrival_mili_sec - ecr_from_1970);  //(double)pre_rtt.count();
     rtt = rtt*1000; // microsseconds
     
-    class_mrs_debug::print<float>("rtt in meth_calculate_rtt: ", rtt);
+    class_mrs_debug::print<float>("rtt in meth_calculate_rtt: ", rtt,feature_saver_tcp_force_print );
 }
 void class_feature_saver_tcp::meth_calculate_send_ewma(uint64_t  par_eco_reply)
 {

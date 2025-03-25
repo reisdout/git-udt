@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_communicator: phony || CMakeFiles/commun
 build CMakeFiles/communicator.dir/main.cpp.o: CXX_COMPILER__communicator_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/main.cpp || cmake_object_order_depends_target_communicator
   DEP_FILE = CMakeFiles/communicator.dir/main.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug
   OBJECT_DIR = CMakeFiles/communicator.dir
   OBJECT_FILE_DIR = CMakeFiles/communicator.dir
 
@@ -64,9 +64,9 @@ build CMakeFiles/communicator.dir/main.cpp.o: CXX_COMPILER__communicator_unscann
 #############################################
 # Link the executable /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator: CXX_EXECUTABLE_LINKER__communicator_Debug CMakeFiles/communicator.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator: CXX_EXECUTABLE_LINKER__communicator_Debug CMakeFiles/communicator.dir/main.cpp.o | /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_saver.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libfeature_extractor.a /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libreport.a
   FLAGS = -g
-  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"
+  LINK_LIBRARIES = /home/ns/UDT-workspace/git-udt/vscode/shared/libudt/libudt.a  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"  "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a"
   OBJECT_DIR = CMakeFiles/communicator.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -113,7 +113,7 @@ build cmake_object_order_depends_target_pure_udt: phony || project_pure_udt/CMak
 build project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o: CXX_COMPILER__pure_udt_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/src/pure_udt.cpp || cmake_object_order_depends_target_pure_udt
   DEP_FILE = project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/../project_feature_saver/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/../project_feature_saver/include
   OBJECT_DIR = project_pure_udt/CMakeFiles/pure_udt.dir
   OBJECT_FILE_DIR = project_pure_udt/CMakeFiles/pure_udt.dir/src
 
@@ -173,14 +173,14 @@ build cmake_object_order_depends_target_tcpsocket: phony || TCP_Socket/CMakeFile
 build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_server.cpp || cmake_object_order_depends_target_tcpsocket
   DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/../project_feature_saver/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/../project_feature_saver/include
   OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
   OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
 
 build TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o: CXX_COMPILER__tcpsocket_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/src/tcp_client.cpp || cmake_object_order_depends_target_tcpsocket
   DEP_FILE = TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/../project_feature_saver/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/../project_feature_saver/include
   OBJECT_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir
   OBJECT_FILE_DIR = TCP_Socket/CMakeFiles/tcpsocket.dir/src
 
@@ -240,21 +240,21 @@ build cmake_object_order_depends_target_feature_saver: phony || project_feature_
 build project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o: CXX_COMPILER__feature_saver_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/src/class_feature_saver.cpp || cmake_object_order_depends_target_feature_saver
   DEP_FILE = project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_saver/CMakeFiles/feature_saver.dir
   OBJECT_FILE_DIR = project_feature_saver/CMakeFiles/feature_saver.dir/src
 
 build project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_udt.cpp.o: CXX_COMPILER__feature_saver_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/src/class_feature_saver_udt.cpp || cmake_object_order_depends_target_feature_saver
   DEP_FILE = project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_udt.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_saver/CMakeFiles/feature_saver.dir
   OBJECT_FILE_DIR = project_feature_saver/CMakeFiles/feature_saver.dir/src
 
 build project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o: CXX_COMPILER__feature_saver_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/src/class_feature_saver_tcp.cpp || cmake_object_order_depends_target_feature_saver
   DEP_FILE = project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_saver/CMakeFiles/feature_saver.dir
   OBJECT_FILE_DIR = project_feature_saver/CMakeFiles/feature_saver.dir/src
 
@@ -314,28 +314,28 @@ build cmake_object_order_depends_target_feature_extractor: phony || project_feat
 build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor.cpp || cmake_object_order_depends_target_feature_extractor
   DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
 build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_udt.cpp || cmake_object_order_depends_target_feature_extractor
   DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
 build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_tcp.cpp || cmake_object_order_depends_target_feature_extractor
   DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
 build project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o: CXX_COMPILER__feature_extractor_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/src/class_feature_extractor_tcp_client.cpp || cmake_object_order_depends_target_feature_extractor
   DEP_FILE = project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o.d
   FLAGS = -g
-  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
   OBJECT_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir
   OBJECT_FILE_DIR = project_feature_extractor/CMakeFiles/feature_extractor.dir/src
 
@@ -379,6 +379,66 @@ build project_feature_extractor/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build project_feature_extractor/rebuild_cache: phony project_feature_extractor/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target report
+
+
+#############################################
+# Order-only phony target for report
+
+build cmake_object_order_depends_target_report: phony || project_report/CMakeFiles/report.dir
+
+build project_report/CMakeFiles/report.dir/src/class_report.cpp.o: CXX_COMPILER__report_unscanned_Debug /home/ns/UDT-workspace/git-udt/vscode/shared/project_report/src/class_report.cpp || cmake_object_order_depends_target_report
+  DEP_FILE = project_report/CMakeFiles/report.dir/src/class_report.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/ns/UDT-workspace/git-udt/vscode/shared/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/./libudt -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_pure_udt/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./TCP_Socket/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_saver/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_feature_extractor/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_mrs_utils/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report -I/home/ns/UDT-workspace/git-udt/vscode/shared/./debug -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_report/. -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_report/include -I/home/ns/UDT-workspace/git-udt/vscode/shared/defines -I/home/ns/UDT-workspace/git-udt/vscode/shared/project_mrs_utils/include
+  OBJECT_DIR = project_report/CMakeFiles/report.dir
+  OBJECT_FILE_DIR = project_report/CMakeFiles/report.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target report
+
+
+#############################################
+# Link the static library /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a
+
+build /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libreport.a: CXX_STATIC_LIBRARY_LINKER__report_Debug project_report/CMakeFiles/report.dir/src/class_report.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = project_report/CMakeFiles/report.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a"
+  TARGET_PDB = report.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build project_report/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build project_report/edit_cache: phony project_report/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build project_report/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report && /usr/bin/cmake --regenerate-during-build -S/home/ns/UDT-workspace/git-udt/vscode/shared -B/home/ns/UDT-workspace/git-udt/vscode/shared/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build project_report/rebuild_cache: phony project_report/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build communicator: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator
@@ -393,9 +453,13 @@ build libfeature_saver.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin
 
 build libpure_udt.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
 
+build libreport.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libreport.a
+
 build libtcpsocket.a: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
 
 build pure_udt: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
+
+build report: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libreport.a
 
 build tcpsocket: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libtcpsocket.a
 
@@ -407,7 +471,7 @@ build tcpsocket: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/
 #############################################
 # Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build
 
-build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator project_pure_udt/all TCP_Socket/all project_feature_saver/all project_feature_extractor/all
+build all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/communicator project_pure_udt/all TCP_Socket/all project_feature_saver/all project_feature_extractor/all project_report/all
 
 # =============================================================================
 
@@ -438,20 +502,27 @@ build project_feature_saver/all: phony /home/ns/UDT-workspace/git-udt/vscode/sha
 build project_pure_udt/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libpure_udt.a
 
 # =============================================================================
+
+#############################################
+# Folder: /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report
+
+build project_report/all: phony /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static$ libs/libreport.a
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_report/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
+build /home/ns/UDT-workspace/git-udt/vscode/shared/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/TCP_Socket/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_extractor/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_feature_saver/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/CMakeLists.txt /home/ns/UDT-workspace/git-udt/vscode/shared/project_report/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
 
 
 #############################################

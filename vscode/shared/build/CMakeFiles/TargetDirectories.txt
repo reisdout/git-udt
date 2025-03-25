@@ -13,3 +13,6 @@
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_extractor/CMakeFiles/feature_extractor.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_extractor/CMakeFiles/edit_cache.dir
 /home/ns/UDT-workspace/git-udt/vscode/shared/build/project_feature_extractor/CMakeFiles/rebuild_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report/CMakeFiles/report.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report/CMakeFiles/edit_cache.dir
+/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report/CMakeFiles/rebuild_cache.dir

@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "5"
+			"value" : "6"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1226,6 +1226,18 @@
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
 		},
 		{
+			"name" : "REPORT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a"
+		},
+		{
 			"name" : "TCP_SOCKET",
 			"properties" : 
 			[
@@ -1416,6 +1428,42 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt"
+		},
+		{
+			"name" : "report_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/build/project_report"
+		},
+		{
+			"name" : "report_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "report_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/project_report"
 		},
 		{
 			"name" : "tcpsocket_BINARY_DIR",

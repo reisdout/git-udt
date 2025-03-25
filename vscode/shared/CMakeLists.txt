@@ -20,6 +20,7 @@ include_directories(. ./libudt
                     ./project_feature_saver/include
                     ./project_feature_extractor/include
                     ./project_mrs_utils/include
+                    ./project_report
                     ./debug)
 
 #link_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -49,6 +50,10 @@ find_library(FEATURE_EXTRACTOR
             NAMES feature_extractor 
             PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
+find_library(REPORT 
+            NAMES report 
+            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+
 #find_library(FEATURE_SAVER 
 #            NAMES feature_saver 
 #            PATHS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
@@ -59,6 +64,7 @@ add_subdirectory(project_pure_udt)
 add_subdirectory(TCP_Socket)
 add_subdirectory(project_feature_saver)
 add_subdirectory(project_feature_extractor)
+add_subdirectory(project_report)
 
 
 #add_library(console SHARED console.cpp)
@@ -70,4 +76,8 @@ target_link_libraries(${PROJECT_NAME}
                       ${PURE_UDT} 
                       ${TCP_SOCKET}
                       ${FEATURE_SAVER} 
-                      ${FEATURE_EXTRACTOR})
+                      ${FEATURE_EXTRACTOR}
+                      ${REPORT})
+
+
+#Lembrar de apagar o build de vez em quando...

@@ -1,5 +1,6 @@
 #include "../include/tcp_client.h"
 #include "../defines/defines.h"
+#include "mrs_utils.h"
 
 #include <cstdlib>
 #include <algorithm>
@@ -9,14 +10,20 @@ using namespace std::chrono;
 
 
 TCP_Client::TCP_Client(uint32_t par_server_port,
+                       uint64_t par_clients_to_fill_band,
                        string par_data_rate,
                        string par_congestion_control,
+                       uint64_t par_mss,
                        string par_num_flows,
+                       uint64_t par_simul_time,
                        string par_tipo_dado,
                        string par_simu_start_time)
                        
 
 {
+    bool tcp_client_constructor_force_print =  false;
+    class_mrs_debug::print<char>("Entrando TCPClient constructor", '\n', tcp_client_constructor_force_print);
+   
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         std::cerr << "Socket creation error" << std::endl;
         exit(0);
@@ -24,12 +31,21 @@ TCP_Client::TCP_Client(uint32_t par_server_port,
 
 
     obj_saver.set_port(par_server_port);
+    class_mrs_debug::print<char>("ajustou porta do obj saver", '\n', tcp_client_constructor_force_print);
     obj_saver.set_bottleneck_datarate(par_data_rate);
     obj_saver.set_default_congestion(par_congestion_control);
     obj_saver.set_num_flows(par_num_flows);
     obj_saver.set_tipo_dado(par_tipo_dado);
     obj_saver.set_starting_time(par_simu_start_time);
     obj_saver.meth_adjust_file_path();
+    class_mrs_debug::print<char>("obj_saver instanciado no TcpClinet constructor", '\n', tcp_client_constructor_force_print);
+    mss = par_mss;
+    data = new char[mss];
+    clients_to_fill_band = par_clients_to_fill_band;
+    simul_time = par_simul_time;
+    experiemnt_dir = obj_saver.get_out_dir();
+    transmission_rate_mbps = stoull(par_data_rate);
+    period_to_transmit_micro_seconds = clients_to_fill_band*((8*mss)/transmission_rate_mbps);
 }
 
 void TCP_Client::SetServerAddr()
@@ -54,11 +70,16 @@ void TCP_Client::ConnectToServer()
 void TCP_Client::Send()
 {
 
+    if(!clients_to_fill_band || !mss ||!transmission_rate_mbps||!port)
+    {
+        cout <<" Not enought parameters to transmit" << endl;
+        exit(0);
+    }
+
     //std::cout << "Testando digitação...: ";
     //getline(cin, message_to_server);
     //std::cout << message_to_server<< endl;
     
-    char* data = new char[MSS];
     char temp;
 
 
@@ -68,7 +89,7 @@ void TCP_Client::Send()
     for(;;) //Se quiser mandar apenas uma mensagem
             //pode tirar o for.
     {
-        if(duration.count() <= SIMUL_TIME)
+        if(duration.count() <= simul_time)
         {
             //temp = cin.get();
             usleep (period_to_transmit_micro_seconds);
@@ -77,13 +98,13 @@ void TCP_Client::Send()
             //message_to_server.clear();
             //getline(cin, message_to_server);
             //std::cout << message_to_server << endl;
-            data = new char [MSS];            
-            fill_of(data,'a',MSS);
+            data = new char [mss];            
+            fill_of(data,'a',mss);
             std::cout << "data: " << data[0] << std::endl;
             if(data)
             {      
                 std::cout << "Enviando...: "<< endl;
-                send(sock, data, MSS, 0);
+                send(sock, data, mss, 0);
                 //std::cout << "cwnd: " << get_cwnd() << std::endl;
                 //if(get_cwnd() == 65)
                     //set_cwnd(100);
@@ -91,11 +112,11 @@ void TCP_Client::Send()
                 //ssize_t valread = read(sock, buffer, CLIENT_BUFFER_SIZE);
                 //std::cout << "Server Received: " << buffer[0] << std::endl;
                 std::cout << "last ack: " << get_last_ack() << std::endl;
-                if ((strncmp(buffer, "exit", 4)) == 0) 
-                {
-                    printf("Client Exit...\n");
-                    break;
-                }
+                //if ((strncmp(buffer, "exit", 4)) == 0) 
+                //{
+                    //printf("Client Exit...\n");
+                    //break;
+                //}
 
             }
         
@@ -107,12 +128,14 @@ void TCP_Client::Send()
             break;
        
     }
+    send(sock, "exit", 4, 0);
     Close();
 }
 
 void TCP_Client::Close()
 {
     // Close the socket
+    cout << "Closing connection in port " << port<< "!" << endl;
     close(sock);
 
 }
@@ -149,3 +172,10 @@ void TCP_Client::fill_of(char* par_buf, char par_value_to_fill, int par_size)
     for (int i=0; i<par_size; i++)
         par_buf[i]=par_value_to_fill;
 }
+
+
+TCP_Client::~TCP_Client()
+{
+    if(data) 
+        delete data;
+};

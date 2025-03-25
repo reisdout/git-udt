@@ -26,13 +26,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 66,
+				"line" : 72,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 68,
+				"line" : 74,
 				"parent" : 0
 			},
 			{
@@ -84,6 +84,10 @@
 				},
 				{
 					"backtrace" : 3,
+					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./project_report"
+				},
+				{
+					"backtrace" : 3,
 					"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/./debug"
 				}
 			],
@@ -130,6 +134,11 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "\"/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a\"",
 				"role" : "libraries"
 			}
 		],
