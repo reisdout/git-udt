@@ -3,13 +3,41 @@
 #include "../include/class_feature_extractor.h"
 #include "mrs_utils.h"
 
+bool class_feature_extractor_tcp::deal_with_port_change(uint32_t par_current_port)
+{
+    
+    class_mrs_debug::print<char>("class_feature_extractor_tcp::deal_with_port_change", '\n', force_print_tcp_extractor);
+
+    uint32_t temp_port;
+    string str_current_line_port;
+    do{
+        
+        class_mrs_debug::print<uint32_t>("par_current_port: ", par_current_port, force_print_tcp_extractor);
+        if(!meth_get_one_of_my_lines(current_dump_line))
+        {
+            cout << "Can't find new port!" << endl;
+            return false;
+        }
+        meth_update_seq_numbers(current_dump_line);
+        str_current_line_port = class_feature_extractor::meth_search_occurence_string_between_delimiter(current_dump_line,' ',3);//10.0.0.3.60434
+        str_current_line_port = class_feature_extractor::meth_search_occurence_string_between_delimiter(str_current_line_port,'.',5);//60434
+        class_mrs_debug::print<string>("str_current_line_port: ", str_current_line_port, force_print_tcp_extractor);
+        temp_port = stoul(str_current_line_port);
+        class_mrs_debug::print<uint32_t>("temp_port: ", temp_port, force_print_tcp_extractor);
+    
+    }while(temp_port != par_current_port);
+
+    class_mrs_debug::print<char>("Found Port: ", '\n', force_print_tcp_extractor);
+    return true;
+
+}
+
 void class_feature_extractor_tcp::meth_extract_router_features()
 {
     
     meth_check_if_parse_dump_file_is_possible();
 
     std::string dump_line;
-    float queue_now;
     //char c;
     //cout << "dump_file: " << dump_file << endl;
     stream_dump_file.open(dump_file);
@@ -49,9 +77,9 @@ void class_feature_extractor_tcp::meth_extract_router_features()
                     dump_line.find(to_string(port)+":") != string::npos)
             {
                 class_mrs_debug::print<string>("dump_line: ", dump_line);
-                if(!first_packet)
+                if(!first_packet_processed)
                 {
-                    first_packet=true;
+                    first_packet_processed=true;
                     continue;
                 }
                 time_stamp = meth_search_time_stamp(dump_line);                
@@ -104,7 +132,10 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
     
 
     if(last_ack_processed >= par_ack_seq)//Ack anacronico
-        return false;
+    {
+        cout << "Anacronic Ack" << endl;
+        //return false;
+    }
     
     last_ack_processed = par_ack_seq;
     meth_check_if_parse_dump_file_is_possible();
@@ -123,7 +154,7 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
         
         while (!stream_dump_file.eof() && !done)
         {
-            class_mrs_debug::print<uint64_t>("\n\nAck to analize: ",par_ack_seq,force_print_in_meth_extract_router_features_ack);
+            class_mrs_debug::print<uint64_t>("\n\nAck to analize in [P.]: ",par_ack_seq,force_print_in_meth_extract_router_features_ack);
             class_mrs_debug::print<string>("Current dump Line: ", current_dump_line,force_print_in_meth_extract_router_features_ack);
             class_mrs_debug::print<uint64_t>("Current Seq Inf: ", current_seq_number_inf_in_decimal ,force_print_in_meth_extract_router_features_ack); 
             class_mrs_debug::print<uint64_t>("Current Seq Sup: ", current_seq_number_sup_in_decimal,force_print_in_meth_extract_router_features_ack);
@@ -134,7 +165,7 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
             //ainda permaneço no pacote correpondente à linha anterior
             
             //Para escapar do primeiro pacote absurdo e posicionar no primeiro significativo
-            if(!first_packet)
+            if(!first_packet_processed)
             {
                 class_mrs_debug::print<char>("Dealing with first packet",'\n',force_print_in_meth_extract_router_features_ack);
                 bool resultado_leitura_linha1;// resultado_leitura_linha1;
@@ -143,7 +174,7 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                 resultado_leitura_linha2 = meth_get_one_of_my_lines(current_dump_line);
                 if(!resultado_leitura_linha1 || !resultado_leitura_linha2)
                 {
-                    cout << "Can't start first router dump readind." << endl;
+                    cout << "Can't start first router dump reading." << endl;
                     done = true;
                     considered_ack =  false;
                 }
@@ -155,7 +186,7 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                     class_mrs_debug::print<uint64_t>("First packet in extractor_tcp com Ack ", par_ack_seq,force_print_in_meth_extract_router_features_ack);
                     class_mrs_debug::print<string>("First packet in extractor_tcp com linha ", current_dump_line ,force_print_in_meth_extract_router_features_ack);
                     meth_update_seq_numbers(current_dump_line);
-                    first_packet=true;
+                    first_packet_processed=true;
                     done = true;
                     considered_ack = false;
 
@@ -172,11 +203,27 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                 {
                     //essa expansão contempla ack com seq no meio dos bytes de um segmento.
                     //ver notes_to_consider.txt. Se chegou aqui o ack-1 está entre inf e sup.
-                 
-                        meth_update_seq_queue_file(par_ack_seq-1, queue_now);
-                        done = true;
-                        considered_ack = true;
-                        cout << "ack " << par_ack_seq << " processed." << endl;
+
+                    class_mrs_debug::print<long double>("queue_now: ",queue_now,force_print_in_meth_extract_router_features_ack);
+
+                    queue_ewma = (long double)((1- exp_weight_expon_queue)*queue_ewma + (exp_weight_expon_queue)*queue_now);
+                    class_mrs_debug::print<long double>("queue_ewma: ",queue_ewma,force_print_in_meth_extract_router_features_ack);
+
+                    //Nunca divida por define, pois, não sei por que dá errado
+                    //por isso, armazenamos na variavels MAX_BYTES_ROUTER_BUFFERSIZE
+                    //uint32_t MAX_BYTES_ROUTER_BUFFERSIZE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
+
+                    long double MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps;
+
+                    class_mrs_debug::print<long double>("MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE: ",MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE,force_print_in_meth_extract_router_features_ack);
+                    
+                    class_mrs_debug::print<long double>("queue_ewma(%): ",(long double)(queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE),force_print_in_meth_extract_router_features_ack);
+                    
+                    meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_now));
+                    //meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE));
+                    done = true;
+                    considered_ack = true;
+                    cout << "ack " << par_ack_seq << " processed." << endl;
                 }
                 else
                 {
@@ -258,14 +305,14 @@ bool class_feature_extractor_tcp::meth_get_one_of_my_lines(string& par_dump_line
         else if(par_dump_line.find("[P.],")!=std::string::npos &&
                 par_dump_line.find(" > 10.0.1.3."+to_string(port)+ ": Flags [P.], seq")!= std::string::npos)
             {
-                class_mrs_debug::print<string>("current port:", to_string(port)+":",force_print_meth_get_one_of_my_lines);
-                class_mrs_debug::print<string>("**read line:", par_dump_line,force_print_meth_get_one_of_my_lines);
+                class_mrs_debug::print<string>("current fishing server port:", to_string(port)+":",force_print_meth_get_one_of_my_lines);
+                class_mrs_debug::print<string>("fishing line:", par_dump_line,force_print_meth_get_one_of_my_lines);
                 
                 return true; //found line
             }
 
     }
-
+    more_packet_line = false;
     return false;
 }
 
@@ -292,6 +339,8 @@ string class_feature_extractor_tcp::meth_search_time_stamp(string par_dump_line)
     return time_stamp_temp;
     
 }
+
+
 
 void class_feature_extractor_tcp::meth_update_seq_numbers(string par_dump_line)
 {

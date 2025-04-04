@@ -88,7 +88,7 @@ public:
     virtual void meth_prepare_time_stamp(string & par_time_stamp){return;};
     virtual string meth_search_seq_number(string par_dump_line)=0;
     virtual string  meth_search_time_stamp(string par_dump_line)=0;
-    bool meth_search_best_queue_size_by_time_stamp(string dump_seq_time_stamp, float& par_best_queue_size);
+    bool meth_search_best_queue_size_by_time_stamp(string dump_seq_time_stamp, long double& par_best_queue_size);
     //bool meth_search_best_queue_size_by_time_stamp(string dump_seq_time_stamp, uint64_t& par_best_queue_size);
     static string meth_search_occurence_string_between_delimiter(string par_string_to_search,
                                                           char par_delimiter, 
@@ -98,7 +98,7 @@ public:
     
     static bool meth_take_and_store_line_values_from_queue_along_time(ifstream &par_stream_of_lines, uint64_t & par_time_stamp, uint64_t & par_queue_buffer);
 
-    void meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma);
+    void meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma);
 
     string get_out_dir(){return out_dir;};
     string get_seq_metrics_file_name(){return seq_metrics_file_name;};
@@ -106,6 +106,7 @@ public:
     string get_queue_size_along_time_file(){return queue_size_along_time_file;};
   
     virtual void set_dump_file(string par_dump_file){dump_file = out_dir+ "/" +"router_data"+ "/" + par_dump_file;};
+    virtual void set_SYN_file(string par_SYN_file){};
     void set_out_dir(string par_out_dir); //Será acrescentado ao /home/ns/Desktop/output
     void set_port(uint32_t par_port){port=par_port;};
     void set_queue_size_along_time_file(string par_queue_size_along_time_file);
@@ -114,7 +115,7 @@ public:
  
 protected:
         
-        bool first_packet = false;
+        bool first_packet_processed = false;
         bool first_ack_seq_queue_association = true;
         unsigned segmentsReceived=0;
         static inline bool queue_ewma_generated = false;
@@ -127,6 +128,7 @@ protected:
         float buffer_at_secondary_packet_arrival_time=0.0;
         static inline float exp_weight_expon_queue = 0.8;
         float router_queue_ewma = 0.0;
+        long double queue_now;
         ifstream stream_queue_size_along_time_file;
         std::string queue_size_along_time_file;
         std::string queue_size_along_time_file_ewma;

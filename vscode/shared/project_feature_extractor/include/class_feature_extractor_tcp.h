@@ -52,11 +52,13 @@ public:
     
     virtual void meth_extract_router_features();//scan dump file
     //retorna true se o seq foi efetivamente a um ewma no cvs.
+    bool deal_with_port_change(uint32_t par_current_port);
     bool meth_extract_router_features(uint64_t par_ack_seq);//scan dump file
     bool meth_get_one_of_my_lines(string& par_dump_line);
     virtual string meth_search_seq_number(string par_dump_line);
     virtual string  meth_search_time_stamp(string par_dump_line);
     void meth_update_seq_numbers(string par_dump_line);
+    bool meth_more_packet_line(){return more_packet_line;};
 
    
     
@@ -66,6 +68,7 @@ public:
        
         uint64_t last_ack_processed = 0;
         ifstream stream_dump_file;
+        uint32_t current_client_port=0;
         string current_dump_line = "XXXXXXXXXXXX";
         string current_seq_number_interval;
         string current_seq_number_inf;
@@ -73,13 +76,16 @@ public:
         uint64_t current_seq_number_inf_in_decimal=0;
         uint64_t current_seq_number_sup_in_decimal=0;
         string current_time_stamp;
-        float queue_now;
+        
+        long double queue_ewma = 0.0;
+        float expWeightExpon = 0.8;
 
 
         //printers
         bool force_print_tcp_extractor = false;
-        bool force_print_in_meth_extract_router_features_ack=false;
+        bool force_print_in_meth_extract_router_features_ack = false;
         bool force_print_meth_get_one_of_my_lines = false;
+        bool more_packet_line = true;
     
     
 };

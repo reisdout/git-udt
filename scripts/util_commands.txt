@@ -1,37 +1,41 @@
-tshark -i enp0s20f3 -f "tcp" -s 100 -w /home/ns/Desktop/tshark/tcp_pcap.pcapng
-
-tcpdump -tt --nano -qns 0 -X -r tcp_pcap.pcapng > tcp_dump.txt
-
-sudo tcpdump  -tt --micro -i enp0s20f3 -f "tcp[tcpflags] == tcp-ack or tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack" > tcp_dump_direct_only_ack.txt
+##### No Roteador
 
 
+tshark -i enp0s20f3 -f "tcp[13] & 8 !=0 " -s 100 -w ./tshark_tcp_pcap_16_30.pcapng
 
-tshark -i enp0s20f3 -f "tcp[13] & 8 !=0 " -s 100 -w ./tshark_tcp_pcap.pcapng
+tshark -i enp0s20f3 -f "(tcp[13] & 8 !=0) and src 10.0.0.3" -s 100 -w ./tcp_pcap_14_25.pcapng
 
-sudo tcpdump  -tt --nano -r tshark_tcp_pcap.pcapng > tshark_tcp_dump_readable.txt
+
+
+
+
+sudo tcpdump -S -n -tt --nano -r tshark_tcp_pcap_16_30.pcapng > tshark_tcp_dump_router_16_30.txt
 
 
 #NOS CLIENTES
 
 
-sudo systemctl restart NetworkManager.service
-
-
-
-
+tshark -i ens33 -B 300 -f "tcp[tcpflags] == tcp-ack and src 10.0.1.3"  -w ./tcp_ACK_pcap_09_40.pcapng
+tshark -i ens33 -a packets:5 -f " tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack"  -w ./tcp_SYN_pcap_09_40.pcapng
 
 tshark -i ens33 -f "tcp[tcpflags] == tcp-ack or tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack"  -w ./tshark_tcp_pcap_16_30.pcapng
 
-sudo tcpdump -n  -tt --micro -r tshark_tcp_pcap_16_30.pcapng > tcp_dump_16_30.txt
+
+
+
+sudo tcpdump -S -n -tt --micro -r tshark_tcp_pcap_16_30.pcapng > tcp_dump_16_30.txt
 
 
 
 
 
-#NO ROTEADOR
 
-tshark -i enp0s20f3 -f "tcp[13] & 8 !=0 " -s 100 -w ./tshark_tcp_pcap_16_30.pcapng
-sudo tcpdump  -tt --nano -r tshark_tcp_pcap_16_30.pcapng > tshark_tcp_dump_router_16_30.txt
+
+
+
+Listar todos os processos
+ps -aux | grep 90
+
 
 
 
@@ -44,4 +48,15 @@ sudo pkill -f ./communicator
 Quantas linha em um arquivo
 
 wc -l < countries.txt
+
+sudo systemctl restart NetworkManager.service
+
+
+
+Para ter acesso a senha de root, deve-se definir uma nova
+passwd root
+Isso é necessáro para carregar módulos de controle de congestionamento.
+
+ver (https://www.hostinger.com/tutorials/how-to-change-password-in-linux/?utm_campaign=Generic-Tutorials-DSA|NT:Se|LO:BR-EN&utm_medium=ppc&gad_source=1&gclid=CjwKCAjwwLO_BhB2EiwAx2e-34ZWdDnD2OaTPn0tVTs8f-dESTwZYhouMPbg1pXsQYZTmUapCgehbRoC8_8QAvD_BwE)
+
 

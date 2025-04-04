@@ -21,7 +21,7 @@ function get_cur_nano_sec() {
 #echo $variableA
 
 # How long the script should run for. 
-duration=600
+duration=$1 #600
 CURSEC=`get_cur_sec`
 #echo $duration
 #echo $CURSEC
@@ -39,6 +39,6 @@ do
   CURSEC=`get_cur_sec`  
 done
 
-
+echo "Finish queue capture!"
 
 

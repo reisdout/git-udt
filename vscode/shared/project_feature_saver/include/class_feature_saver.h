@@ -157,7 +157,8 @@ class class_feature_saver{
     string tipo_dado;
     string default_congestion;
     string num_flows;
-    string bottleneck_datarate;    
+    string bottleneck_datarate;
+    bool force_print_feature_saver = false;
 
 
 };

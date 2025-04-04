@@ -1,4 +1,5 @@
 #include "../include/class_feature_saver.h"
+#include "mrs_utils.h"
 #include <iomanip>
 
 
@@ -12,7 +13,8 @@ void class_feature_saver::meth_adjust_file_path(string par_out_dir)
 {
    
     meth_check_parameters();
-    int client_id = port - 9000;
+    //int client_id = port - 9000;
+    int client_id = port - class_mrs_debug::get_port_range(port);
     seq_metrics_file_name = std::string("10_0_") + 
                             std::to_string(client_id) +
                             std::string("_2") +
@@ -81,6 +83,9 @@ void class_feature_saver::meth_add_file_header()
     std::cout << "Erro ao registrar Dados de Treinamento";
     exit(0);
   }
+
+  class_mrs_debug::print<char> ("Entering meth_add_file_header",'\n',force_print_feature_saver);
+
   file <<"#Ack" << "," 
          << "ack_ewma(us)" << ","
          << "send_ewma(us)" << ","
@@ -163,9 +168,12 @@ void class_feature_saver::meth_save_training_data(uint64_t parNumAckFlow,
   //escapando do slowStart
   //if((Simulator::Now().GetSeconds() - lastTimeCwndIsZero[parIdSrc][parIdDest] <=50) && parFlowType == LONG_FLOW)
     //return;
-  
+
+  class_mrs_debug::print<char> ("Entering meth_save_training_data",'\n',force_print_feature_saver);
   if(!first_ack_process)
   {
+    
+    class_mrs_debug::print<char> ("Creating Headers",'\n',force_print_feature_saver);
     meth_add_file_header();
     return;
   }

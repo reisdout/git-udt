@@ -1108,6 +1108,8 @@ int main(int argc, char**argv){
         class_feature_extractor_tcp_client obj_extractor_tcp_client;
         string dump_line;
         obj_extractor_tcp_client.set_port(server_port);
+        
+
 
 
         uint64_t ack_arrival;
@@ -1115,7 +1117,7 @@ int main(int argc, char**argv){
         uint64_t seq_number;
         uint64_t work_line;
 
-        bool virtual_clock_defined = false;
+
 
         class_feature_saver_tcp obj_saver;
 
@@ -1163,9 +1165,9 @@ int main(int argc, char**argv){
         
         
         
-        ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt");
+        ifstream stream_dump_file (obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump_ACK.txt");
         
-        cout << "client ifstream: " << obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump.txt" << endl;
+        cout << "client ifstream: " << obj_saver.get_out_dir()+ "/" + "clients_data" + "/" + "clients_dump_ACK.txt" << endl;
         
         class_feature_extractor_tcp obj_extractor_tcp_router;
         obj_extractor_tcp_router.set_port((uint32_t)server_port);
@@ -1181,30 +1183,66 @@ int main(int argc, char**argv){
         obj_extractor_tcp_router.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
         obj_extractor_tcp_router.meth_adjust_seq_metrics_file_path();
 
+        uint64_t syn_time_stamp;
+        uint64_t TS_val;
+        obj_extractor_tcp_client.set_SYN_file(obj_saver.get_out_dir() + "/" + "clients_data" + "/" + "clients_dump_SYN.txt");
+        
+        if(obj_extractor_tcp_client.meth_give_time_stamp_to_synchronize_clock(syn_time_stamp, TS_val))
+        {
+            cout << "Setting Virtual Clock origin" << endl;
+            obj_saver.meth_set_virtual_clock_origin(syn_time_stamp,TS_val);
+
+
+        }
+        else
+        {
+            cout << "Can't set virtual clock origin";
+            return 1;
+        }
+
         bool intersting_line = false;
         if (stream_dump_file.is_open())
         {
             
             cout << "stream opend" << endl;
             
+            
             while (getline (stream_dump_file,dump_line) )
             {
                 
-                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line);
-                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line);
+                class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line,main_force_print);
+                class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line, main_force_print);
+                
+                if(!obj_extractor_tcp_router.meth_more_packet_line())
+                {
+                    cout << "No more packet lines!" << endl;
+                    break;
+                }
                 
                 //Verifica se é linha do fluxo da porta
                 if(dump_line.find("10.0.1.3." + to_string(server_port)) == std::string::npos)
                 {
-                    class_mrs_debug::print<string>("line is not of my flow: ", dump_line);
+                    class_mrs_debug::print<string>("line is not of my flow: ", dump_line,main_force_print);
                     //cout << "not intersting line." << endl;
                     continue;
                 }
                 intersting_line = true;
                 //cin.ignore();
                 //extrai os tempos dos pacotes ack
-                if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply) && virtual_clock_defined)
+                //No futuro pensar na possibilidade de se fazer um extractor só, com o tcp_client herdando do tcp_router
+                if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply) && class_feature_saver_tcp::meth_clock_origin_configured())
                 {
+                    if(obj_extractor_tcp_client.get_port_changed())
+                    {
+                        if(!obj_extractor_tcp_router.deal_with_port_change(obj_extractor_tcp_client.get_current_port()))
+                        {   
+                            //Tem horas que muda, mas não há mais pacotes na porta para
+                            //qual mudou. Impressionante!
+                            cout << "Can not change port." <<endl;
+                            break;
+
+                        }
+                    }
                     if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
                     {   
                         //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
@@ -1221,18 +1259,35 @@ int main(int argc, char**argv){
                     if(dump_line.find("[S],")!=std::string::npos &&
                        dump_line.find(string(" > ") + "10.0.1.3." + to_string(server_port))!= std::string::npos)
                        {
-                            class_mrs_debug::print<char>("Setting virtual clock origin ", '\n');
+                            class_mrs_debug::print<char>("Setting virtual clock origin ", '\n',main_force_print);
                             string syn_time_stamp = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',1);
                             class_feature_extractor::meth_erase_dot_from_time_stamp(syn_time_stamp);
                             string syn_TS_val = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',16);
-                            class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp);
-                            class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val);
+                            class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp,main_force_print);
+                            class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val,main_force_print);
                             obj_saver.meth_set_virtual_clock_origin(stoull(syn_time_stamp),stoull(syn_TS_val));
-                            virtual_clock_defined =true;
+                            
                        }
+
+                    else if(!class_feature_saver_tcp::meth_clock_origin_configured() && dump_line.find("[S.],")!=std::string::npos &&
+                    dump_line.find(string("10.0.1.3.") + to_string(server_port)+" > 10.0.0.3")!= std::string::npos)
+                    {
+                        class_mrs_debug::print<char>("Setting virtual clock origin by [S.]", '\n',main_force_print);
+                        string syn_time_stamp = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',1);
+                        class_feature_extractor::meth_erase_dot_from_time_stamp(syn_time_stamp);
+                        //20 para pegar o ecro reply....ecr
+                        string syn_TS_val = class_feature_extractor::meth_search_occurence_string_between_delimiter(dump_line,' ',20);
+                        syn_TS_val = class_feature_extractor::meth_search_occurence_string_between_delimiter(syn_TS_val,',',1);
+                        class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp,main_force_print);
+                        class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val,main_force_print);
+
+                        //O 42500 a seguir é exatamente o RTT, ou seja o SYN saiu RTT microssegundos atrás.
+                        obj_saver.meth_set_virtual_clock_origin(stoull(syn_time_stamp) - 42500,stoull(syn_TS_val));
+
+                    }
                  }
     
-                class_mrs_debug::print<char>("just a pause: ", '\n');
+                class_mrs_debug::print<char>("just a pause: ", '\n',main_force_print);
             
             }
 
@@ -1246,7 +1301,7 @@ int main(int argc, char**argv){
 
         else
         {
-            cout << "Can't open client dump file" << endl;
+            cout << "Can't open client dump ACK file" << endl;
             exit(0);
         } 
 

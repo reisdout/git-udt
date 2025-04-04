@@ -22,7 +22,8 @@ void class_feature_extractor::meth_adjust_seq_metrics_file_path()
     //ajusta para o tempo em que os fluxos foram estabelecidos
     //obtendo esse tempo do out_dir
     meth_adjus_starting_time();
-    int client_id = port - 9000;
+    //int client_id = port - 9000;
+    int client_id = port - class_mrs_debug::get_port_range(port);
     seq_metrics_file_name = std::string("10_0_") + 
                             std::to_string(client_id) +
                             std::string("_2") +
@@ -223,7 +224,7 @@ bool class_feature_extractor::meth_drain_dump_file(string par_dump_file)
 
 
 bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string par_time_stamp, 
-                                                                         float& par_best_queue_size)
+                                                                         long double& par_best_queue_size)
 {
 
     /*
@@ -245,11 +246,19 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
     
     cout << queue_size_along_time_file_ewma <<"\n"; 
 
+
+    cout << "queue_size_along_time_file" <<"\n";
+    
+    cout << queue_size_along_time_file <<"\n"; 
+
+
     
     if(!stream_queue_size_along_time_file.is_open())
     {
        cout << "Queue ewma along time file not oppened." << endl;
+       //Para chavear entre o queue ewma e a pura
        stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
+       //stream_queue_size_along_time_file.open(queue_size_along_time_file);
     }
     
     if(stream_queue_size_along_time_file.is_open())
@@ -272,7 +281,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
             for(int i = 0; i < 2; i++)
             {               
 
-                if(i==0) //preenchenco o prioritario com os dados a primeira linha
+                if(i==0) //preenchenco o prioritario (frente na linha do tempo) com os dados a primeira linha
                 {    
                     if(!class_feature_extractor::meth_take_and_store_line_values_from_queue_along_time(stream_queue_size_along_time_file, prior_packet_arrival_time, buffer_at_prior_packet_arrival_time))
                     {    cout << "End of queue along time file";
@@ -280,7 +289,7 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
                          return false;
                     }
                 }
-                else//prrenchendo o secundário com os dados da segunda linha
+                else//prrenchendo o secundário (imedeiatemente posterior na linha do tempo) com os dados da segunda linha
                 {
                     if(!class_feature_extractor::meth_take_and_store_line_values_from_queue_along_time(stream_queue_size_along_time_file,secondary_packet_arrival_time,buffer_at_secondary_packet_arrival_time))
                     {
@@ -412,7 +421,7 @@ bool class_feature_extractor:: meth_take_and_store_line_values_from_queue_along_
             return true;
         }
         cout<< "sintax error in queueu along time file." <<endl;
-        return false;
+        exit(0);
     }
 
     return false;
@@ -522,6 +531,7 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
         uint64_t time;
         uint64_t queue = 0;
         long double ewma = 0.0;
+        uint32_t MAX_BYTES_ROUTER_BUFFERSIZE;
         
         while (meth_take_and_store_line_values_from_queue_along_time(stream_queue_size, time, queue))
         {
@@ -532,7 +542,7 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
             
             //Nunca divida por define, pois, não sei por que dá errado
             //por isso, armazenamos na variavels MAX_BYTES_ROUTER_BUFFERSIZE
-            uint32_t MAX_BYTES_ROUTER_BUFFERSIZE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
+            MAX_BYTES_ROUTER_BUFFERSIZE = MAX_BYTES_ROUTER_BUFFERSIZE_100Mbps; 
             file <<time << "," <<  fixed << setprecision(5) << (long double) (ewma/MAX_BYTES_ROUTER_BUFFERSIZE) <<"b"<< endl; 
         }
         file.close();
@@ -563,18 +573,23 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
         cout << "Queue size along time file with no extension."<< endl;
         exit(0);
     }
+
+    queue_size_along_time_file = out_dir + "/" + "router_data" + "/" + queue_size_along_time_file;
+
     queue_size_along_time_file_ewma.replace(pos,1,"_ewma.");
     queue_size_along_time_file_ewma = out_dir + "/" + "router_data" + "/" + queue_size_along_time_file_ewma;
+    
+    
     cout << "queue_size_along_time_file_ewma......" << queue_size_along_time_file_ewma <<"\n"; 
     //char c;
     //cin >> c;
 }
 
-void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, float par_queue_ewma)
+void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma)
 {
     
     
-    float queue_ewma_cuted = par_queue_ewma;
+    long double queue_ewma_cuted = par_queue_ewma;
 
     if(par_queue_ewma > 1.0)
         queue_ewma_cuted = 1.0;

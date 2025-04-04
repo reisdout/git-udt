@@ -3,6 +3,7 @@
 #include "mrs_utils.h"
 
 
+uint64_t class_feature_saver_tcp::virtual_clock_origin = 0;
 
 
 void class_feature_saver_tcp::meth_set_virtual_clock_origin(uint64_t par_1970_ts, uint64_t par_virtual_clock_ts)
@@ -57,6 +58,9 @@ void class_feature_saver_tcp::meth_deal_ack_arrival(uint32_t par_seq,
                                                      uint64_t par_packet_eco_reply)
 {
 
+        class_mrs_debug::print<char>("Entering meth_deal_ack_arrival: ", '\n',feature_saver_tcp_force_print);
+
+
         meth_calculate_ack_ewma(par_ack_arrival_time);
         meth_calculate_send_ewma(par_packet_eco_reply);
         meth_calculate_rtt(par_ack_arrival_time,par_packet_eco_reply);
@@ -105,7 +109,7 @@ void class_feature_saver_tcp::meth_calculate_ack_ewma(uint64_t par_ack_arrival_t
         long double intervalFromPreviousAck = delta_t;
         ack_ewma = ((1.0-expWeightExpon )*ack_ewma) + (expWeightExpon *intervalFromPreviousAck);
         //cout << "ack_ewma: " << ack_ewma<< "; "<<"Dt: " <<intervalFromPreviousAck <<  endl;
-        class_mrs_debug::print<long double>("ack_ewma: ", ack_ewma);
+        class_mrs_debug::print<long double>("ack_ewma: ", ack_ewma,feature_saver_tcp_force_print);
     }
     
     

@@ -8,7 +8,7 @@ void class_feature_extractor_udt::meth_extract_router_features()
     this->meth_check_if_parse_dump_file_is_possible();
 
     std::string dump_line;
-    float queue_now;
+
     uint64_t seq_in_decimal;
     //char c;
     //cout << "dump_file: " << dump_file << endl;
