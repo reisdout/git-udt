@@ -115,7 +115,16 @@ bool class_feature_extractor_tcp_client::meth_give_time_stamp_to_synchronize_clo
         return false;
     }
 
-    class_mrs_debug::print<string>("SYN_file", SYN_file,force_print_tcp_extractor_client);
+    //A string abaixo deve variar conforme o caso. Dempederá do range de portas. No caso do 
+    //iperf3, trabalha-se com as portas 5102 a 5161.
+    //Essa varável surgiu, pois estavamos com pacotes DNS que enganavam a condição, se passando
+    //por linha de abertura de conexão iperf3, por exemplo:
+    // SYN line: 1743851520.519843 IP 10.0.0.3.60256 > 10.0.1.3.22: Flags [S], seq 3635465937, win 64240, options [mss 1460,sackOK,TS val 2297727387 ecr 0,nop,wscale 7], length 0
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVV
+    string port_prefix="51";
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVV
+
+    class_mrs_debug::print<string>("SYN_file: ", SYN_file,force_print_tcp_extractor_client);
 
     string SYN_line;
     bool extracted_clock_marks = false;
@@ -128,10 +137,13 @@ bool class_feature_extractor_tcp_client::meth_give_time_stamp_to_synchronize_clo
         
         while (getline (stream_SYN_file ,SYN_line) && !extracted_clock_marks)
         {
+            
+            class_mrs_debug::print<string>("SYN line: ", SYN_line,force_print_tcp_extractor_client);
+
             //A condição abaixo independe da porta, pois a origem de tempo é única
             //Ou seja, procura-se um SYN qualquer, que já fornece a origem.
             if(SYN_line.find("[S],")!=std::string::npos &&
-            SYN_line.find(string(" > ") + "10.0.1.3.")!= std::string::npos)
+            SYN_line.find(string(" > ") + "10.0.1.3."+port_prefix)!= std::string::npos)
             {
                  class_mrs_debug::print<char>("Getting virtual clock origin in extractor_tcp_client ", '\n',force_print_tcp_extractor_client);
                  string syn_time_stamp = class_feature_extractor::meth_search_occurence_string_between_delimiter(SYN_line,' ',1);
@@ -149,14 +161,17 @@ bool class_feature_extractor_tcp_client::meth_give_time_stamp_to_synchronize_clo
                 cout << "Clock Marks successfully extracted" << endl;
                 return true;
             }
-            else
-            {
-                cout << "Clock Marks not extracted" << endl;
-                return false;
-
-            }
 
         }
+
+        if(!extracted_clock_marks)
+        {
+            cout << "No SYN line to set clock in SYN file." << endl;
+            return false;
+
+        }
+
+
     }
     else
     {

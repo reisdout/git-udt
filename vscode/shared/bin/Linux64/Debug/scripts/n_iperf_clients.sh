@@ -192,6 +192,7 @@ while [ $i -le $num_clients ];
 do
     
     door=`expr $i + 5101`
+    cdoor=`expr $i + 4101`
     echo $door
     #command="./udt server ${door}"
     #command="ls"
@@ -201,20 +202,21 @@ do
     #xterm -hold -e  ssh ns@10.0.1.3 ./udt server ${door} #&& /bin/bash &
     #'cd udt_workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./udt server ${door}'
     
-    echo "App call: iperf3  -c 10.0.1.3 -t 30 -p ${door}"
+    echo "App call: iperf3  -c 10.0.1.3 -t 30 -p ${door}"    
     
     
-   
-    
-    
-    
-    xterm -hold -e  "iperf3  -c 10.0.1.3 -t 30 -p ${door}" && /bin/bash &
+    xterm -hold -e  "iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door}" && /bin/bash &
+    #xterm -hold -e  "iperf3  -c 10.0.1.3 -t 30 -p ${door}" && /bin/bash &
     #xterm -hold -e  "iperf3 -c 10.0.1.3 -N -i 1 -t 90 -b /${flows_rate}M -p ${door}" && /bin/bash &
     sleep 0.5
 
     i=`expr $i + 1` 
 
 done
+
+#Tem que esperar. Se não o script termina antes de chamar os clientes todos, o que faz com que
+#os clientes finais (58-61) não subam.
+sleep 20
 
 
 : '

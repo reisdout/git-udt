@@ -77,86 +77,6 @@ done
 
 
 
-
-
-str_tcp_vegas="TcpVegas"
-
-str_tcp_cubic="TcpCubic"
-
-str_tcp_bbr="TcpBbr"
-
-str_tcp_new_reno="TcpNewReno"
-
-str_tcp_west_wood="TcpWestwoodPlus"
-
-
-
-
-case $cong_cont_var in
-    "TcpVegas"|"TcpCubic"|"TcpBbr"|"TcpNewReno"|"TcpWestwoodPlus")
-        echo "Your congestion control is in!"
-        ;;
-    *)
-        # error
-        echo "Your congestion control is out!"
-        exit 0
-esac
-
-
-if [ "$cong_cont_var" == "$str_tcp_vegas" ]; then
-    echo "You choose vegas!"
-    sudo sysctl -w net.ipv4.tcp_congestion_control=vegas
-
-elif [ "$cong_cont_var" == "$str_tcp_cubic" ]; then
-    echo "You choose Cubic"
-    sudo sysctl -w net.ipv4.tcp_congestion_control=cubic
-
-elif [ "$cong_cont_var" == "$str_tcp_bbr" ]; then
-    echo "You choose Bbr"
-    sudo sysctl -w net.ipv4.tcp_congestion_control=bbr
-
-elif [ "$cong_cont_var" == "$str_tcp_new_reno" ]; then
-    echo "You choose NewReno"
-    sudo sysctl -w net.ipv4.tcp_congestion_control=reno
-
-elif [ "$cong_cont_var" == "$str_tcp_west_wood" ]; then
-
-    echo "You choose Westwood" 
-    sudo sysctl -w net.ipv4.tcp_congestion_control=westwood
-
-
-else
-    echo "failed in set congestion control"
-    exit 0
-
-fi
-
-
-
-
-
-rtt=43
-
-wmem_max=`expr ${rate_var} \* ${rtt} \* 1000`
-
-sys_ctl_wmem_max="sudo sysctl -w net.core.wmem_max=${wmem_max}" 
-
-echo $sys_ctl_wmem_max
-
-exec=`$sys_ctl_wmem_max`;
-
-echo ${exec}
-
-sleep 5
-
-sudo systemctl restart NetworkManager.service
-
-sleep 20
-
-
-
-
-
 echo "Starting Tshark ACK capture in client host:"
 
 sleep 2
@@ -183,18 +103,12 @@ xterm -hold -e ssh ns@10.0.0.1  "cd /tmp/ramdisk/tshark;  tshark -i enp0s20f3 -a
 
 sleep 10
 
-echo "Starting iperf3 servers in servers host: "
-
-xterm -hold -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
-
-sleep 120
-
 
 echo "Starting queue capture in router:"
 
 xterm -hold -e ssh ns@10.0.0.1  "echo \"Starting queue record\"; cd /tmp/ramdisk/queue;  ./queue_monitor.sh 220 >> queue_along_time_${start_date_tshark}.txt; echo \"stopping queue capture\" " && /bin/bash &
 
-sleep 2
+sleep 30
 
 
 experiment_path="/home/ns/Desktop/output/${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date_tshark}"
@@ -209,20 +123,6 @@ $($exec)
 exec="chmod 777 ${experiment_path}";
 
 $($exec)
-
-
-
-echo "Starting iperf3 clients in clients host"
-
-#${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date}
-
-echo "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}"
-
-xterm -hold -e  "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}" && /bin/bash &
-
-sleep 700
-
-echo "Check ack if ACK capture get off"
 
 echo "Generanting ACK dump in clients host"
 
@@ -284,7 +184,7 @@ cmd="mv  ${experiment_path}/router_data/tcp_dump_${start_date_tshark}.txt   ${ex
 $($cmd)
 
 
-ssh ns@10.0.0.1 rm \'/tmp/ramdisk/tshark/tcp_dump_${start_date_tshark}.txt\'  #apagando do ramdisk
+ssh ns@10.0.0.1 rm \'/tmp/ramdisk/tshark/tcp_dump_${start_date_tshark}.txt\'   #apagando do ramdisk
 
 
 
@@ -299,7 +199,7 @@ cmd="mv  ${experiment_path}/router_data/queue_along_time_${start_date_tshark}.tx
 $($cmd)
 
 
-ssh ns@10.0.0.1 rm \'/tmp/ramdisk/queue/queue_along_time_${start_date_tshark}.txt\' #apagando do ramdisk
+ssh ns@10.0.0.1 rm \'/tmp/ramdisk/queue/queue_along_time_${start_date_tshark}.txt\'  #apagando do ramdisk
 
 
 

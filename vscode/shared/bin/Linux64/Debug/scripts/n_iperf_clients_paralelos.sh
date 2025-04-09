@@ -205,7 +205,7 @@ do
        
         
         #xterm -hold -e  "iperf3 -c 10.0.1.3  -t 90 -b/1G -p ${door} -P 10" && /bin/bash &
-        xterm -hold -e  "iperf3   -c 10.0.1.3 -Z -t 30 -p ${door} -P 2" && /bin/bash &
+        xterm -hold -e  "iperf3   -c 10.0.1.3 -Z -t 30 -p ${door}" && /bin/bash &
         #xterm -hold -e  "iperf3  -Z -c 10.0.1.3 -k 1000K -b ${flows_rate}M -p ${door}" && /bin/bash &
         #xterm -hold -e  "iperf3 -c 10.0.1.3 -N -i 1 -t 90 -b /${flows_rate}M -p ${door}" && /bin/bash &
         sleep 0.05

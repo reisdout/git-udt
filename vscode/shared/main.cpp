@@ -1204,7 +1204,7 @@ int main(int argc, char**argv){
         if (stream_dump_file.is_open())
         {
             
-            cout << "stream opend" << endl;
+            cout << "ACK File dump opened." << endl;
             
             
             while (getline (stream_dump_file,dump_line) )
