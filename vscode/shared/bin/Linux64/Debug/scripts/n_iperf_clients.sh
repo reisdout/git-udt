@@ -5,14 +5,14 @@ short_help_var="-h"
 
 if [ "$1" == "-h" ]; then
 
-    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
+    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
     exit 0
 fi
 
 
 if [ "$1" == "--help" ]; then
 
-    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
+    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
     exit 0
 fi
 
@@ -22,15 +22,15 @@ i=1
 
 start_date=$(date | cut -b 1-19 | tr ' ' _ | tr : _)
 
-VALID_ARGS=$(getopt -o c:d:r:f:s: --long cong_cont:,data_type:,rate:,flows:,saturation: -- "$@")
+VALID_ARGS=$(getopt -o c:d:r:p:f:s: --long cong_cont:,data_type:,rate:,path:,flows:,saturation: -- "$@")
 
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
 
-if [[ $# -ne 10 ]]; then
-   echo "You provided $# arguments, but we need 10. See -h option."    
+if [[ $# -ne 12 ]]; then
+   echo "You provided $# arguments, but we need 12. See -h option."    
     exit 0;
 fi
 
@@ -53,6 +53,14 @@ while [ : ]; do
         rate_var=$2
         shift 2
         ;;
+
+   -p | --path) #onde estarão os arquivos do experimento
+        #echo "Processing 'rate' option. Input argument is '$2'"
+        experiment_path=$2
+        shift 2
+        ;;
+
+
 
    -f | --flows)
         #echo "Processing 'flows' option. Input argument is '$2'"
@@ -186,7 +194,10 @@ $($exec)
 
 '
 
+
+
 echo "${num_clients}"
+
 
 while [ $i -le $num_clients ];
 do
@@ -200,12 +211,15 @@ do
     #echo $b
     #./udt server ${door}
     #xterm -hold -e  ssh ns@10.0.1.3 ./udt server ${door} #&& /bin/bash &
-    #'cd udt_workspace/git-udt/vscode/shared/bin/Linux64/Debug; ./udt server ${door}'
     
-    echo "App call: iperf3  -c 10.0.1.3 -t 30 -p ${door}"    
+    iperf_call="iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door} -t 30"
+        
+    #echo "App call: iperf3  -c 10.0.1.3 -t 30 -p ${door}"    
+    echo "App call: ${iperf_call}"
     
-    
-    xterm -hold -e  "iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door}" && /bin/bash &
+    #xterm -hold -e  "iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door}" && /bin/bash &
+    xterm -e  ${iperf_call} && /bin/bash &
+    #${iperf_call}
     #xterm -hold -e  "iperf3  -c 10.0.1.3 -t 30 -p ${door}" && /bin/bash &
     #xterm -hold -e  "iperf3 -c 10.0.1.3 -N -i 1 -t 90 -b /${flows_rate}M -p ${door}" && /bin/bash &
     sleep 0.5
@@ -214,10 +228,32 @@ do
 
 done
 
+
+#iperf_call="iperf3  -c 10.0.1.3 --cport 4102 -p 5102 -t 90 -P ${num_clients}"
+
+#echo "App call: ${iperf_call}"
+
+#${iperf_call}
 #Tem que esperar. Se não o script termina antes de chamar os clientes todos, o que faz com que
 #os clientes finais (58-61) não subam.
 sleep 20
 
+
+echo "Reporting iperf command"
+
+#Se colocar a notação $() nos comandos abaixo, o Xterm exibe uma mensagem dizendo que o 
+#arquivo não existe, mas acaba atualizando o arquivo de qualquer forma. Estranho....
+
+cd  ${experiment_path}
+
+
+sleep 1
+
+touch "${experiment_path}/iperf_report.txt"
+
+sleep 2
+
+chmod 777 "${experiment_path}/iperf_report.txt" 
 
 : '
 $(echo "Data Type: ${data_type_var}" >> "${experiment_path}/iperf_report.txt")
@@ -231,8 +267,7 @@ $(echo "Bottleneck Rate: ${rate_var}" >> "${experiment_path}/iperf_report.txt")
 $(echo "Saturation: ${saturation}" >> "${experiment_path}/iperf_report.txt")
 
 $(echo "WmemMax: ${wmem_max}" >> "${experiment_path}/iperf_report.txt")
-
-$(echo "iperf3 Last Call: iperf3 -c 10.0.1.3 -l 1000K -t 90 -b ${flows_rate}M -p ${door}" >> "${experiment_path}/iperf_report.txt")
-
 '
+
+$(echo "iperf3 Last Call: ${iperf_call}" >> "${experiment_path}/iperf_report.txt")
 

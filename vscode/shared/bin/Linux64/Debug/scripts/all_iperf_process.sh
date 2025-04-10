@@ -137,7 +137,9 @@ fi
 
 rtt=43
 
-wmem_max=`expr ${rate_var} \* ${rtt} \* 1000`
+max_rate=500
+
+wmem_max=`expr ${max_rate} \* ${rtt} \* 1000`
 
 sys_ctl_wmem_max="sudo sysctl -w net.core.wmem_max=${wmem_max}" 
 
@@ -154,6 +156,7 @@ sudo systemctl restart NetworkManager.service
 sleep 20
 
 
+pkill -f iperf3
 
 
 
@@ -187,14 +190,14 @@ echo "Starting iperf3 servers in servers host: "
 
 xterm -hold -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
 
-sleep 120
+sleep 100
 
 
 echo "Starting queue capture in router:"
 
-xterm -hold -e ssh ns@10.0.0.1  "echo \"Starting queue record\"; cd /tmp/ramdisk/queue;  ./queue_monitor.sh 220 >> queue_along_time_${start_date_tshark}.txt; echo \"stopping queue capture\" " && /bin/bash &
+xterm -hold -e ssh ns@10.0.0.1  "echo \"Starting queue record\"; cd /tmp/ramdisk/queue; ./queue_monitor.sh 220 >> queue_along_time_${start_date_tshark}.txt & sleep 225; echo \"stopping queue capture\" " && /bin/bash &
 
-sleep 2
+sleep 10
 
 
 experiment_path="/home/ns/Desktop/output/${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date_tshark}"
@@ -216,11 +219,18 @@ echo "Starting iperf3 clients in clients host"
 
 #${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date}
 
-echo "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}"
+echo "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}"
 
-xterm -hold -e  "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}" && /bin/bash &
+xterm -hold -e  "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}" && /bin/bash &
 
-sleep 700
+
+#echo "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}"
+
+#xterm -hold -e  "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -f ${flows_var} -s ${saturation}" && /bin/bash &
+
+sleep 720
+
+#grep -rnw \'/tmp/ramdisk/iperf\' -e 'iperf Done'
 
 echo "Check ack if ACK capture get off"
 
@@ -330,6 +340,8 @@ $($cmd)
 
 rm "/tmp/ramdisk/tshark/tcp_dump_SYN_${start_date_tshark}.txt"
 
+rm "/tmp/ramdisk/iperf/51*"
+
 
 $(echo "Data Type: ${data_type_var}" >> "${experiment_path}/iperf_report.txt")
 
@@ -342,6 +354,7 @@ $(echo "Bottleneck Rate: ${rate_var}" >> "${experiment_path}/iperf_report.txt")
 $(echo "Saturation: ${saturation}" >> "${experiment_path}/iperf_report.txt")
 
 $(echo "WmemMax: ${wmem_max}" >> "${experiment_path}/iperf_report.txt")
+
 
 
 

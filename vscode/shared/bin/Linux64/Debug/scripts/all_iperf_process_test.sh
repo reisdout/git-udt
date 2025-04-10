@@ -75,40 +75,12 @@ while [ : ]; do
   esac
 done
 
+echo "Starting iperf3 servers in servers host: "
 
+xterm -hold -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
 
-echo "Starting Tshark ACK capture in client host:"
+sleep 120
 
-sleep 2
-
-#tshark -i ens33 -B 300 -f "tcp[tcpflags] == tcp-ack and src 10.0.1.3"  -w ./tcp_ACK_pcap_09_52.pcapng
-
-
-xterm -hold -e  "cd /tmp/ramdisk/tshark; tshark -i ens33 -a duration:750 -B 300 -f \"tcp[tcpflags] == tcp-ack and src 10.0.1.3\"  -w ./tcp_ACK_pcap_${start_date_tshark}.pcapng" && /bin/bash &
-
-echo "Starting Tshark SYN capture in host:"
-
-#tshark -i ens33 -a packets:30 -f "(tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack) and (src 10.0.0.3 or  src 10.0.1.3)"  -w ./tcp_SYN_pcap_09_52.pcapng
-
-
-xterm -hold -e  "cd /tmp/ramdisk/tshark; tshark -i ens33 -a packets:30 -f \"(tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack) and (src 10.0.0.3 or  src 10.0.1.3)\"  -w ./tcp_SYN_pcap_${start_date_tshark}.pcapng" && /bin/bash &
-
-
-sleep 30
-
-echo "Starting Tshark packet capture in router:"
-
-xterm -hold -e ssh ns@10.0.0.1  "cd /tmp/ramdisk/tshark;  tshark -i enp0s20f3 -a duration:750 -f \"(tcp[13] & 8 !=0) and src 10.0.0.3\" -s 100 -w ./tcp_pcap_${start_date_tshark}.pcapng" && /bin/bash &
-
-
-sleep 10
-
-
-echo "Starting queue capture in router:"
-
-xterm -hold -e ssh ns@10.0.0.1  "echo \"Starting queue record\"; cd /tmp/ramdisk/queue;  ./queue_monitor.sh 220 >> queue_along_time_${start_date_tshark}.txt; echo \"stopping queue capture\" " && /bin/bash &
-
-sleep 30
 
 
 experiment_path="/home/ns/Desktop/output/${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date_tshark}"
@@ -124,112 +96,31 @@ exec="chmod 777 ${experiment_path}";
 
 $($exec)
 
-echo "Generanting ACK dump in clients host"
-
-xterm -hold -e  "cd /tmp/ramdisk/tshark; tcpdump -S -n -tt --micro -r tcp_ACK_pcap_${start_date_tshark}.pcapng > tcp_dump_ACK_${start_date_tshark}.txt" && /bin/bash &
-
-sleep 10
-
-rm "/tmp/ramdisk/tshark/tcp_ACK_pcap_${start_date_tshark}.pcapng"
-
-echo "Generating SYN dump"
-
-xterm -hold -e  "cd /tmp/ramdisk/tshark; tcpdump -S -n -tt --micro -r tcp_SYN_pcap_${start_date_tshark}.pcapng > tcp_dump_SYN_${start_date_tshark}.txt" && /bin/bash &
-
-sleep 10
-
-rm "/tmp/ramdisk/tshark/tcp_SYN_pcap_${start_date_tshark}.pcapng"
-
-echo "Generating packets dump in router"
-
-xterm -hold -e ssh ns@10.0.0.1  "cd /tmp/ramdisk/tshark; tcpdump -S -n -tt --nano -r tcp_pcap_${start_date_tshark}.pcapng > tcp_dump_${start_date_tshark}.txt" && /bin/bash &
-
-sleep 30
-
-ssh ns@10.0.0.1 rm \'/tmp/ramdisk/tshark/tcp_pcap_${start_date_tshark}.pcapng\'
-
-echo "Copying dumps and queue mesures to experiemnt directories"
 
 
-cmd="mkdir ${experiment_path}/clients_data"
+echo "Starting iperf3 clients in clients host"
 
-$($cmd)
+#${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date}
 
+echo "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}"
 
-exec="chmod 777 ${experiment_path}/clients_data";
-
-$($exec)
+xterm -hold -e  "./n_iperf_clients.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}"
 
 
 
-cmd="mkdir ${experiment_path}/router_data"
-
-$($cmd)
 
 
-exec="chmod 777 ${experiment_path}/router_data";
-
-$($exec)
 
 
-cmd="scp ns@10.0.0.1:/tmp/ramdisk/tshark/tcp_dump_${start_date_tshark}.txt  ${experiment_path}/router_data/"
+echo "Starting iperf3 clients in clients host"
 
-$($cmd)
+#${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps_${start_date}
+
+echo "./n_iperf_clients_test.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}"
+
+xterm -hold -e  "./n_iperf_clients_test.sh -c ${cong_cont_var} -d ${data_type_var} -r ${rate_var} -p ${experiment_path} -f ${flows_var} -s ${saturation}" && /bin/bash &
 
 sleep 10
-
-
-cmd="mv  ${experiment_path}/router_data/tcp_dump_${start_date_tshark}.txt   ${experiment_path}/router_data/tcp_dump.txt"
-
-$($cmd)
-
-
-ssh ns@10.0.0.1 rm \'/tmp/ramdisk/tshark/tcp_dump_${start_date_tshark}.txt\'   #apagando do ramdisk
-
-
-
-cmd="scp ns@10.0.0.1:/tmp/ramdisk/queue/queue_along_time_${start_date_tshark}.txt ${experiment_path}/router_data/"
-
-$($cmd)
-
-sleep 10
-
-cmd="mv  ${experiment_path}/router_data/queue_along_time_${start_date_tshark}.txt  ${experiment_path}/router_data/queue_along_time.txt"
-
-$($cmd)
-
-
-ssh ns@10.0.0.1 rm \'/tmp/ramdisk/queue/queue_along_time_${start_date_tshark}.txt\'  #apagando do ramdisk
-
-
-
-cmd="cp /tmp/ramdisk/tshark/tcp_dump_ACK_${start_date_tshark}.txt ${experiment_path}/clients_data/"
-
-$($cmd)
-
-
-
-cmd="mv ${experiment_path}/clients_data/tcp_dump_ACK_${start_date_tshark}.txt ${experiment_path}/clients_data/clients_dump_ACK.txt"
-
-$($cmd)
-
-
-
-rm "/tmp/ramdisk/tshark/tcp_dump_ACK_${start_date_tshark}.txt"
-
-
-cmd="cp /tmp/ramdisk/tshark/tcp_dump_SYN_${start_date_tshark}.txt ${experiment_path}/clients_data/"
-
-$($cmd)
-
-
-cmd="mv ${experiment_path}/clients_data/tcp_dump_SYN_${start_date_tshark}.txt ${experiment_path}/clients_data/clients_dump_SYN.txt"
-
-$($cmd)
-
-
-rm "/tmp/ramdisk/tshark/tcp_dump_SYN_${start_date_tshark}.txt"
-
 
 $(echo "Data Type: ${data_type_var}" >> "${experiment_path}/iperf_report.txt")
 
@@ -241,7 +132,8 @@ $(echo "Bottleneck Rate: ${rate_var}" >> "${experiment_path}/iperf_report.txt")
 
 $(echo "Saturation: ${saturation}" >> "${experiment_path}/iperf_report.txt")
 
-$(echo "WmemMax: ${wmem_max}" >> "${experiment_path}/iperf_report.txt")
+$(echo "WmemMax: xxxxMbps" >> "${experiment_path}/iperf_report.txt")
+
 
 
 

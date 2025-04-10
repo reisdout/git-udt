@@ -7,6 +7,29 @@ pkill -f iperf3
 
 num_clients=$1
 
+
+rtt=43
+
+max_rate=500
+
+rmem_max=`expr ${max_rate} \* ${rtt} \* 1000`
+
+sys_ctl_rmem_max="sudo sysctl -w net.core.rmem_max=${rmem_max}" 
+
+echo $sys_ctl_rmem_max
+
+exec=`$sys_ctl_rmem_max`;
+
+echo ${exec}
+
+sleep 5
+
+sudo systemctl restart NetworkManager.service
+
+sleep 15
+
+
+
 while [ $i -le $num_clients ];
 do
     
