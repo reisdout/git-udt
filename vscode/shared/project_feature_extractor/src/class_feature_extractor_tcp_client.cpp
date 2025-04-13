@@ -45,7 +45,7 @@ bool class_feature_extractor_tcp_client::meth_extract_client_feature(string par_
         //cout <<"packet: " << packet <<endl;
         //cin >> c;
 
-        class_mrs_debug::print<string>("par_dump_line: " ,par_dump_line);
+        class_mrs_debug::print<string>("par_ACK_dump_line: " ,par_dump_line,force_print_tcp_extractor_client);
         
         if(par_dump_line[0]=='#')//evita comentários e linhas de dados dos pacotes
         {
@@ -54,6 +54,7 @@ bool class_feature_extractor_tcp_client::meth_extract_client_feature(string par_
 
         else if(par_dump_line.find("ack")!=std::string::npos &&
                 par_dump_line.find("[.]")!=std::string::npos && //inserida, pois no iperf3 há mais de um three way, que faz com que seja ferida as duas outras condições
+                par_dump_line.find(string("> 10.0.0.3.")+to_string(port-1000)+": Flags [.]") != std::string::npos &&
                 par_dump_line.find("IP 10.0.1.3."+to_string(port)+" > ")!= std::string::npos)
         {
             class_mrs_debug::print<char>("intersting line in extractor_tcp_client:",'\n',force_print_tcp_extractor_client);
@@ -63,7 +64,7 @@ bool class_feature_extractor_tcp_client::meth_extract_client_feature(string par_
             //Isso tirava o sincronismo dos ACK, que mudavam de range com a mudança
             // da porta. O método abaixo controla essa mudança para retomar o novo range 
             //de ACK.
-            meth_update_port_state(par_dump_line);
+            //meth_update_port_state(par_dump_line);
 
 
             if(!first_packet_processed)//já foi o first_packet?
@@ -233,10 +234,18 @@ void class_feature_extractor_tcp_client::meth_update_port_state(string par_dump_
     class_mrs_debug::print<uint32_t>("temp_port: ", temp_port, force_print_tcp_extractor_client);
     class_mrs_debug::print<bool>("first_packet_processed: ", first_packet_processed, force_print_tcp_extractor_client);
 
-    if(current_port == temp_port || !first_packet_processed)
+    /*if(current_port == temp_port || !first_packet_processed)
+    {
+        port_change = false;
+    }*/
+
+    //Agora a porta do cliente é fixa e a 1000 da porta do servidor.
+    if(temp_port == (this->port - 1000))
     {
         port_change = false;
     }
+
+
     else
         port_change = true;
 

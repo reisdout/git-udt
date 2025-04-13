@@ -40,7 +40,7 @@ class class_feature_extractor_tcp: public class_feature_extractor {
 protected:
    
 public:
-    class_feature_extractor_tcp(){};//Lembrando que os constructors são da classe Base (Pai)
+    class_feature_extractor_tcp();//Lembrando que os constructors são da classe Base (Pai)
                //é autmaticamnete chamda quando se instancia a classe filha
                //se for herança múltipla, os constructors são chamados na ordem
                //de leituraem que foram declaradas as heranças. ver 
@@ -55,6 +55,7 @@ public:
     bool deal_with_port_change(uint32_t par_current_port);
     bool meth_extract_router_features(uint64_t par_ack_seq);//scan dump file
     bool meth_get_one_of_my_lines(string& par_dump_line);
+    bool meth_open_dump_file();
     virtual string meth_search_seq_number(string par_dump_line);
     virtual string  meth_search_time_stamp(string par_dump_line);
     void meth_update_seq_numbers(string par_dump_line);
@@ -85,6 +86,7 @@ public:
         bool force_print_tcp_extractor = false;
         bool force_print_in_meth_extract_router_features_ack = false;
         bool force_print_meth_get_one_of_my_lines = false;
+        bool force_print_in_anacronic_ack = false;
         bool more_packet_line = true;
     
     

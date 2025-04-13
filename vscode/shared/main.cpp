@@ -1100,6 +1100,10 @@ int main(int argc, char**argv){
             estará extraindo, para extrair apenas os seqs correspondentes
             aos ack. O saver provoca o extractor
         */
+
+
+        auto simulation_start = high_resolution_clock::now();
+
         
         cout << "Caso tcp_feature_saver_and_extractor" << endl;
         //A classe class_feature_extractor_tcp_client é praticamente
@@ -1182,6 +1186,11 @@ int main(int argc, char**argv){
         obj_extractor_tcp_router.set_dump_file("tcp_dump.txt");
         obj_extractor_tcp_router.set_queue_size_along_time_file("queue_along_time.txt");//vai procurar o ewma
         obj_extractor_tcp_router.meth_adjust_seq_metrics_file_path();
+        if(!obj_extractor_tcp_router.meth_open_dump_file())
+        {
+            cout << "Can't open packet dump file" << endl;
+            exit(0);
+        }
 
         uint64_t syn_time_stamp;
         uint64_t TS_val;
@@ -1230,19 +1239,28 @@ int main(int argc, char**argv){
                 //cin.ignore();
                 //extrai os tempos dos pacotes ack
                 //No futuro pensar na possibilidade de se fazer um extractor só, com o tcp_client herdando do tcp_router
+                obj_extractor_tcp_client.meth_update_port_state(dump_line);//São asportas esperadas?
+                if(obj_extractor_tcp_client.get_port_changed())//Se a porta mudou, não são!
+                {
+                    //Então busco o pacote com a porta certa.
+                    if(!obj_extractor_tcp_router.deal_with_port_change(obj_extractor_tcp_client.get_current_port()))
+                    {   
+                        //Tem horas que muda, mas não há mais pacotes na porta para
+                        //qual mudou. Impressionante!
+                        cout << "Can not change port." <<endl;
+                        break;
+
+                    }
+                    //A principio, nao ha mais mudança de porta, pois as portas 
+                    //dos clientess foram fixadas. Mesmp assim, o iperf faz bagunça
+                    //as vezes
+                    continue;
+
+
+                }
+                
                 if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply) && class_feature_saver_tcp::meth_clock_origin_configured())
                 {
-                    if(obj_extractor_tcp_client.get_port_changed())
-                    {
-                        if(!obj_extractor_tcp_router.deal_with_port_change(obj_extractor_tcp_client.get_current_port()))
-                        {   
-                            //Tem horas que muda, mas não há mais pacotes na porta para
-                            //qual mudou. Impressionante!
-                            cout << "Can not change port." <<endl;
-                            break;
-
-                        }
-                    }
                     if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
                     {   
                         //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
@@ -1291,11 +1309,15 @@ int main(int argc, char**argv){
             
             }
 
-            cout << "No more Acks to me. Good bye!" <<endl;
+            auto simulation_time = high_resolution_clock::now();
+            auto duration = duration_cast<seconds>(simulation_time - simulation_start);
+
+            cout << "Afther " << duration.count() <<  "No more Acks to me. Good bye!" << endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;
             stream_dump_file.close();
+
 
         }
 

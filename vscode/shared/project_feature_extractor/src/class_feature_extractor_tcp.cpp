@@ -3,6 +3,13 @@
 #include "../include/class_feature_extractor.h"
 #include "mrs_utils.h"
 
+class_feature_extractor_tcp::class_feature_extractor_tcp()
+{
+
+
+}
+
+
 bool class_feature_extractor_tcp::deal_with_port_change(uint32_t par_current_port)
 {
     
@@ -10,7 +17,24 @@ bool class_feature_extractor_tcp::deal_with_port_change(uint32_t par_current_por
 
     uint32_t temp_port;
     string str_current_line_port;
-    do{
+
+    if(current_dump_line == "XXXXXXXXXXXX")
+    {
+        if(!meth_get_one_of_my_lines(current_dump_line))
+        {
+            cout << "Can't find new port!" << endl;
+            return false;
+        }
+    }
+
+    str_current_line_port = class_feature_extractor::meth_search_occurence_string_between_delimiter(current_dump_line,' ',3);//10.0.0.3.60434
+    str_current_line_port = class_feature_extractor::meth_search_occurence_string_between_delimiter(str_current_line_port,'.',5);//60434
+    class_mrs_debug::print<string>("str_current_line_port: ", str_current_line_port, force_print_tcp_extractor);
+    temp_port = stoul(str_current_line_port);
+    class_mrs_debug::print<uint32_t>("temp_port: ", temp_port, force_print_tcp_extractor);
+
+    while(temp_port != port -1000)
+    {
         
         class_mrs_debug::print<uint32_t>("par_current_port: ", par_current_port, force_print_tcp_extractor);
         if(!meth_get_one_of_my_lines(current_dump_line))
@@ -25,7 +49,7 @@ bool class_feature_extractor_tcp::deal_with_port_change(uint32_t par_current_por
         temp_port = stoul(str_current_line_port);
         class_mrs_debug::print<uint32_t>("temp_port: ", temp_port, force_print_tcp_extractor);
     
-    }while(temp_port != par_current_port);
+    }
 
     class_mrs_debug::print<char>("Found Port: ", '\n', force_print_tcp_extractor);
     return true;
@@ -40,7 +64,7 @@ void class_feature_extractor_tcp::meth_extract_router_features()
     std::string dump_line;
     //char c;
     //cout << "dump_file: " << dump_file << endl;
-    stream_dump_file.open(dump_file);
+    //stream_dump_file.open(dump_file);
     string time_stamp;
     string seq_number;
     string seq_number_inf;
@@ -129,11 +153,15 @@ void class_feature_extractor_tcp::meth_extract_router_features()
 bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_seq)
 {
     
-    
+
 
     if(last_ack_processed >= par_ack_seq)//Ack anacronico
     {
+        class_mrs_debug::print<uint64_t>("last_ack_processed: ",last_ack_processed,force_print_in_anacronic_ack);
+        class_mrs_debug::print<string>("Anacronic dump Line: ", current_dump_line,force_print_in_anacronic_ack);
+        class_mrs_debug::print<uint64_t>("Anacronic ACK: ",par_ack_seq,force_print_in_anacronic_ack);
         cout << "Anacronic Ack" << endl;
+
         //return false;
     }
     
@@ -316,6 +344,15 @@ bool class_feature_extractor_tcp::meth_get_one_of_my_lines(string& par_dump_line
     return false;
 }
 
+
+bool class_feature_extractor_tcp::meth_open_dump_file()
+{
+
+    meth_check_if_parse_dump_file_is_possible();
+    stream_dump_file.open(dump_file);
+    return stream_dump_file.is_open();
+    
+}
 
 string class_feature_extractor_tcp::meth_search_seq_number(string par_dump_line)
 {

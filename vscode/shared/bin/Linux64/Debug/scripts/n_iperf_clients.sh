@@ -5,14 +5,14 @@ short_help_var="-h"
 
 if [ "$1" == "-h" ]; then
 
-    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
+    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band'] [-n|--now 'date stamp of experiment']"
     exit 0
 fi
 
 
 if [ "$1" == "--help" ]; then
 
-    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band']"
+    echo "Usage: $0 [-c|--cong_cont 'congestion control'] [-d|--data_type 'type of data'] [-r|--rate 'bottleneck rate'] [-p|--path 'experiment path'] [-f|--flows 'number of flows'] [-s|--saturation 'number of flows to sature band'] [-n|--now 'date stamp of experiment']"
     exit 0
 fi
 
@@ -22,15 +22,15 @@ i=1
 
 start_date=$(date | cut -b 1-19 | tr ' ' _ | tr : _)
 
-VALID_ARGS=$(getopt -o c:d:r:p:f:s: --long cong_cont:,data_type:,rate:,path:,flows:,saturation: -- "$@")
+VALID_ARGS=$(getopt -o c:d:r:p:f:s:n: --long cong_cont:,data_type:,rate:,path:,flows:,saturation:now: -- "$@")
 
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
 
-if [[ $# -ne 12 ]]; then
-   echo "You provided $# arguments, but we need 12. See -h option."    
+if [[ $# -ne 14 ]]; then
+   echo "You provided $# arguments, but we need 14. See -h option."    
     exit 0;
 fi
 
@@ -75,6 +75,15 @@ while [ : ]; do
         flows_rate=`expr $rate_var / $saturation`        
         shift 2
         ;;
+
+
+   -n | --now)
+        #date stamp of experiment
+        now=$2
+        shift 2
+        ;;
+
+
 
 
     --) shift; 
@@ -212,7 +221,7 @@ do
     #./udt server ${door}
     #xterm -hold -e  ssh ns@10.0.1.3 ./udt server ${door} #&& /bin/bash &
     
-    iperf_call="iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door} -t 30"
+    iperf_call="iperf3  -c 10.0.1.3 --cport ${cdoor} -p ${door} -t 90"
         
     #echo "App call: iperf3  -c 10.0.1.3 -t 30 -p ${door}"    
     echo "App call: ${iperf_call}"
@@ -249,11 +258,11 @@ cd  ${experiment_path}
 
 sleep 1
 
-touch "${experiment_path}/iperf_report.txt"
+touch "${experiment_path}/iperf_report_${now}.txt"
 
 sleep 2
 
-chmod 777 "${experiment_path}/iperf_report.txt" 
+chmod 777 "${experiment_path}/iperf_report_${now}.txt" 
 
 : '
 $(echo "Data Type: ${data_type_var}" >> "${experiment_path}/iperf_report.txt")
@@ -269,5 +278,5 @@ $(echo "Saturation: ${saturation}" >> "${experiment_path}/iperf_report.txt")
 $(echo "WmemMax: ${wmem_max}" >> "${experiment_path}/iperf_report.txt")
 '
 
-$(echo "iperf3 Last Call: ${iperf_call}" >> "${experiment_path}/iperf_report.txt")
+$(echo "iperf3 Last Call: ${iperf_call}" >> "${experiment_path}/iperf_report_${now}.txt")
 
