@@ -4,11 +4,15 @@
 
 #define HELLO 2
 
+#define INICIAL_SERVER_PORT 5102
+
 #define PCC 3
 
 #define MESSAGE_SIZE 3000
 
 #define MAX_PCC_SND_SIZE 170000
+
+#define MAX_FEATURES_PER_FLOW_500_MBPS 5000
 
 
 #define NUM_FLOWS 60

@@ -245,7 +245,7 @@ done
 #${iperf_call}
 #Tem que esperar. Se não o script termina antes de chamar os clientes todos, o que faz com que
 #os clientes finais (58-61) não subam.
-sleep 20
+sleep 40
 
 
 echo "Reporting iperf command"

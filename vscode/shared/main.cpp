@@ -1209,6 +1209,9 @@ int main(int argc, char**argv){
             return 1;
         }
 
+        if(server_port == INICIAL_SERVER_PORT )//prepara para contabilizar os n1_n2.
+            obj_extractor_tcp_router.meth_prepare_n1_n2_file();
+
         bool intersting_line = false;
         if (stream_dump_file.is_open())
         {
@@ -1219,6 +1222,13 @@ int main(int argc, char**argv){
             while (getline (stream_dump_file,dump_line) )
             {
                 
+                if(experiment_path.find(string("500Mbps")) != string::npos && 
+                  (obj_extractor_tcp_router.get_n1() > MAX_FEATURES_PER_FLOW_500_MBPS || 
+                   obj_extractor_tcp_router.get_n2() > MAX_FEATURES_PER_FLOW_500_MBPS) )
+                {
+                    cout << "Reach MAX_FEATURES_PER_FLOW_500_MBPS. Bye!" << endl;
+                    break;
+                }
                 class_mrs_debug::print<uint64_t>("workline in client dump file: ", ++work_line,main_force_print);
                 class_mrs_debug::print<string>("dump_line in client dump file: ", dump_line, main_force_print);
                 
@@ -1242,6 +1252,8 @@ int main(int argc, char**argv){
                 obj_extractor_tcp_client.meth_update_port_state(dump_line);//São asportas esperadas?
                 if(obj_extractor_tcp_client.get_port_changed())//Se a porta mudou, não são!
                 {
+                    
+                    class_mrs_debug::print<char>("Ooops! Port Change: ", '\n',main_force_print);
                     //Então busco o pacote com a porta certa.
                     if(!obj_extractor_tcp_router.deal_with_port_change(obj_extractor_tcp_client.get_current_port()))
                     {   
@@ -1258,9 +1270,17 @@ int main(int argc, char**argv){
 
 
                 }
+
+                else
+                {
+                    class_mrs_debug::print<char>("Great! No port Change: ", '\n',main_force_print);
+  
+                }
                 
                 if(obj_extractor_tcp_client.meth_extract_client_feature(dump_line,seq_number,ack_arrival,echo_reply) && class_feature_saver_tcp::meth_clock_origin_configured())
                 {
+                    class_mrs_debug::print<char>("We have features! Let's try to save it ", '\n',main_force_print);
+
                     if(obj_extractor_tcp_router.meth_extract_router_features(seq_number))//Gera o cvs. seq-router_ewma
                     {   
                         //só alimenta os arquvivo dos vetores de treinamento, se o ack foi efetivamente
@@ -1270,6 +1290,18 @@ int main(int argc, char**argv){
                         class_mrs_debug::print<uint64_t>("ech reply to save: ",echo_reply,main_force_print);
                         obj_saver.meth_deal_ack_arrival(seq_number,ack_arrival,echo_reply);                    
                         class_mrs_debug::print<char>("extraiu features efetivamente ", '\n',main_force_print);
+                        if(obj_extractor_tcp_router.get_queue_ewma() <= 0.4 && obj_saver.get_rtt() > 70000.00)
+                        {
+                            bool force_print_queue_rtt_check=false;
+                            class_mrs_debug::print<char>("estrange queue X RTT values ", '\n',force_print_queue_rtt_check);
+
+                            class_mrs_debug::print<int>("server port: ", server_port,force_print_queue_rtt_check);
+                            class_mrs_debug::print<uint64_t>("#ACK: ", seq_number,force_print_queue_rtt_check);
+                            class_mrs_debug::print<long double>("queue_ewma: ",obj_extractor_tcp_router.get_queue_ewma(),force_print_queue_rtt_check);
+                            class_mrs_debug::print<long double>("RTT: ",obj_saver.get_rtt(),force_print_queue_rtt_check);
+
+
+                        }
                     }
                 }
                 else
@@ -1312,7 +1344,7 @@ int main(int argc, char**argv){
             auto simulation_time = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(simulation_time - simulation_start);
 
-            cout << "Afther " << duration.count() <<  "No more Acks to me. Good bye!" << endl;
+            cout << "Afther " << duration.count() <<  ", no more Acks to me. Good bye!" << endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;
             cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" <<endl;

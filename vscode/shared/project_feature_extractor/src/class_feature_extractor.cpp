@@ -13,6 +13,7 @@ class_feature_extractor::class_feature_extractor()
 {
 
 
+
 }
 
 void class_feature_extractor::meth_adjust_seq_metrics_file_path()
@@ -153,6 +154,34 @@ void class_feature_extractor::meth_erase_dot_from_time_stamp(string &par_time_st
 
 }
 
+
+void class_feature_extractor::meth_prepare_n1_n2_file()
+{
+
+
+    if(out_dir == "/home/ns/Desktop/output")
+    {
+      cout << "Please, set out_dir before n1_n2 file conf." << endl;
+      exit(0);
+    }
+
+    std::ofstream file;
+    file.open(out_dir + "/" + "n1_n2.csv", std::ios::out | std::ios::trunc);
+    if (file.fail())
+    {
+        std::cout << "n1_n2 register error at init. " << "\n";
+        exit(0);
+    }
+    //make sure write fails with exception if something is wrong
+
+    file << "n1"<<","<< "n2" << endl;
+        //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
+
+    file.close();
+    
+}
+
+
 string class_feature_extractor:: meth_deal_with_K_occurence(string par_queue_along_time_file_line)
 {
 
@@ -256,9 +285,11 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
     if(!stream_queue_size_along_time_file.is_open())
     {
        cout << "Queue ewma along time file not oppened." << endl;
-       //Para chavear entre o queue ewma e a pura
-       stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
-       //stream_queue_size_along_time_file.open(queue_size_along_time_file);
+       //Para chavear entre o queue ewma e a pura. Não esqueça de alterar
+       //o metodo meth_extract_router_features, para passar o ewma calculado a cada
+       //valor de fila levantada.
+       //stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
+       stream_queue_size_along_time_file.open(queue_size_along_time_file);
     }
     
     if(stream_queue_size_along_time_file.is_open())
@@ -493,18 +524,19 @@ void class_feature_extractor::set_out_dir(string par_out_dir)
 bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string par_queue_along_time_file, string par_queue_along_time_file_ewma)
 {
     
-    if(class_feature_extractor::queue_ewma_generated)
-    {
-        cout << "Queue ewma along time file already generated" << "\n";
-        return false;
-    }
+    //if(class_feature_extractor::queue_ewma_generated)
+    //{
+        //cout << "Queue ewma along time file already generated" << "\n";
+        //return false;
+    //}
 
-    struct stat sb;
-    if (stat(par_queue_along_time_file_ewma .c_str(), &sb) == 0)
-    {
-        cout << "There is previou flow data"<<endl;
-        return false;
-    }
+    //from https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
+    //struct stat sb;
+    //if (stat(par_queue_along_time_file_ewma.c_str(), &sb) == 0)
+    //{
+        //cout << "There is previou flow data"<<endl;
+        //return false;
+    //}
 
     
     ifstream stream_queue_size (par_queue_along_time_file);
@@ -518,8 +550,7 @@ bool class_feature_extractor::meth_generate_queue_ewma_along_time_file(string pa
 
     std::ofstream file;
 
-
-    file.open(par_queue_along_time_file_ewma, std::ios::out | std::ios::app);
+    file.open(par_queue_along_time_file_ewma, std::ios::out | std::ios::trunc);
     if (file.fail())
     {
         std::cout << "Router queue along time ewma error" << endl;
@@ -588,45 +619,74 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
 void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma)
 {
     
+
+    bool force_print_in_meth_update_seq_queue_file = false;
+
+    //if((par_queue_ewma > 0.1) && (par_queue_ewma < 0.2))
+    //force_print_in_meth_update_seq_queue_file=true;
+
+    class_mrs_debug::print<char>("In meth_update_seq_queue_file",'\n',force_print_in_meth_update_seq_queue_file);
+
     
     long double queue_ewma_cuted = par_queue_ewma;
+
+    class_mrs_debug::print<long double>("queue_ewma_cuted: ",queue_ewma_cuted,force_print_in_meth_update_seq_queue_file);
+
 
     if(par_queue_ewma > 1.0)
         queue_ewma_cuted = 1.0;
 
-    cout << "updating router file..."<<"\n";
 
-    if(par_queue_ewma <= 0.000001) //para enriquecer a amostra
+
+    if(queue_ewma_cuted <= 0.000001) //para enriquecer a amostra
     {
         cout << "tiny queue buffer." << endl;
         //return;
     }    
     
-    if(par_queue_ewma >= 0.40 && par_queue_ewma <= 0.70)
+
+    int network_situation = 0;
+
+    
+
+    bool p1 = queue_ewma_cuted <= 0.1;
+    bool p3 = (queue_ewma_cuted >= 0.2) && 
+              (queue_ewma_cuted <= 0.4);
+
+    
+    if(p1 || p3)
+    {
+        
+        class_mrs_debug::print<char>("produce n1! ",'\n',force_print_in_meth_update_seq_queue_file);
+        network_situation = 1;
+        n1++; //vai acumulando e é armazenado no destructor
+
+    }
+    else if(queue_ewma_cuted >= 0.70)
+    {
+        class_mrs_debug::print<char>("produce n2! ",'\n',force_print_in_meth_update_seq_queue_file);
+        network_situation = 2;
+        n2++; //vai acumulando e é armazenado no destructor
+    }
+    else 
     {
         cout << "Queue out of range."<<endl;
         return;
-    
+              
     }
-
-    int network_situation = 1;
-
-    if(par_queue_ewma > 0.70)
-        network_situation = 2;
-    else
-        n1++;
 
     std::ofstream file;
-    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::app);
-    if (file.fail())
-    {
-        std::cout << "Erro ao registrar Dados de Treinamento no Seq " << par_seq << "\n";
-        exit(0);
-    }
     //make sure write fails with exception if something is wrong
 
     if(first_ack_seq_queue_association)//precisa intitular as colunas
     {
+
+        file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::trunc);
+        if (file.fail())
+        {
+            std::cout << "Erro ao registrar Dados de Treinamento no Seq " << par_seq << "\n";
+            exit(0);
+        }
 
         file <<"#Ack" << "," 
             << "Last Router Ocupation Router Arrival" << "(" <<"Packets"<< ")"<<"," 
@@ -636,9 +696,19 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long
             <<"Queue_Router2" << "\n";
 
         first_ack_seq_queue_association = false;
+        file.close();
     
     }
 
+
+
+    file.open(out_dir + "/" + seq_metrics_file_name, std::ios::out | std::ios::app);
+    if (file.fail())
+    {
+        std::cout << "Erro ao registrar Dados de Treinamento no Seq " << par_seq << "\n";
+        exit(0);
+    }
+    cout << "updating router file..."<<"\n";
     file << par_seq << ","
         << "0" << "," 
         << queue_ewma_cuted << ","
@@ -661,15 +731,15 @@ class_feature_extractor:: ~class_feature_extractor()
 
 
         std::ofstream file;
-        file.open(out_dir + "/" + "n1.txt", std::ios::out | std::ios::app);
+        file.open(out_dir + "/" + "n1_n2.csv", std::ios::out | std::ios::app);
         if (file.fail())
         {
-            std::cout << "n1 register error " << "\n";
+            std::cout << "n1_n2 register error " << "\n";
             exit(0);
         }
         //make sure write fails with exception if something is wrong
     
-        file << n1 << endl;
+        file << n1<<","<< n2 << endl;
             //<< " port " << InetSocketAddress::ConvertFrom (srcAddress).GetPort ();
     
         file.close();

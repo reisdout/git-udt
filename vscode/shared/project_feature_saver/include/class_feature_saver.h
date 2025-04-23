@@ -120,6 +120,7 @@ class class_feature_saver{
         string get_default_congestion(){return default_congestion;};
         string get_num_flows(){return num_flows;};
         string get_out_dir(){return out_dir;};
+        long double get_rtt(){return rtt;};
         float get_send_ewma(){return send_ewma;};
         //O ideal é que tenha o formato do comando date no linux
         // antes do AM/PM.

@@ -14,7 +14,7 @@
 						4,
 						5
 					],
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -28,7 +28,7 @@
 				},
 				{
 					"build" : "project_pure_udt",
-					"jsonFile" : "directory-project_pure_udt-Debug-1b57bd1ff1b2538c637b.json",
+					"jsonFile" : "directory-project_pure_udt-Release-1b57bd1ff1b2538c637b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -43,7 +43,7 @@
 				},
 				{
 					"build" : "TCP_Socket",
-					"jsonFile" : "directory-TCP_Socket-Debug-366b6d57c5b8caab1df2.json",
+					"jsonFile" : "directory-TCP_Socket-Release-366b6d57c5b8caab1df2.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -58,7 +58,7 @@
 				},
 				{
 					"build" : "project_feature_saver",
-					"jsonFile" : "directory-project_feature_saver-Debug-e4749189c987ccff613d.json",
+					"jsonFile" : "directory-project_feature_saver-Release-e4749189c987ccff613d.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -73,7 +73,7 @@
 				},
 				{
 					"build" : "project_feature_extractor",
-					"jsonFile" : "directory-project_feature_extractor-Debug-61b51d6df824cd7df30f.json",
+					"jsonFile" : "directory-project_feature_extractor-Release-61b51d6df824cd7df30f.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -88,7 +88,7 @@
 				},
 				{
 					"build" : "project_report",
-					"jsonFile" : "directory-project_report-Debug-ecf299a090b64b8e8da6.json",
+					"jsonFile" : "directory-project_report-Release-ecf299a090b64b8e8da6.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10.0"
@@ -102,7 +102,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -190,42 +190,42 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "communicator::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-communicator-Debug-d5cc22066193eaafed31.json",
+					"jsonFile" : "target-communicator-Release-d4908a864cd7d5d937b8.json",
 					"name" : "communicator",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "feature_extractor::@a015f72589a78a71da2c",
-					"jsonFile" : "target-feature_extractor-Debug-02462c851d8f82e8e698.json",
+					"jsonFile" : "target-feature_extractor-Release-746d8408ddc0e581cc93.json",
 					"name" : "feature_extractor",
 					"projectIndex" : 4
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "feature_saver::@2df2d92e02b088089148",
-					"jsonFile" : "target-feature_saver-Debug-18cb10bd7bbbadff72ec.json",
+					"jsonFile" : "target-feature_saver-Release-87095b6761c95b1fc179.json",
 					"name" : "feature_saver",
 					"projectIndex" : 3
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "pure_udt::@82dc3fe8f10c89423411",
-					"jsonFile" : "target-pure_udt-Debug-3dd33ecc8720a7ead7f8.json",
+					"jsonFile" : "target-pure_udt-Release-72c4db149d26f8333fc6.json",
 					"name" : "pure_udt",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 5,
 					"id" : "report::@44ba9483f3c6816c0939",
-					"jsonFile" : "target-report-Debug-0027963edd40c1fdd3fa.json",
+					"jsonFile" : "target-report-Release-77fa3a33e09aee3e4ced.json",
 					"name" : "report",
 					"projectIndex" : 5
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "tcpsocket::@0877140535a3148449e9",
-					"jsonFile" : "target-tcpsocket-Debug-f653ad983eff46f06dee.json",
+					"jsonFile" : "target-tcpsocket-Release-a69229f629498c0743a6.json",
 					"name" : "tcpsocket",
 					"projectIndex" : 2
 				}

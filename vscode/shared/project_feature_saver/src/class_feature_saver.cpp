@@ -77,7 +77,7 @@ void class_feature_saver::meth_add_file_header()
     //cout << strDestAddres;
     //deletar rtt.substr(0,rtt.length()-3)
   filepath = out_dir+"/"+seq_metrics_file_name;
-  file.open(filepath, std::ios::out | std::ios::app);
+  file.open(filepath, std::ios::out | std::ios::trunc);
   if (file.fail())
   {
     std::cout << "Erro ao registrar Dados de Treinamento";

@@ -85,6 +85,7 @@ public:
     virtual void meth_extract_router_features(){};//scan dump file
     void meth_check_parameters();
     static bool meth_generate_queue_ewma_along_time_file(string par_queue_along_time_file, string par_queue_along_time_file_ewma);
+    void meth_prepare_n1_n2_file(); //Apara o pre-existente e intitula as colunas
     virtual void meth_prepare_time_stamp(string & par_time_stamp){return;};
     virtual string meth_search_seq_number(string par_dump_line)=0;
     virtual string  meth_search_time_stamp(string par_dump_line)=0;
@@ -100,6 +101,8 @@ public:
 
     void meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma);
 
+    u_int64_t get_n1(){return n1;};
+    u_int64_t get_n2(){return n2;};
     string get_out_dir(){return out_dir;};
     string get_seq_metrics_file_name(){return seq_metrics_file_name;};
     string get_dump_file(){return dump_file;};
@@ -136,7 +139,7 @@ protected:
         std::string str_starting_time;
         uint64_t feature_extrator_work_line=0;
         u_int64_t n1 = 0;
-
+        u_int64_t n2 = 0;
 
 
     

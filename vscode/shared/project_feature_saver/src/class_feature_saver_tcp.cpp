@@ -65,7 +65,7 @@ void class_feature_saver_tcp::meth_deal_ack_arrival(uint32_t par_seq,
         meth_calculate_send_ewma(par_packet_eco_reply);
         meth_calculate_rtt(par_ack_arrival_time,par_packet_eco_reply);
 
-        meth_save_training_data(par_seq-1, //numAckReceived[idAckReceiver][idAckSender], 
+        meth_save_training_data(par_seq,//par_seq-1, //numAckReceived[idAckReceiver][idAckSender], 
         ack_ewma, 
         send_ewma,
         rtt,

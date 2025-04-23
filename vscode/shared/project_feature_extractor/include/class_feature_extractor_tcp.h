@@ -61,6 +61,8 @@ public:
     void meth_update_seq_numbers(string par_dump_line);
     bool meth_more_packet_line(){return more_packet_line;};
 
+    long double get_queue_ewma(){return queue_ewma;};
+
    
     
 

@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libpure_udt.a"
+			"path" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libpure_udt.a"
 		}
 	],
 	"backtrace" : 1,
@@ -60,7 +60,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-O3 -DNDEBUG"
 				}
 			],
 			"includes" : 

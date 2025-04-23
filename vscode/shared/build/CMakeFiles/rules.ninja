@@ -7,14 +7,14 @@
 
 # =============================================================================
 # Project: communicator
-# Configurations: Debug
+# Configurations: Release
 # =============================================================================
 # =============================================================================
 
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__communicator_unscanned_Debug
+rule CXX_COMPILER__communicator_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule CXX_COMPILER__communicator_unscanned_Debug
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__communicator_Debug
+rule CXX_EXECUTABLE_LINKER__communicator_Release
   command = $PRE_LINK && /usr/bin/g++ $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
@@ -41,7 +41,7 @@ rule CUSTOM_COMMAND
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__pure_udt_unscanned_Debug
+rule CXX_COMPILER__pure_udt_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -51,7 +51,7 @@ rule CXX_COMPILER__pure_udt_unscanned_Debug
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__pure_udt_Debug
+rule CXX_STATIC_LIBRARY_LINKER__pure_udt_Release
   command = $PRE_LINK && /usr/bin/cmake -E rm -f $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
@@ -60,7 +60,7 @@ rule CXX_STATIC_LIBRARY_LINKER__pure_udt_Debug
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__tcpsocket_unscanned_Debug
+rule CXX_COMPILER__tcpsocket_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -70,7 +70,7 @@ rule CXX_COMPILER__tcpsocket_unscanned_Debug
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__tcpsocket_Debug
+rule CXX_STATIC_LIBRARY_LINKER__tcpsocket_Release
   command = $PRE_LINK && /usr/bin/cmake -E rm -f $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
@@ -79,7 +79,7 @@ rule CXX_STATIC_LIBRARY_LINKER__tcpsocket_Debug
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__feature_saver_unscanned_Debug
+rule CXX_COMPILER__feature_saver_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -89,7 +89,7 @@ rule CXX_COMPILER__feature_saver_unscanned_Debug
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__feature_saver_Debug
+rule CXX_STATIC_LIBRARY_LINKER__feature_saver_Release
   command = $PRE_LINK && /usr/bin/cmake -E rm -f $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
@@ -98,7 +98,7 @@ rule CXX_STATIC_LIBRARY_LINKER__feature_saver_Debug
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__feature_extractor_unscanned_Debug
+rule CXX_COMPILER__feature_extractor_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -108,7 +108,7 @@ rule CXX_COMPILER__feature_extractor_unscanned_Debug
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__feature_extractor_Debug
+rule CXX_STATIC_LIBRARY_LINKER__feature_extractor_Release
   command = $PRE_LINK && /usr/bin/cmake -E rm -f $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
@@ -117,7 +117,7 @@ rule CXX_STATIC_LIBRARY_LINKER__feature_extractor_Debug
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__report_unscanned_Debug
+rule CXX_COMPILER__report_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/bin/g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -127,7 +127,7 @@ rule CXX_COMPILER__report_unscanned_Debug
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__report_Debug
+rule CXX_STATIC_LIBRARY_LINKER__report_Release
   command = $PRE_LINK && /usr/bin/cmake -E rm -f $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT

@@ -76,7 +76,7 @@ done
 
 
 total_extraction_calls=1
-n_to_wait=60
+n_to_wait=20
 
 prefix_dir="/home/ns/Desktop/output/"
 prefix_dir_size=${#prefix_dir}
@@ -98,7 +98,7 @@ for dir in ~/Desktop/output/*; do
             echo "liquid dir: ${liquid_dir}"
             command_var="./communicator router_ewma ${liquid_dir}"
             echo "App call: ${command_var}"
-            xterm $hold_var -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug;  ${command_var}" && /bin/bash &
+            xterm $hold_var -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release;  ${command_var}" && /bin/bash &
             sleep 3
              ;;
         esac
@@ -138,7 +138,7 @@ for dir in ~/Desktop/output/*; do
                 #./udt server ${door}
                 command_var="./communicator tcp_feature_saver_and_extractor ${door} ${liquid_dir}"
                 echo "App call: ${command_var}"
-                xterm $hold_var -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug;  ${command_var}" && /bin/bash &
+                xterm $hold_var -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release;  ${command_var}" && /bin/bash &
                 #xterm -e "cd /home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug;  ${command_var}" && /bin/bash &
 
                 #sleep 3
@@ -148,9 +148,11 @@ for dir in ~/Desktop/output/*; do
                 mod=$(($exprtotal_extraction_calls % $n_to_wait))                
                 if [ $mod -eq 0 ]; then
                     echo "Need wait."
-                    sleep 300
+                    sleep 10
+                elif [ $exprtotal_extraction_calls -le 5 ]; then
+                    sleep 1
                 else
-                    sleep 20
+                    sleep 3
                 fi
                 
             done

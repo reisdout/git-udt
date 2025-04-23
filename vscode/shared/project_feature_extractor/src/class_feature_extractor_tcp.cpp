@@ -51,7 +51,7 @@ bool class_feature_extractor_tcp::deal_with_port_change(uint32_t par_current_por
     
     }
 
-    class_mrs_debug::print<char>("Found Port: ", '\n', force_print_tcp_extractor);
+    class_mrs_debug::print<char>("Port Found. Glory!! ", '\n', force_print_tcp_extractor);
     return true;
 
 }
@@ -161,11 +161,11 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
         class_mrs_debug::print<string>("Anacronic dump Line: ", current_dump_line,force_print_in_anacronic_ack);
         class_mrs_debug::print<uint64_t>("Anacronic ACK: ",par_ack_seq,force_print_in_anacronic_ack);
         cout << "Anacronic Ack" << endl;
-
-        //return false;
+        //cin.ignore();
+        return false;
     }
     
-    last_ack_processed = par_ack_seq;
+    //last_ack_processed = par_ack_seq;
     meth_check_if_parse_dump_file_is_possible();
 
     if(!stream_dump_file.is_open())
@@ -247,11 +247,13 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                     
                     class_mrs_debug::print<long double>("queue_ewma(%): ",(long double)(queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE),force_print_in_meth_extract_router_features_ack);
                     
-                    meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_now));
-                    //meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE));
+                    //meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_now));
+                    meth_update_seq_queue_file(par_ack_seq, (long double) (queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE));
                     done = true;
                     considered_ack = true;
                     cout << "ack " << par_ack_seq << " processed." << endl;
+
+                    last_ack_processed = par_ack_seq;
                 }
                 else
                 {
@@ -330,7 +332,9 @@ bool class_feature_extractor_tcp::meth_get_one_of_my_lines(string& par_dump_line
             continue; //não precisa, mas é só para destacar que vai para o próximo.
         }
 
+        //IP 10.0.0.3.4102 > 10.0.1.3.5102: Flags [P.],
         else if(par_dump_line.find("[P.],")!=std::string::npos &&
+                par_dump_line.find(string("IP 10.0.0.3.")+to_string(port-1000)+ " > ") != std::string::npos &&
                 par_dump_line.find(" > 10.0.1.3."+to_string(port)+ ": Flags [P.], seq")!= std::string::npos)
             {
                 class_mrs_debug::print<string>("current fishing server port:", to_string(port)+":",force_print_meth_get_one_of_my_lines);

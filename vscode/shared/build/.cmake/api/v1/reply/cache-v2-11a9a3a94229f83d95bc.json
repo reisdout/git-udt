@@ -43,7 +43,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : "Release"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -1199,7 +1199,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_extractor.a"
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_extractor.a"
 		},
 		{
 			"name" : "FEATURE_SAVER",
@@ -1211,7 +1211,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a"
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_saver.a"
 		},
 		{
 			"name" : "PURE_UDT",
@@ -1223,7 +1223,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a"
 		},
 		{
 			"name" : "REPORT",
@@ -1235,7 +1235,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libreport.a"
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libreport.a"
 		},
 		{
 			"name" : "TCP_SOCKET",
@@ -1247,7 +1247,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libtcpsocket.a"
+			"value" : "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a"
 		},
 		{
 			"name" : "UDT_LIB",
@@ -1415,7 +1415,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;"
+			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_saver.a;"
 		},
 		{
 			"name" : "pure_udt_SOURCE_DIR",
@@ -1499,7 +1499,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/static libs/libfeature_saver.a;"
+			"value" : "general;/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_saver.a;"
 		},
 		{
 			"name" : "tcpsocket_SOURCE_DIR",
