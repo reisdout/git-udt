@@ -38,8 +38,11 @@ TS SYN 1       Origem Virtual Clock(Ov)	    ack_arr	   ecr	       RTT
 */
 
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-    class_mrs_debug::print<uint64_t>("par_1970_ts: ", par_1970_ts, feature_saver_tcp_force_print); 
-    class_mrs_debug::print<uint64_t>("par_virtual_clock_ts: ", par_virtual_clock_ts, feature_saver_tcp_force_print ); 
+
+    bool force_print_set_virtual_clock_origin=false;
+
+    class_mrs_debug::print<uint64_t>("par_1970_ts: ", par_1970_ts, feature_saver_tcp_force_print||force_print_set_virtual_clock_origin); 
+    class_mrs_debug::print<uint64_t>("par_virtual_clock_ts: ", par_virtual_clock_ts, feature_saver_tcp_force_print||force_print_set_virtual_clock_origin); 
 
 
     //tem que dividir por 1000 o desde de 1970, pois o dump traz em microssegundos e o virtual
@@ -47,7 +50,7 @@ TS SYN 1       Origem Virtual Clock(Ov)	    ack_arr	   ecr	       RTT
     
     virtual_clock_origin = (par_1970_ts/1000) - par_virtual_clock_ts;
 
-    class_mrs_debug::print<uint64_t>("virtual_clock_origin: ", virtual_clock_origin, feature_saver_tcp_force_print ); 
+    class_mrs_debug::print<uint64_t>("virtual_clock_origin: ", virtual_clock_origin, feature_saver_tcp_force_print||force_print_set_virtual_clock_origin); 
 
 }
 

@@ -83,6 +83,7 @@ prefix_dir_size=${#prefix_dir}
 
 
 #PRODUZINDO OS queue_ewma
+
 echo "Constructing queue_ewma file" 
 for dir in ~/Desktop/output/*; do 
    if [ -d "$dir" ]; then    
@@ -124,8 +125,9 @@ for dir in ~/Desktop/output/*; do
         liquid_dir=${dir:$prefix_dir_size:$dir_size}
         echo "liquid dir: ${liquid_dir}"
         i=1
-        
-            while [ $i -le $num_clients ];
+        num_flows_to_extract=20
+            #while [ $i -le $num_clients ];
+            while [ $i -le $num_flows_to_extract ];
             do
 
                 #echo "$exprtotal_extraction_calls"

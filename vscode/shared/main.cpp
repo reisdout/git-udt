@@ -785,7 +785,7 @@ int main(int argc, char**argv){
         ./communicator tcp_client $cong_control $port $simul_type $data_rate $num_flows $simul_start_time
         
         **********************************************************/
-        uint64_t mss = 60000;
+        uint64_t mss = 1000;//60000;
         uint64_t clients_to_fill_band = 50; //stoull(num_flows);
         uint64_t simul_time = 90000000; //1.5 min em microsec
 
@@ -1290,6 +1290,17 @@ int main(int argc, char**argv){
                         class_mrs_debug::print<uint64_t>("ech reply to save: ",echo_reply,main_force_print);
                         obj_saver.meth_deal_ack_arrival(seq_number,ack_arrival,echo_reply);                    
                         class_mrs_debug::print<char>("extraiu features efetivamente ", '\n',main_force_print);
+                        if(seq_number == 3004198515)
+                        {
+                            bool force_print_ack_to_check=false;
+                            class_mrs_debug::print<char>("*****************HEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIII************************** ", '\n',force_print_ack_to_check);
+                            class_mrs_debug::print<uint64_t>("Found #ACK: ", seq_number,force_print_ack_to_check);
+                            class_mrs_debug::print<int>("server port: ", server_port,force_print_ack_to_check);
+                            class_mrs_debug::print<string>("experiment_path: ", experiment_path,force_print_ack_to_check);
+
+
+
+                        }
                         if(obj_extractor_tcp_router.get_queue_ewma() <= 0.4 && obj_saver.get_rtt() > 70000.00)
                         {
                             bool force_print_queue_rtt_check=false;

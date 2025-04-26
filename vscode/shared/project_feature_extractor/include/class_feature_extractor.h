@@ -99,7 +99,7 @@ public:
     
     static bool meth_take_and_store_line_values_from_queue_along_time(ifstream &par_stream_of_lines, uint64_t & par_time_stamp, uint64_t & par_queue_buffer);
 
-    void meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma);
+    bool meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma);
 
     u_int64_t get_n1(){return n1;};
     u_int64_t get_n2(){return n2;};

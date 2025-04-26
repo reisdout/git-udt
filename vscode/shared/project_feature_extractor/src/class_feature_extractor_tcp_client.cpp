@@ -143,15 +143,20 @@ bool class_feature_extractor_tcp_client::meth_give_time_stamp_to_synchronize_clo
 
             //A condição abaixo independe da porta, pois a origem de tempo é única
             //Ou seja, procura-se um SYN qualquer, que já fornece a origem.
+            /*
+            1745344093.917373 IP 10.0.0.3.4102 > 10.0.1.3.5102: Flags [S], seq 3728736778, win 64240, options [mss 1460,sackOK,TS val 3061407159 ecr 0,nop,wscale 7], length 0
+            */
             if(SYN_line.find("[S],")!=std::string::npos &&
             SYN_line.find(string(" > ") + "10.0.1.3."+port_prefix)!= std::string::npos)
             {
-                 class_mrs_debug::print<char>("Getting virtual clock origin in extractor_tcp_client ", '\n',force_print_tcp_extractor_client);
+                //force_print_tcp_extractor_client ||
+                bool force_print_synchronize_clock = false; 
+                class_mrs_debug::print<char>("Getting virtual clock origin in extractor_tcp_client ", '\n',force_print_tcp_extractor_client ||force_print_synchronize_clock);
                  string syn_time_stamp = class_feature_extractor::meth_search_occurence_string_between_delimiter(SYN_line,' ',1);
                  class_feature_extractor::meth_erase_dot_from_time_stamp(syn_time_stamp);
                  string syn_TS_val = class_feature_extractor::meth_search_occurence_string_between_delimiter(SYN_line,' ',16);
-                 class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp,force_print_tcp_extractor_client);
-                 class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val,force_print_tcp_extractor_client);
+                 class_mrs_debug::print<string>("syn_time_stamp: ", syn_time_stamp,force_print_tcp_extractor_client ||force_print_synchronize_clock);
+                 class_mrs_debug::print<string>("sys_TS_val: ", syn_TS_val,force_print_tcp_extractor_client ||force_print_synchronize_clock);
                  par_time_stamp = stoull(syn_time_stamp);
                  par_TS_value = stoull(syn_TS_val);
                  extracted_clock_marks = true;

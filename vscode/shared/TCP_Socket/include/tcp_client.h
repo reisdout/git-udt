@@ -79,6 +79,7 @@ class TCP_Client{
         struct sockaddr_in serv_addr;
         //uint64_t period_to_transmit_micro_seconds = clients_to_fill_band*((8*mss)/transmission_rate_mbps);
         char *data;
+        char *buffer;
         std::string  message_to_server;
         std::string experiemnt_dir;
         

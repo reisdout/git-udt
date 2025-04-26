@@ -157,10 +157,11 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
 
     if(last_ack_processed >= par_ack_seq)//Ack anacronico
     {
+        bool force_print_in_anacronic_ack = false;
         class_mrs_debug::print<uint64_t>("last_ack_processed: ",last_ack_processed,force_print_in_anacronic_ack);
         class_mrs_debug::print<string>("Anacronic dump Line: ", current_dump_line,force_print_in_anacronic_ack);
         class_mrs_debug::print<uint64_t>("Anacronic ACK: ",par_ack_seq,force_print_in_anacronic_ack);
-        cout << "Anacronic Ack" << endl;
+        cout << "Anacronic Ack: "<< par_ack_seq << endl;
         //cin.ignore();
         return false;
     }
@@ -247,13 +248,16 @@ bool class_feature_extractor_tcp::meth_extract_router_features(uint64_t par_ack_
                     
                     class_mrs_debug::print<long double>("queue_ewma(%): ",(long double)(queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE),force_print_in_meth_extract_router_features_ack);
                     
-                    //meth_update_seq_queue_file(par_ack_seq-1, (long double) (queue_now));
-                    meth_update_seq_queue_file(par_ack_seq, (long double) (queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE));
-                    done = true;
-                    considered_ack = true;
-                    cout << "ack " << par_ack_seq << " processed." << endl;
+                    //para chavear entre o queue_ewma por fluxo e o geral.
 
-                    last_ack_processed = par_ack_seq;
+                    considered_ack = meth_update_seq_queue_file(par_ack_seq, (long double) (queue_now));
+                    //meth_update_seq_queue_file(par_ack_seq, (long double) (queue_ewma/MAX_BYTES_ROUTER_BUFFERSIZE_LONG_DOUBLE));
+                    done = true;
+                    if(considered_ack)
+                    {                     
+                        cout << "ack " << par_ack_seq << " processed." << endl;
+                        last_ack_processed = par_ack_seq;
+                    }
                 }
                 else
                 {

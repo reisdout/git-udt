@@ -41,6 +41,7 @@ TCP_Client::TCP_Client(uint32_t par_server_port,
     class_mrs_debug::print<char>("obj_saver instanciado no TcpClinet constructor", '\n', tcp_client_constructor_force_print);
     mss = par_mss;
     data = new char[mss];
+    buffer = new char[mss];
     clients_to_fill_band = par_clients_to_fill_band;
     simul_time = par_simul_time;
     experiemnt_dir = obj_saver.get_out_dir();
@@ -101,6 +102,7 @@ void TCP_Client::Send()
             data = new char [mss];            
             fill_of(data,'a',mss);
             std::cout << "data: " << data[0] << std::endl;
+            cout << get_cwnd() << endl;
             if(data)
             {      
                 std::cout << "Enviando...: "<< endl;
@@ -108,10 +110,11 @@ void TCP_Client::Send()
                 //std::cout << "cwnd: " << get_cwnd() << std::endl;
                 //if(get_cwnd() == 65)
                     //set_cwnd(100);
+                
                 std::cout << "message sent: " << data[0] << std::endl;
-                //ssize_t valread = read(sock, buffer, CLIENT_BUFFER_SIZE);
-                //std::cout << "Server Received: " << buffer[0] << std::endl;
-                std::cout << "last ack: " << get_last_ack() << std::endl;
+                //ssize_t valread = read(sock, buffer, mss);
+                //td::cout << "Server Received: " << buffer[0] << std::endl;
+                //std::cout << "last ack: " << get_last_ack() << std::endl;
                 //if ((strncmp(buffer, "exit", 4)) == 0) 
                 //{
                     //printf("Client Exit...\n");

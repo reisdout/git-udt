@@ -88,7 +88,6 @@ public:
         bool force_print_tcp_extractor = false;
         bool force_print_in_meth_extract_router_features_ack = false;
         bool force_print_meth_get_one_of_my_lines = false;
-        bool force_print_in_anacronic_ack = false;
         bool more_packet_line = true;
     
     

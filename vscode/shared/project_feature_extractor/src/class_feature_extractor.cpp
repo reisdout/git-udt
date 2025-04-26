@@ -288,8 +288,9 @@ bool class_feature_extractor::meth_search_best_queue_size_by_time_stamp(string p
        //Para chavear entre o queue ewma e a pura. Não esqueça de alterar
        //o metodo meth_extract_router_features, para passar o ewma calculado a cada
        //valor de fila levantada.
-       //stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
-       stream_queue_size_along_time_file.open(queue_size_along_time_file);
+       
+       stream_queue_size_along_time_file.open(queue_size_along_time_file_ewma);
+       //stream_queue_size_along_time_file.open(queue_size_along_time_file);
     }
     
     if(stream_queue_size_along_time_file.is_open())
@@ -616,7 +617,7 @@ void class_feature_extractor::set_queue_size_along_time_file(string par_queue_si
     //cin >> c;
 }
 
-void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma)
+bool  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long double par_queue_ewma)
 {
     
 
@@ -671,7 +672,7 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long
     else 
     {
         cout << "Queue out of range."<<endl;
-        return;
+        return false;
               
     }
 
@@ -719,7 +720,7 @@ void  class_feature_extractor::meth_update_seq_queue_file(uint64_t par_seq, long
 
     file.close();
 
-
+    return true;
 
 }
 
