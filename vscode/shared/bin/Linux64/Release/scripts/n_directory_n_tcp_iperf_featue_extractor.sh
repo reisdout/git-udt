@@ -125,7 +125,7 @@ for dir in ~/Desktop/output/*; do
         liquid_dir=${dir:$prefix_dir_size:$dir_size}
         echo "liquid dir: ${liquid_dir}"
         i=1
-        num_flows_to_extract=6 # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 10
+        num_flows_to_extract=7 # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 10
             #while [ $i -le $num_clients ];
             while [ $i -le $num_flows_to_extract ];
             do

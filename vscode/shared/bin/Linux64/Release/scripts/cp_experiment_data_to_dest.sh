@@ -85,7 +85,7 @@ sudo mkdir /home/ns/Desktop/output/${file_destination}
 sleep 2
 sudo chmod 777 /home/ns/Desktop/output/${file_destination}
 sleep 2
-: '
+
 for dir in ~/Desktop/output/*; do 
    if [ -d "$dir" ]; then    
         echo $dir
@@ -103,7 +103,7 @@ for dir in ~/Desktop/output/*; do
         esac
    fi
 done
-'
+
 num_flows_cc=$(echo $cong_cont_var | cut -c 4-)
 
 $(echo "${flows_var} ${num_flows_cc}-${rate_var}Mbps" > "${HOME}/Desktop/output/${file_destination}/numFlows.txt")

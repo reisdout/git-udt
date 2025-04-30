@@ -1223,9 +1223,12 @@ int main(int argc, char**argv){
             {
                 
                 if(experiment_path.find(string("500Mbps")) != string::npos && 
+                   !(experiment_path.find(string("TcpVegas_20Fluxos")) != string::npos) &&
                   (obj_extractor_tcp_router.get_n1() > MAX_FEATURES_PER_FLOW_500_MBPS || 
                    obj_extractor_tcp_router.get_n2() > MAX_FEATURES_PER_FLOW_500_MBPS) )
                 {
+                    class_mrs_debug::print<string>("Experiment path",experiment_path,false);
+                    class_mrs_debug::print<char>("Nao é possivel ", '\n',false);
                     cout << "Reach MAX_FEATURES_PER_FLOW_500_MBPS. Bye!" << endl;
                     break;
                 }

@@ -1,4 +1,13 @@
 # ninja log v5
+1658	1712	1745926642209599576	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
+39	4106	1745926644604604777	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+14574	14663	1744630135221760240	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libreport.a	14299f3d1e32a903
+11153	11254	1745669434840137410	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_extractor.a	3d464f7254f120d4
+5255	10817	1745669434400137057	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	bb70875ae698cf99
+40	1658	1745926642156599461	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
+12	2944	1745493930532610972	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o	6b9888316a50bfe2
+6752	11152	1745669434734137325	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o	ef6d01295f486645
+123	248	1744630120805706423	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libpure_udt.a	c4f859ceb70ababd
 12895	14574	1744630135133759911	project_report/CMakeFiles/report.dir/src/class_report.cpp.o	cdd3799a755ae2fe
 39	6752	1745669430332133791	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o	a6e925d6a280852b
 5397	10247	1745269547792024941	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_udt.cpp.o	5969f7acb4c47cee
@@ -6,18 +15,31 @@
 57	7859	1745269545400028935	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver.cpp.o	456e71e5bd22a10a
 11	122	1744630120679705953	project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o	4fc348856690249c
 2946	3070	1745493930652611068	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_saver.a	25ca1f9ea46e80f7
+4106	4339	1745926644830605269	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
 21	2492	1744630123052714812	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o	72ccdfc9686aeb09
-1014	1330	1745681594923900393	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
-11153	11254	1745669434840137410	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_extractor.a	3d464f7254f120d4
-14574	14663	1744630135221760240	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libreport.a	14299f3d1e32a903
-37	4010	1745673427867343254	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
-961	1014	1745681594605900138	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
-123	248	1744630120805706423	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libpure_udt.a	c4f859ceb70ababd
-12	2944	1745493930532610972	project_feature_saver/CMakeFiles/feature_saver.dir/src/class_feature_saver_tcp.cpp.o	6b9888316a50bfe2
-6752	11152	1745669434734137325	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o	ef6d01295f486645
-16	960	1745681594556900099	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
-5255	10817	1745669434400137057	project_feature_extractor/CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o	bb70875ae698cf99
-20	2791	1745881706698299383	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
-2791	2933	1745881706841299387	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
-16	5952	1745881709862299480	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
-5953	6397	1745881710305299493	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+11	1482	1745950251031869321	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
+1485	1545	1745950251093869456	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
+11	3255	1745950252802873167	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3255	3422	1745950252968873528	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+34	1379	1745950347472078760	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
+1379	1478	1745950347572078977	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
+31	3593	1745950349688083573	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3595	3804	1745950349897084026	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+17	2315	1745955370662987245	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+2315	2477	1745955370825987599	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+28	3751	1745955681725662724	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3753	3929	1745955681904663113	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+31	4006	1745955995217343509	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+4006	4183	1745955995394343893	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+13	3909	1745956208688807108	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3910	4067	1745956208844807447	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+12	2566	1745959851395717875	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+2566	2723	1745959851552718216	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+12	1240	1745959986363010989	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
+1241	1326	1745959986445011167	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
+10	3194	1745959988316015231	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3195	3476	1745959988595015837	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
+11	963	1745960087391230384	TCP_Socket/CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o	1b40bb96f3e1f613
+963	1022	1745960087450230512	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a	bf229d24a10e73e4
+9	3010	1745960089437234827	CMakeFiles/communicator.dir/main.cpp.o	8e69357c67ec5d5b
+3010	3252	1745960089674235342	/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/communicator	f82094cbcb1a2fe0
