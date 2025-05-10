@@ -82,9 +82,9 @@ done
 
 
 sudo mkdir /home/ns/Desktop/output/${file_destination}
-sleep 2
+sleep 1
 sudo chmod 777 /home/ns/Desktop/output/${file_destination}
-sleep 2
+sleep 1
 
 for dir in ~/Desktop/output/*; do 
    if [ -d "$dir" ]; then    
@@ -95,10 +95,10 @@ for dir in ~/Desktop/output/*; do
         case "$dir" in  *${data_type_var}_${cong_cont_var}_${flows_var}Fluxos_${rate_var}Mbps*)
             echo "dir in case:"        
             echo $dir 
-            command_var="cp ${dir}/*.csv  ~/Desktop/output/${file_destination}; cp ${dir}/iperf*.txt  ~/Desktop/output/${file_destination}"
+            command_var="cp -v ${dir}/*.csv  ~/Desktop/output/${file_destination}; cp -v ${dir}/iperf*.txt  ~/Desktop/output/${file_destination}"
             echo "App call: ${command_var}"
             xterm $hold_var -e "echo \"Starting copy from ${dir}\"; ${command_var}; echo \"finished\" " && /bin/bash &
-            sleep 5
+            sleep 3
              ;;
         esac
    fi

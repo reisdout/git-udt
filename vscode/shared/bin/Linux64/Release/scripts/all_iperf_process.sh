@@ -10,7 +10,7 @@ hold_param=" "
 short_help_var="-h"
 
 
-start_date_tshark=$(date | cut -b 1-19 | tr ' ' _ | tr : _)
+start_date_tshark=$(date +'%a_%b_%d_%H_%M_%S')
 
 
 if [ "$1" == "-h" ]; then
@@ -197,7 +197,7 @@ echo "Starting iperf3 servers in servers host: "
 
 xterm $hold_param -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
 
-sleep 100
+sleep 120
 
 
 echo "Starting queue capture in router:"

@@ -76,7 +76,7 @@ done
 
 
 total_extraction_calls=1
-n_to_wait=20
+n_to_wait=20 #20
 
 prefix_dir="/home/ns/Desktop/output/"
 prefix_dir_size=${#prefix_dir}
@@ -107,7 +107,7 @@ for dir in ~/Desktop/output/*; do
 done
 
 
-sleep 5
+sleep 20
 
 
 echo "Generating metric files"
@@ -125,13 +125,15 @@ for dir in ~/Desktop/output/*; do
         liquid_dir=${dir:$prefix_dir_size:$dir_size}
         echo "liquid dir: ${liquid_dir}"
         i=1
-        num_flows_to_extract=7 # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 10
+        num_flows_to_extract=7   #$num_clients #40 #$num_clients # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 7/1500n1
+        echo "${num_flows_to_extract}"
+        #read c
             #while [ $i -le $num_clients ];
             while [ $i -le $num_flows_to_extract ];
             do
 
                 #echo "$exprtotal_extraction_calls"
-                door=`expr $i + 5101` 
+                door=`expr $i + 5101`
                 echo $door
                 #command="./udt server ${door}"
                 #command="ls"
@@ -150,11 +152,11 @@ for dir in ~/Desktop/output/*; do
                 mod=$(($exprtotal_extraction_calls % $n_to_wait))                
                 if [ $mod -eq 0 ]; then
                     echo "Need wait."
-                    sleep 10
+                    sleep 20
                 elif [ $exprtotal_extraction_calls -le 5 ]; then
                     sleep 1
                 else
-                    sleep 3
+                    sleep 3 #3
                 fi
                 
             done
