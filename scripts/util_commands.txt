@@ -60,3 +60,12 @@ Isso é necessáro para carregar módulos de controle de congestionamento.
 ver (https://www.hostinger.com/tutorials/how-to-change-password-in-linux/?utm_campaign=Generic-Tutorials-DSA|NT:Se|LO:BR-EN&utm_medium=ppc&gad_source=1&gclid=CjwKCAjwwLO_BhB2EiwAx2e-34ZWdDnD2OaTPn0tVTs8f-dESTwZYhouMPbg1pXsQYZTmUapCgehbRoC8_8QAvD_BwE)
 
 
+
+echo "Para exibir todas as configuracoes da maquina";
+neofetch
+
+
+
+
+
+

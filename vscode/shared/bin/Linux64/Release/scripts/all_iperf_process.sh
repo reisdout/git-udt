@@ -9,6 +9,8 @@ hold_param=" "
 
 short_help_var="-h"
 
+cliesnts_host_eth_interface="enp4s0"
+
 
 start_date_tshark=$(date +'%a_%b_%d_%H_%M_%S')
 
@@ -83,7 +85,16 @@ while [ : ]; do
 done
 
 
+echo "Disabling wifi in clients host"
 
+
+sudo nmcli radio wifi off
+
+#echo "disabling wifi interface in servers host"
+
+#xterm $hold_param -e ssh ns@10.0.1.3  "sudo nmcli radio wifi off" &
+
+sleep 10
 
 
 str_tcp_vegas="TcpVegas"
@@ -95,6 +106,8 @@ str_tcp_bbr="TcpBbr"
 str_tcp_new_reno="TcpNewReno"
 
 str_tcp_west_wood="TcpWestwoodPlus"
+
+
 
 
 
@@ -174,14 +187,14 @@ sleep 2
 #tshark -i ens33 -B 300 -f "tcp[tcpflags] == tcp-ack and src 10.0.1.3"  -w ./tcp_ACK_pcap_09_52.pcapng
 
 
-xterm $hold_param -e  "cd /tmp/ramdisk/tshark; tshark -i ens33 -a duration:750 -B 300 -f \"tcp[tcpflags] == tcp-ack and src 10.0.1.3\"  -w ./tcp_ACK_pcap_${start_date_tshark}.pcapng" && /bin/bash &
+xterm $hold_param -e  "cd /tmp/ramdisk/tshark; tshark -i ${cliesnts_host_eth_interface} -a duration:750 -B 300 -f \"tcp[tcpflags] == tcp-ack and src 10.0.1.3\"  -w ./tcp_ACK_pcap_${start_date_tshark}.pcapng" && /bin/bash &
 
 echo "Starting Tshark SYN capture in host:"
 
 #tshark -i ens33 -a packets:30 -f "(tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack) and (src 10.0.0.3 or  src 10.0.1.3)"  -w ./tcp_SYN_pcap_09_52.pcapng
 
 
-xterm $hold_param -e  "cd /tmp/ramdisk/tshark; tshark -i ens33 -a packets:30 -f \"(tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack) and (src 10.0.0.3 or  src 10.0.1.3)\"  -w ./tcp_SYN_pcap_${start_date_tshark}.pcapng" && /bin/bash &
+xterm $hold_param -e  "cd /tmp/ramdisk/tshark; tshark -i ${cliesnts_host_eth_interface} -a packets:30 -f \"(tcp[tcpflags] == tcp-syn or tcp[tcpflags]== tcp-syn|tcp-ack) and (src 10.0.0.3 or  src 10.0.1.3)\"  -w ./tcp_SYN_pcap_${start_date_tshark}.pcapng" && /bin/bash &
 
 
 sleep 30
@@ -193,9 +206,11 @@ xterm $hold_param -e ssh ns@10.0.0.1  "cd /tmp/ramdisk/tshark;  tshark -i enp0s2
 
 sleep 10
 
+
 echo "Starting iperf3 servers in servers host: "
 
-xterm $hold_param -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Debug/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
+xterm $hold_param -e ssh ns@10.0.1.3  "cd ~/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/scripts; ./n_iperf_servers_from_clients_host.sh ${flows_var}" & 
+
 
 sleep 120
 

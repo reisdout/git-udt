@@ -1,0 +1,2 @@
+/usr/bin/ar qc "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a" CMakeFiles/tcpsocket.dir/src/tcp_server.cpp.o CMakeFiles/tcpsocket.dir/src/tcp_client.cpp.o
+/usr/bin/ranlib "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libtcpsocket.a"

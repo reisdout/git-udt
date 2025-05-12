@@ -1,0 +1,2 @@
+/usr/bin/ar qc "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libreport.a" CMakeFiles/report.dir/src/class_report.cpp.o
+/usr/bin/ranlib "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libreport.a"

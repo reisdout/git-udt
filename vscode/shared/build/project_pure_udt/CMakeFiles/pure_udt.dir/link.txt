@@ -1,0 +1,2 @@
+/usr/bin/ar qc "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libpure_udt.a" CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o
+/usr/bin/ranlib "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libpure_udt.a"

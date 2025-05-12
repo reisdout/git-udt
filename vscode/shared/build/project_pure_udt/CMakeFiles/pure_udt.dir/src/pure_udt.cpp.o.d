@@ -1,0 +1,3 @@
+project_pure_udt/CMakeFiles/pure_udt.dir/src/pure_udt.cpp.o: \
+ /home/ns/UDT-workspace/git-udt/vscode/shared/project_pure_udt/src/pure_udt.cpp \
+ /usr/include/stdc-predef.h

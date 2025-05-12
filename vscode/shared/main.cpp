@@ -1222,9 +1222,7 @@ int main(int argc, char**argv){
             while (getline (stream_dump_file,dump_line) )
             {
                 
-                if(!(experiment_path.find(string("TcpVegas_20Fluxos_500Mbps")) != string::npos) &&
-                   !(experiment_path.find(string("TcpVegas_40Fluxos_500Mbps")) != string::npos) &&
-                   
+                if(!(experiment_path.find(string("TcpVegas_40Fluxos_500Mbps")) != string::npos) &&                   
                   (obj_extractor_tcp_router.get_n1() > MAX_FEATURES_PER_FLOW_500_MBPS || 
                    obj_extractor_tcp_router.get_n2() > MAX_FEATURES_PER_FLOW_500_MBPS) )
                 {

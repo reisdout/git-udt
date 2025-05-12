@@ -1,0 +1,2 @@
+/usr/bin/ar qc "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_extractor.a" CMakeFiles/feature_extractor.dir/src/class_feature_extractor.cpp.o CMakeFiles/feature_extractor.dir/src/class_feature_extractor_udt.cpp.o CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp.cpp.o CMakeFiles/feature_extractor.dir/src/class_feature_extractor_tcp_client.cpp.o
+/usr/bin/ranlib "/home/ns/UDT-workspace/git-udt/vscode/shared/bin/Linux64/Release/static libs/libfeature_extractor.a"

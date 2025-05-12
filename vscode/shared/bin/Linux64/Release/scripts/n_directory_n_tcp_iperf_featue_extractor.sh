@@ -125,7 +125,7 @@ for dir in ~/Desktop/output/*; do
         liquid_dir=${dir:$prefix_dir_size:$dir_size}
         echo "liquid dir: ${liquid_dir}"
         i=1
-        num_flows_to_extract=7   #$num_clients #40 #$num_clients # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 7/1500n1
+        num_flows_to_extract=$num_clients #40 #$num_clients # 10Mbps 3; 100mbps 20; 300mbps 10; 500Mbps 7/1500n1
         echo "${num_flows_to_extract}"
         #read c
             #while [ $i -le $num_clients ];
@@ -152,7 +152,7 @@ for dir in ~/Desktop/output/*; do
                 mod=$(($exprtotal_extraction_calls % $n_to_wait))                
                 if [ $mod -eq 0 ]; then
                     echo "Need wait."
-                    sleep 20
+                    sleep 5
                 elif [ $exprtotal_extraction_calls -le 5 ]; then
                     sleep 1
                 else
